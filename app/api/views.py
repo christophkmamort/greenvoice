@@ -1,59 +1,35 @@
-from django.shortcuts import render
-from django.http import JsonResponse
+from rest_framework import generics
+from rest_framework import mixins
+from rest_framework import permissions
 
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from .permissions import IsOwnerOrReadOnly
 from .serializers import ProductSerializer
-
+from .serializers import UserSerializer
+from django.contrib.auth.models import User
 from shop.models import Product
 
-@api_view(['GET'])
-def apiOverview(request):
-	api_urls = {
-		'List':'/product-list/',
-		'Detail View':'/product-detail/<str:pk>/',
-		'Create':'/product-create/',
-		'Update':'/product-update/<str:pk>/',
-		'Delete':'/product-delete/<str:pk>/',}
 
-	return Response(api_urls) # JsonResponse
+class ProductList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
-@api_view(['GET'])
-def productList(request):
-	products = Product.objects.all()
-	serializer = ProductSerializer(products, many=True)
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
-	return Response(serializer.data)
 
-@api_view(['GET'])
-def productDetail(request, pk):
-	product = Product.objects.get(pk=pk)
-	serializer = ProductSerializer(product, many=False)
+class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                      IsOwnerOrReadOnly]
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
-	return Response(serializer.data)
 
-@api_view(['POST'])
-def productCreate(request):
-	serializer = TaskSerializer(data=request.data)
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-	if serializer.is_valid():
-		serializer.save()
 
-	return Response(serializer.data)
-
-@api_view(['POST'])
-def productUpdate(request, pk):
-	product = Product.objects.get(pk=pk)
-	serializer = TaskSerializer(instance=product, data=request.data)
-
-	if serializer.is_valid():
-		serializer.save()
-
-	return Response(serializer.data)
-
-@api_view(['DELETE'])
-def productDelete(request, pk):
-	product = Product.objects.get(pk=pk)
-	product.delete()
-
-	return Response('Product successfully deleted!')
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

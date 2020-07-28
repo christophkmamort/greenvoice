@@ -1,11 +1,18 @@
+from django.conf.urls import include
 from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
+
 from . import views
 
 urlpatterns = [
-	path('', views.apiOverview, name="api"),
-	path('product-list/', views.productList, name="product-list"),
-	path('product-datail/<str:pk>/', views.productDetail, name="product-datail"),
-	path('product-create/', views.productCreate, name="product-create"),
-	path('product-update/<str:pk>/', views.productUpdate, name="product-update"),
-	path('product-delete/<str:pk>/', views.productDelete, name="product-delete"),
+    path('products/', views.ProductList.as_view()),
+    path('products/<int:pk>/', views.ProductDetail.as_view()),
+    path('users/', views.UserList.as_view()),
+    path('users/<int:pk>/', views.UserDetail.as_view()),
+]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
+
+urlpatterns += [
+    path('api-auth/', include('rest_framework.urls')),
 ]
