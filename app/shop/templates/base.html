@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block seo %}{% endblock %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'shop/med/favicon.ico' %}"/>
+    <!--<link rel="stylesheet" href="{% static 'shop/bundled.css' %}">-->
+  </head>
+  <body>
+    {% block header %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}{% endblock %}
+    <script type="text/javascript" src="{% static 'shop/bundled.js' %}"></script>
+  </body>
+</html>
