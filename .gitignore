@@ -11,3 +11,7 @@ app/node_modules
 
 # OS
 *.DS_Store
+
+# Env
+.env.dev
+.env.prod
