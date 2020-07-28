@@ -18,7 +18,7 @@ class Product(models.Model):
     )
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
-    owner = models.ForeignKey('auth.User', related_name='products', on_delete=models.CASCADE)
+    owner = models.ForeignKey('auth.User', related_name='products', on_delete=models.CASCADE, verbose_name=_('owner'))
 
     class Meta:
         ordering = ['created']
