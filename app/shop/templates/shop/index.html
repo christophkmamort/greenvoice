@@ -2,24 +2,112 @@
 
 {% load static %}
 
+<!-- SEO optimisation -->
 {% block seo %}
-  <!-- Add seo stuff. -->
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
 {% endblock %}
 
-{% block header %}
-  <header>
-
-  </header>
-{% endblock %}
+<!-- Include header and footer -->
+{% block header %}{% include 'shop/templates/header.html' %}{% endblock %}
+{% block footer %}{% include 'shop/templates/footer.html' %}{% endblock %}
 
 {% block content %}
-  <div>
-    Index
+  <div class="down">
+    <!-- Image. -->
+    <div class="position-absolute w-100" style="height: 80vh; z-index: -1">
+      <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+    </div>
+    <div style="height: 75vh;"></div>
+
+    <!-- Container. -->
+    <div class="bg-white down-container">
+      <div class="container">
+        <div class="p-3 d-flex justify-content-center align-items-center">
+          <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+        </div>
+
+        <!-- Values. -->
+        <h5 class="text-info m-0 mt-4">Dafür stehen wir</h5>
+        <h5 class="mb-4">Unsere Werte</h5>
+        <div class="pt-3"></div>
+        {% include 'shop/templates/values.html' with class='text-dark' height='2.5em' border='#fff' only %}
+
+        <p class="mt-4 text-center">
+          Mit Allem was wir tun glauben wir daran, dass eine transparente Wirtschaft die Grundlage für nachhaltige und faire Mode bilden soll. Aus diesem Grund zeigen wir dir die Bestandteile, Lieferketten und Produktionsstätten jedes einzelnen Produktes. Greenvoice ist dein transparenter Mode Marktplatz.
+        </p>
+
+        <div class="d-flex justify-content-center align-items-center mt-4">
+          <a href="#" class="text-decoration-none"><h6 class="text-info border-bottom border-2">Mehr erfahren</h6></a>
+        </div>
+      </div>
+
+        <!-- Popular products. -->
+        <div class="mt-5 container">
+          <h5 class="text-info m-0">Style Trends</h5>
+          <h5>Beliebte Produkte</h5>
+        </div>
+
+        <div class="d-flex scrollbar mt-4">
+          <div class="feed-padding-left"></div>
+          {% for product in products %}
+            {{ product }}
+          {% endfor %}
+          <div class="text-white feed-padding-right">.</div>
+        </div>
+
+        <div class="container d-flex justify-content-center align-items-center mt-4">
+          <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
+        </div>
+
+        <!-- New products. -->
+        <div class="mt-5 container">
+          <h5 class="text-info m-0">Vor kurzem eingetroffen</h5>
+          <h5>Neue Produkte</h5>
+        </div>
+        {% include 'shop/templates/product-slide.html' with class='text-dark' only %}
+
+        <div class="container d-flex justify-content-center align-items-center mt-4">
+          <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
+        </div>
+
+
+        <!-- Popular categories. -->
+        <div class="mt-5 container">
+          <h5 class="text-info m-0">Beliebt & Meistgekauft</h5>
+          <h5>Top Kategorien</h5>
+          <div class="mt-4">
+            <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Schuhe</button></a>
+            <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Accessoires</button></a>
+            <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Jeans</button></a>
+            <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">T-Shirts</button></a>
+            <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Hemden</button></a>
+            <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Sportbekleidung</button></a>
+            <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Bademode</button></a>
+            <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Schnürschuhe</button></a>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center mt-4">
+            <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Kategorien anzeigen</h6></u></button></a>
+          </div>
+        </div>
+
+        <!-- Popular brands. -->
+        <div class="mt-5 container">
+          <h5 class="text-info m-0">Nachhaltig & Fair</h5>
+          <h5>Beliebte Marken</h5>
+        </div>
+        {% include 'shop/templates/brand-slide.html' with class='text-dark' only %}
+
+        <div class="container d-flex justify-content-center align-items-center mt-4">
+          <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Marken anzeigen</h6></u></button></a>
+        </div>
+
+      <div class="mt-4"></div>
+      <div class="p-3 d-flex justify-content-center align-items-center">
+        <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+      </div>
+    </div>
   </div>
-{% endblock %}
-
-{% block footer %}
-  <footer>
-
-  </footer>
 {% endblock %}

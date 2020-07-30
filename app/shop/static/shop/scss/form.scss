@@ -1,0 +1,18 @@
+.form {
+  &-control {
+    border-radius: 0.6em;
+
+    &-sm {
+      border-radius: 0.6em;
+    }
+
+    &-lg {
+      border-radius: 0.6em;
+      padding-top: 1.6em;
+      padding-bottom: 1.6em;
+      font-size: 1em;
+      font-weight: 700;
+      border-width: 2px;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{% extends "../base.html" %}
+
+{% load static %}
+
+{% block seo %}
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
+{% endblock %}
+
+{% block content %}
+  <div class="down">
+    <div class="position-absolute bg-white w-100" style="height: 60vh; z-index: -1"></div>
+    <div class="container position-relative d-flex align-items-center" style="height: 50vh; z-index: -1;">
+      <div>
+        <h3 class="text-dark pt-5">Meine Zahlunsarten</h3>
+        <div class="d-flex align-items-center">
+          {% include 'shop/templates/svg/check.html' with class='text-primary' height='0.8em' only %}
+          <p class="m-0 ml-2 text-primary">Änderungen erfolgreich gespeichert</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-dark down-container position-relative" style="min-height: 50vh;">
+      <div class="container">
+        <div class="p-3 d-flex justify-content-center align-items-center">
+          <div class="bg-white rounded" style="width: 3em; height: 0.4em;"></div>
+        </div>
+
+        <form>
+          <div class="mt-4">
+            <div class="d-flex align-items-center">
+              <div>
+                <div class="d-flex align-items-center mb-2">
+                  <h6 class="text-white m-0">Mastercard</h6>
+                  <button class="btn p-0"><u class="text-info ml-2">bearbeiten</u></button>
+                </div>
+                <div class="d-flex align-items-center">
+                  {% include 'shop/templates/svg/card.html' with class='text-white' height='1.2em' style='' only %}
+                  <p class="text-white m-0 ml-2" style="white-space: nowrap;">•••• 0483</p>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end w-100">
+                <button class="btn">{% include 'shop/templates/svg/trash.html' with class='text-white' height='1.2em' only %}</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <div class="d-flex align-items-center">
+              <div>
+                <div class="d-flex align-items-center mb-2">
+                  <h6 class="text-white m-0">Visa</h6>
+                  <button class="btn p-0"><u class="text-info ml-2">bearbeiten</u></button>
+                </div>
+                <div class="d-flex align-items-center">
+                  {% include 'shop/templates/svg/card.html' with class='text-white' height='1.2em' style='' only %}
+                  <p class="text-white m-0 ml-2" style="white-space: nowrap;">•••• 5936</p>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end w-100">
+                <button class="btn">{% include 'shop/templates/svg/trash.html' with class='text-white' height='1.2em' only %}</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 mt-5"><div class="p-5"></div></div>
+          <div class="position-absolute w-100 pb-3 pr-3 pl-3" style="bottom: 0; left: 0;">
+            <hr class="bg-white border-2 mt-5">
+            <div class="p-4"></div>
+            <button class="btn btn-primary btn-lg w-100">Änderungen speichern</button>
+            <p class="text-info m-0 text-center mt-2" style="font-size: 0.8em;">*Neue Zahlungsarten  kannst du beim Checkout hinzufügen.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

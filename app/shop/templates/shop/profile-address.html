@@ -1,0 +1,71 @@
+{% extends "../base.html" %}
+
+{% load static %}
+
+{% block seo %}
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
+{% endblock %}
+
+{% block content %}
+  <div class="down">
+    <div class="position-absolute bg-white w-100" style="height: 60vh; z-index: -1"></div>
+    <div class="container position-relative d-flex align-items-center" style="height: 50vh; z-index: -1;">
+      <div>
+        <h3 class="text-dark pt-5">Meine Lieferadresse</h3>
+        <div class="d-flex align-items-center">
+          {% include 'shop/templates/svg/check.html' with class='text-primary' height='0.8em' only %}
+          <p class="m-0 ml-2 text-primary">Änderungen erfolgreich gespeichert</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-dark down-container position-relative" style="min-height: 50vh;">
+      <div class="container">
+        <div class="p-3 d-flex justify-content-center align-items-center">
+          <div class="bg-white rounded" style="width: 3em; height: 0.4em;"></div>
+        </div>
+
+        <form>
+          <input type="text" class="form-control form-control-lg bg-dark text-white" id="checkoutDeliveryName" aria-describedby="nameHelp" placeholder="Name" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;" value="Christoph Amort">
+          <input type="text" class="form-control form-control-lg bg-dark text-white" id="checkoutDeliveryStreet" aria-describedby="streetHelp" placeholder="Straße" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;" value="Embach 101">
+          <input type="number" class="form-control form-control-lg bg-dark text-white" id="checkoutDeliveryZip" aria-describedby="zipHelp" placeholder="Postleitzahl" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;" value="6320">
+          <input type="text" class="form-control form-control-lg bg-dark text-white" id="checkoutDeliveryCity" aria-describedby="cityHelp" placeholder="Stadt" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;" value="Angerberg">
+
+          <div class="dropdown w-100">
+            <button class="btn btn-lg w-100 d-flex align-items-center dropdown-toggle text-left text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
+              Österreich
+              <div class="w-100 d-flex justify-content-end">
+                {% include 'shop/templates/svg/arrow-down.html' with class='text-white ml-2 arrow-down' height='.4em' only %}
+                {% include 'shop/templates/svg/arrow-up.html' with class='text-white ml-2 d-none arrow-up' height='.4em' only %}
+              </div>
+            </button>
+            <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+              <div class="form-check p-0">
+                <input class="form-check-input d-none" type="radio" name="checkoutDeliveryCountry" id="checkoutDeliveryAustria" value="at">
+                <label class="form-check-label w-100" for="checkoutDeliveryAustria">
+                  <button class="btn pt-1 pb-1 pr-3 pl-3 w-100 text-left" style="color: #6B757C;">Österreich</button>
+                </label>
+              </div>
+              <div class="form-check p-0">
+                <input class="form-check-input d-none" type="radio" name="checkoutDeliveryCountry" id="checkoutDeliveryGermany" value="de">
+                <label class="form-check-label w-100" for="checkoutDeliveryGermany">
+                  <button class="btn pt-1 pb-1 pr-3 pl-3 w-100 text-left" style="color: #6B757C;">Deutschland</button>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5"><div class="p-5"></div></div>
+          <div class="position-absolute w-100 pb-3 pr-3 pl-3" style="bottom: 0; left: 0;">
+            <!--<hr class="bg-white border-2 mt-5">-->
+            <div class="p-4"></div>
+            <button class="btn btn-primary btn-lg w-100">Änderungen speichern</button>
+            <p class="text-info m-0 text-center mt-2" style="font-size: 0.8em;">*Deine Lieferaddresse wird auch als deine Rechungsaddresse verwendet.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

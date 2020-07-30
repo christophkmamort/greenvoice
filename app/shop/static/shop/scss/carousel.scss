@@ -1,0 +1,11 @@
+.carousel-indicators li {
+  border: none;
+  border-radius: .2em;
+  width: .4em;
+  height: .4em;
+  transition: width 0.6s ease;
+}
+
+.carousel-indicators .active {
+  width: .8em;
+}

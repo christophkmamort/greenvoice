@@ -1,0 +1,117 @@
+<!-- Allow access also from email with security code without beeing logged in. -->
+
+{% extends "../base.html" %}
+
+{% load static %}
+
+{% block seo %}
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
+{% endblock %}
+
+{% block content %}
+  <div class="up bg-dark down-container up-container-flat">
+    <div class="up-container bg-white position-relative">
+      <div class="position-absolute w-100" style="min-height: 60vh; z-index: -1"></div>
+      <div class="pt-5 d-flex align-items-center" style="min-height: 50vh; z-index: -1;">
+        <div class="w-100">
+          <div class="container">
+            <h3 class="pt-4 m-0">Produkte zurücksenden</h3>
+            <p class="m-0 text-info">Bestellung #92834 vom 09.06.2020</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-4">
+        <h5 class="m-0">Produkte:</h5>
+
+        <div class="mt-4">
+          <h6 class="text-info">Verkauf & Versand durch <u class="text-info">MusterMarke®</u></h6>
+          <div class="container mt-3">
+            <div class="row">
+              <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                <div style="max-height: 105px; max-width: 70px;">
+                  <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                </div>
+              </div>
+              <div class="col d-flex align-items-center justiy-content-start ml-2">
+                <div>
+                  <h6 class="m-0">Product Title</h6>
+                  <p>€ 39,99</p>
+                  <p class="m-0 mt-3">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-dark ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                  <p class="m-0">Größe: M</p>
+                </div>
+              </div>
+              <div class="col-auto d-flex align-items-center justiy-content-end p-0">
+                <div class="d-flex align-items-center justify-content-center rounded bg-dark" style="width: 2em; height: 2em;">{% include 'shop/templates/svg/check.html' with class='text-white' height='0.6em' only %}</div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                <div style="max-height: 105px; max-width: 70px;">
+                  <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                </div>
+              </div>
+              <div class="col d-flex align-items-center justiy-content-start ml-2">
+                <div>
+                  <h6 class="m-0">Product Title</h6>
+                  <p>€ 39,99</p>
+                  <p class="m-0 mt-3">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-dark ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                  <p class="m-0">Größe: M</p>
+                </div>
+              </div>
+              <div class="col-auto d-flex align-items-center justiy-content-end p-0">
+                <div class="d-flex align-items-center justify-content-center rounded border border-dark border-2" style="width: 2em; height: 2em;">{% include 'shop/templates/svg/check.html' with class='text-white' height='0.6em' only %}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <h6 class="text-info">Verkauf & Versand durch <u class="text-info">MusterMarke®</u></h6>
+          <div class="container mt-3">
+            <div class="row">
+              <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                <div style="max-height: 105px; max-width: 70px;">
+                  <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                </div>
+              </div>
+              <div class="col d-flex align-items-center justiy-content-start ml-2">
+                <div>
+                  <h6 class="m-0">Product Title</h6>
+                  <p>€ 39,99</p>
+                  <p class="m-0 mt-3">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-dark ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                  <p class="m-0">Größe: M</p>
+                </div>
+              </div>
+              <div class="col-auto d-flex align-items-center justiy-content-end p-0">
+                <div class="d-flex align-items-center justify-content-center rounded bg-dark" style="width: 2em; height: 2em;">{% include 'shop/templates/svg/check.html' with class='text-white' height='0.6em' only %}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <hr class="bg-white border-2 mt-5">
+          <div class="pt-2 pb-3 row">
+            <h5 class="col-auto">Rückerstattung:</h5><h5 class="col text-right w-100">€ 91,96</h5>
+          </div>
+        </div>
+
+        <div class="p-4"></div>
+        <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100" style="bottom: 0; left: 0;">
+          <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <div class="w-100" style="bottom: 0; left: 0;">
+        <button class="btn btn-primary btn-lg w-100">Produkte zurückgeben</button>
+        <p class="text-info m-0 text-center mt-2" style="font-size: 0.8em;">*Die Refundierung erfolgt auf das Konto mit dem du ursprünglich bezahlt hast.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

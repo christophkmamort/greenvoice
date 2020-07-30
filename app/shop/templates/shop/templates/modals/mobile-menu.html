@@ -1,0 +1,96 @@
+<!-- Modal. -->
+<div class="modal fade vw-100 min-vh-100 bg-white" id="mobileMenuModal" tabindex="-1" role="dialog" aria-labelledby="mobileMenuModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog m-0 mw-100 h-100">
+    <div class="modal-content up h-100" style="border: none;">
+      <div class="bg-dark h-100 up-container bg-primary position-relative">
+        <div class="row p-3 m-0">
+          <div class="col d-flex justify-content-end align-items-center p-0">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              {% include 'shop/templates/svg/close.html' with class='text-white' height='1.1em' only %}
+            </button>
+          </div>
+        </div>
+        <div class="container" style="margin-bottom: 7em;">
+          <!-- Choose gender. -->
+          <div class="row mt-4">
+            <div class="col pr-2">
+              <a href="{% url 'shop:index' %}">
+                <button class="btn btn-lg btn-outline-light w-100">Herren</button>
+              </a>
+            </div>
+            <div class="col pl-2">
+              <a href="{% url 'shop:index' %}">
+                <button class="btn btn-lg btn-outline-light w-100">Damen</button>
+              </a>
+            </div>
+          </div>
+
+          <!-- Main categories. -->
+          <div class="mt-5">
+            <ul class="text m-0 p-0 mt-4">
+              <li class="border-bottom border-2 p-2">
+                <a href="{% url 'shop:shop' %}">
+                  <button class="btn m-0 p-0 w-100">
+                    <div class="d-flex align-items-center">
+                      <h5 class="text-white m-0 mr-auto regular">Accessoires</h5>
+                      {% include 'shop/templates/svg/arrow.html' with class='text-white' height='0.8em' only %}
+                    </div>
+                  </button>
+                </a>
+              </li>
+              <li class="border-bottom border-2 p-2">
+                <a href="{% url 'shop:shop' %}">
+                  <button class="btn m-0 p-0 w-100">
+                    <div class="d-flex align-items-center">
+                      <h5 class="text-white m-0 mr-auto regular">Bekleidung</h5>
+                      {% include 'shop/templates/svg/arrow.html' with class='text-white' height='0.8em' only %}
+                    </div>
+                  </button>
+                </a>
+              </li>
+              <li class="border-bottom border-2 p-2">
+                <a href="{% url 'shop:shop' %}">
+                  <button class="btn m-0 p-0 w-100">
+                    <div class="d-flex align-items-center">
+                      <h5 class="text-white m-0 mr-auto regular">Taschen</h5>
+                      {% include 'shop/templates/svg/arrow.html' with class='text-white' height='0.8em' only %}
+                    </div>
+                  </button>
+                </a>
+              </li>
+              <li class="border-bottom border-2 p-2">
+                <a href="{% url 'shop:shop' %}">
+                  <button class="btn m-0 p-0 w-100">
+                    <div class="d-flex align-items-center">
+                      <h5 class="text-white m-0 mr-auto regular">Schuhe</h5>
+                      {% include 'shop/templates/svg/arrow.html' with class='text-white' height='0.8em' only %}
+                    </div>
+                  </button>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100" style="bottom: 2em; left: 0;">
+          <a href="{% url 'shop:login' %}" class="mr-2">
+            <button class="btn m-0 p-0 w-100">
+              <h5 class="text-white text-center regular">Anmelden</h5>
+            </button>
+          </a>
+          <a href="{% url 'shop:register' %}" class="ml-2">
+            <button class="btn m-0 p-0 w-100">
+              <h5 class="text-info text-center regular">Registrieren</h5>
+            </button>
+          </a>
+        </div>
+        <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100" style="bottom: 0; left: 0;">
+          <div class="bg-white rounded" style="width: 3em; height: 0.4em;"></div>
+        </div>
+      </div>
+      <div class="container pt-4 pb-4">
+        {% include 'shop/templates/values.html' with class='text-dark' height='2.5em' border='#fff' only %}
+      </div>
+    </div>
+  </div>
+</div>

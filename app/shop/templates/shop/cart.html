@@ -1,0 +1,88 @@
+{% extends "../base.html" %}
+
+{% load static %}
+
+{% block seo %}
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
+{% endblock %}
+
+{% block content %}
+  <div class="bg-dark">
+    <div class="container">
+      <div class="position-relative" style="min-height: 100vh;">
+        <div class="d-flex align-items-center pt-5 pb-5">
+          <h4 class="text-white mt-5 mb-5 pt-4">Mein Warenkorb <span class="text-info">(2)</span></h4>
+        </div>
+        <div class="">
+          <!-- Emty cart. -->
+          <!--<p class="text-white m-0">Du hast noch keine Artikel zu deinem Warenkorb hinzugefügt. {% include 'shop/templates/svg/bag.html' with class='text-white ml-1' height='1em' style='margin-top: -3px;' only %}</p>-->
+
+          <div class="container">
+            <!-- Product. -->
+            <div class="row">
+              <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                <div style="max-height: 105px; max-width: 70px;">
+                  <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                </div>
+              </div>
+              <div class="col d-flex align-items-center justiy-content-start ml-2">
+                <div>
+                  <h6 class="text-white m-0">Product Title</h6>
+                  <p class="text-white">1x € 39,99</p>
+                  <p class="text-white m-0 mt-3">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-white ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                  <p class="text-white m-0">Größe: M</p>
+                </div>
+              </div>
+              <div class="col-auto d-flex align-items-center justiy-content-end p-0">
+                <div>
+                  <button class="btn text-white w-100">+</button>
+                  <br>
+                  <button class="btn">{% include 'shop/templates/svg/trash.html' with class='text-white' height='1.2em' only %}</button>
+                  <br>
+                  <button class="btn text-white w-100">-</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product. -->
+            <div class="row mt-4">
+              <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                <div style="max-height: 105px; max-width: 70px;">
+                  <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                </div>
+              </div>
+              <div class="col d-flex align-items-center justiy-content-start ml-2">
+                <div>
+                  <h6 class="text-white m-0">Product Title</h6>
+                  <p class="text-white">1x € 39,99</p>
+                  <p class="text-white m-0 mt-3">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-white ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                  <p class="text-white m-0">Größe: M</p>
+                </div>
+              </div>
+              <div class="col-auto d-flex align-items-center justiy-content-end p-0">
+                <div>
+                  <button class="btn text-white w-100">+</button>
+                  <br>
+                  <button class="btn">{% include 'shop/templates/svg/trash.html' with class='text-white' height='1.2em' only %}</button>
+                  <br>
+                  <button class="btn text-white w-100">-</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5"><div class="p-5"></div></div>
+        <div class="position-absolute w-100 pt-3 pb-3" style="bottom: 0; left: 0;">
+          <hr class="bg-white border-2 mt-5">
+          <div class="pt-2 pb-3 d-flex">
+            <h5 class="text-white w-50">Summe:</h5><h5 class="text-white text-right w-50">€ 79,98</h5>
+          </div>
+          <a href="{% url 'shop:checkout' %}"><button class="btn btn-light btn-lg w-100">Zur Kassa</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

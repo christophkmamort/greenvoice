@@ -1,0 +1,52 @@
+{% load static %}
+
+<div class="d-flex scrollbar mt-4">
+  <div class="feed-padding-left"></div>
+
+  <div class="feed-product feed-product-slide">
+    <div class="overflow-hidden position-relative feed-product-img">
+      <a href="{% url 'shop:product' %}">
+        <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+      </a>
+      <!-- Wishlist. -->
+      <button class="btn position-absolute p-0" style="top: .5em; right: .5em;">
+        <svg class="bi bi-heart text-white d-none" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+        <svg class="bi bi-heart text-primary" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="currentColor" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+      </button>
+      <!-- Notification. -->
+      <a href="{% url 'shop:product' %}">
+        <div class="position-absolute bg-white d-flex justify-content-center align-items-center pt-1 pl-2 pb-1 pr-2" style="bottom: .8em; left: .8em; border-radius: .5em;">
+          <h6 class="p-0 m-0 text-danger" style="font-size: .8em; margin-top: .3em !important; margin-bottom: .1em !important;">-20%</h6>
+        </div>
+      </a>
+    </div>
+    <a href="{% url 'shop:product' %}" class="text-decoration-none">
+      <div class="pt-2 pr-2 pl-2">
+        <h6 class="m-0 p-0 mt-1">Product Title</h6>
+        <p class="m-0 p-0 mt-1" style="font-size: .9em;"><span class="mr-2 text-info" style="text-decoration: line-through;">€39,99</span><span class="text-danger">€29,99</span></p>
+      </div>
+    </a>
+  </div>
+
+  {% for item in "x"|ljust:"10" %}
+    <div class="feed-product feed-product-slide">
+      <div class="overflow-hidden position-relative feed-product-img">
+        <a href="{% url 'shop:product' %}">
+          <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+        </a>
+        <!-- Wishlist. -->
+        <button class="btn position-absolute p-0" style="top: .5em; right: .5em;">
+          <svg class="bi bi-heart text-white" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+        </button>
+      </div>
+      <a href="{% url 'shop:product' %}" class="text-decoration-none">
+        <div class="pt-2 pr-2 pl-2">
+          <h6 class="m-0 p-0 mt-1 {{ class }}">Product Title</h6>
+          <p class="m-0 p-0 mt-1" style="font-size: .9em;"><span class="{{ class }}">€29,99</span></p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+
+  <div class="text-white feed-padding-right">.</div>
+</div>

@@ -1,0 +1,89 @@
+.feed {
+  &-padding {
+    &-left {
+      padding-left: 15px;
+
+      @include media-breakpoint-only(sm) {
+        padding-left: calc(50vw - 255px);
+      }
+
+      @include media-breakpoint-only(md) {
+        padding-left: calc(50vw - 345px);
+      }
+
+      @include media-breakpoint-only(lg) {
+        padding-left: calc(50vw - 465px);
+      }
+
+      @include media-breakpoint-only(xl) {
+        padding-left: calc(50vw - 555px);
+      }
+    }
+    &-right {
+      padding-right: 15px;
+
+      @include media-breakpoint-only(sm) {
+        padding-right: calc(50vw - 255px);
+      }
+
+      @include media-breakpoint-only(md) {
+        padding-right: calc(50vw - 345px);
+      }
+
+      @include media-breakpoint-only(lg) {
+        padding-right: calc(50vw - 465px);
+      }
+
+      @include media-breakpoint-only(xl) {
+        padding-right: calc(50vw - 555px);
+      }
+    }
+  }
+
+  &-product {
+    min-width: 120px;
+    max-width: 50%;
+    flex-basis: 50%;
+    padding-right: 1em;
+
+    @include media-breakpoint-up(md) {
+      max-width: 33.33%;
+      flex-basis: 33.33%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      max-width: 25%;
+      flex-basis: 25%;
+    }
+
+    &-slide {
+      max-width: 40%;
+      flex-basis: 40%;
+
+      @include media-breakpoint-up(md) {
+        max-width: 28%;
+        flex-basis: 28%;
+      }
+
+      @include media-breakpoint-up(lg) {
+        max-width: 20%;
+        flex-basis: 20%;
+      }
+    }
+
+    &-img {
+      border-radius: .8em;
+    }
+  }
+
+  &-brand {
+    min-width: 100px;
+    max-width: 20%;
+    flex-basis: 20%;
+
+    @include media-breakpoint-up(md) {
+      max-width: 10%;
+      flex-basis: 10%;
+    }
+  }
+}

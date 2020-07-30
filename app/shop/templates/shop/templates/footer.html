@@ -1,0 +1,84 @@
+{% load static %}
+
+<footer>
+  <div class="container">
+    <!-- Cookies. -->
+    <p class="text-white p-0 m-0 mt-5">{% include 'shop/templates/svg/cookie.html' with class='text-white mr-1' height='1em' only %} Wir verwenden <strong>Cookies</strong>. Wenn du fortfährst, nehmen wir an, dass du damit einverstanden bist. <button class="btn m-0 p-0 ml-1 text-white" style="vertical-align: baseline;"><strong class="border-bottom border-2">Ok</strong></button></p>
+  </div>
+
+  <!-- Payment methods. -->
+  <div class="container pr-0">
+    <h6 class="mt-5 text-white text-uppercase">Zahlungsmöglichkeiten</h6>
+    <div class="d-flex scrollbar mt-4">
+      <button class="btn btn-lg btn-outline-light mr-1">Mastercard</button>
+      <button class="btn btn-lg btn-outline-light mr-1 ml-2">Visa</button>
+      <button class="btn btn-lg btn-outline-light mr-1 ml-2">PayPal</button>
+      <button class="btn btn-lg btn-outline-light mr-1 ml-2">Klarna</button>
+      <button class="btn btn-lg btn-outline-light mr-1 ml-2">Sofort</button>
+      <button class="btn btn-lg btn-outline-light mr-1 ml-2">Eps</button>
+      <button class="btn btn-lg btn-outline-light ml-2">Sepa</button>
+      <div class="p-2"></div>
+    </div>
+    <p class="text-white m-0 p-0 mt-4" style="font-size: .8em;">Alle Preise inkl. der gesetzl. MwSt.</p>
+  </div>
+
+  <div class="container mt-5 pr-0">
+    <div class="d-flex scrollbar position-relative">
+      <div class="mr-3">
+        <h6 class="text-white text-uppercase">Über uns</h6>
+        <ul class="text m-0 p-0 mt-4">
+          <li><a href="#" class="text-white">Unsere Kriterien</a></li>
+          <li class="mt-1"><a href="#" class="text-white">Kontaktiere uns</a></li>
+          <li class="mt-1"><a href="#" class="text-white">Impressum</a></li>
+        </ul>
+      </div>
+      <div class="mr-3 ml-4">
+        <h6 class="text-white text-uppercase">Infos</h6>
+        <ul class="text m-0 p-0 mt-4">
+          <li><a href="#" class="text-white">Wie sende ich zurück?</a></li>
+          <li class="mt-1"><a href="#" class="text-white mt-3">Nutzungsbedingungen</a></li>
+          <li class="mt-1"><a href="#" class="text-white mt-3">Datenschutzrichtlinien</a></li>
+        </ul>
+      </div>
+      <div class="ml-4">
+        <h6 class="text-white text-uppercase">Business</h6>
+        <ul class="text m-0 p-0 mt-4">
+          <li><a href="#" class="text-white">Auf Greenvoice verkaufen</a></li>
+          <li class="mt-1"><a href="#" class="text-white mt-3">Preisgestaltung</a></li>
+          <li class="mt-1"><a href="#" class="text-white mt-3">Verkaufsbedingungen</a></li>
+          <li class="mt-1"><a href="#" class="text-white mt-3">Shooting Vereinbarung</a></li>
+        </ul>
+      </div>
+      <div class="p-2"></div>
+    </div>
+  </div>
+
+  <!-- Social media. -->
+  <div class="container mt-5">
+    <div class="row d-flex align-items-center mt-5">
+      <div class="col d-flex justify-content-start align-items-center">
+        <a href="#" target="_blank">
+          <button class="btn m-0 p-0">
+            {% include 'shop/templates/svg/instagram.html' with class='text-white' height='2em' border='#545761' only %}
+          </button>
+        </a>
+        <a href="#" target="_blank" class="ml-4">
+          <button class="btn m-0 p-0">
+            {% include 'shop/templates/svg/facebook.html' with class='text-white' height='1.9em' border='#fff' only %}
+          </button>
+        </a>
+      </div>
+
+      <div class="col d-flex justify-content-end align-items-center">
+        <p class="text-white m-0" style="font-size: .8em;">© 2020</p>
+      </div>
+    </div>
+
+    <hr class="bg-white mt-3 mb-3">
+
+    <p class="text-white text-center" style="font-size: .8em;">
+      Gemacht mit
+      <svg class="bi bi-heart text-white ml-1 mr-1" height=".8em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg" style="margin-top: -.2em;"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="3" fill-rule="evenodd"/></svg>
+      in Österreich</p>
+  </div>
+</footer>

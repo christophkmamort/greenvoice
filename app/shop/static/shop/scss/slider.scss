@@ -1,0 +1,20 @@
+.slider-horizontal {
+  width: 100% !important;
+}
+
+.slider-track {
+  height: .2em !important;
+  margin-top: -2.5px !important;
+}
+
+.slider-track-low, .slider-track-high {
+	background: $info;
+}
+
+.slider-selection {
+  background: white;
+}
+
+.slider-handle {
+  background: white;
+}

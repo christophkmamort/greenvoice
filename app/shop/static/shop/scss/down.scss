@@ -1,0 +1,22 @@
+.down {
+  &-container {
+    border-radius: 25px;
+
+    &-flat {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+.up {
+  &-container {
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+
+    &-flat {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}

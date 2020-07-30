@@ -1,0 +1,170 @@
+{% extends "../base.html" %}
+
+{% load static %}
+
+{% block seo %}
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
+{% endblock %}
+
+{% block content %}
+<div class="down">
+  <!-- Image gallery. -->
+  <div class="position-absolute w-100" style="height: 80vh;">
+    <div id="carouselExampleIndicators" class="carousel slide h-100 w-100" data-interval="false">
+      <ol class="carousel-indicators mb-5 pb-1">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner h-100">
+        <div class="carousel-item active h-100">
+          <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid d-block w-100 h-100" alt="...">
+        </div>
+        <div class="carousel-item h-100">
+          <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid d-block w-100 h-100" alt="...">
+        </div>
+        <div class="carousel-item h-100">
+          <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid d-block w-100 h-100" alt="...">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        {% include 'shop/templates/svg/arrow-left.html' with class='text-white' height='1.2em' only %}
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        {% include 'shop/templates/svg/arrow-right.html' with class='text-white' height='1.2em' only %}
+      </a>
+    </div>
+
+  </div>
+  <div style="height: 75vh; z-index: -1;"></div>
+
+  <!-- Container. -->
+  <div class="bg-white down-container position-relative">
+    <div class="container">
+      <div class="p-3 d-flex justify-content-center align-items-center">
+        <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+      </div>
+
+      <!-- Product core. -->
+      <h4 class="mt-4">Product Title</h4>
+      <div class="d-flex align-items-end">
+        <h5 class="text-info m-0">€ 236,54</h5>
+        <p class="text-info m-0 ml-1" style="font-size: 0.8em;">inkl. MwSt.</p>
+      </div>
+
+      <p class="mt-4">This could be a very short Product description.</p>
+
+      <!-- Choose color. -->
+      <div class="mt-4">
+        <h6 class="m-0">Farbe: <span class="text-info ml-1">Space Black</span></h6>
+        <div class="d-flex mt-2">
+          <div class="bg-dark border border-dark d-flex align-items-center justify-content-center" style="height: 2em; width: 2em; border-radius: .4em;">
+            {% include 'shop/templates/svg/check.html' with class='text-white' height='0.7em' only %}
+          </div>
+          <div class="bg-info border border-info ml-2" style="height: 2em; width: 2em; border-radius: .4em;"></div>
+          <div class="bg-white border border-info ml-2" style="height: 2em; width: 2em; border-radius: .4em;"></div>
+        </div>
+      </div>
+
+      <!-- Wishlist. -->
+      <button class="btn p-0 d-flex align-items-center mt-4">
+        {% include 'shop/templates/svg/heart.html' with class='text-info' height='1em' only %}
+        <p class="m-0 text-info ml-2">Auf die Wunschliste</p>
+      </button>
+
+      <!-- Size & Add to cart. -->
+      <div class="d-flex mt-2">
+        <div class="dropdown w-100">
+          <button class="btn btn-lg btn-outline-info w-100 d-flex align-items-center justify-content-center dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+            Größe
+            {% include 'shop/templates/svg/arrow-down.html' with class='text-info ml-2 arrow-down' height='.4em' only %}
+            {% include 'shop/templates/svg/arrow-up.html' with class='text-dark ml-2 d-none arrow-up' height='.4em' only %}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="form-check p-0">
+              <input class="form-check-input d-none" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+              <label class="form-check-label w-100" for="exampleRadios1">
+                <button class="btn pt-1 pb-1 pr-3 pl-3 w-100 text-left">XS</button>
+              </label>
+            </div>
+            <div class="form-check p-0">
+              <input class="form-check-input d-none" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+              <label class="form-check-label w-100" for="exampleRadios1">
+                <button class="btn pt-1 pb-1 pr-3 pl-3 w-100 text-left">S</button>
+              </label>
+            </div>
+            <div class="form-check p-0">
+              <input class="form-check-input d-none" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+              <label class="form-check-label w-100" for="exampleRadios1">
+                <button class="btn pt-1 pb-1 pr-3 pl-3 w-100 text-left">M</button>
+              </label>
+            </div>
+            <div class="form-check p-0">
+              <input class="form-check-input d-none" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+              <label class="form-check-label w-100" for="exampleRadios1">
+                <button class="btn pt-1 pb-1 pr-3 pl-3 w-100 text-left">L</button>
+              </label>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-lg btn-primary ml-2">In den Warenkorb</button>
+      </div>
+      <p class="m-0 mt-2 text-info" style="font-size: 0.8em;">*Versand und Verkauf durch MusterMarke®</p>
+    </div>
+
+    <!-- Accordion with additional product info. -->
+    <div class="container">
+      {% include 'shop/templates/accordion.html' %}
+
+      <div class="d-flex justify-content-center align-items-center mt-2">
+        <button class="btn p-0"><u class="text-info"><h6 class="text-info" style="font-size: 0.8em;">Neue Bewerbung verfassen</h6></u></button>
+      </div>
+    </div>
+
+      <!-- Matching products. -->
+      <div class="mt-5 container">
+        <h5 class="text-info m-0">Vervollständige deinen Style</h5>
+        <h5>Passt sehr gut dazu</h5>
+      </div>
+      {% include 'shop/templates/product-slide.html' with class='text-dark' only %}
+
+      <div class="container d-flex justify-content-center align-items-center mt-4">
+        <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
+      </div>
+
+      <!-- Similar products. -->
+      <div class="mt-5 container">
+        <h5 class="text-info m-0">Das könnte dir auch gefallen</h5>
+        <h5>Ähnliche Produkte</h5>
+      </div>
+      {% include 'shop/templates/product-slide.html' with class='text-dark' only %}
+
+      <div class="container d-flex justify-content-center align-items-center mt-4">
+        <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
+      </div>
+
+      <!-- Matching categories. -->
+      <div class="mt-5 container">
+        <h5 class="text-info m-0">Passend zu diesem Produkt</h5>
+        <h5>Produkt Kategorien</h5>
+        <div class="mt-4">
+          <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Schuhe</button></a>
+          <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Accessoires</button></a>
+          <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Jeans</button></a>
+          <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">T-Shirts</button></a>
+          <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Hemden</button></a>
+          <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Sportbekleidung</button></a>
+          <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Bademode</button></a>
+          <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Schnürschuhe</button></a>
+        </div>
+      </div>
+
+    <div class="mt-4"></div>
+    <div class="p-3 d-flex justify-content-center align-items-center">
+      <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

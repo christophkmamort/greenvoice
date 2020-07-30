@@ -1,0 +1,16 @@
+.btn {
+  border-radius: 0.6em;
+
+  &-sm {
+    border-radius: 0.6em;
+  }
+
+  &-lg {
+    border-radius: 0.6em;
+    padding-top: .9em;
+    padding-bottom: .9em;
+    font-size: 1em;
+    font-weight: 700;
+    border-width: 2px;
+  }
+}

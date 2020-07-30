@@ -1,0 +1,163 @@
+{% extends "../base.html" %}
+
+{% load static %}
+
+{% block seo %}
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
+{% endblock %}
+
+{% block content %}
+  <div class="down">
+    <div class="position-absolute bg-dark w-100" style="min-height: 60vh; z-index: -1"></div>
+    <div class="pt-5 d-flex align-items-center" style="min-height: 50vh; z-index: -1;">
+      <div class="w-100">
+        <div class="container">
+          <h3 class="text-white pt-4">Meine Bestellungen</h3>
+        </div>
+        <div class="d-flex scrollbar pl-3 mt-4 mb-3">
+          <button class="btn btn-sm btn-light mr-1">Alle</button>
+          <button class="btn btn-sm btn-outline-info mr-1 ml-2">Bezahlt</button>
+          <button class="btn btn-sm btn-outline-info mr-1 ml-2">Ausgeliefert</button>
+          <button class="btn btn-sm btn-outline-info mr-1 ml-2">Wiederrufen</button>
+          <div class="p-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white down-container position-relative" style="min-height: 50vh;">
+      <div class="container">
+        <div class="p-3 d-flex justify-content-center align-items-center">
+          <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+        </div>
+
+        <div class="bg-dark rounded mt-4">
+          <div class="pt-2 p-3 row">
+            <h6 class="col-auto text-white m-0">Bestellung #92834</h6><p class="text-info m-0 col text-right w-100">09.06.2020</p>
+          </div>
+          <div class="d-flex scrollbar mt-2">
+            <div class="pl-3 pr-3">
+              <h6 class="text-info">Verkauf & Versand durch <u class="text-info">MusterMarke®</u></h6>
+              <div class="d-flex align-items-center">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-auto">
+                      <div class="row">
+                        <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                          <div style="height: 80px; width: 80px;">
+                            <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                          </div>
+                        </div>
+                        <div class="col d-flex align-items-center justiy-content-start ml-2">
+                          <div>
+                            <h6 class="text-white m-0">Product Title</h6>
+                            <p class="text-white">1x € 39,99</p>
+                            <div class="d-flex mt-3">
+                              <p class="text-white m-0">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-white ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                              <p class="text-white m-0 ml-3">Größe: M</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto ml-3">
+                      <div class="row">
+                        <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                          <div style="height: 80px; width: 80px;">
+                            <img src="{% static 'shop/media/delivery-white.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                          </div>
+                        </div>
+                        <div class="col d-flex ml-2">
+                          <div>
+                            <h6 class="text-white m-0">Versand</h6>
+                            <p class="text-white">€ 5,99</p>
+                            <div class="d-flex align-items-center mt-3">
+                              <p class="text-white m-0">DHL GoGreen</p>
+                              <p class="m-0 ml-1 text-primary" style="font-size: 0.8em; padding-top: 0.2em;">& CO2 Ausgleich</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 mt-3">
+            <div class="d-flex">
+              <button class="btn btn-sm btn-light">Details</button>
+              <button class="btn btn-sm btn-outline-info w-100 ml-3">Produkte zurücksenden</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-dark rounded mt-4 mb-3">
+          <div class="pt-2 p-3 row">
+            <h6 class="col-auto text-white m-0">Bestellung #92834</h6><p class="text-info m-0 col text-right w-100">09.06.2020</p>
+          </div>
+          <div class="d-flex scrollbar mt-2">
+            <div class="pl-3 pr-3">
+              <h6 class="text-info">Verkauf & Versand durch <u class="text-info">MusterMarke®</u></h6>
+              <div class="d-flex align-items-center">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-auto">
+                      <div class="row">
+                        <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                          <div style="height: 80px; width: 80px;">
+                            <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                          </div>
+                        </div>
+                        <div class="col d-flex align-items-center justiy-content-start ml-2">
+                          <div>
+                            <h6 class="text-white m-0">Product Title</h6>
+                            <p class="text-white">1x € 39,99</p>
+                            <div class="d-flex mt-3">
+                              <p class="text-white m-0">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-white ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                              <p class="text-white m-0 ml-3">Größe: M</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto ml-3">
+                      <div class="row">
+                        <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                          <div style="height: 80px; width: 80px;">
+                            <img src="{% static 'shop/media/delivery-white.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                          </div>
+                        </div>
+                        <div class="col d-flex ml-2">
+                          <div>
+                            <h6 class="text-white m-0">Versand</h6>
+                            <p class="text-white">€ 5,99</p>
+                            <div class="d-flex align-items-center mt-3">
+                              <p class="text-white m-0">DHL GoGreen</p>
+                              <p class="m-0 ml-1 text-primary" style="font-size: 0.8em; padding-top: 0.2em;">& CO2 Ausgleich</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 mt-3">
+            <div class="d-flex">
+              <button class="btn btn-sm btn-light w-100">Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4"></div>
+        <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100" style="bottom: 0; left: 0;">
+          <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
