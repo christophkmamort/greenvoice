@@ -6,16 +6,16 @@
   <div class="feed-product feed-product-slide">
     <div class="overflow-hidden position-relative feed-product-img">
       <a href="{% url 'shop:product' %}">
-        <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+        <img src="{% static 'shop/med/phs3.jpg' %}" class="img img-fluid w-100 h-100" alt="">
       </a>
       <!-- Wishlist. -->
-      <button class="btn position-absolute p-0" style="top: .5em; right: .5em;">
+      <button class="btn position-absolute p-1" style="top: 0.25em; right: 0.25em; background-color: rgba(255,255,255,0.5); border-radius: 100%;">
         <svg class="bi bi-heart text-white d-none" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
         <svg class="bi bi-heart text-primary" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="currentColor" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
       </button>
       <!-- Notification. -->
       <a href="{% url 'shop:product' %}">
-        <div class="position-absolute bg-white d-flex justify-content-center align-items-center pt-1 pl-2 pb-1 pr-2" style="bottom: .8em; left: .8em; border-radius: .5em;">
+        <div class="position-absolute d-flex bg-white justify-content-center align-items-center pt-1 pl-2 pb-1 pr-2" style="bottom: .40em; left: .38em; border-radius: .5em; border: rgba(0,0,0,0.1) solid .05em;">
           <h6 class="p-0 m-0 text-danger" style="font-size: .8em; margin-top: .3em !important; margin-bottom: .1em !important;">-20%</h6>
         </div>
       </a>
@@ -32,17 +32,17 @@
     <div class="feed-product feed-product-slide">
       <div class="overflow-hidden position-relative feed-product-img">
         <a href="{% url 'shop:product' %}">
-          <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+          <img src="{% static 'shop/med/phs3.jpg' %}" class="img img-fluid w-100 h-100" alt="">
         </a>
         <!-- Wishlist. -->
-        <button class="btn position-absolute p-0" style="top: .5em; right: .5em;">
-          <svg class="bi bi-heart text-white" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+        <button class="btn position-absolute p-1" style="top: 0.25em; right: 0.25em; background-color: rgba(255,255,255,0.5); border-radius: 100%;">
+          <svg class="bi bi-heart text-dark" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
         </button>
       </div>
       <a href="{% url 'shop:product' %}" class="text-decoration-none">
         <div class="pt-2 pr-2 pl-2">
-          <h6 class="m-0 p-0 mt-1 {{ class }}">Product Title</h6>
-          <p class="m-0 p-0 mt-1" style="font-size: .9em;"><span class="{{ class }}">€29,99</span></p>
+          <h6 class="m-0 p-0 mt-1">Product Title</h6>
+          <p class="m-0 p-0 mt-1"><span class="text-dark">€29,99</span></p>
         </div>
       </a>
     </div>
