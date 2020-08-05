@@ -68,6 +68,10 @@ ul {
 		text-decoration: underline;
 	}
 
+	&-inherit {
+		text-decoration: inherit;
+	}
+
 	&-sup {
 	  position: relative;
 	  bottom: 1ex;
