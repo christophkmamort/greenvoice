@@ -1,11 +1,12 @@
 .carousel-indicators li {
-  border: none;
-  border-radius: .2em;
-  width: .4em;
-  height: .4em;
+  width: 0.4em;
+  height: 0.4em;
   transition: width 0.6s ease;
+  background-color: $dark;
+  border-radius: 0.4em;
+  border: 0.1em solid rgba($white, 0.5) !important;
 }
 
 .carousel-indicators .active {
-  width: .8em;
+  width: 0.8em;
 }

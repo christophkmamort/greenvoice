@@ -32,21 +32,45 @@
 }
 
 * {
-  font-family: 'Nunito', sans-serif !important;
+  font-family: 'Nunito', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'NunitoBold', sans-serif !important;
+	font-family: 'NunitoBold', sans-serif;
+}
+
+a {
+	color: $dark;
 }
 
 strong {
-	font-family: 'NunitoBold', sans-serif !important;
-}
-
-.regular {
-	font-family: 'Nunito', sans-serif !important;
+	font-family: 'NunitoBold', sans-serif;
 }
 
 ul {
   list-style-type: none;
+}
+
+.text {
+	&-regular {
+		font-family: 'Nunito', sans-serif;
+	}
+
+	&-strong {
+		font-family: 'NunitoBold', sans-serif;
+	}
+
+	&-small {
+		font-size: 0.8em;
+	}
+
+	&-underlined {
+		text-decoration: underline;
+	}
+
+	&-sup {
+	  position: relative;
+	  bottom: 1ex;
+	  font-size: 80%;
+	}
 }

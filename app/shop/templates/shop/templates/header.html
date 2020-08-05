@@ -2,63 +2,76 @@
 
 <header class="position-absolute w-100 bg-gradient-dark d-flex justify-content-center" style="z-index: 2000;">
   <div class="container row p-3 m-0">
-    <!-- Mobile Menu. -->
-    {% include 'shop/templates/modals/mobile-menu.html' %}
-    <div class="col d-flex justify-content-start align-items-center p-0">
-      <button class="btn m-0 p-0" data-toggle="modal" data-target="#mobileMenuModal">
-        {% include 'shop/templates/svg/menu.html' with class='text-white' height='1.6em' only %}
-      </button>
+
+
+    <div><!-- Mobile Menu. -->
+      {% include 'shop/templates/modals/mobile-menu.html' %}
+      <div class="col d-flex justify-content-start align-items-center p-0">
+        <button class="btn m-0 p-0" data-toggle="modal" data-target="#mobileMenuModal">
+          {% include 'shop/templates/svg/menu.svg' with class='text-white' height='1.6em' style='' only %}
+        </button>
+      </div>
     </div>
 
+
     <div class="col d-flex justify-content-end align-items-center p-0">
-      <!-- Search. -->
-      <button class="btn m-0 p-0 mr-3">
-        {% include 'shop/templates/svg/search.html' with class='text-white' height='1.8em' only %}
-      </button>
 
-      <!-- Wishlist. -->
-      <a href="{% url 'shop:wishlist' %}" class="mr-3">
-        <button class="btn m-0 p-0 position-relative">
-          {% include 'shop/templates/svg/heart.html' with class='text-white' height='1.8em' only %}
-          <div class="position-absolute notify d-none">
-            <div class="position-relative d-flex justify-content-center align-items-center">
-              {% include 'shop/templates/svg/circle.html' with class='text-white position-absolute' height='1.1em' only %}
-              <p class="text-dark position-absolute notify-txt">4</p>
-            </div>
-          </div>
-        </button>
-        <button class="btn m-0 p-0 position-relative d-none">
-          {% include 'shop/templates/svg/heart-filled.html' with class='text-white' height='1.8em' only %}
-          <div class="position-absolute notify d-none">
-            <div class="position-relative d-flex justify-content-center align-items-center">
-              {% include 'shop/templates/svg/circle.html' with class='text-white position-absolute' height='1.1em' only %}
-              <p class="text-dark position-absolute notify-txt">4</p>
-            </div>
-          </div>
-        </button>
-      </a>
 
-      <!-- Cart. -->
-      <a href="{% url 'shop:cart' %}">
-        <button class="btn m-0 p-0 position-relative">
-          {% include 'shop/templates/svg/bag.html' with class='text-white' height='1.8em' only %}
-          <div class="position-absolute notify d-none">
-            <div class="position-relative d-flex justify-content-center align-items-center">
-              {% include 'shop/templates/svg/circle.html' with class='text-white position-absolute' height='1.1em' only %}
-              <p class="text-dark position-absolute notify-txt">4</p>
-            </div>
-          </div>
+      <div> <!-- Search. -->
+        <button class="btn m-0 p-0 mr-3">
+          {% include 'shop/templates/svg/search.svg' with class='text-white' height='1.8em' style='' only %}
         </button>
-        <button class="btn m-0 p-0 position-relative d-none">
-          {% include 'shop/templates/svg/bag-filled.html' with class='text-white' height='1.8em' only %}
-          <div class="position-absolute notify d-none">
-            <div class="position-relative d-flex justify-content-center align-items-center">
-              {% include 'shop/templates/svg/circle.html' with class='text-white position-absolute' height='1.1em' only %}
-              <p class="text-dark position-absolute notify-txt">4</p>
+      </div>
+
+
+      <div> <!-- Wishlist. -->
+        <a href="{% url 'shop:wishlist' %}" class="mr-3">
+          <button class="btn m-0 p-0 position-relative">
+            {% include 'shop/templates/svg/heart.svg' with class='text-white' height='1.8em' style='' strokewidth='2' only %}
+            <div class="position-absolute notify d-none">
+              <div class="position-relative d-flex justify-content-center align-items-center">
+                {% include 'shop/templates/svg/circle.svg' with class='text-white position-absolute' height='1.1em' style='' only %}
+                <p class="text-dark position-absolute notify-txt">4</p>
+              </div>
             </div>
-          </div>
-        </button>
-      </a>
+          </button>
+          <button class="btn m-0 p-0 position-relative d-none">
+            {% include 'shop/templates/svg/heart-filled.svg' with class='text-white' height='1.8em' style='' only %}
+            <div class="position-absolute notify d-none">
+              <div class="position-relative d-flex justify-content-center align-items-center">
+                {% include 'shop/templates/svg/circle.svg' with class='text-white position-absolute' height='1.1em' only %}
+                <p class="text-dark position-absolute notify-txt">4</p>
+              </div>
+            </div>
+          </button>
+        </a>
+      </div>
+
+
+      <div> <!-- Cart. -->
+        <a href="{% url 'shop:cart' %}">
+          <button class="btn m-0 p-0 position-relative">
+            {% include 'shop/templates/svg/bag.svg' with class='text-white' height='1.8em' only %}
+            <div class="position-absolute notify d-none">
+              <div class="position-relative d-flex justify-content-center align-items-center">
+                {% include 'shop/templates/svg/circle.svg' with class='text-white position-absolute' height='1.1em' only %}
+                <p class="text-dark position-absolute notify-txt">4</p>
+              </div>
+            </div>
+          </button>
+          <button class="btn m-0 p-0 position-relative d-none">
+            {% include 'shop/templates/svg/bag-filled.svg' with class='text-white' height='1.8em' only %}
+            <div class="position-absolute notify d-none">
+              <div class="position-relative d-flex justify-content-center align-items-center">
+                {% include 'shop/templates/svg/circle.svg' with class='text-white position-absolute' height='1.1em' only %}
+                <p class="text-dark position-absolute notify-txt">4</p>
+              </div>
+            </div>
+          </button>
+        </a>
+      </div>
+
+
     </div>
   </div>
 </header>

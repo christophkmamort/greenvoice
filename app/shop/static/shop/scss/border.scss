@@ -1,7 +1,11 @@
-.border-2 {
-    border-width: 2px !important;
+.border {
+  border-width: 0.1em !important;
 }
 
-.border-radius {
-  border-radius: 0.8em;
+.btn, .form-control, .dropdown-menu {
+  border-radius: 0.6em;
+}
+
+.circle {
+  border-radius: 100%;
 }

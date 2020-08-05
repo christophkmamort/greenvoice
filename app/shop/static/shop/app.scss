@@ -1,58 +1,27 @@
-$primary: #7FC6A4;
-$danger: #DE636F;
-$info: #BFBFBF;
-$warning: #eeb868;
+/* Custom vars */
+@import './scss/bootstrap-vars';
 
-$headings-color: #404040;
-$body-color: #404040;
-$yiq-text-dark: #404040;
-
-$light: #ffffff;
-$dark: #404040;
-
-$btn-white-space: nowrap;
-
+/* 3rd party */
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-slider/dist/css/bootstrap-slider.min.css";
 
+/* Custom */
+@import './scss/accordion';
+@import './scss/background';
 @import './scss/border';
 @import './scss/button';
 @import './scss/carousel';
+@import './scss/checkbox';
 @import './scss/down';
+@import './scss/design-elements';
 @import './scss/dropdown';
 @import './scss/feed';
 @import './scss/fonts';
 @import './scss/form';
 @import './scss/gradients';
+@import './scss/height';
 @import './scss/img';
 @import './scss/notify';
+@import './scss/seperator';
 @import './scss/scrollbar';
 @import './scss/slider';
-
-.card {
-  border: none;
-
-  &-header {
-    border: none;
-    margin-bottom: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding: 0 !important;
-  }
-}
-
-.rounded {
-  border-radius: 0.6em !important;
-}
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}

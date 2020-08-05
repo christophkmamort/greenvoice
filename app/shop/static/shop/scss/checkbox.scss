@@ -1,0 +1,51 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+
+  &-box {
+    width: 1.4em;
+    height: 1.4em;
+    border: 0.1em solid $info;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4em;
+
+    &-lg {
+      width: 2em;
+      height: 2em;
+      border-radius: 0.6em;
+    }
+  }
+
+  &-text {
+    color: $info;
+    padding-top: 0.15em;
+  }
+
+  &-icon {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  input {
+    display: none;
+  }
+
+  :hover {
+    cursor: pointer;
+  }
+
+  input:checked ~ .checkbox-box {
+    background-color: $primary;
+    border: 0.2em solid $primary;
+  }
+  input:checked ~ .checkbox-text {
+    color: $dark;
+  }
+  input:checked ~ .checkbox-box .checkbox-icon {
+    visibility: visible;
+    opacity: 1;
+  }
+}

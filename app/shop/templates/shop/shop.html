@@ -1,46 +1,62 @@
 {% extends "../base.html" %}
-
 {% load static %}
 
+<!-- SEO -->
 {% block seo %}
   <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
   <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
   <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
 {% endblock %}
 
+<!-- Header and footer -->
+{% block header %}{% include 'shop/templates/header.html' %}{% endblock %}
+{% block footer %}{% include 'shop/templates/footer.html' %}{% endblock %}
+
+<!-- Page content -->
 {% block content %}
   <div class="down">
-    <!-- Image. -->
-    <div class="position-absolute w-100" style="height: 30vh; z-index: -1;">
-      <div class="position-relative w-100 h-100">
-        <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100" alt="">
-        <div class="w-100 h-100 position-absolute" style="top: 0; left: 0; background-color: rgba(0,0,0,0.15)"></div>
+
+
+    <div> <!-- Image small -->
+      <div class="position-absolute w-100" style="height: 30vh; z-index: -1;">
+        <div class="position-relative w-100 h-100">
+          <img src="{% static 'shop/med/phs1.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+          <div class="w-100 h-100 position-absolute" style="top: 0; left: 0; background-color: rgba(0,0,0,0.15)"></div>
+        </div>
       </div>
-    </div>
-    <div class="position-relative" style="height: 25vh; z-index: -1;">
-      <div class="p-3 position-absolute w-100" style="left: 0; bottom: 0;">
-        <h4 class="text-white text-center">Nachhaltige Basics</h4>
-        <p class="text-white text-center m-0 mb-2" style="font-size: 0.8em;">100+ Produkte</p>
+      <div class="position-relative" style="height: 25vh; z-index: -1;">
+        <div class="p-3 position-absolute w-100" style="left: 0; bottom: 0;">
+          <h4 class="text-white text-center">Nachhaltige Basics</h4>
+          <p class="text-white text-center m-0 mb-2" style="font-size: 0.8em;">100+ Produkte</p>
+        </div>
       </div>
     </div>
 
-    <!-- Container. -->
+
     <div class="bg-white down-container">
-      <div class="p-3 d-flex justify-content-center align-items-center">
-        <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+      <div> <!-- Design element -->
+        <div class="p-3 d-flex justify-content-center align-items-center">
+          <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+        </div>
       </div>
 
-      <!-- Filter & Categories. -->
-      {% include 'shop/templates/modals/filter.html' %}
-      <div class="d-flex scrollbar mt-4">
-        <div class="feed-padding-left"></div>
-        <button class="btn btn-lg btn-outline-info mr-1"  data-toggle="modal" data-target="#filterModal">Filter (0)</button>
-        <a href="#"><button class="btn btn-lg btn-outline-info mr-1 ml-2">Accessoires</button></a>
-        <a href="#"><button class="btn btn-lg btn-outline-info mr-1 ml-2">Bekleidung</button></a>
-        <a href="#"><button class="btn btn-lg btn-outline-info mr-1 ml-2">Taschen</button></a>
-        <a href="#"><button class="btn btn-lg btn-outline-info mr-1 ml-2">Schuhe</button></a>
-        <div class="feed-padding-right"></div>
+
+
+
+
+      <div> <!-- Filter & Categories -->
+        {% include 'shop/templates/modals/filter.html' %}
+        <div class="d-flex scrollbar mt-4">
+          <div class="feed-padding-left"></div>
+          <button class="btn btn-lg btn-outline-info mr-1"  data-toggle="modal" data-target="#filterModal">Filter (0)</button>
+          <a href="#"><button class="btn btn-lg btn-outline-info mr-1 ml-2">Accessoires</button></a>
+          <a href="#"><button class="btn btn-lg btn-outline-info mr-1 ml-2">Bekleidung</button></a>
+          <a href="#"><button class="btn btn-lg btn-outline-info mr-1 ml-2">Taschen</button></a>
+          <a href="#"><button class="btn btn-lg btn-outline-info mr-1 ml-2">Schuhe</button></a>
+          <div class="feed-padding-right"></div>
+        </div>
       </div>
+
 
       <!-- Responsive product feed. -->
       <div class="container mt-5">
@@ -50,11 +66,11 @@
           <div class="feed-product mb-4">
             <div class="overflow-hidden position-relative feed-product-img">
               <a href="{% url 'shop:product' %}">
-                <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+                <img src="{% static 'shop/med/phs1.jpg' %}" class="img img-fluid w-100 h-100" alt="">
               </a>
               <!-- Wishlist. -->
-              <button class="btn position-absolute p-0" style="top: .5em; right: .5em;">
-                <svg class="bi bi-heart text-white" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+              <button class="btn position-absolute p-1" style="top: 0.25em; right: 0.25em; background-color: rgba(255,255,255,0.5); border-radius: 100%;">
+                <svg class="bi bi-heart text-dark" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
                 <svg class="bi bi-heart text-primary d-none" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="currentColor" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
               </button>
               <!-- Notification. -->

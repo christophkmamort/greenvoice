@@ -1,226 +1,346 @@
 {% load static %}
 
-<div class="accordion mt-5" id="productInfoAccordion">
-  <!-- Description. -->
-  <div class="card">
-    <div class="card-header bg-white" id="headingOne">
-      <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoDescription" aria-expanded="true" aria-controls="productInfoDescription" style="cursor: pointer;">
-        <h6 class="m-0" style="white-space: nowrap;">Beschreibung:</h6>
-        <div class="d-flex justify-content-end w-100">
-          {% include 'shop/templates/svg/arrow-down.html' with class='text-dark arrow-down' height='0.4em' only %}
-          {% include 'shop/templates/svg/arrow-up.html' with class='text-dark arrow-up d-none' height='0.4em' only %}
-        </div>
-      </div>
-    </div>
-    <div id="productInfoDescription" class="collapse" aria-labelledby="headingOne" data-parent="#productInfoAccordion">
-      <div class="card-body pt-1 pl-0 pr-0">
-        <ul class="p-0 m-0">
-          <li><strong>Materialkonstruktion:</strong> <span class="text-info">Strick</span></li>
-          <li><strong>Muster:</strong> <span class="text-info">Unifarben</span></li>
-          <li><strong>Ausschnitt:</strong> <span class="text-info">Rundhals</span></li>
-          <li><strong>Artikelnummer:</strong> <span class="text-info">{% include 'shop/templates/svg/upc.html' with class='text-info pb-1' height='1.5em' only %} 6CA22Q01D-N11</span></li>
-        </ul>
-      </div>
-    </div>
-    <hr class="m-0 p-0">
-  </div>
+<div class="accordion" id="productDetailInfoAccordion">
 
-  <!-- Materials. -->
-  <div class="card">
-    <div class="card-header bg-white" id="headingTwo">
-      <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoMaterials" aria-expanded="true" aria-controls="productInfoMaterials" style="cursor: pointer;">
-        <h6 class="m-0" style="white-space: nowrap;">Materialien:</h6>
-        <div class="d-flex justify-content-end w-100">
-          {% include 'shop/templates/svg/arrow-down.html' with class='text-dark arrow-down' height='0.4em' only %}
-          {% include 'shop/templates/svg/arrow-up.html' with class='text-dark d-none arrow-up' height='0.4em' only %}
+
+  {% if 1 == 1 %}
+    <div data-section="productDetailInfoAttributes">
+      <div class="container">
+        <div class="card">
+
+          <div class="card-header bg-white" id="productDetailInfoAttributeHeading">
+            <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productDetailInfoAttributes" aria-expanded="true" aria-controls="productDetailInfoAttributes">
+              <h6 class="m-0 w-100">Beschreibung:</h6>
+              {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
+              {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark accordion-up d-none' height='0.4em' style='' only %}
+            </div>
+          </div>
+
+          <div id="productDetailInfoAttributes" class="collapse" aria-labelledby="productDetailInfoAttributeHeading" data-parent="#productDetailInfoAccordion">
+            <div class="card-body pt-1 pl-0 pr-0">
+              <ul class="p-0 m-0">
+                <li><strong>Materialkonstruktion: </strong><span class="text-info">Strick</span></li>
+                <li><strong>Muster: </strong><span class="text-info">Unifarben</span></li>
+                <li><strong>Ausschnitt: </strong><span class="text-info">Rundhals</span></li>
+                <li><strong>Artikelnummer: </strong><span class="text-info">{% include 'shop/templates/svg/upc.svg' with class='text-info pb-1' height='1.5em' style='' only %}6CA22Q01D-N11</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <hr class="m-0 p-0">
         </div>
       </div>
     </div>
-    <div id="productInfoMaterials" class="collapse" aria-labelledby="headingTwo" data-parent="#productInfoAccordion">
-      <div class="card-body pt-1 pl-0 pr-0">
-        <div class="d-flex justify-content-center">
-          <div class="row">
-            <div class="col d-flex align-items-center justify-content-center p-3">
-              <canvas id="productInfoMaterialsChart" width="100%" height="100%"></canvas>
+  {% endif %}
+
+
+  {% if 1 == 1 %}
+    <div data-section="productDetailInfoMaterials">
+      <div class="container">
+        <div class="card">
+
+          <div class="card-header bg-white" id="productDetailInfoMaterialsHeading">
+            <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productDetailInfoMaterials" aria-expanded="true" aria-controls="productDetailInfoMaterials">
+              <h6 class="m-0 w-100">Materialien:</h6>
+              {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
+              {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark d-none accordion-up' height='0.4em' style='' only %}
             </div>
-            <div class="col d-flex align-items-center p-3">
-              <div>
-                <div class="d-flex align-items-center">
-                  {% include 'shop/templates/svg/circle.html' with class='text-dark mr-3' height='0.8em' only %}
-                  <div>
-                    <p class="m-0 text-info">BIO-Baumwolle</p>
-                    <h6 class="m-0">50%</h6>
+          </div>
+
+          <div id="productDetailInfoMaterials" class="collapse" aria-labelledby="productDetailInfoMaterialsHeading" data-parent="#productDetailInfoAccordion">
+            <div class="card-body pt-1 pl-0 pr-0">
+              <div class="d-flex justify-content-center">
+                <div class="row">
+                  <div class="col d-flex align-items-center justify-content-center p-3">
+                    <canvas id="productDetailInfoMaterialsChart" width="100%" height="100%" data-colors="#353535, #CCCCCC, #4E7704"></canvas>
                   </div>
-                </div>
-                <div class="d-flex align-items-center mt-2">
-                  {% include 'shop/templates/svg/circle.html' with class='text-info mr-3' height='0.8em' only %}
-                  <div>
-                    <p class="m-0 text-info">Hanf</p>
-                    <h6 class="m-0">35%</h6>
-                  </div>
-                </div>
-                <div class="d-flex align-items-center mt-2">
-                  {% include 'shop/templates/svg/circle.html' with class='text-primary mr-3' height='0.8em' only %}
-                  <div>
-                    <p class="m-0 text-info">Recyceltes PET</p>
-                    <h6 class="m-0">15%</h6>
+                  <div class="col d-flex align-items-center p-3">
+                    <div>
+                      <div class="d-flex align-items-center">
+                        {% include 'shop/templates/svg/circle.svg' with class='mr-3' height='0.9em' style='' only %}
+                        <div>
+                          <p class="m-0 text-info productDetailInfoMaterial" data-material="BIO-Baumwolle" data-amount="50">BIO-Baumwolle</p>
+                          <h6 class="m-0">50%</h6>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center mt-2">
+                        {% include 'shop/templates/svg/circle.svg' with class='mr-3' height='0.9em' style='' only %}
+                        <div>
+                          <p class="m-0 text-info productDetailInfoMaterial" data-material="Hanf" data-amount="35">Hanf</p>
+                          <h6 class="m-0">35%</h6>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center mt-2">
+                        {% include 'shop/templates/svg/circle.svg' with class='mr-3' height='0.9em' style='' only %}
+                        <div>
+                          <p class="m-0 text-info productDetailInfoMaterial" data-material="Recyceltes PET" data-amount="15">Recyceltes PET</p>
+                          <h6 class="m-0">15%</h6>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <hr class="m-0 p-0">
-  </div>
 
-  <!-- Transparency. -->
-  <div class="card">
-    <div class="card-header bg-white" id="headingThree">
-      <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoTransparency" aria-expanded="true" aria-controls="productInfoTransparency" style="cursor: pointer;">
-        <h6 class="m-0 d-flex align-items-start" style="white-space: nowrap;">Transparenz:<span style="font-size: 0.7em;">®</span></h6>
-        <div class="d-flex justify-content-end w-100">
-          {% include 'shop/templates/svg/arrow-down.html' with class='text-dark arrow-down' height='0.4em' only %}
-          {% include 'shop/templates/svg/arrow-up.html' with class='text-dark d-none arrow-up' height='0.4em' only %}
+          <hr class="m-0 p-0">
         </div>
       </div>
     </div>
-    <div id="productInfoTransparency" class="collapse" aria-labelledby="headingThree" data-parent="#productInfoAccordion">
-      <div class="card-body pt-1 pl-0 pr-0">
-        {% include 'shop/templates/svg/world.html' with class='text-info' width="100%" only %}
-        <div class="d-flex align-items-start scrollbar mt-2">
-          <div style="max-width: 50vw;">
-            <p class="text-info m-0 mt-2"><strong class="text-dark">Stoff:</strong> 80% BIO Baumwolle angebaut in San Diego Valley, USA. Faden gesponnen in Turkoglu Türkei.</p>
-          </div>
-          <div class="ml-4" style="max-width: 50vw;">
-            <p class="text-info m-0 mt-2"><strong class="text-dark">Faden:</strong> 80% BIO Baumwolle angebaut in San Diego Valley, USA. Faden gesponnen in Turkoglu Türkei.</p>
-          </div>
-          <div class="ml-4" style="max-width: 50vw;">
-            <p class="text-info m-0 mt-2"><strong class="text-dark">Label:</strong> 80% Faden gedreht, gefärbt und gewoben in Ronfe Portugal.</p>
-          </div>
-          <div class="p-2"></div>
-        </div>
-      </div>
-    </div>
-    <hr class="m-0 p-0">
-  </div>
+  {% endif %}
 
-  <!-- Fit. -->
-  <div class="card">
-    <div class="card-header bg-white" id="headingThree">
-      <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoFit" aria-expanded="true" aria-controls="productInfoFit" style="cursor: pointer;">
-        <h6 class="m-0" style="white-space: nowrap;">Passform:</h6>
-        <div class="d-flex justify-content-end w-100">
-          {% include 'shop/templates/svg/arrow-down.html' with class='text-dark arrow-down' height='0.4em' only %}
-          {% include 'shop/templates/svg/arrow-up.html' with class='text-dark d-none arrow-up' height='0.4em' only %}
-        </div>
-      </div>
-    </div>
-    <div id="productInfoFit" class="collapse" aria-labelledby="headingThree" data-parent="#productInfoAccordion">
-      <div class="card-body pt-1 pl-0 pr-0">
-        <ul class="p-0 m-0">
-          <li><strong>Model:</strong> <span class="text-info">170cm trägt Größe M</span></li>
-          <li><strong>Beinlänge:</strong> <span class="text-info">120cm</span></li>
-        </ul>
-        <button class="btn text-info p-0 mt-2"><u class="text-info">Größentabelle</u></button>
-      </div>
-    </div>
-    <hr class="m-0 p-0">
-  </div>
 
-  <!-- Shipping. -->
-  <div class="card">
-    <div class="card-header bg-white" id="headingThree">
-      <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoShipping" aria-expanded="true" aria-controls="productInfoShipping" style="cursor: pointer;">
-        <h6 class="m-0" style="white-space: nowrap;">Versand:</h6>
-        <div class="d-flex justify-content-end w-100">
-          {% include 'shop/templates/svg/arrow-down.html' with class='text-dark arrow-down' height='0.4em' only %}
-          {% include 'shop/templates/svg/arrow-up.html' with class='text-dark d-none arrow-up' height='0.4em' only %}
-        </div>
-      </div>
-    </div>
-    <div id="productInfoShipping" class="collapse" aria-labelledby="headingThree" data-parent="#productInfoAccordion">
-      <div class="card-body pt-1 pl-0 pr-0">
+  {% if 1 == 1 %}
+    <div data-section="productDetailInfoTransparency">
+      <div class="card">
         <div class="container">
-          <div class="row">
-            <div class="col-auto p-0">{% include 'shop/templates/svg/delivery.html' with class='text-dark arrow-down' width='1.2em' only %}</div>
-            <div class="col-auto"><p class="m-0"><strong>Lieferung:</strong> <span class="text-info">€ 5,99 / 2 - 4 Werktage <br> nach Österreich</span></p></div>
-          </div>
-          <div class="row">
-            <div class="col-auto p-0">{% include 'shop/templates/svg/return.html' with class='text-dark arrow-down' width='1.2em' height='1em' only %}</div>
-            <div class="col-auto"><p class="m-0"><strong>Rückgaberecht:</strong> <span class="text-info">30 Tage</span></p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr class="m-0 p-0">
-  </div>
 
-  <!-- Seals -->
-  <div class="card">
-    <div class="card-header bg-white" id="headingThree">
-      <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoSeals" aria-expanded="true" aria-controls="productInfoSeals" style="cursor: pointer;">
-        <h6 class="m-0" style="white-space: nowrap;">Siegel:</h6>
-        <div class="d-flex justify-content-end w-100">
-          {% include 'shop/templates/svg/arrow-down.html' with class='text-dark arrow-down' height='0.4em' only %}
-          {% include 'shop/templates/svg/arrow-up.html' with class='text-dark d-none arrow-up' height='0.4em' only %}
-        </div>
-      </div>
-    </div>
-    <div id="productInfoSeals" class="collapse" aria-labelledby="headingThree" data-parent="#productInfoAccordion">
-      <div class="card-body pt-1 pl-0 pr-0">
-        <div class="d-flex scrollbar" style="height: 50px;">
-          <img src="{% static 'shop/media/fairtrade.png' %}" class="img img-fluid h-100" alt="">
-          <img src="{% static 'shop/media/peta.png' %}" class="img img-fluid ml-3 h-100" alt="">
-          <div class="p-2"></div>
-        </div>
-      </div>
-    </div>
-    <hr class="m-0 p-0">
-  </div>
+          <div class="card-header bg-white" id="headingThree">
+            <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoTransparency" aria-expanded="true" aria-controls="productInfoTransparency" style="cursor: pointer;">
+              <h6 class="m-0 d-flex align-items-start" style="white-space: nowrap;">Transparenz:<span style="font-size: 0.7em;">®</span><span class="text-primary ml-1">(A+)</span></h6>
+              <div class="d-flex justify-content-end w-100">
+                {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
+                {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark d-none accordion-up' height='0.4em' style='' only %}
+              </div>
+            </div>
+          </div>
 
-  <!-- Reviews. -->
-  <div class="card">
-    <div class="card-header bg-white" id="headingThree">
-      <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoReviews" aria-expanded="true" aria-controls="productInfoReviews" style="cursor: pointer;">
-        <h6 class="m-0" style="white-space: nowrap;">Bewertungen: <span class="text-info">(4.0)</span></h6>
-        <div class="d-flex align-items-center justify-content-end w-100">
-          <div class="d-flex mr-2">
-            {% for item in "x"|ljust:"5" %}
-              {% include 'shop/templates/svg/star.html' with class='text-dark' height="0.8em" style='margin-right: 0.1em;' only %}
-            {% endfor %}
+        </div>
+        <div id="productInfoTransparency" class="collapse show" aria-labelledby="headingThree" data-parent="#productDetailInfoAccordion">
+          <div class="card-body pt-1 pl-0 pr-0">
+
+            <div class="container">
+              <div class="position-relative" id="productDetailTransparencyMap">
+                <!--{% include 'shop/templates/svg/world-coordinate-system.svg' with class='text-info' width='100%' style='' coordinatesystem='#4e7714' only %}-->
+                {% include 'shop/templates/svg/world.svg' with class='text-info' width='100%' style='' only %}
+              </div>
+            </div>
+
+            <div class="container px-0">
+              <div class="d-flex align-items-start scrollbar mt-2 pl-3">
+                <div style="max-width: 50vw;">
+                  <p class="text-info m-0 mt-2"><strong class="text-dark">Stoff:</strong> 80% <u>BIO Baumwolle</u> angebaut in <i>San Diego Valley, USA<span class="text-sup">1</span></i>. Faden gesponnen in <i>Turkoglu Türkei<span class="text-sup">2</span></i></i>.</p>
+                </div>
+                <div class="ml-4" style="max-width: 50vw;">
+                  <p class="text-info m-0 mt-2"><strong class="text-dark">Faden:</strong> 80% <u>BIO Baumwolle</u> angebaut in <i>San Diego Valley, USA<span class="text-sup">1</span></i>. Faden gesponnen in <i>Turkoglu Türkei<span class="text-sup">2</span></i></i>.</p>
+                </div>
+                <div class="ml-4" style="max-width: 50vw;">
+                  <p class="text-info m-0 mt-2"><strong class="text-dark">Label:</strong> 80% <u>BIO Baumwolle</u> angebaut in <i>San Diego Valley, USA<span class="text-sup">1</span></i>. Faden gesponnen in <i>Turkoglu Türkei<span class="text-sup">2</span></i></i>.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
-          {% include 'shop/templates/svg/arrow-down.html' with class='text-dark arrow-down' height='0.4em' only %}
-          {% include 'shop/templates/svg/arrow-up.html' with class='text-dark d-none arrow-up' height='0.4em' only %}
+        </div>
+
+        <div class="container">
+          <hr class="m-0 p-0">
         </div>
       </div>
     </div>
-    <div id="productInfoReviews" class="collapse" aria-labelledby="headingThree" data-parent="#productInfoAccordion">
-      <div class="card-body pt-1 pl-0 pr-0">
-        <div class="d-flex align-items-start scrollbar mt-2">
-          <div style="max-width: 70vw;">
-            <h6>Richard Buchner</h6>
-            <div class="d-flex">
-              {% for item in "x"|ljust:"5" %}
-                {% include 'shop/templates/svg/star.html' with class='text-dark' height="0.8em" style='margin-right: 0.1em;' only %}
-              {% endfor %}
+  {% endif %}
+
+
+  {% if 1 == 1 %}
+    <div data-section="productDetailInfoFit">
+      <div class="container">
+        <div class="card">
+
+          <div class="card-header bg-white" id="headingThree">
+            <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoFit" aria-expanded="true" aria-controls="productInfoFit" style="cursor: pointer;">
+              <h6 class="m-0" style="white-space: nowrap;">Passform:</h6>
+              <div class="d-flex justify-content-end w-100">
+                {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
+                {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark d-none accordion-up' height='0.4em' style='' only %}
+              </div>
             </div>
-            <p class="text-info m-0 mt-2">Das ist die erste Bewertung dieses Produktes. Das Produkt ist angenehm zu tragen und pflegeleicht. Ich bin damit sehr zu frieden.</p>
           </div>
-          <div class="ml-4" style="max-width: 70vw;">
-            <h6>Christoph Amort</h6>
-            <div class="d-flex">
-              {% for item in "x"|ljust:"5" %}
-                {% include 'shop/templates/svg/star.html' with class='text-dark' height="0.8em" style='margin-right: 0.1em;' only %}
-              {% endfor %}
+
+          <div id="productInfoFit" class="collapse" aria-labelledby="headingThree" data-parent="#productDetailInfoAccordion">
+            <div class="card-body pt-1 pl-0 pr-0">
+              <ul class="p-0 m-0">
+                <li><strong>Model:</strong> <span class="text-info">170cm trägt Größe M</span></li>
+                <li><strong>Beinlänge:</strong> <span class="text-info">120cm</span></li>
+              </ul>
+
+              <!--<button class="btn text-info p-0 mt-2"><u class="text-info">Größentabelle</u></button>-->
+
             </div>
-            <p class="text-info m-0 mt-2">Das ist die zweite Bewertung dieses Produktes. Das Produkt ist angenehm zu tragen und pflegeleicht. Ich bin damit sehr zu frieden.</p>
           </div>
-          <div class="p-2"></div>
+
+          <hr class="m-0 p-0">
         </div>
       </div>
     </div>
-  </div>
-  <hr class="m-0 p-0">
+  {% endif %}
+
+
+  {% if 1 == 1 %}
+    <div data-section="productDetailInfoShipping">
+      <div class="container">
+        <div class="card">
+
+          <div class="card-header bg-white" id="headingThree">
+            <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoShipping" aria-expanded="true" aria-controls="productInfoShipping" style="cursor: pointer;">
+              <h6 class="m-0" style="white-space: nowrap;">Versand: <span class="text-primary">(CO2 neutral)</span></h6>
+              <div class="d-flex justify-content-end w-100">
+                {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
+                {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark d-none accordion-up' height='0.4em' style='' only %}
+              </div>
+            </div>
+          </div>
+
+          <div id="productInfoShipping" class="collapse" aria-labelledby="headingThree" data-parent="#productDetailInfoAccordion">
+            <div class="card-body pt-1 pl-0 pr-0">
+              <div class="container">
+                <div class="row">
+                  <div class="col-auto p-0" style="width: 1.2em;">{% include 'shop/templates/svg/delivery.svg' with class='text-dark mb-1' height='1em' style='' only %}</div>
+                  <div class="col-auto"><p class="m-0"><strong>Lieferung:</strong> <span class="text-info">€ 5,99 / 2 - 4 Werktage <br> nach Österreich</span></p></div>
+                </div>
+                <div class="row">
+                  <div class="col-auto p-0" style="width: 1.2em;">{% include 'shop/templates/svg/return.svg' with class='text-dark mb-1' height='1em' style='' only %}</div>
+                  <div class="col-auto"><p class="m-0"><strong>Rückgaberecht:</strong> <span class="text-info">30 Tage</span></p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="m-0 p-0">
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+
+  {% if 1 == 1 %}
+    <div data-section="productDetailInfoSeals">
+      <div class="card">
+
+        <div class="container">
+          <div class="card-header bg-white" id="headingThree">
+            <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoSeals" aria-expanded="true" aria-controls="productInfoSeals" style="cursor: pointer;">
+              <h6 class="m-0" style="white-space: nowrap;">Siegel:</h6>
+              <div class="d-flex justify-content-end w-100">
+                {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
+                {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark d-none accordion-up' height='0.4em' style='' only %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container px-0">
+          <div id="productInfoSeals" class="collapse" aria-labelledby="headingThree" data-parent="#productDetailInfoAccordion">
+            <div class="card-body pt-1 pl-0 pr-0">
+              <div class="d-flex scrollbar pl-3">
+                {% include 'shop/templates/svg/seals/fairtrade.svg' with class='flex-shrink-0' height='4em' style='' only %}
+                <img src="{% static 'shop/med/peta.png' %}" class="img img-fluid ml-3 h-100" alt="">
+                <div class="p-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <hr class="m-0 p-0">
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+
+  {% if 1 == 1 %}
+    <div data-section="productDetailInfoReviews">
+      <div class="card">
+
+        <div class="container">
+          <div class="card-header bg-white" id="headingThree">
+            <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoReviews" aria-expanded="true" aria-controls="productInfoReviews" style="cursor: pointer;">
+
+              <h6 class="m-0" style="white-space: nowrap;">Bewertungen: <span class="text-info">(4.5)</span></h6>
+
+              <div class="d-flex align-items-center justify-content-end w-100">
+
+                <div class="d-flex mr-2">
+                  {% include 'shop/templates/svg/star.svg' with class='text-primary' height='0.9em' style='' only %}
+                  {% include 'shop/templates/svg/star.svg' with class='text-primary' height='0.9em' style='margin-left: 0.1em;' only %}
+                  {% include 'shop/templates/svg/star.svg' with class='text-primary' height='0.9em' style='margin-left: 0.1em;' only %}
+                  {% include 'shop/templates/svg/star.svg' with class='text-primary' height='0.9em' style='margin-left: 0.1em;' only %}
+                  {% include 'shop/templates/svg/star-left.svg' with class='text-primary' height='0.9em' style='margin-left: 0.1em;' only %}
+                  {% include 'shop/templates/svg/star-right.svg' with class='text-info' height='0.9em' style='' only %}
+                </div>
+
+                {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
+                {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark d-none accordion-up' height='0.4em' style='' only %}
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="container px-0">
+          <div id="productInfoReviews" class="collapse" aria-labelledby="headingThree" data-parent="#productDetailInfoAccordion">
+            <div class="card-body pt-1 pl-0 pr-0">
+              <div class="d-flex align-items-start scrollbar mt-2 pl-3">
+
+                <div style="max-width: 70vw;">
+                  <h6>Richard Buchner</h6>
+                  <div class="d-flex">
+                    {% for item in "x"|ljust:"5" %}
+                      {% include 'shop/templates/svg/star.svg' with class='text-primary' height="0.9em" style='margin-right: 0.1em;' only %}
+                    {% endfor %}
+                  </div>
+                  <p class="text-info m-0 mt-2">Das ist die erste Bewertung dieses Produktes. Das Produkt ist angenehm zu tragen und pflegeleicht. Ich bin damit sehr zufrieden.</p>
+                </div>
+
+                <div class="ml-4" style="max-width: 70vw;">
+                  <h6>Christoph Amort</h6>
+                  <div class="d-flex">
+                    {% for item in "x"|ljust:"4" %}
+                      {% include 'shop/templates/svg/star.svg' with class='text-primary' height="0.9em" style='margin-right: 0.1em;' only %}
+                    {% endfor %}
+                    {% include 'shop/templates/svg/star.svg' with class='text-info' height="0.9em" style='margin-right: 0.1em;' only %}
+                  </div>
+                  <p class="text-info m-0 mt-2">Das ist die zweite Bewertung dieses Produktes. Das Produkt ist angenehm zu tragen und pflegeleicht. Ich bin damit sehr zufrieden.</p>
+                </div>
+
+                <div class="p-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <hr class="m-0 p-0">
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
 </div>
+
+
+{% if 1 == 0 %}
+  <div data-section="productDetailCommentAdd">
+    <div class="seperator mt-2"></div>
+
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center">
+        <button class="btn p-0"><u class="text-info"><h6 class="text-info" style="font-size: 0.9em;">Neue Bewerbung verfassen</h6></u></button>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
+{% if 1 == 1 %}
+  <div data-section="productDetailCommentQuestions">
+    <div class="seperator mt-2"></div>
+
+    <div class="container">
+      <div class="d-flex justify-content-center align-items-center">
+        <button class="btn p-0"><u class="text-info"><h6 class="text-info" style="font-size: 0.9em;">Hast du noch eine Frage zu diesem Produkt?</h6></u></button>
+      </div>
+    </div>
+  </div>
+{% endif %}

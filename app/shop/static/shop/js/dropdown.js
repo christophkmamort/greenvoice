@@ -21,6 +21,7 @@ class Dropdown {
     if ($(e.target).find(that.arrowDown).hasClass('d-none')) {
       $(e.target).find(that.arrowDown).removeClass('d-none');
       $(e.target).find(that.arrowUp).addClass('d-none');
+      that.arrowDown.addClass('text-dark');
     } else {
       $(e.target).find(that.arrowDown).addClass('d-none');
       $(e.target).find(that.arrowUp).removeClass('d-none');
@@ -35,10 +36,9 @@ class Dropdown {
 
   resetArrow(e) {
     var that = this;
-    if ($(e.target) != that.trigger) {
-      that.arrowDown.removeClass('d-none');
-      that.arrowUp.addClass('d-none');
-    }
+    that.arrowDown.removeClass('d-none');
+    that.arrowUp.addClass('d-none');
+    that.arrowDown.removeClass('text-dark');
   }
 }
 
