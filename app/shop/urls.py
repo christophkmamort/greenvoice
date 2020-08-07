@@ -11,6 +11,7 @@ urlpatterns = [
     path('business/shooting-agreements', views.ShootingAgreementsView.as_view(), name='shooting-agreements'),
     path('imprint', views.ImprintView.as_view(), name='imprint'),
     path('login', views.LoginView.as_view(), name='login'),
+    path('logout', views.LogoutView.as_view(), name='logout'),
     path('order', views.OrderView.as_view(), name='order'),
     path('privacy', views.PrivacyView.as_view(), name='privacy'),
     path('profile', views.ProfileView.as_view(), name='profile'),

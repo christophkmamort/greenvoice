@@ -1,7 +1,26 @@
-.form-control-lg {
-  padding-top: 1.6em;
-  padding-bottom: 1.6em;
-  font-size: 1em;
-  font-weight: 700;
-  border-width: 2px;
+.form-control {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid $info;
+  box-shadow: none !important;
+
+  &-lg {
+    padding-top: 1.6em;
+    padding-bottom: 1.6em;
+    font-size: 1em;
+    font-weight: 700;
+    border-width: 2px;
+  }
+
+  &-error {
+    border-color: $danger;
+  }
+
+  &:active {
+    border-color: $primary !important;
+  }
+
+  &:focus {
+    border-color: $primary !important;
+  }
 }

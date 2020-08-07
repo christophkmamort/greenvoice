@@ -35,14 +35,24 @@
         </div>
 
         <div data-section="registerForm">
-          <form>
-            <input type="text" class="form-control form-control-lg" id="registerName" aria-describedby="nameHelp" placeholder="Name">
-            <input type="email" class="form-control form-control-lg" id="registerEmail" aria-describedby="emailHelp" placeholder="*E-Mail">
-            <input type="password" class="form-control form-control-lg" id="registerPassword" aria-describedby="passwordHelp" placeholder="*Passwort">
+          <form id="registerUserForm" method="POST">
+            {% csrf_token %}
+
+            {{ form.email }}
+            {{ form.password1 }}
+            {{ form.password2 }}
+            <input type="hidden" name="registerHoney">
 
             <div class="seperator mt-4"></div>
 
-            <button class="btn btn-primary btn-lg w-100">Jetzt registrieren</button>
+            <button id="registerUserTrigger" class="btn btn-primary btn-lg w-100" type="button">Jetzt registrieren</button>
+
+            <div class="seperator mt-2"></div>
+
+            <p id="registerUserMessage" class="text-danger text-small text-center"></p>
+            {% for message in messages %}
+    					<p class="text-danger text-small text-center">{{ message }}</p>
+    				{% endfor %}
           </form>
         </div>
 

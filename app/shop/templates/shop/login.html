@@ -35,13 +35,26 @@
         </div>
 
         <div data-section="loginForm">
-          <form>
-            <input type="email" class="form-control form-control-lg" id="loginEmail" aria-describedby="emailHelp" placeholder="E-Mail">
-            <input type="password" class="form-control form-control-lg mt-2" id="loginPassword" aria-describedby="passwordHelp" placeholder="Passwort">
+          <form id="loginUserForm" method="POST">
+            {% csrf_token %}
+
+            <input type="email" name="loginEmail" class="form-control form-control-lg" placeholder="E-Mail" value="{{ submittedLoginEmail }}">
+            <input type="password" name="loginPassword" class="form-control form-control-lg mt-2" placeholder="Passwort">
 
             <div class="seperator mt-4"></div>
 
-            <button class="btn btn-primary btn-lg w-100">Anmelden</button>
+            <button id="loginUserTrigger" class="btn btn-primary btn-lg w-100" type="button">Anmelden</button>
+
+            <div class="seperator mt-2"></div>
+
+            <p id="loginUserMessage" class="text-danger text-small text-center"></p>
+            {% for message in messages %}
+              {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+    					  <p class="text-danger text-small text-center">{{ message }}</p>
+              {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <p class="text-primary text-small text-center">{{ message }}</p>
+              {% endif %}
+    				{% endfor %}
           </form>
         </div>
 
