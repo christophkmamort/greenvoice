@@ -98,16 +98,16 @@
 
           <div class="card-header bg-white" id="headingThree">
             <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoTransparency" aria-expanded="true" aria-controls="productInfoTransparency" style="cursor: pointer;">
-              <h6 class="m-0 d-flex align-items-start" style="white-space: nowrap;">Transparenz:<span style="font-size: 0.7em;">®</span><span class="text-primary ml-1">(A+)</span></h6>
+              <h6 class="m-0 d-flex align-items-start" style="white-space: nowrap;">Transparenz:<span style="font-size: 0.7em;">®</span><span class="text-primary ml-1 {% if 1 == 0 %} text-italic {% endif %}">(A+)</span></h6>
               <div class="d-flex justify-content-end w-100">
-                {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
-                {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark d-none accordion-up' height='0.4em' style='' only %}
+                {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down d-none' height='0.4em' style='' only %}
+                {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark accordion-up' height='0.4em' style='' only %}
               </div>
             </div>
           </div>
 
         </div>
-        <div id="productInfoTransparency" class="collapse" aria-labelledby="headingThree" data-parent="#productDetailInfoAccordion">
+        <div id="productInfoTransparency" class="collapse show" aria-labelledby="headingThree" data-parent="#productDetailInfoAccordion">
           <div class="card-body pt-1 pl-0 pr-0">
 
             <div class="container">
@@ -183,7 +183,7 @@
 
           <div class="card-header bg-white" id="headingThree">
             <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoShipping" aria-expanded="true" aria-controls="productInfoShipping" style="cursor: pointer;">
-              <h6 class="m-0" style="white-space: nowrap;">Versand: <span class="text-primary">(CO2 neutral)</span></h6>
+              <h6 class="m-0" style="white-space: nowrap;">Versand: <span class="text-primary {% if 1 == 0 %} text-italic {% endif %}">(CO2 neutral)</span></h6>
               <div class="d-flex justify-content-end w-100">
                 {% include 'shop/templates/svg/arrow-down.svg' with class='text-dark accordion-down' height='0.4em' style='' only %}
                 {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark d-none accordion-up' height='0.4em' style='' only %}
@@ -257,7 +257,7 @@
           <div class="card-header bg-white" id="headingThree">
             <div class="d-flex align-items-center pt-2 pb-2 accordion-toggle" data-toggle="collapse" data-target="#productInfoReviews" aria-expanded="true" aria-controls="productInfoReviews" style="cursor: pointer;">
 
-              <h6 class="m-0" style="white-space: nowrap;">Bewertungen: <span class="text-info">(4.5)</span></h6>
+              <h6 class="m-0" style="white-space: nowrap;">Bewertungen: <span class="text-info {% if 1 == 0 %} text-italic {% endif %}">(4.5)</span></h6>
 
               <div class="d-flex align-items-center justify-content-end w-100">
 
@@ -339,7 +339,7 @@
 
     <div class="container">
       <div class="d-flex justify-content-center align-items-center">
-        <button class="btn p-0"><u class="text-info"><h6 class="text-info" style="font-size: 0.9em;">Hast du noch eine Frage zu diesem Produkt?</h6></u></button>
+        <button class="btn p-0"><u class="text-info"><p class="text-info text-smaller  {% if 1 == 0 %} text-italic {% endif %}">Hast du noch eine Frage zu diesem Produkt?</p></u></button>
       </div>
     </div>
   </div>

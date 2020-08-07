@@ -1,5 +1,9 @@
-.border {
+.border, .border-top, .border-right, .border-bottom, .border-left {
   border-width: 0.1em !important;
+
+  &-none {
+    border: none !important;
+  }
 }
 
 .btn, .form-control, .dropdown-menu {

@@ -1,43 +1,68 @@
 {% extends "../base.html" %}
-
 {% load static %}
 
+<!-- SEO -->
 {% block seo %}
   <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
   <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
   <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
 {% endblock %}
 
+<!-- Header and footer -->
+{% block header %}{% include 'shop/templates/header.html' %}{% endblock %}
+{% block footer %}{% include 'shop/templates/footer.html' %}{% endblock %}
+
+<!-- Page content -->
 {% block content %}
 <div class="down">
-  <!-- Image. -->
-  <div class="position-absolute w-100" style="height: 60vh; z-index: -1">
-    <img src="{% static 'shop/media/placeholder.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+
+
+  <div data-section="registerImageMedium">
+    <div class="position-absolute w-100" style="height: 60vh; z-index: -1">
+      <img src="{% static 'shop/med/backdrops/b1.jpg' %}" class="img img-fluid w-100 h-100" alt="">
+    </div>
+    <div class="container position-relative d-flex align-items-center" style="height: 50vh; z-index: -1;">
+      <h3 class="text-white pt-5">Dein transparenter<br>Mode Marktplatz.</h3>
+    </div>
   </div>
-  <div class="container position-relative d-flex align-items-center" style="height: 50vh; z-index: -1;">
-    <h3 class="text-white pt-5">Benutzerkonto <br> erstellen</h3>
-  </div>
 
-  <!-- Container. -->
-  <div class="bg-white down-container down-container-flat position-relative" style="min-height: 50vh;">
-    <div class="container">
-      <div class="p-3 d-flex justify-content-center align-items-center">
-        <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
-      </div>
 
-      <form>
-        <input type="text" class="form-control form-control-lg" id="registerName" aria-describedby="nameHelp" placeholder="Name" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-        <input type="email" class="form-control form-control-lg" id="registerEmail" aria-describedby="emailHelp" placeholder="E-Mail" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-        <input type="password" class="form-control form-control-lg" id="registerPassword" aria-describedby="passwordHelp" placeholder="Passwort" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-        <button class="btn btn-primary btn-lg w-100  mt-4">Jetzt registrieren</button>
-      </form>
+  <div data-section="registerFormWrapper">
+    <div class="bg-white down-container position-relative" style="min-height: 50vh;">
+      <div class="container">
+        <div data-section="indexDesignElementVerticalBar">
+          {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
+        </div>
 
-      <!-- Login. -->
-      <div class="p-5 m-4"></div>
-      <div class="position-absolute w-100 pl-3 pr-3 pb-3" style="left: 0; bottom: 0;">
-        <p class="text-info text-center m-0" style="font-size: 0.8em">Du hast bereits ein Benutzerkonto?</p>
-        <a href="{% url 'shop:login' %}"><button class="btn btn-outline-info btn-lg w-100 mt-2">Anmelden</button></a>
+        <div data-section="registerForm">
+          <form>
+            <input type="text" class="form-control form-control-lg" id="registerName" aria-describedby="nameHelp" placeholder="Name">
+            <input type="email" class="form-control form-control-lg" id="registerEmail" aria-describedby="emailHelp" placeholder="*E-Mail">
+            <input type="password" class="form-control form-control-lg" id="registerPassword" aria-describedby="passwordHelp" placeholder="*Passwort">
+
+            <div class="seperator mt-4"></div>
+
+            <button class="btn btn-primary btn-lg w-100">Jetzt registrieren</button>
+          </form>
+        </div>
+
+        <div class="seperator mt-5"></div>
+
+        <div data-section="registerLogin">
+          <div class="w-100">
+            <p class="text-info text-center m-0 text-smaller">Du hast bereits einen Account?</p>
+            <a href="{% url 'shop:login' %}"><button class="btn btn-outline-info btn-lg w-100 mt-2">Jetzt anmelden</button></a>
+          </div>
+        </div>
+
+        <div class="seperator mt-5"></div>
+
+        <div data-section="indexDesignElementVerticalBar">
+          {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
+        </div>
       </div>
     </div>
   </div>
+
+</div>
 {% endblock %}

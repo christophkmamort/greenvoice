@@ -2,9 +2,9 @@
   width: 0.4em;
   height: 0.4em;
   transition: width 0.6s ease;
-  background-color: $dark;
+  background-color: $white;
   border-radius: 0.4em;
-  border: 0.1em solid rgba($white, 0.5) !important;
+  border: 0.01em solid $dark;
 }
 
 .carousel-indicators .active {

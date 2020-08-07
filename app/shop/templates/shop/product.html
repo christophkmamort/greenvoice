@@ -36,12 +36,8 @@
               <img src="{% static 'shop/med/phs2.jpg' %}" class="img img-fluid d-block w-100 h-100" alt="...">
             </div>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            {% include 'shop/templates/svg/arrow-left.svg' with class='text-dark' height='1.2em' style='' only %}
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            {% include 'shop/templates/svg/arrow-right.svg' with class='text-dark' height='1.2em' style='' only %}
-          </a>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"></a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"></a>
         </div>
       </div>
 
@@ -59,10 +55,10 @@
         <div class="seperator mt-4"></div>
 
         <div data-section="productDetailInfoCore">
-          <h4><i>Product Title</i></h4>
+          <h4 class="{% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Product Title</h4>
           <div class="d-flex align-items-end">
             <h4 class="m-0">€ 236,54</h4>
-            <p class="text-info m-0 ml-1 text-small">inkl. MwSt.</p>
+            <p class="text-info m-0 ml-1 text-smaller text-italic">*inkl. MwSt.</p>
           </div>
 
           <div class="seperator mt-4"></div>
@@ -98,13 +94,13 @@
           <div class="seperator mt-4"></div>
 
           <div data-section="productDetailNavWishlist">
-            <button class="btn p-0 d-flex align-items-center" data-action="{% if 1 == 0 %}addToWishlist{% else %}removeFromWishlist{% endif %}">
+            <button class="btn p-0 d-flex align-items-center" data-action="{% if 1 == 0 %} addToWishlist {% else %} removeFromWishlist {% endif %}">
               {% if 1 == 0 %}
                 {% include 'shop/templates/svg/heart.svg' with class='text-info' height='1em' strokewidth='3' only %}
-                <p class="m-0 text-info ml-2">Auf die Wunschliste</p>
+                <p class="m-0 text-info ml-2 {% if 1 == 0 %} text-italic {% endif %}">Auf die Wunschliste</p>
               {% else %}
                 {% include 'shop/templates/svg/heart-filled.svg' with class='text-primary' height='1em' only %}
-                <p class="m-0 ml-2 text-primary">Auf der Wunschliste</p>
+                <p class="m-0 ml-2 text-primary {% if 1 == 0 %} text-italic {% endif %}">Auf der Wunschliste</p>
               {% endif %}
             </button>
           </div>
@@ -123,26 +119,26 @@
                 <div class="dropdown-menu w-100 border border-info p-0" aria-labelledby="productDetailNavSizeDropdown">
                   <label class="checkbox form-check m-0 p-2 pt-3">
                     <input class="form-check-input productDetailNavSizeChoose" type="radio" name="productSize" vlaue="XS">
-                    <h6 class="checkbox-text m-0 ml-2">XS</h6>
+                    <h6 class="checkbox-text checkbox-text-strong m-0 ml-2 text-regular">XS</h6>
                   </label>
                   <label class="checkbox form-check m-0 p-2">
                     <input class="form-check-input productDetailNavSizeChoose" type="radio" name="productSize" vlaue="S">
-                    <h6 class="checkbox-text m-0 ml-2">S</h6>
+                    <h6 class="checkbox-text checkbox-text-strong m-0 ml-2 text-regular">S</h6>
                   </label>
                   <label class="checkbox form-check m-0 p-2">
                     <input class="form-check-input productDetailNavSizeChoose" type="radio" name="productSize" vlaue="M">
-                    <h6 class="checkbox-text m-0 ml-2">M</h6>
+                    <h6 class="checkbox-text checkbox-text-strong m-0 ml-2 text-regular">M</h6>
                   </label>
                   <label class="checkbox form-check m-0 p-2 pb-3">
                     <input class="form-check-input productDetailNavSizeChoose" type="radio" name="productSize" vlaue="L">
-                    <h6 class="checkbox-text m-0 ml-2">L</h6>
+                    <h6 class="checkbox-text checkbox-text-strong m-0 ml-2 text-regular">L</h6>
                   </label>
                 </div>
               </div>
             </div>
 
             <div data-section="productDetailNavChart">
-              <button class="btn btn-lg btn-primary ml-2">In den Warenkorb</button>
+              <button class="btn btn-lg btn-primary ml-2 {% if 1 == 0 %} text-italic {% endif %}">In den Warenkorb</button>
             </div>
 
           </div>
@@ -152,7 +148,7 @@
         <div data-section="productDetailInfoBrand">
           <div class="seperator mt-2"></div>
 
-          <p class="m-0 text-info" style="font-size: 0.8em;"><i>*Versand und Verkauf durch <a href="#" class="text-info text-underlined">MusterMarke®</a>.</i></p>
+          <p class="m-0 text-info text-smaller text-italic">*Versand und Verkauf durch <a href="#" class="text-info text-underlined text-italic">MusterMarke®</a>.</p>
         </div>
       </div>
 
@@ -169,7 +165,7 @@
 
         <div data-section="productListMatching">
           <div class="container">
-            <h5 class="text-info m-0"><i>Vervollständige deinen Style</i></h5>
+            <h5 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Vervollständige deinen Style</h5>
             <h5>Passt sehr gut dazu</h5>
           </div>
 
@@ -186,7 +182,7 @@
 
         <div data-section="productListSimilar">
           <div class="container">
-            <h5 class="text-info m-0"><i>Das könnte dir auch gefallen</i></h5>
+            <h5 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Das könnte dir auch gefallen</h5>
             <h5>Ähnliche Produkte</h5>
           </div>
           {% include 'shop/templates/product-slide.html' with class='text-dark' only %}
@@ -202,7 +198,7 @@
 
         <div data-section="categoryListMatching">
           <div class="container">
-            <h5 class="text-info m-0"><i>Passend zu diesem Produkt</i></h5>
+            <h5 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Passend zu diesem Produkt</h5>
             <h5>Produkt Kategorien</h5>
 
             <div class="seperator mt-4"></div>
@@ -218,6 +214,12 @@
               <a href="#"><button class="btn btn-sm btn-outline-dark mr-1 mb-2">Schnürschuhe</button></a>
             </div>
           </div>
+        </div>
+
+        <div class="seperator mt-4"></div>
+
+        <div class="container d-flex justify-content-center align-items-center">
+          <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Alle Kategorien anzeigen</h6></u></button></a>
         </div>
       </div>
 

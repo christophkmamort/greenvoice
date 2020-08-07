@@ -3,6 +3,8 @@ Greenvoie is a transparent, sustainable and fair fashion marketplace that build 
 
 Updates to this documentation are planned in the near future...
 
+https://openfolder.sh/django-keeping-logic-out-of-templates-and-views
+
 TODO:
 - Add REST-framework *===== TICK =====*
 - Implement test driven dev *??*

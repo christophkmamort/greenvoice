@@ -1,0 +1,61 @@
+{% extends "../base.html" %}
+{% load static %}
+
+<!-- SEO -->
+{% block seo %}
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
+{% endblock %}
+
+<!-- Header and footer -->
+{% block header %}{% include 'shop/templates/header.html' %}{% endblock %}
+{% block footer %}{% include 'shop/templates/footer.html' %}{% endblock %}
+
+<!-- Page content -->
+{% block content %}
+  <div class="up">
+    <div class="up-container bg-white min-height-80vh position-relative">
+      <div class="container pt-5">
+        <div class="seperator mt-5"></div>
+
+        <h2 class="text-center">Impressum</h2>
+
+        <div class="seperator mt-5"></div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <div>
+            <h5>Greenvoice ist ein Angebot von:</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <p class="m-0 p-0">
+              Suuzan GmbH <br>
+              Embach 101 <br>
+              6320 Angerberg <br>
+              Österreich <br>
+              Tel: +43 (0)660 564 32 82 <br>
+              E-Mail: <a href="mailto:kundensupport@greenvoice.shop?subject=Frage/n betreffend des Angebots von Greenvoice"><u>kundensupport@greenvoice.shop</u></a> <br>
+              <a href="{% url 'shop:terms' %}"><u>Nutzungsbedingungen</u></a> <br>
+              <a href="{% url 'shop:privacy' %}"><u>Datenschutzrichtlinien</u></a>
+            </p>
+          </div>
+        </div>
+
+        <div class="seperator mt-5"></div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="{% url 'shop:index' %}"><button type="button" class="btn btn-lg btn-primary">Okay, zur Startseite</button></a>
+        </div>
+      </div>
+
+      <div class="seperator mt-5"></div>
+
+      <div data-section="mobileMenuDesignElementVerticalBar">
+        <div class="position-absolute w-100" style="bottom: 0; left: 0;">
+          {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

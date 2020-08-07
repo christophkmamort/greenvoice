@@ -17,11 +17,19 @@
       height: 2em;
       border-radius: 0.6em;
     }
+
+    &-radio {
+      border-radius: 100%;
+    }
   }
 
   &-text {
     color: $info;
     padding-top: 0.15em;
+
+    &-strong {
+      color: $dark;
+    }
   }
 
   &-icon {
@@ -47,5 +55,13 @@
   input:checked ~ .checkbox-box .checkbox-icon {
     visibility: visible;
     opacity: 1;
+  }
+
+  input:checked ~ .checkbox-text-dark {
+    color: $white;
+  }
+  input:checked ~ .checkbox-text-strong {
+    font-family: 'NunitoBold', sans-serif;
+    color: $primary;
   }
 }

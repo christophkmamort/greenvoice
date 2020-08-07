@@ -1,17 +1,24 @@
 {% load static %}
 
 <footer>
-  <div> <!-- Cookie notice -->
+  <div data-setion="footerCookieNotice">
     <div class="container">
-      <p class="text-white p-0 m-0 mt-5">{% include 'shop/templates/svg/cookie.svg' with class='text-white mr-1' height='1em' only %} Wir verwenden <strong>Cookies</strong>. Wenn du fortfährst, nehmen wir an, dass du damit einverstanden bist. <button id="acceptCookies" class="btn m-0 p-0 ml-1 text-white" style="vertical-align: baseline;"><strong class="border-bottom border-2">Ok</strong></button></p>
+      <div class="seperator mt-5"></div>
+
+      <p class="text-white p-0 m-0">{% include 'shop/templates/svg/cookie.svg' with class='text-white mr-1' height='1em' only %} Wir verwenden <strong>Cookies</strong>. Wenn du fortfährst, nehmen wir an, dass du damit einverstanden bist. <button id="acceptCookies" class="btn m-0 p-0 ml-1 text-white" style="vertical-align: baseline;"><strong class="border-bottom border-2">Ok</strong></button></p>
     </div>
   </div>
 
 
-  <div> <!-- Payment methods -->
+  <div data-section="footerPaymentsMethods">
     <div class="container px-0">
-      <h6 class="mt-5 text-white text-uppercase pl-3">Zahlungsmöglichkeiten</h6>
-      <div class="d-flex scrollbar mt-4 pl-3">
+      <div class="seperator mt-5"></div>
+
+      <h6 class="text-white text-uppercase pl-3 {% if 1 == 0 %} text-strong-italic {% endif %}">Zahlungsmöglichkeiten</h6>
+
+      <div class="seperator mt-4"></div>
+
+      <div class="d-flex scrollbar pl-3">
         <button class="btn btn-lg btn-outline-light mr-1">Mastercard</button>
         <button class="btn btn-lg btn-outline-light mr-1 ml-2">Visa</button>
         <button class="btn btn-lg btn-outline-light mr-1 ml-2">PayPal</button>
@@ -21,37 +28,53 @@
         <button class="btn btn-lg btn-outline-light ml-2">Sepa</button>
         <div class="p-2"></div>
       </div>
-      <p class="text-white m-0 p-0 mt-4 pl-3" style="font-size: .8em;"><i>Alle Preise inkl. der gesetzl. MwSt.</i></p>
+
+      <div class="seperator mt-4"></div>
+
+      <p class="text-white m-0 p-0 pl-3" style="font-size: .8em;"><i>*Alle Preise inkl. der gesetzl. MwSt.</i></p>
     </div>
   </div>
 
 
-  <div> <!-- Page links -->
-    <div class="container mt-5 px-0">
+  <div data-section="footerPageLinks">
+    <div class="seperator mt-5"></div>
+
+    <div class="container px-0">
       <div class="d-flex scrollbar position-relative pl-3">
         <div class="mr-3">
-          <h6 class="text-white text-uppercase">Über uns</h6>
-          <ul class="text m-0 p-0 mt-4">
-            <li><a href="#" class="text-white">Unsere Kriterien</a></li>
-            <li class="mt-1"><a href="#" class="text-white">Kontaktiere uns</a></li>
-            <li class="mt-1"><a href="#" class="text-white">Impressum</a></li>
+          <h6 class="text-white text-uppercase {% if 1 == 0 %} text-strong-italic {% endif %}">Über uns</h6>
+
+          <div class="seperator mt-4"></div>
+
+          <ul class="text m-0 p-0">
+            <!--<li><a href="{% url 'shop:index' %}" class="text-white">Unsere Kriterien</a></li>-->
+            <li class="mt-1"><a href="mailto:kundensupport@greenvoice.shop?subject=Frage/n betreffend des Angebots von Greenvoice" class="text-white">Kontaktiere uns</a></li>
+            <li class="mt-1"><a href="{% url 'shop:imprint' %}" class="text-white">Impressum</a></li>
           </ul>
         </div>
+
         <div class="mr-3 ml-4">
-          <h6 class="text-white text-uppercase">Infos</h6>
-          <ul class="text m-0 p-0 mt-4">
-            <li><a href="#" class="text-white">Wie sende ich zurück?</a></li>
-            <li class="mt-1"><a href="#" class="text-white mt-3">Nutzungsbedingungen</a></li>
-            <li class="mt-1"><a href="#" class="text-white mt-3">Datenschutzrichtlinien</a></li>
+          <h6 class="text-white text-uppercase {% if 1 == 0 %} text-strong-italic {% endif %}">Infos</h6>
+
+          <div class="seperator mt-4"></div>
+
+          <ul class="text m-0 p-0">
+            <li><a href="{% url 'shop:terms' %}" class="text-white">Wie sende ich zurück?</a></li>
+            <li class="mt-1"><a href="{% url 'shop:terms' %}" class="text-white mt-3">Nutzungsbedingungen</a></li>
+            <li class="mt-1"><a href="{% url 'shop:privacy' %}" class="text-white mt-3">Datenschutzrichtlinien</a></li>
           </ul>
         </div>
+
         <div class="ml-4">
-          <h6 class="text-white text-uppercase">Business</h6>
-          <ul class="text m-0 p-0 mt-4">
-            <li><a href="#" class="text-white">Auf Greenvoice verkaufen</a></li>
-            <li class="mt-1"><a href="#" class="text-white mt-3">Preisgestaltung</a></li>
-            <li class="mt-1"><a href="#" class="text-white mt-3">Verkaufsbedingungen</a></li>
-            <li class="mt-1"><a href="#" class="text-white mt-3">Shooting Vereinbarung</a></li>
+          <h6 class="text-white text-uppercase {% if 1 == 0 %} text-strong-italic {% endif %}">Business</h6>
+
+          <div class="seperator mt-4"></div>
+
+          <ul class="text m-0 p-0">
+            <!--<li><a href="#" class="text-white">Auf Greenvoice verkaufen</a></li>
+            <li class="mt-1"><a href="#" class="text-white mt-3">Preisgestaltung</a></li>-->
+            <li class="mt-1"><a href="{% url 'shop:terms-of-sale' %}" class="text-white mt-3">Verkaufsbedingungen</a></li>
+            <li class="mt-1"><a href="{% url 'shop:shooting-agreements' %}" class="text-white mt-3">Shooting Vereinbarung</a></li>
           </ul>
         </div>
         <div class="p-2"></div>
@@ -60,40 +83,53 @@
   </div>
 
 
-  <div> <!-- Footer footer -->
-    <div class="container mt-5">
-      <div class="row d-flex align-items-center mt-5">
+  <div data-section="footerFooter">
+    <div class="seperator mt-5"></div>
 
-        <!-- Social media links -->
-        <div class="col d-flex justify-content-start align-items-center">
-          <div> <!-- Instagram -->
-            <a href="https://www.instagram.com/greenvoice.shop/" target="_blank">
-              <button class="btn m-0 p-0">
-                {% include 'shop/templates/svg/instagram.svg' with class='text-white' height='2.2em' only %}
-              </button>
-            </a>
-          </div>
-          <div> <!-- Facebook -->
-            <a href="#" target="_blank" class="ml-4">
-              <button class="btn m-0 p-0">
-                {% include 'shop/templates/svg/facebook.svg' with class='text-white' height='1.9em' style='margin-top: -0.1em' only %}
-              </button>
-            </a>
+    <div class="container">
+      <div class="seperator mt-5"></div>
+
+      <div class="row d-flex align-items-center">
+
+
+        <div data-seciton="footerSocialMediaLinks">
+          <div class="col d-flex justify-content-start align-items-center">
+
+            <div data-section="footerInstagramLink">
+              <a href="https://www.instagram.com/greenvoice.shop/" target="_blank">
+                <button class="btn m-0 p-0">
+                  {% include 'shop/templates/svg/instagram.svg' with class='text-white' height='2.2em' only %}
+                </button>
+              </a>
+            </div>
+
+            <div data-section="footerFacebookLink">
+              <a href="#" target="_blank" class="ml-4">
+                <button class="btn m-0 p-0">
+                  {% include 'shop/templates/svg/facebook.svg' with class='text-white' height='1.9em' style='margin-top: -0.1em' only %}
+                </button>
+              </a>
+            </div>
+
           </div>
         </div>
 
-        <!-- Copyright notice -->
-        <div class="col d-flex justify-content-end align-items-center">
+
+        <div class="col d-flex justify-content-end align-items-center" data-section="footerCopyrightNotice">
           <p class="text-white m-0" style="font-size: .8em;">© 2020</p>
         </div>
       </div>
 
-      <hr class="bg-white mt-3 mb-3"> <!-- Design element: Line -->
 
-      <div> <!-- Design element: Made with <3 in austria -->
-        <p class="text-white text-center" style="font-size: .8em;">
+      <div data-section="footerDesignElementHorizontalLine">
+        <hr class="bg-white mt-3 mb-3">
+      </div>
+
+
+      <div data-section="footerMadeWithLove">
+        <p class="text-white text-center {% if 1 == 0 %} text-italic {% endif %}" style="font-size: .8em;">
           Gemacht mit
-          {% include 'shop/templates/svg/heart.svg' with class='text-white ml-1 mr-1' height='0.8em' style='margin-top: -0.3em' strokewidth='3' only %}
+          {% include 'shop/templates/svg/heart.svg' with class='text-white ml-1 mr-1' height='0.8em' style='margin-top: -0.2em' strokewidth='3' only %}
           in Österreich
         </p>
       </div>

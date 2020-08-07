@@ -1,3 +1,29 @@
-.height-75vh {
-  height: 75vh;
+.height  {
+  &-25vh {
+    height: 25vh;
+  }
+
+  &-30vh {
+    height: 30vh;
+  }
+
+  &-75vh {
+    height: 75vh;
+  }
+}
+
+.min-height {
+  &-80vh {
+    min-height: 80vh;
+  }
+
+  &-100vh {
+    min-height: 100vh;
+  }
+}
+
+.max-height {
+  &-25vh {
+    max-height: 25vh;
+  }
 }

@@ -1,161 +1,232 @@
-<div class="modal fade vw-100 min-vh-100" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true" data-backdrop="static">
+<div class="modal fade vw-100 min-vh-100" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true" data-backdrop="static" style="z-index: 2000;">
+
   <div class="position-relative" style="height: 24.5vh; z-index: -1;"></div>
+
   <div class="modal-dialog m-0 mw-100" style="min-height: 75%;">
     <div class="modal-content down bg-transparent" style="border: none;">
       <div class="bg-dark down-container down-container-flat bg-primary position-relative">
-        <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100">
-          <div class="bg-white rounded" style="width: 3em; height: 0.4em;"></div>
-        </div>
-        <div class="row p-3 m-0">
-          <div class="col d-flex justify-content-end align-items-center p-0">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              {% include 'shop/templates/svg/close.html' with class='text-white' height='1.1em' only %}
-            </button>
+
+        <div data-section="filterDesignElementVerticalBar">
+          <div class="position-absolute w-100">
+            {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
           </div>
         </div>
+
+
+        <div data-section="filterClose">
+          <div class="row p-3 m-0">
+            <div class="col d-flex justify-content-end align-items-center p-0">
+              <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+                {% include 'shop/templates/svg/close.html' with class='text-white' height='1.1em' only %}
+              </button>
+            </div>
+          </div>
+        </div>
+
+
         <div class="container">
 
-          <!-- Brands. -->
-          <h5 class="text-white">Marken</h5>
 
-          <!-- Brand search. -->
-          <input type="text" name="searchBrands" placeholder="Marke suchen..." class="text-white form-control form-control-lg bg-dark mt-3">
+          <div data-section="filterBrands">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Marken</h5>
 
-          <div class="mt-3">
-            <div class="form-check">
-              <input class="form-check-input bg-dark border-2" type="checkbox" value="" id="brandCheck1">
-              <label class="form-check-label text-white" for="brandCheck1">
-                MusterMarke®
+            <!--<input type="text" name="searchBrands" placeholder="Marke suchen..." class="text-white form-control form-control-lg bg-dark mt-3">-->
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="MusterMarke®">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">MusterMarke®</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="BeispielMarke">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">BeispielMarke</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="TestMarke">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">TestMarke</h6>
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input bg-dark border-2" type="checkbox" value="" id="brandCheck2">
-              <label class="form-check-label text-white" for="brandCheck2">
-                BeispielMarke
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="brandCheck3">
-              <label class="form-check-label text-white" for="brandCheck3">
-                TestMarke
-              </label>
-            </div>
+
           </div>
 
-          <hr class="bg-info mt-4 mb-4">
 
-          <!-- Price. -->
-          <h5 class="text-white">Preisspanne</h5>
-          <div class="mt-3 pr-2 pl-2">
-            <input id="filterPriceSlider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="[0,1000]" data-slider-tooltip="hide"/>
-            <div class="d-flex">
-              <p class="text-white w-50 m-0">€ <span id="filterPriceMin">0</span></p>
-              <p class="text-white text-right w-50 m-0">€ <span id="filterPriceMax">1000</span></p>
-            </div>
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
           </div>
 
-          <hr class="bg-info mt-4 mb-4">
 
-          <!-- Sort by. -->
-          <h5 class="text-white">Sortieren nach</h5>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="filterSortBy" id="filterSortByPopularity" value="option1" checked>
-            <label class="form-check-label text-white" for="filterSortByPopularity">
-              Beliebtheit
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="filterSortBy" id="filterSortByNew" value="option2">
-            <label class="form-check-label text-white" for="filterSortByNew">
-              Neu
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="filterSortBy" id="filterSortByPriceHigh" value="option2">
-            <label class="form-check-label text-white" for="filterSortByPriceHigh">
-              Preis Aufsteigend
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="filterSortBy" id="filterSortByPriceLow" value="option2">
-            <label class="form-check-label text-white" for="filterSortByPriceLow">
-              Preis Absteigend
-            </label>
-          </div>
-
-          <hr class="bg-info mt-4 mb-4">
-
-          <!--  -->
-          <h5 class="text-white">Materialien</h5>
-          <div class="mt-3">
-            <div class="form-check">
-              <input class="form-check-input bg-dark border-2" type="checkbox" value="" id="filterMaterialCotton">
-              <label class="form-check-label text-white" for="filterMaterialCotton">
-                Baumwolle
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input bg-dark border-2" type="checkbox" value="" id="filterMaterialHemp">
-              <label class="form-check-label text-white" for="filterMaterialHemp">
-                Hanf
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="filterMaterialPET">
-              <label class="form-check-label text-white" for="filterMaterialPET">
-                Recyceltes PET
-              </label>
+          <div data-section="filterPriceRange">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Preisspanne</h5>
+            <div class="mt-3 pr-2 pl-2">
+              <input id="filterPriceSlider" type="text" class="span2" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="[0,1000]" data-slider-tooltip="hide"/>
+              <div class="d-flex">
+                <p class="text-white w-50 m-0">€ <span id="filterPriceMin">0</span></p>
+                <p class="text-white text-right w-50 m-0">€ <span id="filterPriceMax">1000</span></p>
+              </div>
             </div>
           </div>
 
 
-          <hr class="bg-info mt-4 mb-4">
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
+          </div>
 
-          <!--  -->
-          <h5 class="text-white">Farben</h5>
-          <div class="mt-3">
-            <div class="form-check">
-              <input class="form-check-input bg-dark border-2" type="checkbox" value="" id="filterColorBlack">
-              <label class="form-check-label text-white" for="filterColorBlack">
-                Schwarz
+
+          <div data-section="filterSortBy">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Sortieren nach</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="radio" name="filterSortBy" vlaue="Beliebtheit" checked>
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Beliebtheit</h6>
               </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input bg-dark border-2" type="checkbox" value="" id="filterColorWhite">
-              <label class="form-check-label text-white" for="filterColorWhite">
-                Weiß
+              <label class="checkbox">
+                <input type="radio" name="filterSortBy" vlaue="Neu">
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Neu</h6>
               </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="filterColorBlue">
-              <label class="form-check-label text-white" for="filterColorBlue">
-                Blau
+              <label class="checkbox">
+                <input type="radio" name="filterSortBy" vlaue="Preis Aufsteigend">
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Preis Aufsteigend</h6>
+              </label>
+              <label class="checkbox">
+                <input type="radio" name="filterSortBy" vlaue="Preis Absteigend">
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Preis Absteigend</h6>
               </label>
             </div>
           </div>
 
 
-          <hr class="bg-info mt-4 mb-4">
-
-          <!--  -->
-          <h5 class="text-white">Produktion</h5>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="filterProduction" id="filterProductionWorld" value="option1" checked>
-            <label class="form-check-label text-white" for="filterProductionWorld">
-              Weltweit
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="filterProduction" id="filterProductionEurope" value="option2">
-            <label class="form-check-label text-white" for="filterProductionEurope">
-              Europaweit
-            </label>
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
           </div>
 
 
-          <!-- Submit filter. -->
-          <button class="btn btn-light btn-lg w-100 mt-5" disabled>Filter anwenden (0)</button>
-          <p class="text-info text-center m-0 mt-2 mb-5" style="font-size: 0.8em">All unsere Produkte sind 100% Vegan.</p>
+          <div data-section="filterMaterials">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Materialien</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Baumwolle">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Baumwolle</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Hanf">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Hanf</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Recyceltes PET">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Recyceltes PET</h6>
+              </label>
+            </div>
+          </div>
+
+
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
+          </div>
+
+
+          <div data-section="filterColors">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Farben</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Schwarz">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Schwarz</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Weiß">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Weiß</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Blau">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Blau</h6>
+              </label>
+            </div>
+          </div>
+
+
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
+          </div>
+
+
+          <div data-section="filterProduction">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Produktion</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="radio" name="filterProduction" vlaue="Weltweit" checked>
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Weltweit</h6>
+              </label>
+              <label class="checkbox">
+                <input type="radio" name="filterProduction" vlaue="Europaweit">
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Europaweit</h6>
+              </label>
+            </div>
+          </div>
+
+
+          <div data-section="filterSubmit">
+            <button class="btn btn-light btn-lg w-100 mt-5 {% if 1 == 0 %} text-italic {% endif %}" data-dismiss="modal" aria-label="Close">Filter anwenden (0)</button>
+
+            <p class="text-info text-center m-0 mt-2 mb-5 text-italic" style="font-size: 0.8em">*All unsere Produkte sind selbstverständlich <u>100% Vegan</u>.</p>
+          </div>
         </div>
       </div>
     </div>

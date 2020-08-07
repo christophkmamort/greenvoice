@@ -1,0 +1,230 @@
+{% extends "../base.html" %}
+{% load static %}
+
+<!-- SEO -->
+{% block seo %}
+  <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
+  <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
+  <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
+{% endblock %}
+
+<!-- Header and footer -->
+{% block header %}{% include 'shop/templates/header.html' %}{% endblock %}
+{% block footer %}{% include 'shop/templates/footer.html' %}{% endblock %}
+
+<!-- Page content -->
+{% block content %}
+  <div class="up">
+    <div class="up-container bg-white min-height-80vh position-relative">
+      <div class="container pt-5">
+        <div class="seperator mt-5"></div>
+
+        <h2 class="text-center">Datenschutzrichlinien</h2>
+
+        <p class="mt-3">
+          Diese Datenschutzrichtlinien geben dir einen Überblick über die Verarbeitung deiner Daten bei Millionair Network. Sie gilt für alle Websites, Apps und weiteren Dienste und Leistungen, die von Millionair Network angeboten werden.
+          <br><br>
+          Wir verarbeiten deine Daten unter Einhaltung aller anwendbaren Datenschutzgesetze. Deine Daten werden nur zu den in diesen Datenschutzrichtlinien aufgelisteten Zwecken verarbeitet. Nicht in diesen Datenschutzrichtlinien aufgelistete Datenerhebungen werden dir im Rahmen der jeweiligen Erhebung erläutert.
+        </p>
+
+        <h5 class="mt-5">1. Entstehung und Verarbeitung von personenbezogenen Daten</h5>
+
+        <h6 class="mt-5">1.1 Kontaktdaten und Newsletterdaten</h6>
+        <p>
+          Für den Versand unserer anmeldepflichtigen Newsletter werden wir dir erst dann einen Newsletter zusenden, wenn du zuvor ausdrücklich eingewilligt hast, dass wir den Newsletter-Service aktivieren sollen. Wenn du dich für einen Newsletter anmeldest, speichern wir automatisch deine E-Mail Adresse, dein Geschlecht und die Zeitpunkte der Anmeldung sowie der Bestätigung. Solltest du später keine Newsletter mehr von uns erhalten wollen, kannst du dem Erhalt jederzeit widersprechen, ohne dass hierfür andere als die Übermittlungskosten nach den Basistarifen entstehen.
+          <br><br>
+          Deine Kontakt- und Newsletterdaten verarbeiten wir aus folgenden Gründen:
+          <br>
+          <ul>
+            <li>Zur Bereitstellung von Nachrichten, Meldungen, Newslettern und anderer Direktkommunikation.</li>
+            <li>Zur Bereitstellung, Personalisierung und bedarfsgerechte Gestaltung unserer Services.</li>
+          </ul>
+        </p>
+
+        <h6 class="mt-5">1.2 Mitteilungs- und Gesprachsdaten</h6>
+        <p>
+          Wenn du mit uns in irgendeiner Art kommunizierst, erfassen wir dabei die Inhalte deiner Mitteilung.
+          <br><br>
+          Falls notwendig leiten wir deine Mitteilung an die für dein Anliegen zuständige Stelle weiter. Du hast die Möglichkeit, uns mitzuteilen, dass deine Daten nur von Millionair Network verwendet werden sollen. Falls dein Anliegen in diesem Fall bearbeitet werden kann, leiten wir die Mitteilung nicht oder ohne deine persönlichen Angaben an die zuständige Stelle weiter.
+          <br><br>
+          Wenn du uns über dafür vorgesehene Funktionen Mitteilungen für andere Nutzer übermittelst, können diese von uns innerhalb unserer Services je nach Wahl entweder anonym oder mit deinem Vornamen veröffentlicht werden.
+          <br><br>
+          Deine Mitteilungs- und Gesprachsdaten verarbeiten wir aus folgenden Gründen:
+          <br>
+          <ul>
+            <li>Zur Bereitstellung unseres Kundenservices.</li>
+            <li>Zur Bereitstellung der Kommentar- und Fragefunktion.</li>
+          </ul>
+        </p>
+
+        <h6 class="mt-5">1.3 Sozialen Netzwerksdaten</h6>
+        <p>
+          In unseren Services sind Funktionen von sozialen Netzwerken integriert. Falls du diese verwendest, erhalten wir von den jeweiligen Anbietern Daten, mit denen du identifiziert werden kannst. Diese Daten umfassen:
+          <br>
+          <ul>
+            <li>Deine öffentlichen Profilinformationen.</li>
+            <li>Angaben zu deinem verwendeten Gerätetyp.</li>
+            <li>Deine Konto ID des jeweiligen Netzwerks.</li>
+          </ul>
+          Deine Sozialen Netzwerksdaten verarbeiten wir aus folgenden Gründen:
+          <br>
+          <ul>
+            <li>Um mit dir über Messenger Dienste zu kommunizieren.</li>
+            <li>Um dir personalisierte Werbung zu präsentieren.</li>
+          </ul>
+          Wir verwenden zurzeit Social Plugins/Logins der folgenden Netzwerke:
+          <br>
+          <ul>
+            <li>Google Ireland Limited, incorporated and operating under the laws of Ireland (Registered Number: 368047), Gordon House, Barrow Street, Dublin 4, Ireland</li>
+          </ul>
+        </p>
+
+        <h6 class="mt-5">1.4 Standortdaten</h6>
+        <p>
+          Bei der Nutzung unserer Services erfassen wir Daten zum aktuellen Standort deines Geräts. Es wird dazu eine auf drei Stellen gekürzte, anonymisierte IP-Adresse verwendet. Aus deiner IP-Adresse kann der ungefähre Standort deines Internetanschlusses auf Stadtebene ermittelt werden.
+          <br><br>
+          Deine Standortdaten verarbeiten wir aus folgenden Gründen:
+          <br>
+          <ul>
+            <li>Zur Bereitstellung, Personalisierung und bedarfsgerechte Gestaltung unserer Services.</li>
+            <li>Um dich auf die richtige Länderseite weiterzuleiten, und dir damit maßgeschneiderte Angebote für dein Land zu präsentieren.</li>
+          </ul>
+        </p>
+
+        <h6 class="mt-5">1.5 Angaben bei Aktionen und Befragungen</h6>
+        <p>
+          Wenn du bei einer von uns angebotenen Aktion teilnimmst, erfassen wir Daten zu deiner Person mit der wir dich später identifizieren können.
+          <br><br>
+          Befragungen werden immer anonym also ohne Daten zu deiner Person verarbeitet.
+          <br><br>
+          Deine Angaben bei Aktionen und Befragungen verarbeiten wir aus folgenden Gründen:
+          <br>
+          <ul>
+            <li>Zur Durchführung von Aktionen und Gewinnspielen.</li>
+            <li>Zur Teilnahme an Befragungen und Marktforschungsstudien.</li>
+          </ul>
+        </p>
+
+        <h6 class="mt-5">1.6 Geräte- und Zugriffsdaten</h6>
+        <p>
+          Bei der Nutzung unserer Services fallen technische Daten deines Gerätes an. Diese können zum einen Angaben zum Gerätetyp, zur Version des Betriebssystems, Konfigurationseinstellungen, Informationen zur Internetverbindung und zur verwendeten App oder Identifizierungs-Daten (IDs), etwa Session-IDs, Cookie-IDs, eindeutige Geräte-Kennnummern, Konto-IDs von Drittanbietern sowie weitere gängige Internettechnologien, um deinen Webbrowser, dein Gerät oder eine bestimmte App-Installation wiedererkennen zu können.
+          <br><br>
+          Auch entstehen Zugriffsdaten auf Webserver und Datenbanken von Apps und Webbrowsern. Dabei handelt es sich um standardisierte Informationen zu den angeforderten Inhalten sowie weitere Informationen zum Serverzugriff, oder deinem Gerät. Deine Geräte- und Zugriffsdaten verarbeiten wir aus folgenden Gründen:
+          <br>
+          <ul>
+            <li>Zur Bereitstellung, Personalisierung und bedarfsgerechte Gestaltung unserer Services.</li>
+          </ul>
+        </p>
+
+        <h5 class="mt-5">2. Forschung und Entwicklung</h5>
+        <p>
+          Wir verarbeiten gesammelte Daten für wissenschaftliche Forschung in den Forschungsbereichen maschinelles Lernen, künstliche Intelligenz, Verarbeitung natürlicher Sprache und Deep Learning. Diese Forschung soll der Verbesserung und der Weiterentwicklung des bestehenden Service-Angebots dienen und umfasst unter anderem die nachfolgenden Zwecke:
+          <br>
+          <ul>
+            <li>Entwicklung von maschinellen Lernverfahren, die Schätzwerte, Prognosen und Analysen zu den Bedürfnissen und Interessen von Nutzer ermöglichen.</li>
+            <li>Entwicklung von technischen Lösungen für Kundenprobleme.</li>
+            <li>Optimierung von Geschäfts- und Logistikprozessen.</li>
+            <li>Ausbau unseres Geschäftsmodells in neue Bereiche.</li>
+            <li>Marktforschung um Nutzungsgewohnheiten, Interessen sowie Verhalten und Wünsche unserer Nutzer in verschiedene Ziel- und Nebengruppen einzuteilen. Sowie die anschließende Vermarktung dieser Erkenntnisse an unsere Partner.</li>
+            <li>Frühzeitigen Erkennung von Trends.</li>
+            <li>Planung, Durchführung und Erfolgskontrolle von zielgerichteter Werbung jeglicher Art.</li>
+          </ul>
+          Dabei beachten wir selbstverständlich die anerkannten wissenschaftlichen Datenschutzstandards. Das heißt, dass wir deine Daten nur in zusammengefasster, anonymisierter oder pseudonymisierter Form für Forschungszwecke verarbeiten.
+        </p>
+
+        <h5 class="mt-5">3. Cookies</h5>
+        <p>
+          Wir verwenden Cookies. Das Akzeptieren von Cookies ist keine Voraussetzung zum Besuch unserer Websites, jedoch haben unsere Websites nur eingeschränkte Funktionalitäten falls du Cookies nicht akzeptieren solltest. Einstellungen über das Akzeptieren oder nicht akzeptieren von Cookies kannst du in deinem Webbrowser treffen.
+          <br><br>
+          Die Cookies auf unseren Seiten können von Millionair Network selbst, oder von unseren Partnern stammen. Wenn du nur die Millionair Network-Cookies, nicht aber die Cookies unserer Partner akzeptieren willst, kannst du entsprechende Einstellung in deinem Browser (z.B. „Cookies von Drittanbietern blockieren“) wählen.
+          <br><br>
+          Für unsere Services kommen drei Kategorien von Cookies zum Einsatz:
+          <br>
+          <ul>
+            <li><strong>Notwendige Cookies:</strong> Diese Cookies sind für die optimale Navigation und Bedienung der Website erforderlich. Die notwendigen Cookies dienen auch der Speicherung bestimmter Eingaben und Einstellungen, die du getätigt hast sowie dazu, Inhalte von Millionair Network auf deine individuellen Interessen abzustimmen. Ohne notwendige Cookies können unsere Websites nicht oder nur eingeschränkt genutzt werden.</li>
+            <li><strong>Statistik Cookies:</strong> Diese Cookies erfassen Geräte- und Zugriffsdaten, um die Benutzung unserer Websites zu analysieren, etwa welche Bereiche der Website wie genutzt werden, wie schnell Inhalte geladen werden und ob Fehler auftreten. Diese Cookies werden verwendet, um unsere Website zu verbessern. Wir verwenden dazu unter anderem Dienste wie Google Analytics der Google Inc.</li>
+            <li><strong>Marketing Cookies:</strong> Diese Cookies und ähnliche Tracking-Technologien enthalten Identifikatoren und erfassen Geräte- und Zugriffsdaten, um personalisierte Werbung auf individuellen Interessen abzustimmen. Auch einige unserer Partner, erfassen auf unseren Websites Geräte- und Zugriffsdaten. So können auch auf anderen Websites und Apps von anderen Anbietern personalisierte Werbung anzeigen.</li>
+          </ul>
+        </p>
+
+        <h5 class="mt-5">4. Werbung</h5>
+        <p>
+          Um dir relevante Empfehlungen und Inhalte zu präsentieren nutzen wir und unsere Werbepartner deine Daten für personalisierte Werbung auf folgenden Werbekanälen:
+          <br>
+          <ul>
+            <li>Facebook Ads.</li>
+            <li>Instagram Ads.</li>
+            <li>YouTube-Video Ads.</li>
+            <li>Google Ads.</li>
+          </ul>
+          Dabei berücksichtigen wir insbesondere aggregierte, pseudonymisierte oder anonymisierte Einkaufsdaten, Suchverläufe, Interessendaten und demographische Profildaten sowie Geräte- und Zugriffsdaten. Wenn wir Werbung über soziale Netzwerke durchführen geben wir bestimmte Merkmale wie Altersgruppe, Region und Interessen an diese in verschlüsselter Form weiter.
+        </p>
+
+        <h5 class="mt-5">5. Übertragung deiner Daten an andere</h5>
+        <p>
+          Wir arbeiten mit einigen Parteien besonders eng zusammen. Diese Parteien dürfen Ihre Daten grundsätzlich nur unter besonderen Bedingungen in unserem Auftrag und nur in dem Umfang und für den Zeitraum wie dies für die Erbringung der jeweiligen Leistung erforderlich ist verarbeiten.
+        </p>
+
+        <h6 class="mt-5">5.1 Dein Empfehlungsgeber</h6>
+        <p>
+          Wenn du dich bei unserem Kontaktformular anmeldest, geben wir die entsprechenden Daten an deinen Empfehlungsgeber weiter. Dieser wird deine Daten verwenden um für dich ein Konto bei Cashbackworld unter: <a href="https://www.cashbackworld.com/registration/public" target="_blank">https://www.cashbackworld.com/registration/public</a> zu erstellen.
+          <br><br>
+          Dein Empfehlungsgeber ist verpflichtet sich an diese Datenschutzrichtlinien zu halten und Daten nur im dafür vorgesehenen Ausmaß zu verarbeiten.
+        </p>
+
+        <h6 class="mt-5">5.2 Technische Dienstleister</h6>
+        <p>
+          Wir arbeiten mit technischen Dienstleistern zusammen, damit wir dir unsere Services erbringen können. Zu diesen Dienstleistern gehört unter anderem die SiteGround Hosting, Ltd.. Sofern diese Ihre Daten außerhalb der Europäischen Union verarbeiten, stellt wir sicher, dass die betreffenden Dienstleister vertraglich oder auf andere Weise ein gleichwertiges Datenschutzniveau garantieren.
+        </p>
+
+        <h6 class="mt-5">5.3 Social Media Netzwerke</h6>
+        <p>
+          Im Rahmen von Werbekampagnen geben wir im Rahmen des Datenschutzrechts Daten an Anbieter von sozialen Netzwerken weiter.
+        </p>
+
+        <h6 class="mt-5">5.4 Behörden und sonstige Dritte</h6>
+        <p>
+          Soweit wir durch eine Behörden- oder Gerichtsentscheidung verpflichtet sind oder zur Rechts- oder Strafverfolgung geben wir deine Daten erforderlichenfalls an Strafverfolgungsbehörden oder sonstige Dritte weiter.
+        </p>
+
+        <h5 class="mt-5">6. Betrugsprävention</h5>
+        <p>
+          Alle gesammelten Daten werden verschlüsselt mit dem Codierungssystem SSL übertragen. Um uns zusätzlich vor externen Angriffen zu schützen, greifen wir auf spezielle Sicherheitstechnologien zurück. So sind unsere Systeme durch technische und organisatorische Maßnahmen gegen Verlust, Zerstörung, unerlaubten Zugriff, Veränderung oder Verbreitung von Kundendaten durch unbefugte Personen abgesichert. Trotzdem können wir keinen absoluten Schutz ihrer persönlichen Daten garantieren.
+        </p>
+
+        <h5 class="mt-5">7. Deine Datenschutzrechte</h5>
+        <p>
+          Du hast unter den jeweiligen gesetzlichen Voraussetzungen die folgenden gesetzlichen Datenschutzrechte: Recht auf Auskunft, Recht auf Löschung, Recht auf Berichtigung, Recht auf Einschränkung der Verarbeitung, Recht auf Datenübertragbarkeit, Beschwerderecht bei einer Datenschutzaufsichtsbehörde, Recht auf Widerruf von Einwilligungen sowie das Recht auf Widerspruch gegen bestimmte Datenverarbeitungsmaßnahmen.
+        </p>
+
+        <h5 class="mt-5">8. Löschung von Daten</h5>
+        <p>
+          Wir speichern deine personenbezogenen Daten solange, wie es für die in dieser Datenschutzerklärung genannten Zwecke notwendig ist, insbesondere zur Erfüllung unserer vertraglichen und gesetzlichen Verpflichtungen. Darüber Hinaus können wir deine Daten noch länger speichern, wenn uns das Gesetz die weitere Speicherung gestattet.
+          <br><br>
+          Von der Löschung kann in den gesetzlich erlaubten Fällen abgesehen werden, soweit es sich um anonyme oder pseudonymisierte Daten handelt und die Löschung die Verarbeitung für wissenschaftliche Forschungszwecke oder für statistische Zwecke unmöglich macht oder ernsthaft beeinträchtigen würde.
+        </p>
+
+        <h5 class="mt-5">9. Änderungen dieser Datenschutzrichtlinien und Auskunft</h5>
+        <p>
+          Im Zuge der Weiterentwicklung unserer Websites und Apps und der Implementierung neuer Technologien, um unseren Service für Sie zu verbessern, können Änderungen dieser Datenschutzhinweise erforderlich werden.
+          <br><br>
+          Falls du Fragen zum Datenschutz bei Millionair Network hast, kannst du dich jederzeit an <a href="mailto:support@millionair-network.com?subject=Frage/n betreffend des Datenschutzes auf https://millionair-network.com">support@millionair-network.com</a> wenden.
+        </p>
+
+        <div class="seperator mt-5"></div>
+
+        <div class="d-flex justify-content-center align-items-center">
+          <a href="{% url 'shop:index' %}"><button type="button" class="btn btn-lg btn-primary">Okay, zur Startseite</button></a>
+        </div>
+      </div>
+
+      <div class="seperator mt-5"></div>
+
+      <div data-section="mobileMenuDesignElementVerticalBar">
+        <div class="position-absolute w-100" style="bottom: 0; left: 0;">
+          {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
