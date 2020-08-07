@@ -94,18 +94,7 @@
 
         <div data-section="mobileNavUserLogin">
           <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100" style="bottom: 2em; left: 0;">
-            {% if user.is_authenticated == false %}
-              <a href="{% url 'shop:login' %}" class="mr-2">
-                <button class="btn m-0 p-0 w-100">
-                  <h5 class="text-white text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Anmelden</h5>
-                </button>
-              </a>
-              <a href="{% url 'shop:register' %}" class="ml-2">
-                <button class="btn m-0 p-0 w-100">
-                  <h5 class="text-info text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Registrieren</h5>
-                </button>
-              </a>
-            {% else %}
+            {% if user.is_authenticated %}
               <a href="{% url 'shop:profile' %}" class="mr-2">
                 <button class="btn m-0 p-0 w-100">
                   <h5 class="text-white text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Mein Profil</h5>
@@ -114,6 +103,17 @@
               <a href="{% url 'shop:logout' %}" class="ml-2">
                 <button class="btn m-0 p-0 w-100">
                   <h5 class="text-info text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Abmelden</h5>
+                </button>
+              </a>
+            {% else %}
+              <a href="{% url 'shop:login' %}" class="mr-2">
+                <button class="btn m-0 p-0 w-100">
+                  <h5 class="text-white text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Anmelden</h5>
+                </button>
+              </a>
+              <a href="{% url 'shop:register' %}" class="ml-2">
+                <button class="btn m-0 p-0 w-100">
+                  <h5 class="text-info text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Registrieren</h5>
                 </button>
               </a>
             {% endif %}

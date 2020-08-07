@@ -21,7 +21,7 @@
           <div class="seperator mt-5"></div>
 
           <div data-section="wishlistHeader">
-            <h4>Meine Wunschliste <span class="text-primary">(2)</span></h4>
+            <h4>Meine Wunschliste <span class="text-primary">(0)</span></h4>
           </div>
 
           <div class="seperator mt-5"></div>
@@ -29,50 +29,61 @@
 
           <div data-section="wishlistContent">
 
-            {% if 1 == 0 %}
 
-              <div data-section="wishlistEmty">
-                <p class="text-info">Du hast noch keine Artikel zu deiner Wunschliste hinzugefügt. {% include 'shop/templates/svg/heart.svg' with class='text-info ml-1' height='1em' style='margin-top: -0.2em;' strokewidth='2' only %}</p>
-              </div>
+            {% if user.is_authenticated %}
+
+              {% if 1 == 0 %}
+
+                <div data-section="wishlistEmty">
+                  <p class="text-info">Du hast noch keine Artikel zu deiner Wunschliste hinzugefügt. {% include 'shop/templates/svg/heart.svg' with class='text-info ml-1' height='1em' style='margin-top: -0.2em;' strokewidth='2' only %}</p>
+                </div>
+
+              {% else %}
+
+                <div data-section="wishlistItems">
+                  <div class="container">
+
+                    <div class="row">
+                      <a class="col-auto p-0" style="max-height: 105px; max-width: 70px;" href="{% url 'shop:product' %}">
+                        <img src="{% static 'shop/med/phs4.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                      </a>
+                      <a class="col d-flex align-items-center justiy-content-start ml-2" href="{% url 'shop:product' %}">
+                        <div>
+                          <h6 class="m-0">Product Title</h6>
+                          <p>€ 39,99</p>
+                          <p class="m-0 mt-3">Farbe: <span style="color: #C0C0C0;">Silver</span></p>
+                        </div>
+                      </a>
+                      <div class="col-auto d-flex align-items-center justiy-content-end p-0">
+                        <button class="btn">{% include 'shop/templates/svg/trash.svg' with class='text-dark' height='1.2em' style='' only %}</button>
+                      </div>
+                    </div>
+
+                    <div class="row mt-4">
+                      <a class="col-auto p-0" style="max-height: 105px; max-width: 70px;" href="{% url 'shop:product' %}">
+                        <img src="{% static 'shop/med/phs4.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
+                      </a>
+                      <a class="col d-flex align-items-center justiy-content-start ml-2" href="{% url 'shop:product' %}">
+                        <div>
+                          <h6 class="m-0">Product Title</h6>
+                          <p>€ 39,99</p>
+                          <p class="m-0 mt-3">Farbe: <span style="color: #000000;">Black</span></p>
+                        </div>
+                      </a>
+                      <div class="col-auto d-flex align-items-center justiy-content-end p-0">
+                        <button class="btn">{% include 'shop/templates/svg/trash.svg' with class='text-dark' height='1.2em' style='' only %}</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              {% endif %}
 
             {% else %}
 
-              <div data-section="wishlistItems">
-                <div class="container">
-
-                  <div class="row">
-                    <a class="col-auto p-0" style="max-height: 105px; max-width: 70px;" href="{% url 'shop:product' %}">
-                      <img src="{% static 'shop/med/phs4.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
-                    </a>
-                    <a class="col d-flex align-items-center justiy-content-start ml-2" href="{% url 'shop:product' %}">
-                      <div>
-                        <h6 class="m-0">Product Title</h6>
-                        <p>€ 39,99</p>
-                        <p class="m-0 mt-3">Farbe: <span style="color: #C0C0C0;">Silver</span></p>
-                      </div>
-                    </a>
-                    <div class="col-auto d-flex align-items-center justiy-content-end p-0">
-                      <button class="btn">{% include 'shop/templates/svg/trash.svg' with class='text-dark' height='1.2em' style='' only %}</button>
-                    </div>
-                  </div>
-
-                  <div class="row mt-4">
-                    <a class="col-auto p-0" style="max-height: 105px; max-width: 70px;" href="{% url 'shop:product' %}">
-                      <img src="{% static 'shop/med/phs4.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">
-                    </a>
-                    <a class="col d-flex align-items-center justiy-content-start ml-2" href="{% url 'shop:product' %}">
-                      <div>
-                        <h6 class="m-0">Product Title</h6>
-                        <p>€ 39,99</p>
-                        <p class="m-0 mt-3">Farbe: <span style="color: #000000;">Black</span></p>
-                      </div>
-                    </a>
-                    <div class="col-auto d-flex align-items-center justiy-content-end p-0">
-                      <button class="btn">{% include 'shop/templates/svg/trash.svg' with class='text-dark' height='1.2em' style='' only %}</button>
-                    </div>
-                  </div>
-
-                </div>
+              <div data-section="wishlistEmty">
+                <p class="text-info">Du musst dich erst anmelden um Artikel zu deiner Wunschliste hinzugefügen zu können. {% include 'shop/templates/svg/heart.svg' with class='text-info ml-1' height='1em' style='margin-top: -0.2em;' strokewidth='2' only %}</p>
               </div>
 
             {% endif %}
@@ -84,7 +95,11 @@
 
             <div class="seperator mt-5"></div>
 
-            <a href="{% url 'shop:shop' %}"><button class="btn btn-primary btn-lg w-100">Weiter stöbern</button></a>
+            {% if user.is_authenticated %}
+              <a href="{% url 'shop:shop' %}"><button class="btn btn-primary btn-lg w-100">Weiter stöbern</button></a>
+            {% else %}
+              <a href="{% url 'shop:login' %}"><button class="btn btn-primary btn-lg w-100">Jetzt anmelden</button></a>
+            {% endif %}
           </div>
 
       </div>

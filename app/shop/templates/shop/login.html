@@ -22,7 +22,13 @@
       <img src="{% static 'shop/med/backdrops/b1.jpg' %}" class="img img-fluid w-100 h-100" alt="">
     </div>
     <div class="container position-relative d-flex align-items-center" style="height: 50vh; z-index: -1;">
-      <h3 class="text-white pt-5">Willkommen <br> zurück</h3>
+      <h3 class="text-white pt-5">
+        {% if 'redirect' in request.get_full_path %}
+          Melde dich an <br> um die Wunschliste <br> zu verwenden
+        {% else %}
+          Willkommen <br> zurück
+        {% endif %}
+      </h3>
     </div>
   </div>
 

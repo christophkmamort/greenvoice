@@ -45,7 +45,7 @@
             <div class="seperator mt-4"></div>
 
             <p class="text-center">
-              Mit Allem was wir tun glauben wir daran, dass <i>eine <strong>transparente Wirtschaft</strong> die <i>Grundlage</i> für nachhaltige und faire Mode bilden soll</i>. Aus diesem Grund zeigen wir dir die <i>Bestandteile, Lieferketten und Produktionsstätten</i> jedes einzelnen Produktes. Greenvoice ist <strong>dein transparenter und nachhaltiger Mode Marktplatz</strong>. <i>All unsere Produkte sind selbstverständlich <u>100% Vegan</u></i>.
+              Mit Allem was wir tun glauben wir daran, dass eine <strong>transparente Wirtschaft</strong> die Grundlage für nachhaltige und faire Mode bilden soll. Aus diesem Grund zeigen wir dir die Bestandteile, Lieferketten und Produktionsstätten jedes einzelnen Produktes. Greenvoice ist <strong>dein transparenter und nachhaltiger Mode Marktplatz</strong>. All unsere Produkte sind selbstverständlich <u>100% Vegan</u>.
             </p>
           </div>
         </div>
@@ -61,7 +61,7 @@
 
           <div class="seperator mt-4"></div>
 
-          {% include 'shop/templates/product-slide.html' %}
+          {% include 'shop/templates/product-slide.html' with request=request only %}
 
           <div class="container d-flex justify-content-center align-items-center mt-4">
             <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
@@ -79,7 +79,7 @@
 
           <div class="seperator mt-4"></div>
 
-          {% include 'shop/templates/product-slide.html' %}
+          {% include 'shop/templates/product-slide.html' with request=request only %}
 
           <div class="container d-flex justify-content-center align-items-center mt-4">
             <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
@@ -124,7 +124,7 @@
             <h4>Beliebte Marken</h4>
           </div>
 
-          {% include 'shop/templates/brand-slide.html' with class='text-dark' only %}
+          {% include 'shop/templates/brand-slide.html' %}
 
           <div class="seperator mt-4"></div>
 

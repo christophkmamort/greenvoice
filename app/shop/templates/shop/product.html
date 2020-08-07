@@ -169,7 +169,7 @@
             <h5>Passt sehr gut dazu</h5>
           </div>
 
-          {% include 'shop/templates/product-slide.html' with class='text-dark' only %}
+          {% include 'shop/templates/product-slide.html' with request=request only %}
 
           <div class="seperator mt-4"></div>
 
@@ -185,7 +185,8 @@
             <h5 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Das könnte dir auch gefallen</h5>
             <h5>Ähnliche Produkte</h5>
           </div>
-          {% include 'shop/templates/product-slide.html' with class='text-dark' only %}
+
+          {% include 'shop/templates/product-slide.html' with request=request only %}
 
           <div class="seperator mt-4"></div>
 

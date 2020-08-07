@@ -5,7 +5,9 @@
     <div class="container">
       <div class="seperator mt-5"></div>
 
-      <p class="text-white p-0 m-0">{% include 'shop/templates/svg/cookie.svg' with class='text-white mr-1' height='1em' only %} Wir verwenden <strong>Cookies</strong>. Wenn du fortfährst, nehmen wir an, dass du damit einverstanden bist. <button id="acceptCookies" class="btn m-0 p-0 ml-1 text-white" style="vertical-align: baseline;"><strong class="border-bottom border-2">Ok</strong></button></p>
+      {% if request.COOKIES.cookies_accepted != 'true' %}
+        <p id="cookieNotice" class="text-white p-0 m-0">{% include 'shop/templates/svg/cookie.svg' with class='text-white mr-1' height='1em' only %} Wir verwenden <strong>Cookies</strong>. Wenn du fortfährst, nehmen wir an, dass du damit einverstanden bist. <button id="acceptCookies" class="btn m-0 p-0 ml-1 text-white" style="vertical-align: baseline;"><strong id="acceptCookiesTrigger" class="border-bottom border-2">Ok</strong></button></p>
+      {% endif %}
     </div>
   </div>
 
