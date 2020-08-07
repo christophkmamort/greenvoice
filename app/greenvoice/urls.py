@@ -21,5 +21,5 @@ urlpatterns = [
 
     # Custom
     path('', include('shop.urls')),
-    path('api/', include('api.urls')),
+    # path('api/', include('api.urls')),
 ]

@@ -1,4 +1,4 @@
-from PIL import Image
+"""from PIL import Image
 import tempfile
 
 # from django.contrib.auth.models import User
@@ -32,7 +32,7 @@ class ProductApiTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Product.objects.count(), 1)
-        self.assertEqual(Product.objects.get().title, 'Test Product')
+        self.assertEqual(Product.objects.get().title, 'Test Product')"""
 
 
 """
