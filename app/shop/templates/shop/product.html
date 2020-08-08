@@ -27,7 +27,7 @@
           </ol>
           <div class="carousel-inner h-100">
             <div class="carousel-item active h-100">
-              <img src="{% static 'shop/med/phs7.jpg' %}" class="img img-fluid d-block w-100 h-100" alt="...">
+              <img src="{{ product.imageUrl }}" class="img img-fluid d-block w-100 h-100" alt="...">
             </div>
             <div class="carousel-item h-100">
               <img src="{% static 'shop/med/phs8.jpg' %}" class="img img-fluid d-block w-100 h-100" alt="...">
@@ -55,15 +55,15 @@
         <div class="seperator mt-4"></div>
 
         <div data-section="productDetailInfoCore">
-          <h4 class="{% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Product Title</h4>
+          <h4 class="{% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">{{ product.name }}</h4>
           <div class="d-flex align-items-end">
-            <h4 class="m-0">€ 236,54</h4>
+            <h4 class="m-0">€ {{ product.price|floatformat:2 }}</h4>
             <p class="text-info m-0 ml-1 text-smaller text-italic">*inkl. MwSt.</p>
           </div>
 
           <div class="seperator mt-4"></div>
 
-          <p>Moderner gestreifter Langrock von <a href="#" class="text-underlined">MusterMarke®</a>.</p>
+          <p>Moderner gestreifter Langrock von <a href="#" class="text-underlined">{{ product.brand.name }}</a>.</p>
         </div>
 
 
@@ -94,15 +94,17 @@
           <div class="seperator mt-4"></div>
 
           <div data-section="productDetailNavWishlist">
-            <button class="btn p-0 d-flex align-items-center" data-action="{% if 1 == 0 %} addToWishlist {% else %} removeFromWishlist {% endif %}">
-              {% if 1 == 0 %}
-                {% include 'shop/templates/svg/heart.svg' with class='text-info' height='1em' strokewidth='3' only %}
-                <p class="m-0 text-info ml-2 {% if 1 == 0 %} text-italic {% endif %}">Auf die Wunschliste</p>
-              {% else %}
-                {% include 'shop/templates/svg/heart-filled.svg' with class='text-primary' height='1em' only %}
-                <p class="m-0 ml-2 text-primary {% if 1 == 0 %} text-italic {% endif %}">Auf der Wunschliste</p>
-              {% endif %}
-            </button>
+            {% if user.is_authenticated != 'true' %}<a href="{% url 'shop:login' %}?next={{ request.path|urlencode }}">{% endif %}
+              <button class="btn p-0 d-flex align-items-center" data-action="{% if 1 == 0 %} addToWishlist {% else %} removeFromWishlist {% endif %}">
+                {% if 1 == 0 %}
+                  {% include 'shop/templates/svg/heart.svg' with class='text-info' height='1em' strokewidth='3' only %}
+                  <p class="m-0 text-info ml-2 {% if 1 == 0 %} text-italic {% endif %}">Auf die Wunschliste</p>
+                {% else %}
+                  {% include 'shop/templates/svg/heart-filled.svg' with class='text-primary' height='1em' only %}
+                  <p class="m-0 ml-2 text-primary {% if 1 == 0 %} text-italic {% endif %}">Auf der Wunschliste</p>
+                {% endif %}
+              </button>
+            {% if user.is_authenticated != 'true' %}</a>{% endif %}
           </div>
 
           <div class="seperator mt-2"></div>
@@ -138,7 +140,7 @@
             </div>
 
             <div data-section="productDetailNavChart">
-              <button class="btn btn-lg btn-primary ml-2 {% if 1 == 0 %} text-italic {% endif %}">In den Warenkorb</button>
+              <button class="btn btn-lg btn-primary ml-2 {% if 1 == 0 %} text-italic {% endif %} updateCartTrigger" data-product="{{ product.pk }}" data-action="add">In den Warenkorb</button>
             </div>
 
           </div>
@@ -169,7 +171,7 @@
             <h5>Passt sehr gut dazu</h5>
           </div>
 
-          {% include 'shop/templates/product-slide.html' with request=request only %}
+          {% include 'shop/templates/product-slide.html' with request=request products=products only %}
 
           <div class="seperator mt-4"></div>
 
@@ -186,7 +188,7 @@
             <h5>Ähnliche Produkte</h5>
           </div>
 
-          {% include 'shop/templates/product-slide.html' with request=request only %}
+          {% include 'shop/templates/product-slide.html' with request=request products=products only %}
 
           <div class="seperator mt-4"></div>
 

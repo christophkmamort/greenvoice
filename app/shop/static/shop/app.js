@@ -6,6 +6,7 @@ import  './../../../node_modules/bootstrap-slider/dist/bootstrap-slider.min.js';
 
 import AcceptCookies from './js/acceptCookies';
 import Accordion from './js/accordion';
+import Cart from './js/cart';
 import Dropdown from './js/dropdown';
 import LoginUser from './js/loginUser';
 import ProductDetailMaterialsDoughnut from './js/productDetailMaterialsDoughnut';
@@ -16,6 +17,7 @@ import RegisterUser from './js/registerUser';
 
 var acceptCookies = new AcceptCookies();
 var accordion = new Accordion();
+var cart = new Cart();
 var dropdown = new Dropdown();
 var loginUser = new LoginUser();
 var productDetailMaterialsDoughnut = new ProductDetailMaterialsDoughnut();

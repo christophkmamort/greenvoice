@@ -75,7 +75,7 @@
                     <img src="{% static 'shop/med/phs1.jpg' %}" class="img img-fluid w-100 h-100" alt="">
                   </a>
 
-                  {% if user.is_authenticated != 'true' %}<a href="{% url 'shop:login' %}?redirect={{ request.get_full_path }}">{% endif %}
+                  {% if user.is_authenticated != 'true' %}<a href="{% url 'shop:login' %}?next={{ request.path|urlencode }}">{% endif %}
                     <button class="btn position-absolute p-1" style="top: 0.25em; right: 0.25em; background-color: rgba(255,255,255,0.5); border-radius: 100%;">
                       <svg class="bi bi-heart text-dark" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
                       <svg class="bi bi-heart text-primary d-none" height="1.5em" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="currentColor" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>

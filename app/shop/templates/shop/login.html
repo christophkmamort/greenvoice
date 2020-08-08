@@ -23,10 +23,13 @@
     </div>
     <div class="container position-relative d-flex align-items-center" style="height: 50vh; z-index: -1;">
       <h3 class="text-white pt-5">
-        {% if 'redirect' in request.get_full_path %}
-          Melde dich an <br> um die Wunschliste <br> zu verwenden
+        {% if request.GET.next %}
+          Melde dich an <br> um alle Funktionen <br> zu verwenden
+        {% elif request.GET.logout %}
+          {% include 'shop/templates/svg/check.svg' with class='text-primary mr-2' height='0.6em' style='margin-top: -0.2em;' only %}
+          Erfolgreich <br> abgemeldet!
         {% else %}
-          Willkommen <br> zurück
+          Willkommen <br> zurück!
         {% endif %}
       </h3>
     </div>
@@ -46,6 +49,7 @@
 
             <input type="email" name="loginEmail" class="form-control form-control-lg" placeholder="E-Mail" value="{{ submittedLoginEmail }}">
             <input type="password" name="loginPassword" class="form-control form-control-lg mt-2" placeholder="Passwort">
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
 
             <div class="seperator mt-4"></div>
 

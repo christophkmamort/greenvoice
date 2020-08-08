@@ -100,7 +100,7 @@
                   <h5 class="text-white text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Mein Profil</h5>
                 </button>
               </a>
-              <a href="{% url 'shop:logout' %}" class="ml-2">
+              <a href="{% url 'shop:logout' %}?logout=success" class="ml-2">
                 <button class="btn m-0 p-0 w-100">
                   <h5 class="text-info text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Abmelden</h5>
                 </button>

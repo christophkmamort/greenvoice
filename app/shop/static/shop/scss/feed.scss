@@ -20,7 +20,7 @@
       }
     }
     &-right {
-      padding-right: 15px;
+      // padding-right: 15px;
 
       @include media-breakpoint-only(sm) {
         padding-right: calc(50vw - 255px);
@@ -73,6 +73,18 @@
 
     &-img {
       border-radius: 0.8em;
+
+      &:before {
+        content: '';
+        padding-top: 150%;
+        float: left;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
     }
   }
 
