@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -33,9 +34,15 @@ class Order(models.Model):
         total = sum([item.get_total for item in orderitems])
         return total
 
+    """@property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        return content_type"""
+
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, verbose_name=_('order'))
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, verbose_name=_('order')) # related_name='orderitem',
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, verbose_name=_('product'))
     quantity = models.IntegerField(default=0, null=True, verbose_name=_('quantity'))
 
@@ -46,3 +53,9 @@ class OrderItem(models.Model):
     def get_total(self):
         total = self.product.price * self.quantity
         return total
+
+    """@property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        return content_type"""

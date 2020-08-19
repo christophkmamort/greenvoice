@@ -57,7 +57,7 @@
               <div class="position-absolute notify">
                 <div class="position-relative d-flex justify-content-center align-items-center">
                   {% include 'shop/templates/svg/circle.svg' with class='text-primary position-absolute' height='1.1em' only %}
-                  <h6 class="text-white position-absolute notify-txt">2</h6>
+                  <h6 class="text-white position-absolute notify-txt cartItemsTotal">{{ order.get_cart_items }}</h6>
                 </div>
               </div>
             {% endif %}

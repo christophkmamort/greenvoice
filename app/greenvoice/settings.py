@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 3rd party
-    # 'rest_framework',
+    'rest_framework',
     'nested_inline',
 
     # Custom
@@ -134,5 +134,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/med/' # "/mediafiles/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/med') # 'mediafiles'
+MEDIA_URL = '/med/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/med')

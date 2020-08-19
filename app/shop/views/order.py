@@ -30,7 +30,31 @@ class CheckoutView(TemplateView):
     template_name = 'shop/checkout.html'
 
     def get(self, request):
-        context = {}
+        addressIconStyle = 'opacity: 25%';
+        paymentIconStyle = 'opacity: 25%';
+        summaryIconStyle = 'opacity: 25%';
+
+        if request.user.is_authenticated:
+            customer = request.user.customer
+            order, created = Order.objects.get_or_create(customer=customer, status=1)
+            items = order.orderitem_set.all()
+        else:
+            order = {'get_cart_total': 0, 'get_cart_items': 0}
+            items = []
+
+        if 1 == 1:
+            addressIconStyle = '';
+        if 1 == 1:
+            paymentIconStyle = '';
+        if 1 == 1:
+            summaryIconStyle = '';
+
+        context = {
+            'items':items,
+            'order':order,
+            'addressIconStyle':addressIconStyle,
+            'paymentIconStyle':paymentIconStyle,
+            'summaryIconStyle':summaryIconStyle,}
         return render(request, self.template_name, context)
 
 

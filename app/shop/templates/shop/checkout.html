@@ -1,214 +1,148 @@
 {% extends "../base.html" %}
-
 {% load static %}
 
+<!-- SEO -->
 {% block seo %}
   <title>Greenvoice - Nachhaltige & Fair Mode - Online kaufen</title>
   <meta name="description" content="Dein Onlineshop für nachhaltige & faire Mode. Aktuelle Mode Trends für {% now 'Y' %}. √100% Transparent √100% Vegan √BIO √Recycelt.">
   <meta name="keywords" content="Nachhaltige Mode, Faire Mode, Fair Fashion, Sustainable Fashion, Onlineshop, Green Lifestyle,">
 {% endblock %}
 
+<!-- Header and footer -->
+{% block header %}{% include 'shop/templates/header.html' %}{% endblock %}
+{% block footer %}{% include 'shop/templates/footer.html' %}{% endblock %}
+
+<!-- Page content -->
 {% block content %}
-  <!-- Step 1: Login -->
-  <!--<div class="down">
-    <!--<div class="position-absolute bg-dark w-100" style="height: 60vh; z-index: -1"></div>
-    <div class="container position-relative d-flex align-items-center" style="height: 50vh; z-index: -1;">
-      <div class="d-flex align-items-center justify-content-end position-absolute" style="top: 5em; right: 1em;">
-        {% include 'shop/templates/svg/checkout-address.html' with class='text-white' inner='#404040' height='2em' style='opacity: 25%;' only %}
-        {% include 'shop/templates/svg/checkout-separator.html' with class='text-white m-2' width='1.5em' style='opacity: 25%;' only %}
-        {% include 'shop/templates/svg/checkout-payment-method.html' with class='text-white' inner='#404040' height='2em' style='opacity: 25%;' only %}
-        {% include 'shop/templates/svg/checkout-separator.html' with class='text-white m-2' width='1.5em' style='opacity: 25%;' only %}
-        {% include 'shop/templates/svg/checkout-check.html' with class='text-white' inner='#404040' height='2em' style='opacity: 25%;' only %}
+  <div class="down accordion" id="checkoutOption">
+    <div data-section="checkoutHeader">
+      <div class="position-absolute 353535w-100" style="height: 60vh; z-index: -1">
+        <img src="{% static 'shop/med/backdrops/b1.jpg' %}" class="img img-fluid w-100 h-100" alt="">
       </div>
-      <h3 class="text-white pt-5">Anmelden</h3>
-    </div>
 
-    <div class="bg-white down-container down-container-flat position-relative" style="min-height: 50vh;">
-      <div class="container">
-        <div class="p-3 d-flex justify-content-center align-items-center">
-          <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
-        </div>
+      <div class="height-50vh position-relative">
+        <div class="container">
+          <div class="seperator pt-5"><div class="mt-4"></div></div>
 
-        <form>
-          <input type="email" class="form-control form-control-lg" id="loginEmail" aria-describedby="emailHelp" placeholder="E-Mail" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-          <input type="password" class="form-control form-control-lg mt-2" id="loginPassword" aria-describedby="passwordHelp" placeholder="Passwort" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-          <button class="btn btn-dark btn-lg w-100  mt-4">Anmelden</button>
-        </form>
-
-        <!-- Register. -->
-        <!--<div class="p-5 m-5"><div class="m-5"></div></div>
-        <div class="position-absolute w-100 pl-3 pr-3 pb-3" style="left: 0; bottom: 0;">
-          <p class="text-info text-center m-0" style="font-size: 0.8em">Du bist noch nicht registriert?</p>
-          <a href="{% url 'shop:register' %}"><button class="btn btn-outline-info btn-lg w-100 mt-2">Jetzt registrieren</button></a>
-          <button class="btn btn-outline-info btn-lg w-100 mt-2">Als Gast fortfahren</button>
-        </div>
-      </div>
-    </div>
-  </div>-->
-
-  <!-- Step 2: Address -->
-  <!--<div class="down">
-    <div class="position-absolute bg-white w-100" style="height: 60vh; z-index: -1"></div>
-    <div class="container position-relative d-flex align-items-center" style="height: 50vh; z-index: -1;">
-      <div class="d-flex align-items-center justify-content-end position-absolute" style="top: 5em; right: 1em;">
-        {% include 'shop/templates/svg/checkout-address.html' with class='text-dark' inner='#fff' height='2em' style='opacity: 100%;' only %}
-        {% include 'shop/templates/svg/checkout-separator.html' with class='text-dark m-2' width='1.5em' style='opacity: 25%;' only %}
-        {% include 'shop/templates/svg/checkout-payment-method.html' with class='text-dark' inner='#fff' height='2em' style='opacity: 25%;' only %}
-        {% include 'shop/templates/svg/checkout-separator.html' with class='text-dark m-2' width='1.5em' style='opacity: 25%;' only %}
-        {% include 'shop/templates/svg/checkout-check.html' with class='text-dark' inner='#fff' height='2em' style='opacity: 25%;' only %}
-      </div>
-      <h3 class="text-dark pt-5">Lieferaddresse</h3>
-    </div>
-
-    <div class="bg-dark down-container down-container-flat position-relative" style="min-height: 50vh;">
-      <div class="container">
-        <div class="p-3 d-flex justify-content-center align-items-center">
-          <div class="bg-white rounded" style="width: 3em; height: 0.4em;"></div>
-        </div>
-
-        <form>
-          <input type="text" class="form-control form-control-lg bg-dark text-white" id="checkoutDeliveryName" aria-describedby="nameHelp" placeholder="Name" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-          <input type="text" class="form-control form-control-lg bg-dark text-white" id="checkoutDeliveryStreet" aria-describedby="streetHelp" placeholder="Straße" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-          <input type="number" class="form-control form-control-lg bg-dark text-white" id="checkoutDeliveryZip" aria-describedby="zipHelp" placeholder="Postleitzahl" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-          <input type="text" class="form-control form-control-lg bg-dark text-white" id="checkoutDeliveryCity" aria-describedby="cityHelp" placeholder="Stadt" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-
-          <div class="dropdown w-100">
-            <button class="btn btn-lg w-100 d-flex align-items-center dropdown-toggle text-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF; color: #6B757C;">
-              Land
-              <div class="w-100 d-flex justify-content-end">
-                {% include 'shop/templates/svg/arrow-down.html' with class='text-info ml-2 arrow-down' height='.4em' style='color: #6B757C !important;' only %}
-                {% include 'shop/templates/svg/arrow-up.html' with class='text-dark ml-2 d-none arrow-up' height='.4em' style='color: #6B757C !important;' only %}
-              </div>
-            </button>
-            <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-              <div class="form-check p-0">
-                <input class="form-check-input d-none" type="radio" name="checkoutDeliveryCountry" id="checkoutDeliveryAustria" value="at">
-                <label class="form-check-label w-100" for="checkoutDeliveryAustria">
-                  <button class="btn pt-1 pb-1 pr-3 pl-3 w-100 text-left" style="color: #6B757C;">Österreich</button>
-                </label>
-              </div>
-              <div class="form-check p-0">
-                <input class="form-check-input d-none" type="radio" name="checkoutDeliveryCountry" id="checkoutDeliveryGermany" value="de">
-                <label class="form-check-label w-100" for="checkoutDeliveryGermany">
-                  <button class="btn pt-1 pb-1 pr-3 pl-3 w-100 text-left" style="color: #6B757C;">Deutschland</button>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <button class="btn btn-light btn-lg w-100  mt-4">Weiter zur Zahlung</button>
-          <p class="text-info m-0 text-center mt-2 pb-3" style="font-size: 0.8em;">*Deine Lieferaddresse wird auch als deine Rechungsaddresse verwendet.</p>
-        </form>
-      </div>
-    </div>
-  </div>-->
-
-  <!-- Step 3: Payment method -->
-  <!--<div class="down">
-    <div class="position-absolute bg-dark w-100" style="min-height: 60vh; z-index: -1"></div>
-    <div class="pt-5 d-flex align-items-center" style="min-height: 50vh; z-index: -1;">
-      <div class="w-100">
-        <div class="container pt-4">
           <div class="d-flex align-items-center justify-content-end">
-            {% include 'shop/templates/svg/checkout-address.html' with class='text-white' inner='#404040' height='2em' style='opacity: 100%;' only %}
-            {% include 'shop/templates/svg/checkout-separator.html' with class='text-white m-2' width='1.5em' style='opacity: 100%;' only %}
-            {% include 'shop/templates/svg/checkout-payment-method.html' with class='text-white' inner='#404040' height='2em' style='opacity: 100%;' only %}
-            {% include 'shop/templates/svg/checkout-separator.html' with class='text-white m-2' width='1.5em' style='opacity: 25%;' only %}
-            {% include 'shop/templates/svg/checkout-check.html' with class='text-white' inner='#404040' height='2em' style='opacity: 25%;' only %}
+            {% include 'shop/templates/svg/checkout-address.svg' with class='text-white' inner='#353535' height='2em' style=addressIconStyle only %}
+            {% include 'shop/templates/svg/checkout-separator.svg' with class='text-white m-2' height='0.2em' style=paymentIconStyle only %}
+            {% include 'shop/templates/svg/checkout-payment-method.svg' with class='text-white' inner='#353535' height='2em' style=paymentIconStyle only %}
+            {% include 'shop/templates/svg/checkout-separator.svg' with class='text-white m-2' height='0.2em' style=summaryIconStyle only %}
+            {% include 'shop/templates/svg/checkout-check.svg' with class='text-white' inner='#353535' height='2em' style=summaryIconStyle only %}
           </div>
-          <h3 class="text-white pt-4">Zahlungs- möglichkeiten</h3>
         </div>
-        <div class="d-flex scrollbar pl-3 mt-4 mb-3">
-          <button class="btn btn-lg btn-light mr-1">Mastercard</button>
-          <button class="btn btn-lg btn-outline-info mr-1 ml-2">Visa</button>
-          <button class="btn btn-lg btn-outline-info mr-1 ml-2">PayPal</button>
-          <button class="btn btn-lg btn-outline-info mr-1 ml-2">Klarna</button>
-          <button class="btn btn-lg btn-outline-info mr-1 ml-2">Sofort</button>
-          <button class="btn btn-lg btn-outline-info mr-1 ml-2">Eps</button>
-          <button class="btn btn-lg btn-outline-info ml-2">Sepa</button>
-          <div class="p-2"></div>
+
+        <div class="position-absolute" style="top: 50%; left: 1em; right 1em;">
+          <h3 class="text-white">
+            {% if 1 == 1 %}
+              Überprüfe deine Angaben
+            {% elif 1 == 1 %}
+              Zahlungsmöglichkeiten
+            {% elif 1 == 1 %}
+              Deine Lieferadresse
+            {% else %}
+              Anmelden oder <br> als Gast fortfahren
+            {% endif %}
+          </h3>
         </div>
+
+        {% if 1 == 1 and 1 != 1 or 1 == 1 and 1 != 1 %}
+          <div class="d-flex align-items-end" style="height: calc(100% - 6.5em)">
+            <div class="mw-100">
+              <div class="d-flex scrollbar pl-3">
+                <label class="checkbox">
+                  <input type="radio" name="paymentMethod" vlaue="creditcard" checked>
+                  <div class="btn btn-lg btn-outline-light mr-1 checkbox-button" data-toggle="collapse" data-target="#checkoutOptionOne" aria-expanded="true" aria-controls="checkoutOptionOne" data-parent="#checkoutOption">Kreditkarte</div>
+                </label>
+                <label class="checkbox">
+                  <input type="radio" name="paymentMethod" vlaue="klarna">
+                  <div class="btn btn-lg btn-outline-light mr-1 ml-2 checkbox-button" data-toggle="collapse" data-target="#checkoutOptionTwo" aria-expanded="true" aria-controls="checkoutOptionTwo" data-parent="#checkoutOption">Klarna</div>
+                </label>
+                <label class="checkbox">
+                  <input type="radio" name="paymentMethod" vlaue="paypal">
+                  <div class="btn btn-lg btn-outline-light mr-1 ml-2 checkbox-button" data-toggle="collapse" data-target="#checkoutOptionThree" aria-expanded="true" aria-controls="checkoutOptionThree" data-parent="#checkoutOption">PayPal</div>
+                </label>
+                <label class="checkbox">
+                  <input type="radio" name="paymentMethod" vlaue="sofort">
+                  <div class="btn btn-lg btn-outline-light mr-1 ml-2 checkbox-button" data-toggle="collapse" data-target="#checkoutOptionFour" aria-expanded="true" aria-controls="checkoutOptionFour" data-parent="#checkoutOption">Sofort</div>
+                </label>
+                <label class="checkbox">
+                  <input type="radio" name="paymentMethod" vlaue="eps">
+                  <div class="btn btn-lg btn-outline-light mr-1 ml-2 checkbox-button" data-toggle="collapse" data-target="#checkoutOptionFive" aria-expanded="true" aria-controls="checkoutOptionFive" data-parent="#checkoutOption">Eps</div>
+                </label>
+                <label class="checkbox">
+                  <input type="radio" name="paymentMethod" vlaue="sepa">
+                  <div class="btn btn-lg btn-outline-light mr-1 ml-2 checkbox-button" data-toggle="collapse" data-target="#checkoutOptionSix" aria-expanded="true" aria-controls="checkoutOptionSix" data-parent="#checkoutOption">Sepa</div>
+                </label>
+                <div class="p-2"></div>
+              </div>
+
+              <div class="seperator mt-4"></div>
+            </div>
+          </div>
+        {% endif %}
+
       </div>
     </div>
 
-    <div class="bg-white down-container down-container-flat position-relative" style="min-height: 50vh;">
-      <div class="container">
-        <div class="p-3 d-flex justify-content-center align-items-center">
-          <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+
+    <div class="bg-white down-container position-relative">
+      <div data-section="designElementVerticalBar">
+        {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
+
+        <div class="seperator mt-4"></div>
+      </div>
+
+
+      {% if 1 == 1 %}
+        <div data-section="checkoutStepFour">
+          Bestätigen und Bestellen
         </div>
 
-        <div class="mt-4">
-          <div class="d-flex align-items-center">
-            <div>
-              <h6>Mastercard</h6>
-              <div class="d-flex align-items-center">
-                {% include 'shop/templates/svg/card.html' with class='text-dark' height='1.2em' style='' only %}
-                <p class="m-0 ml-2" style="white-space: nowrap;">•••• 0483</p>
-              </div>
-            </div>
-            <div class="d-flex justify-content-end w-100">
-              <div class="d-flex align-items-center justify-content-center rounded bg-dark" style="width: 2em; height: 2em;">
-                {% include 'shop/templates/svg/check.html' with class='text-white' height='0.6em' only %}
-              </div>
-            </div>
-          </div>
+
+      {% elif 1 == 1 %}
+        <div data-section="checkoutStepThree">
+          {% include 'shop/templates/checkout/payment.html' %}
         </div>
 
-        <div class="mt-4">
-          <div class="d-flex align-items-center">
-            <div>
-              <h6>Mastercard</h6>
-              <div class="d-flex align-items-center">
-                {% include 'shop/templates/svg/card.html' with class='text-dark' height='1.2em' style='' only %}
-                <p class="m-0 ml-2" style="white-space: nowrap;">•••• 2705</p>
-              </div>
-            </div>
-            <div class="d-flex justify-content-end w-100">
-              <div class="d-flex align-items-center justify-content-center rounded border border-2 border-dark" style="width: 2em; height: 2em;">
-                {% include 'shop/templates/svg/check.html' with class='text-white' height='0.6em' only %}
-              </div>
-            </div>
-          </div>
+
+      {% elif 1 == 1 %}
+        <div data-section="checkoutStepTwo">
+          {% include 'shop/templates/checkout/address.html' %}
         </div>
 
-        <!-- Add new card. -->
-        <!--<div class="mt-4 mb-3">
-          <input type="number" class="form-control form-control-lg" id="checkoutPaymentMethodKey" placeholder="Kartennummer" style="border: none; border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-          <div class="form-row">
-            <div class="col">
-              <input type="text" class="form-control form-control-lg" id="checkoutPaymentMethodSecret" placeholder="MM/YY" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-            </div>
-            <div class="col">
-              <input type="text" maxlength="3" class="form-control form-control-lg" id="checkoutPaymentMethodSecret" placeholder="Sicherheitszahl" style="border: none;  border-radius: 0; border-bottom: 2px solid #BFBFBF;">
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-center align-items-center mt-4">
-          <button class="btn"><u class="text-info"><h6 class="text-info">Neue Karte hinzufügen</h6></u></button>
-        </div>
 
-        <div class="p-5"><div class="p-5"></div></div>
-        <div class="position-absolute w-100 p-3" style="bottom: 0; left: 0;">
-          <hr class="bg-dark border-2">
-          <div class="p-4"></div>
-          <button class="btn btn-dark btn-lg w-100">Weiter zur Bestätigung</button>
-          <p class="text-info m-0 text-center mt-2" style="font-size: 0.8em;">*Die Bezahlung findet im nächsten Schritt statt.</p>
+      {% else %}
+        <div data-section="checkoutStepOne">
+          {% include 'shop/templates/checkout/authentication.html' %}
         </div>
+      {% endif %}
+
+
+      <div data-section="designElementVerticalBar">
+        <div class="seperator mt-4"></div>
+
+        {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
       </div>
     </div>
-  </div>-->
+
+
+  </div>
+
+
 
 
   <!-- Step 4: Check -->
-  <div class="up">
+  <!--<div class="up">
     <div class="up-container bg-white position-relative">
       <div class="container">
         <div class="d-flex align-items-center justify-content-end" style="padding-top: 5em;">
-          {% include 'shop/templates/svg/checkout-address.html' with class='text-dark' inner='#fff' height='2em' style='opacity: 100%;' only %}
-          {% include 'shop/templates/svg/checkout-separator.html' with class='text-dark m-2' width='1.5em' style='opacity: 100%;' only %}
-          {% include 'shop/templates/svg/checkout-payment-method.html' with class='text-dark' inner='#fff' height='2em' style='opacity: 100%;' only %}
-          {% include 'shop/templates/svg/checkout-separator.html' with class='text-dark m-2' width='1.5em' style='opacity: 100%;' only %}
-          {% include 'shop/templates/svg/checkout-check.html' with class='text-dark' inner='#fff' height='2em' style='opacity: 100%;' only %}
+          {% include 'shop/templates/svg/checkout-address.svg' with class='text-dark' inner='#fff' height='2em' style='opacity: 100%;' only %}
+          {% include 'shop/templates/svg/checkout-separator.svg' with class='text-dark m-2' width='1.5em' style='opacity: 100%;' only %}
+          {% include 'shop/templates/svg/checkout-payment-method.svg' with class='text-dark' inner='#fff' height='2em' style='opacity: 100%;' only %}
+          {% include 'shop/templates/svg/checkout-separator.svg' with class='text-dark m-2' width='1.5em' style='opacity: 100%;' only %}
+          {% include 'shop/templates/svg/checkout-check.svg' with class='text-dark' inner='#fff' height='2em' style='opacity: 100%;' only %}
         </div>
       </div>
 
@@ -235,7 +169,7 @@
                             <h6 class="m-0">Product Title</h6>
                             <p>1x € 39,99</p>
                             <div class="d-flex mt-3">
-                              <p class="m-0">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-dark ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                              <p class="m-0">Farbe: {% include 'shop/templates/svg/circle.svg' with class='text-dark ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
                               <p class="m-0 ml-3">Größe: M</p>
                             </div>
                           </div>
@@ -286,7 +220,7 @@
                             <h6 class="m-0">Product Title</h6>
                             <p>1x € 39,99</p>
                             <div class="d-flex mt-3">
-                              <p class="m-0">Farbe: {% include 'shop/templates/svg/circle.html' with class='text-dark ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
+                              <p class="m-0">Farbe: {% include 'shop/templates/svg/circle.svg' with class='text-dark ml-1' height='0.9em' style='margin-top: -3px;' only %}</p>
                               <p class="m-0 ml-3">Größe: M</p>
                             </div>
                           </div>
@@ -343,7 +277,7 @@
           <div>
             <h6>Mastercard</h6>
             <div class="d-flex align-items-center">
-              {% include 'shop/templates/svg/card.html' with class='text-dark' height='1.2em' style='' only %}
+              {% include 'shop/templates/svg/card.svg' with class='text-dark' height='1.2em' style='' only %}
               <p class="m-0 ml-2" style="white-space: nowrap;">•••• 0483</p>
             </div>
           </div>
@@ -364,7 +298,7 @@
 
         <div class="p-4"></div>
         <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100" style="bottom: 0; left: 0;">
-          <div class="bg-dark rounded" style="width: 3em; height: 0.4em;"></div>
+          <div class="353535rounded" style="width: 3em; height: 0.4em;"></div>
         </div>
       </div>
     </div>
@@ -373,5 +307,5 @@
       <button class="btn btn-primary btn-lg w-100">Jetzt bestellen</button>
       <p class="text-info m-0 text-center mt-2" style="font-size: 0.8em;">*Mit der Aufgabe dieser Bestellung bist du mit den <u class="text-info">AGB’s</u> und <u class="text-info">Datenschutzrichtlinien</u> von allen Verkäufern und von Greenvoice einverstanden.</p>
     </div>
-  </div>
+  </div>-->
 {% endblock %}

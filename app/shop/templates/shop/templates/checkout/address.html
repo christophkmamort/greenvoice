@@ -1,0 +1,60 @@
+<div class="container">
+  <form id="checkoutAddress" method="POST">
+    <input type="text" name="name" class="form-control form-control-lg" placeholder="Name" value="{{ submittedName }}">
+    <input type="text" name="street" class="form-control form-control-lg" placeholder="Straße" value="{{ submittedStreet }}">
+    <input type="number" name="zip" class="form-control form-control-lg" placeholder="Postleitzahl" value="{{ submittedZip }}">
+    <input type="text" name="city" class="form-control form-control-lg" placeholder="Stadt" value="{{ submittedCity }}">
+
+    <div class="dropdown w-100">
+      <button class="btn btn-lg w-100 d-flex align-items-center dropdown-toggle dropdown-toggle-border-bottom dropdownToggle" type="button" id="dropdownCountry" data-toggle="dropdown">
+        <p class="m-0 w-100 text-left">Land</p>
+        {% include 'shop/templates/svg/arrow-down.svg' with class='text-info ml-2 arrowDown' height='.4em' style='' only %}
+        {% include 'shop/templates/svg/arrow-up.svg' with class='text-dark ml-2 d-none arrowUp' height='.4em' style='' only %}
+      </button>
+      <div class="dropdown-menu dropdown-menu-border-bottom border w-100 p-0" aria-labelledby="dropdownCountry">
+        <label class="checkbox form-check m-0 p-2 pt-3">
+          <input class="form-check-input dropdownOption" type="radio" name="country" vlaue="at">
+          <p class="checkbox-text checkbox-text-strong m-0 ml-2">Österreich</p>
+        </label>
+        <label class="checkbox form-check m-0 p-2 pb-3">
+          <input class="form-check-input dropdownOption" type="radio" name="country" vlaue="de">
+          <p class="checkbox-text checkbox-text-strong m-0 ml-2">Deutschland</p>
+        </label>
+      </div>
+    </div>
+
+    <!--<div class="seperator mt-4"></div>
+
+    <button class="btn btn-primary btn-lg w-100" type="button">Weiter zur Zahlung</button>
+    <div class="seperator mt-1"></div>
+    <p class="text-info m-0 text-center text-smaller text-italic">*Lieferaddresse = Rechungsaddresse.</p>-->
+
+    <div data-section="toCheckoutStep2">
+      <div data-section="designElementLine">
+        <div class="seperator mt-5"></div>
+
+        <hr>
+      </div>
+
+      <div>
+        <div class="seperator mt-4"></div>
+
+        <div class="d-flex">
+          <h5 class="w-50 m-0">Summe:</h5>
+          <h5 class="text-right w-50 m-0">€ <span class="cartTotal text-strong">{{ order.get_cart_total|floatformat:2 }}</span></h5>
+        </div>
+        <p class="text-smaller text-info">*zzgl. Versandkosten</p>
+
+        <div class="seperator mt-4"></div>
+
+        <div class="d-flex">
+          <button class="btn btn-outline-info btn-lg" type="button">
+            {% include 'shop/templates/svg/arrow-left.svg' with class='text-info' height='0.8em' style='' only %}
+          </button>
+          <button class="btn btn-dark btn-lg w-100 ml-2" type="button" {% if 1 == 0 %} disabled {% endif %}>Weiter zur Zahlung</button>
+        </div>
+        <p class="text-info m-0 text-center mt-2" style="font-size: 0.8em;">*Lieferaddresse = Rechungsaddresse.</p>
+      </div>
+    </div>
+  </form>
+</div>

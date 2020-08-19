@@ -3,39 +3,48 @@ import $ from 'jquery';
 class Dropdown {
   constructor() {
     this.window = $(window);
-    this.trigger = $('.dropdown-toggle');
-    this.arrowDown = $('.arrow-down');
-    this.arrowUp = $('.arrow-up');
+    this.dropdown = $('.dropdown');
+    this.dropdownToggle = $('.dropdownToggle');
+    this.arrowDown = $('.arrowDown');
+    this.arrowUp = $('.arrowUp');
+    this.checkbox = $('.checkbox');
+    this.dropdownOption = $('.dropdownOption');
     this.events();
   }
 
   events() {
-    this.trigger.on("click", this.toggleArrow.bind(this));
-    this.arrowDown.on("click", this.activateArrow.bind(this));
-    this.arrowUp.on("click", this.resetArrow.bind(this));
+    this.dropdownToggle.on("click", this.toggleArrow.bind(this));
     this.window.on("click", this.resetArrow.bind(this));
+    this.dropdownOption.on("click", this.selectOption.bind(this));
+  }
+
+  selectOption(e) {
+    var that = this;
+    var dorpdownSelected = $(e.target).closest(that.dropdown).find(that.dropdownToggle).find('p');
+    var dropdownOptionValue = $(e.target).closest(that.checkbox).find('p').html();
+
+    dorpdownSelected.html(dropdownOptionValue);
+    dorpdownSelected.addClass('text-dark');
   }
 
   toggleArrow(e) {
     var that = this;
-    if ($(e.target).find(that.arrowDown).hasClass('d-none')) {
-      $(e.target).find(that.arrowDown).removeClass('d-none');
-      $(e.target).find(that.arrowUp).addClass('d-none');
+    var dropdownArrowDown = $(e.target).closest(that.dropdown).find(that.arrowDown);
+    var dropdownArrowUp = $(e.target).closest(that.dropdown).find(that.arrowUp);
+
+    if (dropdownArrowDown.hasClass('d-none')) {
+      dropdownArrowDown.removeClass('d-none');
+      dropdownArrowUp.addClass('d-none');
       that.arrowDown.addClass('text-dark');
     } else {
-      $(e.target).find(that.arrowDown).addClass('d-none');
-      $(e.target).find(that.arrowUp).removeClass('d-none');
+      dropdownArrowDown.addClass('d-none');
+      dropdownArrowUp.removeClass('d-none');
     }
   }
 
-  activateArrow(e) {
+  resetArrow() {
     var that = this;
-    $(e.target).closest(that.trigger).find(that.arrowDown).addClass('d-none');
-    $(e.target).closest(that.trigger).find(that.arrowUp).removeClass('d-none');
-  }
 
-  resetArrow(e) {
-    var that = this;
     that.arrowDown.removeClass('d-none');
     that.arrowUp.addClass('d-none');
     that.arrowDown.removeClass('text-dark');

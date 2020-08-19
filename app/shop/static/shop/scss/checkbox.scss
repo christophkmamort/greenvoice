@@ -49,6 +49,11 @@
     background-color: $primary;
     border: 0.2em solid $primary;
   }
+  input:checked ~ .checkbox-button {
+    background-color: $primary;
+    border-color: $primary;
+    color: $white;
+  }
   input:checked ~ .checkbox-text {
     color: $dark;
   }

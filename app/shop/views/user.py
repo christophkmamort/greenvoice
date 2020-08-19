@@ -4,19 +4,20 @@ from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
 
+from shop.decorators import unauthenticated_user
 from users.forms import CustomUserCreationForm
 
 
 class LoginView(TemplateView):
     template_name = 'shop/login.html'
 
+    @unauthenticated_user
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('shop:index')
-
         context = {}
         return render(request, self.template_name, context)
 
+
+    # @unauthenticated_user
     def post(self, request):
         email = request.POST.get('loginEmail')
         password =request.POST.get('loginPassword')
@@ -47,15 +48,14 @@ class LogoutView(TemplateView):
 class RegisterView(TemplateView):
     template_name = 'shop/register.html'
 
+    @unauthenticated_user
     def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('shop:index')
-
         form = CustomUserCreationForm()
 
         context = {'form':form}
         return render(request, self.template_name, context)
 
+    @unauthenticated_user
     def post(self, request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
