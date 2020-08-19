@@ -1,0 +1,141 @@
+{% load static %}
+
+<div>
+  <div class="container">
+    <h5 class="m-0">Produkte & Versand:</h5>
+  </div>
+
+  <div class="seperator mt-3"></div>
+
+  <div class="d-flex scrollbar">
+
+
+    <div data-section="checkBrandOrder">
+      <div class="pl-3 pr-3">
+        <p class="text-info m-0 p-0">Verkauf & Versand durch <u class="text-info">MusterMarke®</u></p>
+
+        <div class="seperator mt-2"></div>
+
+        <div class="d-flex align-items-center">
+
+          <div class="container">
+            <div class="row">
+
+              {% for item in items %}
+                <div class="col-auto">
+                  <div class="row">
+                    <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                      <div style="height: 80px; width: 80px;">
+                        <img src="{{ item.product.imageUrl }}" class="img img-fluid w-100 h-100 rounded" alt="">
+                      </div>
+                    </div>
+                    <div class="col d-flex align-items-center justiy-content-start ml-2">
+                      <div>
+                        <h6 class="m-0">{{ item.product.name }}</h6>
+                        <p><span class="cartItemTotal">{{ item.quantity }}</span>x € <span class="cartItemPrice">{{ item.product.price|floatformat:2 }}</span></p>
+
+                        <div class="seperator mt-3"></div>
+
+                        <div class="d-flex">
+                          <p class="m-0">Farbe: <span style="color: #C0C0C0;">Silver</span></p>
+                          <p class="m-0 ml-3">Größe: M</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+              <div class="col-auto ml-3">
+                <div class="row">
+                  <div class="col-auto p-0 d-flex align-items-center justiy-content-start">
+                    <div style="height: 80px; width: 80px;">
+                      {% include 'shop/templates/svg/delivery-checkout.svg' with class='text-info' height='100%' only %}
+                      <!--<img src="{% static 'shop/med/delivery.jpg' %}" class="img img-fluid w-100 h-100 rounded" alt="">-->
+                    </div>
+                  </div>
+                  <div class="col d-flex ml-2">
+                    <div>
+                      <h6 class="m-0">Versand <span class="text-italic text-info">(von MusterMarke®)</span></h6>
+                      <p>€ 5,99</p>
+
+                      <div class="seperator mt-3"></div>
+
+                      <div class="d-flex align-items-center">
+                        <p class="m-0">DHL GoGreen</p>
+                        <p class="m-0 ml-1 text-primary text-smaller" style="padding-top: 0.2em;">& CO2 Ausgleich</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="container">
+    <div class="mt-4">
+      <div class="pt-2 pb-3 d-flex align-items-center">
+        <h5 class="w-50 m-0">Lieferung:</h5><p class="w-50 text-right m-0"><button class="btn p-0"><u class="text-info text-smaller">Lieferadresse bearbeiten</u></button></p>
+      </div>
+      <div>
+        <p class="m-0">
+          Christoph Amort <br>
+          Embach 101 <br>
+          6320 Angerberg <br>
+          Österreich
+        </p>
+      </div>
+    </div>
+
+    <div class="seperator mt-4"></div>
+
+    <div>
+      <div class="pt-2 pb-3 d-flex align-items-center">
+        <h5 class="w-50 m-0">Zahlung:</h5><p class="w-50 text-right m-0"><button class="btn p-0"><u class="text-info text-smaller">Zahlungsart bearbeiten</u></button></p>
+      </div>
+      <div>
+        <h6>Mastercard</h6>
+        <div class="d-flex align-items-center">
+          {% include 'shop/templates/svg/card.svg' with class='text-dark' height='1.2em' style='' only %}
+          <p class="m-0 ml-2" style="white-space: nowrap;">•••• 0483</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="seperator mt-5"></div>
+
+      <hr>
+
+      <div class="pt-2 row">
+        <h6 class="col-auto">Zwischensumme:</h6><h6 class="col text-right w-100">€ 79,98</h6>
+      </div>
+      <div class="row">
+        <h6 class="text-info col-auto" style="">Versandkosten:</h6><h6 class="text-info col text-right w-100">€ 11,98</h6>
+      </div>
+      <div class="pb-3 row">
+        <h5 class="col-auto">Gesamtsumme:</h5><h5 class="col text-right w-100">€ 91,96</h5>
+      </div>
+    </div>
+
+
+    <div class="seperator mt-4"></div>
+
+    <div class="w-100 p-3" style="bottom: 0; left: 0;">
+      <button class="btn btn-primary btn-lg w-100">Jetzt bestellen</button>
+
+      <div class="seperator mt-2"></div>
+
+      <p class="text-info m-0 text-center text-smaller">*Mit der Aufgabe dieser Bestellung bist du mit den <u class="text-info">AGB’s</u> und <u class="text-info">Datenschutzrichtlinien</u> von allen Verkäufern und Greenvoice einverstanden.</p>
+    </div>
+  </div>
+</div>
