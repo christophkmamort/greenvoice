@@ -3,8 +3,11 @@
 <div class="container">
   <form id="checkoutAddress" method="POST">
     <input type="text" name="name" class="form-control form-control-lg" placeholder="Name" value="{{ submittedName }}">
-    <input type="text" name="street" class="form-control form-control-lg" placeholder="Straße" value="{{ submittedStreet }}">
-    <input type="number" name="zip" class="form-control form-control-lg" placeholder="Postleitzahl" value="{{ submittedZip }}">
+    <div class="row px-3">
+      <input type="text" name="line-1" class="form-control form-control-lg mr-2 col" placeholder="Straße" value="{{ submittedLine1 }}">
+      <input type="number" name="zip" class="form-control form-control-lg ml-2 col-4" placeholder="Postleitzahl" value="{{ submittedZip }}">
+    </div>
+    <input type="text" name="line-2" class="form-control form-control-lg" placeholder="Adresszusatz" value="{{ submittedLine2 }}">
     <input type="text" name="city" class="form-control form-control-lg" placeholder="Stadt" value="{{ submittedCity }}">
 
     <div class="dropdown w-100">
@@ -28,14 +31,14 @@
     <!--<div class="seperator mt-4"></div>
 
     <button class="btn btn-primary btn-lg w-100" type="button">Weiter zur Zahlung</button>
-    <div class="seperator mt-1"></div>
+    <div class="seperator"></div>
     <p class="text-info m-0 text-center text-smaller text-italic">*Lieferaddresse = Rechungsaddresse.</p>-->
 
     <div data-section="toCheckoutStep2">
       <div data-section="designElementLine">
         <div class="seperator mt-5"></div>
 
-        <hr>
+        <hr class="bg-info">
       </div>
 
       <div>
@@ -50,9 +53,10 @@
         <div class="seperator mt-4"></div>
 
         <div class="d-flex">
-          <button class="btn btn-outline-info btn-lg" type="button">
+          <!-- Only allow going back if user is checking out as a guest. -->
+          <!--<button class="btn btn-outline-info btn-lg" type="button">
             {% include 'shop/templates/svg/arrow-left.svg' with class='text-info' height='0.8em' style='' only %}
-          </button>
+          </button>-->
           <button class="btn btn-dark btn-lg w-100 ml-2" type="button" {% if 1 == 0 %} disabled {% endif %}>Weiter zur Zahlung</button>
         </div>
         <p class="text-info m-0 text-center mt-2 text-smaller">*Lieferaddresse = Rechungsaddresse.</p>

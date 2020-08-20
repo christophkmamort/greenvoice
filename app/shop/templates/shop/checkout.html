@@ -25,29 +25,29 @@
           <div class="seperator pt-5"><div class="mt-4"></div></div>
 
           <div class="d-flex align-items-center justify-content-end">
-            {% include 'shop/templates/svg/checkout-address.svg' with class='text-white' inner='#353535' height='2em' style=addressIconStyle only %}
-            {% include 'shop/templates/svg/checkout-separator.svg' with class='text-white m-2' height='0.2em' style=paymentIconStyle only %}
-            {% include 'shop/templates/svg/checkout-payment-method.svg' with class='text-white' inner='#353535' height='2em' style=paymentIconStyle only %}
-            {% include 'shop/templates/svg/checkout-separator.svg' with class='text-white m-2' height='0.2em' style=summaryIconStyle only %}
-            {% include 'shop/templates/svg/checkout-check.svg' with class='text-white' inner='#353535' height='2em' style=summaryIconStyle only %}
+            {% include 'shop/templates/svg/checkout-address.svg' with class='text-white' inner='#353535' height='2em' style=checkoutAddressIcon only %}
+            {% include 'shop/templates/svg/checkout-separator.svg' with class='text-white m-2' height='0.2em' style=checkoutPaymentIcon only %}
+            {% include 'shop/templates/svg/checkout-payment-method.svg' with class='text-white' inner='#353535' height='2em' style=checkoutPaymentIcon only %}
+            {% include 'shop/templates/svg/checkout-separator.svg' with class='text-white m-2' height='0.2em' style=checkoutCheckIcon only %}
+            {% include 'shop/templates/svg/checkout-check.svg' with class='text-white' inner='#353535' height='2em' style=checkoutCheckIcon only %}
           </div>
         </div>
 
         <div class="position-absolute" style="top: 50%; left: 1em; right 1em;">
           <h3 class="text-white">
-            {% if 1 == 1 %}
-              Überprüfe deine Angaben
-            {% elif 1 == 1 %}
-              Zahlungsmöglichkeiten
-            {% elif 1 == 1 %}
-              Deine Lieferadresse
-            {% else %}
+            {% if checkoutStep == 1 %}
               Anmelden oder <br> als Gast fortfahren
+            {% elif checkoutStep == 2 %}
+              Deine Lieferadresse
+            {% elif checkoutStep == 3 %}
+              Zahlungsmöglichkeiten
+            {% elif checkoutStep == 4 %}
+              Überprüfe deine Angaben
             {% endif %}
           </h3>
         </div>
 
-        {% if 1 == 1 and 1 != 1 or 1 == 1 and 1 != 1 %}
+        {% if checkoutStep == 3 %}
           <div class="d-flex align-items-end" style="height: calc(100% - 6.5em)">
             <div class="mw-100">
               <div class="d-flex scrollbar pl-3">
@@ -95,27 +95,27 @@
       </div>
 
 
-      {% if 1 == 1 %}
-        <div data-section="checkoutStepFour">
-          {% include 'shop/templates/checkout/confirm.html' %}
+      {% if checkoutStep == 1 %}
+        <div data-section="checkoutStepOne">
+          {% include 'shop/templates/checkout/authentication.html' %}
         </div>
 
 
-      {% elif 1 == 1 %}
-        <div data-section="checkoutStepThree">
-          {% include 'shop/templates/checkout/payment.html' %}
-        </div>
-
-
-      {% elif 1 == 1 %}
+      {% elif checkoutStep == 2 %}
         <div data-section="checkoutStepTwo">
           {% include 'shop/templates/checkout/address.html' %}
         </div>
 
 
-      {% else %}
-        <div data-section="checkoutStepOne">
-          {% include 'shop/templates/checkout/authentication.html' %}
+      {% elif checkoutStep == 3 %}
+        <div data-section="checkoutStepThree">
+          {% include 'shop/templates/checkout/payment.html' %}
+        </div>
+
+
+      {% elif checkoutStep == 4 %}
+        <div data-section="checkoutStepFour">
+          {% include 'shop/templates/checkout/confirm.html' %}
         </div>
       {% endif %}
 
