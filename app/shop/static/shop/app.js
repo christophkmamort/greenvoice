@@ -14,6 +14,8 @@ import ProductDetailNav from './js/productDetailNav';
 import ProductDetailTransparencyMapLocations from './js/productDetailTransparencyMapLocations';
 import RegisterUser from './js/registerUser';
 
+import Test from './js/test';
+
 
 var acceptCookies = new AcceptCookies();
 var accordion = new Accordion();
@@ -24,6 +26,8 @@ var productDetailMaterialsDoughnut = new ProductDetailMaterialsDoughnut();
 var productDetailNav = new ProductDetailNav();
 var productDetailTransparencyMapLocations = new ProductDetailTransparencyMapLocations();
 var registerUser = new RegisterUser();
+
+var test = new Test();
 
 
 

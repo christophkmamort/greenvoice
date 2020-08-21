@@ -1,4 +1,4 @@
-from rest_framework.serializers import HyperlinkedModelSerializer, PrimaryKeyRelatedField, ModelSerializer, HyperlinkedIdentityField, SerializerMethodField
+from rest_framework.serializers import HyperlinkedModelSerializer, PrimaryKeyRelatedField, ModelSerializer, HyperlinkedIdentityField, StringRelatedField, HyperlinkedRelatedField
 
 from shop.models.customer import Customer
 from shop.models.brand import Brand
@@ -14,7 +14,6 @@ class ProductSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
-        # fields = ['id', 'name', 'image', 'price', 'status', 'created', 'owner', 'brand']
 
 
 class UserSerializer(HyperlinkedModelSerializer):
@@ -23,13 +22,21 @@ class UserSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['url', 'last_login', 'is_superuser', 'email', 'is_staff', 'is_active', 'date_joined', 'user_permissions']
-        # fields = '__all__'
+
+
+class CustomerSerializer(ModelSerializer):
+    # products = PrimaryKeyRelatedField(many=True, queryset=Product.objects.all())
+
+    class Meta:
+        model = Customer
+        fields = '__all__'
 
 
 class OrderItemSerializer(ModelSerializer): # HyperlinkedModelSerializer
     # url = HyperlinkedIdentityField(view_name='order-item-detail')
     # owner = ReadOnlyField(source='owner.username')
     # order = PrimaryKeyRelatedField(many=False, queryset=Order.objects.all())
+    product = ProductSerializer()
 
     class Meta:
         model = OrderItem
@@ -38,23 +45,15 @@ class OrderItemSerializer(ModelSerializer): # HyperlinkedModelSerializer
 
 class OrderSerializer(ModelSerializer): # HyperlinkedModelSerializer
     url = HyperlinkedIdentityField(view_name='order-detail')
-
-    # owner = ReadOnlyField(source='owner.username')
-    # customer = PrimaryKeyRelatedField(many=False, queryset=Customer.objects.all())
-    customer = SerializerMethodField()
-    # order_items = StringRelatedField(many=True)
-    # order_items = PrimaryKeyRelatedField(many=True, read_only=True)
-    #order_items = HyperlinkedRelatedField(many=True, queryset=OrderItem.objects.all(), view_name='order-detail') # read_only=True,
-    # order_items = HyperlinkedIdentityField(view_name='order-detail')
-    # order_items = OrderItemSerializer(many=True)
-    # order_items = SerializerMethodField()
+    customer = CustomerSerializer(many=False)
+    items = OrderItemSerializer(many=True)
 
     class Meta:
         model = Order
         fields = '__all__'
 
-    def get_customer(self, obj):
-        return str(obj.customer.name)
+    """def get_customer(self, obj):
+        return str(obj.customer.name)"""
 
     """def get_order_items(self, obj):
         content_type = obj.get_content_type

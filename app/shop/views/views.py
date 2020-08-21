@@ -88,3 +88,11 @@ class WishlistView(TemplateView):
     def get(self, request):
         context = {}
         return render(request, self.template_name, context)
+
+
+class TestView(TemplateView):
+    template_name = 'shop/test.html'
+
+    def get(self, request):
+        context = {}
+        return render(request, self.template_name, context)

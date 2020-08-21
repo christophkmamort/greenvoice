@@ -25,6 +25,7 @@ urlpatterns = [
 
     # Shop (functional)
     path('shop/update-cart/', views.updateCart, name='update-cart'),
+    path('test', views.TestView.as_view(), name='test'),
 
     # Legal
     path('imprint', views.ImprintView.as_view(), name='imprint'),

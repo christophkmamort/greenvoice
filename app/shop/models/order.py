@@ -7,7 +7,6 @@ from .product import Product
 
 
 class Order(models.Model):
-    order_number = models.CharField(max_length=200, blank=True, verbose_name=_('order id'))
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, verbose_name=_('customer'))
     DRAFT = 1
     ORDERED = 2
@@ -42,7 +41,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, verbose_name=_('order')) # related_name='orderitem',
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, related_name='items', verbose_name=_('order'))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, verbose_name=_('product'))
     quantity = models.IntegerField(default=0, null=True, verbose_name=_('quantity'))
 

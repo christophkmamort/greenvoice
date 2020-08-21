@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission
 
 
-class IsCustomer(BasePermission):
+class IsCustomerOrStaff(BasePermission):
     """
     Custom permission to only allow customers that
     created orders/wishlist-items to edit them.
@@ -9,7 +9,7 @@ class IsCustomer(BasePermission):
 
     # message = 'This post does not belong to you'
     def has_object_permission(self, request, view, obj):
-        return obj.customer.user == request.user
+        return obj.customer.user == request.user # or request.user.is_staff
 
 
     """def has_object_permission(self, request, view, obj):

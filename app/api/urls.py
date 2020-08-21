@@ -5,10 +5,11 @@ from . import views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'order', views.OrderViewSet) # , basename='user'
-router.register(r'order-item', views.OrderItemViewSet)
-router.register(r'products', views.ProductViewSet)
-router.register(r'users', views.UserViewSet)
+router.register(r'order', views.OrderViewSet, basename='order')
+router.register(r'order-item', views.OrderItemViewSet, basename='order-item')
+router.register(r'products', views.ProductViewSet, basename='product')
+router.register(r'users', views.UserViewSet, basename='user')
+router.register(r'customer', views.CustomerViewSet, basename='customer')
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
