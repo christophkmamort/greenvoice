@@ -1,14 +1,16 @@
-from rest_framework import generics
 from rest_framework.decorators import action, api_view
 from rest_framework.filters import OrderingFilter
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, \
+                                    IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from .permissions import IsCustomerOrStaff
-from .serializers import OrderSerializer, OrderItemSerializer, \
+from .serializers import BrandSerializer, OrderSerializer, \
+                        OrderItemSerializer, OrderItemDetailSerializer, \
                         ProductSerializer, UserSerializer, CustomerSerializer
+from shop.models.brand import Brand
 from shop.models.customer import Customer
 from shop.models.product import Product
 from shop.models.order import Order, OrderItem
@@ -25,10 +27,23 @@ def api_root(request, format=None):
     })
 
 
+class BrandViewSet(ModelViewSet):
+    """
+    Manage `list`, `create`, `retrieve`, `update` and `destroy` brands.
+    """
+    queryset = Brand.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['created',]
+    ordering = ['created']
+    serializer_class = BrandSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+
 class ProductViewSet(ModelViewSet):
     """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
+    Manage `list`, `create`, `retrieve`, `update` and `destroy` products.
     """
     queryset = Product.objects.all()
     filter_backends = [OrderingFilter]
@@ -43,7 +58,7 @@ class ProductViewSet(ModelViewSet):
 
 class UserViewSet(ReadOnlyModelViewSet):
     """
-    This viewset automatically provides `list` and `detail` actions.
+    Manage `list` and `detail` users.
     """
     serializer_class = UserSerializer
     queryset = CustomUser.objects.all()
@@ -52,7 +67,7 @@ class UserViewSet(ReadOnlyModelViewSet):
 
 class CustomerViewSet(ModelViewSet):
     """
-    This viewset automatically provides `list` and `detail` actions.
+    Manage `list` and `detail` customers.
     """
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
@@ -61,8 +76,7 @@ class CustomerViewSet(ModelViewSet):
 
 class OrderViewSet(ModelViewSet): # ModelViewSet
     """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
+    Manage `list`, `create`, `retrieve`, `update` and `destroy` orders.
     """
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated] # , IsCustomerOrStaff
@@ -73,17 +87,31 @@ class OrderViewSet(ModelViewSet): # ModelViewSet
     def perform_create(self, serializer):
         serializer.save(customer=self.request.user.customer)
 
+    def perform_update(self, serializer):
+        serializer.save(customer=self.request.user.customer)
+
+    """def perform_destroy(self, instance):"""
+
 
 class OrderItemViewSet(ModelViewSet):
     """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
+    Manage `list`, `create`, `retrieve`, `update` and `destroy` order-items.
     """
     serializer_class = OrderItemSerializer
     permission_classes = [IsAuthenticated] # , IsCustomerOrStaff
 
+    def get_serializer_class(self):
+        """Return appropriate serializer class"""
+        if self.action == 'retrieve':
+            return OrderItemDetailSerializer
+
+        return self.serializer_class
+
     def get_queryset(self):
-        return OrderItem.objects.filter(order=4)
+        return OrderItem.objects.filter(customer=self.request.user.customer)
 
     def perform_create(self, serializer):
-        serializer.save() # order = ..
+        serializer.save(customer=self.request.user.customer)
+
+    def perform_update(self, serializer):
+        serializer.save(customer=self.request.user.customer)

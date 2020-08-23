@@ -1,12 +1,11 @@
 {% load static %}
 
-<div> <!-- Product slider -->
-  <div class="d-flex scrollbar">
-    <div data-section="designElementDynamicSpacerLeft">
-      <div class="feed-padding-left"></div>
-    </div>
+<div data-section="productSlide">
+  <div class="d-flex scrollbar productSlide" data-sort="{{ sort }}" data-amount="{{ amount }}">
+    <!--<div class="feed-padding-left"></div>-->
 
-    {% for product in products %}
+
+    <!--{% for product in products %}
       <div class="feed-product feed-product-slide" data-section="productSlideProduct">
         <div class="overflow-hidden position-relative feed-product-img">
           <a href="{% url 'shop:product' product.pk %}">
@@ -28,7 +27,7 @@
           </div>
         </a>
       </div>
-    {% endfor %}
+    {% endfor %}-->
 
 
 
@@ -81,8 +80,6 @@
       </div>
     {% endfor %}-->
 
-    <div data-section="designElementDynamicSpacerRight">
-      <div class="feed-padding-right"></div>
-    </div>
+    <!--<div class="feed-padding-right"></div>-->
   </div>
 </div>

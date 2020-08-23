@@ -18,8 +18,8 @@ class Order(models.Model):
     )
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
 
-    def __str__(self):
-        return self.order_number
+    """def __str__(self):
+        return self.customer"""
 
     @property
     def get_cart_items(self):
@@ -41,6 +41,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, verbose_name=_('customer'))
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, related_name='items', verbose_name=_('order'))
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, verbose_name=_('product'))
     quantity = models.IntegerField(default=0, null=True, verbose_name=_('quantity'))

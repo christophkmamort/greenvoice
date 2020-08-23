@@ -12,9 +12,8 @@ import LoginUser from './js/loginUser';
 import ProductDetailMaterialsDoughnut from './js/productDetailMaterialsDoughnut';
 import ProductDetailNav from './js/productDetailNav';
 import ProductDetailTransparencyMapLocations from './js/productDetailTransparencyMapLocations';
+import ProductSlide from './js/productSlide';
 import RegisterUser from './js/registerUser';
-
-import Test from './js/test';
 
 
 var acceptCookies = new AcceptCookies();
@@ -25,9 +24,12 @@ var loginUser = new LoginUser();
 var productDetailMaterialsDoughnut = new ProductDetailMaterialsDoughnut();
 var productDetailNav = new ProductDetailNav();
 var productDetailTransparencyMapLocations = new ProductDetailTransparencyMapLocations();
+var productSlide = new ProductSlide();
 var registerUser = new RegisterUser();
 
-var test = new Test();
+
+/*import Test from './js/test';
+var test = new Test();*/
 
 
 

@@ -11,8 +11,12 @@
     <!--<link rel="stylesheet" href="{% static 'shop/bundled.css' %}">-->
 
     <script type="text/javascript">
-      var user = '{{ request.user }}';
-      var currentUrl = '{{ request.path|urlencode }}';
+      var user = '{{ request.user }}'
+
+      var domain = window.location.protocol + '//' + window.location.hostname
+      if (domain.includes('localhost')) { domain = 'http://localhost:8000' }
+      var current_url = domain + '{{ request.path|urlencode }}'
+      var login_url = domain + '{% url "shop:login" %}?next={{ request.path|urlencode }}'
 
       function getToken(name) {
 		    var cookieValue = null;
