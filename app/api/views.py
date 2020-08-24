@@ -7,13 +7,12 @@ from rest_framework.reverse import reverse
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from .permissions import IsCustomerOrStaff
-from .serializers import BrandSerializer, OrderSerializer, CategorySerializer, \
-                        OrderItemSerializer, OrderItemDetailSerializer, \
-                        ProductSerializer, UserSerializer, CustomerSerializer
+from .serializers import *
 from shop.models.taxonomies import Category
 from shop.models.brand import Brand
 from shop.models.customer import Customer
 from shop.models.product import Product
+from shop.models.log import ProductLog
 from shop.models.order import Order, OrderItem
 from users.models import CustomUser
 
@@ -25,22 +24,9 @@ def api_root(request, format=None):
         'orders': reverse('order-list', request=request, format=format),
         'users': reverse('user-list', request=request, format=format),
         'customer': reverse('customer-list', request=request, format=format),
-        'products': reverse('product-list', request=request, format=format)
+        'products': reverse('product-list', request=request, format=format),
+        'product-log': reverse('product-log-list', request=request, format=format),
     })
-
-
-class CategoryViewSet(ModelViewSet):
-    """
-    Manage `list`, `create`, `retrieve`, `update` and `destroy` brands.
-    """
-    queryset = Category.objects.all()
-    filter_backends = [OrderingFilter]
-    ordering_fields = ['created',]
-    ordering = ['created']
-    serializer_class = CategorySerializer
-
-    def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
 
 
 class BrandViewSet(ModelViewSet):
@@ -57,13 +43,42 @@ class BrandViewSet(ModelViewSet):
         serializer.save()
 
 
+class CategoryViewSet(ModelViewSet):
+    """
+    Manage `list`, `create`, `retrieve`, `update` and `destroy` brands.
+    """
+    queryset = Category.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['created',]
+    ordering = ['created']
+    serializer_class = CategorySerializer
+
+    def perform_create(self, serializer):
+        serializer.save(slug=self.request.data['name'].lower())
+
+
+class ProductLogViewSet(ModelViewSet):
+    """
+    Manage `list`, `create`, `retrieve`, `update` and `destroy` product log.
+    """
+    queryset = ProductLog.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['created',]
+    ordering = ['created']
+    serializer_class = ProductLogSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+
+
 class ProductViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` products.
     """
     filter_backends = [OrderingFilter]
-    ordering_fields = ['created',]
-    ordering = ['created']
+    ordering_fields = ['created', 'value',]
+    ordering = ['-value']
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 

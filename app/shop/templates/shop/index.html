@@ -61,7 +61,7 @@
 
           <div class="seperator mt-4"></div>
 
-          {% include 'shop/templates/product-slide.html' with sort=created amount=12 only %}
+          {% include 'shop/templates/product-slide.html' with sort='-value' amount=12 only %}
 
           <div class="container d-flex justify-content-center align-items-center mt-4">
             <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
@@ -79,7 +79,7 @@
 
           <div class="seperator mt-4"></div>
 
-          {% include 'shop/templates/product-slide.html' with sort=created amount=12 only %}
+          {% include 'shop/templates/product-slide.html' with sort='created' amount=12 only %}
 
           <div class="container d-flex justify-content-center align-items-center mt-4">
             <a href="{% url 'shop:shop' %}"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>

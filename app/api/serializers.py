@@ -1,12 +1,20 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField, \
                                     HyperlinkedModelSerializer
 
-from shop.models.taxonomies import Category
-from shop.models.customer import Customer
 from shop.models.brand import Brand
+from shop.models.customer import Customer
+from shop.models.log import ProductLog
 from shop.models.product import Product
 from shop.models.order import Order, OrderItem
+from shop.models.taxonomies import Category
 from users.models import CustomUser
+
+
+class ProductLogSerializer(ModelSerializer):
+
+    class Meta:
+        model = ProductLog
+        fields = '__all__'
 
 
 class BrandSerializer(ModelSerializer):

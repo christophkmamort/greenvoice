@@ -18,6 +18,7 @@ class ProductSlide {
       var currentProductSlide = $(this)
       var amount = currentProductSlide.data('amount')
       var sort = currentProductSlide.data('sort')
+      console.log(sort)
 
       currentProductSlide.append('<div class="feed-padding-left"></div>')
 

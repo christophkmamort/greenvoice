@@ -7,11 +7,11 @@ import  './../../../node_modules/bootstrap-slider/dist/bootstrap-slider.min.js';
 // Api
 import BrandList from './js/brandList';
 import CategoryList from './js/categoryList';
-import ProductSlide from './js/productSlide';
+import ProductList from './js/productList';
 
 var brandList = new BrandList();
 var categoryList = new CategoryList();
-var productSlide = new ProductSlide();
+var productList = new ProductList();
 
 
 // Functions

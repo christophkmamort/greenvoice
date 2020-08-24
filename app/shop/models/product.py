@@ -19,6 +19,7 @@ class Product(models.Model):
         (PAUSED, _('paused')),
         (RETIRED, _('retired')),
     )
+    value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 

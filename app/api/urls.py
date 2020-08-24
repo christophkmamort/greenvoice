@@ -10,6 +10,7 @@ router.register(r'category', views.CategoryViewSet, basename='category')
 router.register(r'order', views.OrderViewSet, basename='order')
 router.register(r'order-item', views.OrderItemViewSet, basename='orderitem')
 router.register(r'products', views.ProductViewSet, basename='product')
+router.register(r'product-log', views.ProductLogViewSet, basename='product-log')
 router.register(r'users', views.UserViewSet, basename='user')
 router.register(r'customer', views.CustomerViewSet, basename='customer')
 
