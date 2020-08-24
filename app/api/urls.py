@@ -6,6 +6,7 @@ from . import views
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'brand', views.BrandViewSet, basename='brand')
+router.register(r'category', views.CategoryViewSet, basename='category')
 router.register(r'order', views.OrderViewSet, basename='order')
 router.register(r'order-item', views.OrderItemViewSet, basename='orderitem')
 router.register(r'products', views.ProductViewSet, basename='product')

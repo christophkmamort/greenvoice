@@ -7,9 +7,10 @@ from rest_framework.reverse import reverse
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
 from .permissions import IsCustomerOrStaff
-from .serializers import BrandSerializer, OrderSerializer, \
+from .serializers import BrandSerializer, OrderSerializer, CategorySerializer, \
                         OrderItemSerializer, OrderItemDetailSerializer, \
                         ProductSerializer, UserSerializer, CustomerSerializer
+from shop.models.taxonomies import Category
 from shop.models.brand import Brand
 from shop.models.customer import Customer
 from shop.models.product import Product
@@ -20,11 +21,26 @@ from users.models import CustomUser
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
+        'category': reverse('category-list', request=request, format=format),
         'orders': reverse('order-list', request=request, format=format),
         'users': reverse('user-list', request=request, format=format),
         'customer': reverse('customer-list', request=request, format=format),
         'products': reverse('product-list', request=request, format=format)
     })
+
+
+class CategoryViewSet(ModelViewSet):
+    """
+    Manage `list`, `create`, `retrieve`, `update` and `destroy` brands.
+    """
+    queryset = Category.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['created',]
+    ordering = ['created']
+    serializer_class = CategorySerializer
+
+    def perform_create(self, serializer):
+        serializer.save(slug=self.request.data['name'].lower())
 
 
 class BrandViewSet(ModelViewSet):
@@ -45,12 +61,21 @@ class ProductViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` products.
     """
-    queryset = Product.objects.all()
     filter_backends = [OrderingFilter]
     ordering_fields = ['created',]
     ordering = ['created']
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        """
+        Filter products to have specific `brand`.
+        """
+        queryset = Product.objects.all()
+        brand = self.request.query_params.get('brand', None)
+        if brand is not None:
+            queryset = queryset.filter(brand=brand)
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save()

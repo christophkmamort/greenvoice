@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField, \
                                     HyperlinkedModelSerializer
 
+from shop.models.taxonomies import Category
 from shop.models.customer import Customer
 from shop.models.brand import Brand
 from shop.models.product import Product
@@ -15,13 +16,19 @@ class BrandSerializer(ModelSerializer):
         exclude = ['created',]
 
 
+class CategorySerializer(ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+
 class ProductSerializer(ModelSerializer):
     brand = BrandSerializer(read_only=True)
 
     class Meta:
         model = Product
-        fields = ('id', 'url', 'brand', 'name', 'price', 'image', 'status', 'created')
-        # fields = '__all__'
+        fields = '__all__'
 
 
 class UserSerializer(ModelSerializer):

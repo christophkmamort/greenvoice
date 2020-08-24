@@ -4,6 +4,17 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import  './../../../node_modules/bootstrap-slider/dist/bootstrap-slider.min.js';
 
 
+// Api
+import BrandList from './js/brandList';
+import CategoryList from './js/categoryList';
+import ProductSlide from './js/productSlide';
+
+var brandList = new BrandList();
+var categoryList = new CategoryList();
+var productSlide = new ProductSlide();
+
+
+// Functions
 import AcceptCookies from './js/acceptCookies';
 import Accordion from './js/accordion';
 import Cart from './js/cart';
@@ -12,9 +23,7 @@ import LoginUser from './js/loginUser';
 import ProductDetailMaterialsDoughnut from './js/productDetailMaterialsDoughnut';
 import ProductDetailNav from './js/productDetailNav';
 import ProductDetailTransparencyMapLocations from './js/productDetailTransparencyMapLocations';
-import ProductSlide from './js/productSlide';
 import RegisterUser from './js/registerUser';
-
 
 var acceptCookies = new AcceptCookies();
 var accordion = new Accordion();
@@ -24,7 +33,6 @@ var loginUser = new LoginUser();
 var productDetailMaterialsDoughnut = new ProductDetailMaterialsDoughnut();
 var productDetailNav = new ProductDetailNav();
 var productDetailTransparencyMapLocations = new ProductDetailTransparencyMapLocations();
-var productSlide = new ProductSlide();
 var registerUser = new RegisterUser();
 
 

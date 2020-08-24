@@ -17,6 +17,8 @@
       if (domain.includes('localhost')) { domain = 'http://localhost:8000' }
       var current_url = domain + '{{ request.path|urlencode }}'
       var login_url = domain + '{% url "shop:login" %}?next={{ request.path|urlencode }}'
+      var product_url = domain + '/shop/product/'
+      var shop_url = domain + '/shop'
 
       function getToken(name) {
 		    var cookieValue = null;

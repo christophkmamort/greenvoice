@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 class Brand(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('name'), blank=True)
+    logo = models.ImageField(upload_to='brands/', blank=True, verbose_name=_('logo'))
     DRAFT = 1
     PUBLISHED = 2
     PAUSED = 3
