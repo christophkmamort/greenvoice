@@ -33,22 +33,24 @@ class BrandList {
         for (var i in brands) {
           var brand = brands[i]
 
-          var html = `
-            <div class="feed-brand mr-4">
-              <a href="${ shop_url + '?brand=' + brand.id }" class="text-decoration-none">
-                <div class="d-flex justify-content-center align-items-center">
-                  <div class="mw-100">
-                    <img src="${ brand.logo }" class="img img-fluid img-thumbnail circle w-100 h-100" alt="">
-                    <div class="pt-2">
-                      <h6 class="m-0 p-0 text-center">${ brand.name }</h6>
-                      <p class="m-0 p-0 mt-2 text-info text-center text-smaller" style="line-height: 1.2em;">#Bekleidung #Schuhe</p>
+          if (brand.status == 2) {
+            var html = `
+              <div class="feed-brand mr-4">
+                <a href="${ shop_url + '?brand=' + brand.id }" class="text-decoration-none">
+                  <div class="d-flex justify-content-center align-items-center">
+                    <div class="mw-100">
+                      <img src="${ brand.logo }" class="img img-fluid img-thumbnail circle w-100 h-100" alt="">
+                      <div class="pt-2">
+                        <h6 class="m-0 p-0 text-center">${ brand.name }</h6>
+                        <p class="m-0 p-0 mt-2 text-info text-center text-smaller" style="line-height: 1.2em;">#Bekleidung #Schuhe</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
-            </div>
-            `
-          currentBrandList.append(html)
+                </a>
+              </div>
+              `
+            currentBrandList.append(html)
+          }
         }
       })
 
