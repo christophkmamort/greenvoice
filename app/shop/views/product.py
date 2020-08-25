@@ -33,7 +33,16 @@ class ProductView(TemplateView):
         brand.value = brandVal
         brand.save()
 
-        # Category log logic
+        for categoryName in product.category.all():
+            category = Category.objects.get(name=categoryName)
+            ValueLog.objects.create(category=category, action=1)
+            
+            categoryVal = 0
+            categoryLogs = ValueLog.objects.filter(category=category)
+            for log in categoryLogs:
+                categoryVal += log.get_value
+            category.value = categoryVal
+            category.save()
 
         context = {'product':product,} # 'products':products
         return render(request, self.template_name, context)

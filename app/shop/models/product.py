@@ -2,11 +2,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .brand import Brand
+from .taxonomies import Category
 
 
 class Product(models.Model):
     brand = models.ForeignKey(Brand, blank=True, on_delete=models.CASCADE, verbose_name=_('brand'))
     name = models.CharField(max_length=200, blank=True, verbose_name=_('name'))
+    category = models.ManyToManyField(Category, blank=True, verbose_name=_('category'))
     price = models.FloatField(blank=True, verbose_name=_('price'))
     image = models.ImageField(upload_to='products/', blank=True , verbose_name=_('image'))
     DRAFT = 1

@@ -33,13 +33,24 @@ class CategoryList {
         for (var i in categories) {
           var category = categories[i]
 
-          var html = `
-            <a href="#">
-              <button class="btn btn-sm btn-outline-dark mr-1 mb-2">
-                ${ category.name }
-              </button>
-            </a>
-            `
+          if (category.name == 'Sport') {
+            var html = `
+              <a href="#">
+                <button class="btn btn-sm btn-outline-dark mr-1 mb-2">
+                  <i>${ category.name }</i>
+                </button>
+              </a>
+              `
+          } else {
+            var html = `
+              <a href="#">
+                <button class="btn btn-sm btn-outline-dark mr-1 mb-2">
+                  ${ category.name }
+                </button>
+              </a>
+              `
+          }
+
           currentCategoryList.append(html)
         }
       })

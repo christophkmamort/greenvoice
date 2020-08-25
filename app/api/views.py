@@ -66,7 +66,7 @@ class ValueLogViewSet(ModelViewSet):
     queryset = ValueLog.objects.all()
     filter_backends = [OrderingFilter]
     ordering_fields = ['created',]
-    ordering = ['created']
+    ordering = ['-created']
     serializer_class = ValueLogSerializer
 
     def perform_create(self, serializer):
