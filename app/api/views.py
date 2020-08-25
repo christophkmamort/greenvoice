@@ -12,7 +12,7 @@ from shop.models.taxonomies import Category
 from shop.models.brand import Brand
 from shop.models.customer import Customer
 from shop.models.product import Product
-from shop.models.log import ProductLog
+from shop.models.log import ValueLog
 from shop.models.order import Order, OrderItem
 from users.models import CustomUser
 
@@ -25,7 +25,7 @@ def api_root(request, format=None):
         'users': reverse('user-list', request=request, format=format),
         'customer': reverse('customer-list', request=request, format=format),
         'products': reverse('product-list', request=request, format=format),
-        'product-log': reverse('product-log-list', request=request, format=format),
+        'value-log': reverse('value-log-list', request=request, format=format),
     })
 
 
@@ -35,9 +35,10 @@ class BrandViewSet(ModelViewSet):
     """
     queryset = Brand.objects.all()
     filter_backends = [OrderingFilter]
-    ordering_fields = ['created',]
-    ordering = ['created']
+    ordering_fields = ['created', 'value',]
+    ordering = ['-value']
     serializer_class = BrandSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save()
@@ -49,27 +50,27 @@ class CategoryViewSet(ModelViewSet):
     """
     queryset = Category.objects.all()
     filter_backends = [OrderingFilter]
-    ordering_fields = ['created',]
-    ordering = ['created']
+    ordering_fields = ['created', 'value',]
+    ordering = ['-value']
     serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(slug=self.request.data['name'].lower())
 
 
-class ProductLogViewSet(ModelViewSet):
+class ValueLogViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` product log.
     """
-    queryset = ProductLog.objects.all()
+    queryset = ValueLog.objects.all()
     filter_backends = [OrderingFilter]
     ordering_fields = ['created',]
     ordering = ['created']
-    serializer_class = ProductLogSerializer
+    serializer_class = ValueLogSerializer
 
     def perform_create(self, serializer):
         serializer.save()
-
 
 
 class ProductViewSet(ModelViewSet):
@@ -102,7 +103,7 @@ class UserViewSet(ReadOnlyModelViewSet):
     """
     serializer_class = UserSerializer
     queryset = CustomUser.objects.all()
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
 
 class CustomerViewSet(ModelViewSet):

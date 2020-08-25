@@ -6,6 +6,7 @@ class Category(models.Model):
     name = models.CharField(max_length=200, null=True, verbose_name=_('name'))
     slug = models.SlugField(unique=True, null=True, verbose_name=_('slug'))
     parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, related_name='children', verbose_name=_('parent'))
+    value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
     class Meta:

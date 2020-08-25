@@ -3,11 +3,15 @@ import datetime
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from .brand import Brand
 from .product import Product
+from .taxonomies import Category
 
 
-class ProductLog(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, verbose_name=_('product'))
+class ValueLog(models.Model):
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('brand'))
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('product'))
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('category'))
     CLICK = 1
     WISHLIST = 2
     CART = 3
