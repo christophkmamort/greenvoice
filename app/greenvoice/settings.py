@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
     # 3rd party
     'rest_framework',
-    'nested_inline',
 
     # Custom
     'users',

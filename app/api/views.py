@@ -1,3 +1,5 @@
+from url_filter.integrations.drf import DjangoFilterBackend
+
 from rest_framework.decorators import action, api_view
 from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, \
@@ -39,6 +41,18 @@ class BrandViewSet(ModelViewSet):
     ordering = ['-value']
     serializer_class = BrandSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    # def get_queryset(self):
+    """
+    Filter brands to have specific `products`.
+    """
+    # queryset = Brand.objects.all()
+
+    """product = self.request.query_params.get('product', None)
+    if product is not None:
+        queryset = queryset.filter(product=product).distinct()"""
+
+    # return queryset
 
     def perform_create(self, serializer):
         serializer.save()
@@ -83,29 +97,39 @@ class ProductViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` products.
     """
-    filter_backends = [OrderingFilter]
-    ordering_fields = ['created', 'value',]
+    queryset = Product.objects.all()
+    filter_backends = [OrderingFilter, DjangoFilterBackend]
+    filter_fields = ['brand', 'category', 'price']
+    ordering_fields = ['created', 'price', 'value']
     ordering = ['-value']
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def get_queryset(self):
-        """
-        Filter products to have specific `brand`.
-        """
-        queryset = Product.objects.all()
+    #def get_queryset(self):
+    """
+    Filter products to have specific `brand`.
+    """
+    """queryset = Product.objects.all()
 
-        brand = self.request.query_params.get('brand', None)
-        if brand is not None:
-            queryset = queryset.filter(brand=brand)
+    brands = self.request.query_params.get('brands', None)
+    if brands is not None:
+        queryset = queryset.filter(brand__in=brands)
 
-        category_name = self.request.query_params.get('category', None)
-        if category_name:
-            category = Category.objects.get(name=category_name)
-            if category is not None:
-                queryset = queryset.filter(category=category)
+    category_name = self.request.query_params.get('category', None)
+    if category_name:
+        category = Category.objects.get(name=category_name)
+        if category is not None:
+            queryset = queryset.filter(category=category)
 
-        return queryset
+    price_max = self.request.query_params.get('price_max', None)
+    if price_max is not None:
+        queryset = queryset.filter(price__lte=price_max)
+
+    price_min = self.request.query_params.get('price_min', None)
+    if price_min is not None:
+        queryset = queryset.filter(price__gte=price_min)
+
+    return queryset"""
 
     def perform_create(self, serializer):
         serializer.save()

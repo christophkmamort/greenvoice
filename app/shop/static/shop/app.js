@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import './../../../node_modules/popper.js/dist/popper.min.js';
 import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
-import  './../../../node_modules/bootstrap-slider/dist/bootstrap-slider.min.js';
 
 
 // Api
@@ -34,19 +33,6 @@ var productDetailMaterialsDoughnut = new ProductDetailMaterialsDoughnut();
 var productDetailNav = new ProductDetailNav();
 var productDetailTransparencyMapLocations = new ProductDetailTransparencyMapLocations();
 var registerUser = new RegisterUser();
-
-
-/*import Test from './js/test';
-var test = new Test();*/
-
-
-
-$("#filterPriceSlider").slider({});
-$("#filterPriceSlider").on("slide", function(slideEvt) {
-	$("#filterPriceMin").text(slideEvt.value[0]);
-  $("#filterPriceMax").text(slideEvt.value[1]);
-});
-
 
 
 // Scss
