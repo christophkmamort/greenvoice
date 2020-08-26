@@ -48,12 +48,18 @@ class CategoryViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` brands.
     """
-    queryset = Category.objects.all()
     filter_backends = [OrderingFilter]
     ordering_fields = ['created', 'value',]
     ordering = ['-value']
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        """
+        Only display categories that are assosiated with a `product`.
+        """
+        queryset = Category.objects.filter(product__isnull=False).distinct()
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save(slug=self.request.data['name'].lower())
@@ -88,9 +94,17 @@ class ProductViewSet(ModelViewSet):
         Filter products to have specific `brand`.
         """
         queryset = Product.objects.all()
+
         brand = self.request.query_params.get('brand', None)
         if brand is not None:
             queryset = queryset.filter(brand=brand)
+
+        category_name = self.request.query_params.get('category', None)
+        if category_name:
+            category = Category.objects.get(name=category_name)
+            if category is not None:
+                queryset = queryset.filter(category=category)
+
         return queryset
 
     def perform_create(self, serializer):

@@ -15,10 +15,11 @@
 
       var domain = window.location.protocol + '//' + window.location.hostname
       if (domain.includes('localhost')) { domain = 'http://localhost:8000' }
-      var current_url = domain + '{{ request.path|urlencode }}'
+      var current_url = domain + '{{ request.get_full_path|urlencode }}' // request.path
       var login_url = domain + '{% url "shop:login" %}?next={{ request.path|urlencode }}'
       var product_url = domain + '/shop/product/'
       var shop_url = domain + '/shop'
+      var url_params = new URLSearchParams(window.location.search);
 
       function getToken(name) {
 		    var cookieValue = null;

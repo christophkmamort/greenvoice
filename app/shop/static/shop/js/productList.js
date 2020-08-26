@@ -1,33 +1,59 @@
 import $ from 'jquery';
 
-class ProductSlide {
+class ProductList {
   constructor() {
-    this.productSlide = $('.productSlide')
+    this.productList = $('.productList')
 
-    if (this.productSlide.length > 0) {
+    if (this.productList.length > 0) {
       this.product_api = domain + '/api/products/'
+      this.productAmount = $('.productAmount')
 
-      this.populateProductSlide()
+      this.populateProductList()
     }
   }
 
-  populateProductSlide() {
-    var that = this;
+  populateProductList() {
+    var that = this
+    var i_tag = ''
+    var i_tag_close = ''
 
-    that.productSlide.each(function() {
-      var currentProductSlide = $(this)
-      var amount = currentProductSlide.data('amount')
-      var sort = currentProductSlide.data('sort')
+    if (current_url.includes('Sport')) {
+      var i_tag = '<i>'
+      var i_tag_close = '</i>'
+    }
 
-      currentProductSlide.append('<div class="feed-padding-left"></div>')
+    that.productList.each(function() {
+      var currentProductList = $(this)
+      var amount = currentProductList.data('amount')
+      var sort = currentProductList.data('sort')
+      var style = currentProductList.data('style')
 
-      fetch(that.product_api + '?ordering=' + sort)
+      if (style == 'slide') {
+        var product_wrapper_class = 'feed-product feed-product-slide'
+
+        // currentProductList.append('<div class="feed-padding-left"></div>')
+      } else {
+        var product_wrapper_class = 'feed-product mb-4'
+      }
+
+      var filter = ''
+      if (url_params.get('category')) {
+        filter = '&category=' + url_params.get('category')
+      }
+
+      fetch(that.product_api + '?ordering=' + sort + filter)
       .then((resp) => resp.json())
       .then(function(data) {
-        if (amount.length > 0) {
+        if (amount && amount.length > 0) {
           var products = data.slice(0,amount)
         } else {
           var products = data
+        }
+
+        if (products.length == 1) {
+          that.productAmount.html(products.length + ' Produkt')
+        } else {
+          that.productAmount.html(products.length + ' Produkte')
         }
 
         for (var i in products) {
@@ -60,7 +86,7 @@ class ProductSlide {
             }
 
             var html = `
-              <div class="feed-product feed-product-slide">
+              <div class="${ product_wrapper_class }">
                 <div class="overflow-hidden position-relative feed-product-img">
                   <a href="${ product_url + product.id }">
                     <div class="position-absolute" style="left: 0; top: 0; right: 0; bottom: 0;">
@@ -74,20 +100,22 @@ class ProductSlide {
                 </div>
                 <a href="${ product_url + product.id }" class="text-decoration-none">
                   <div class="pt-2 pr-2 pl-2">
-                    <p class="m-0 p-0 mt-1">${ product.name }</p>
+                    <p class="m-0 p-0 mt-1">${ i_tag + product.name + i_tag_close }</p>
                     <h6 class="m-0 p-0 mt-1 text-small"><span class="text-dark text-strong">€ ${ product.price }</span></h6>
                   </div>
                 </a>
               </div>
               `
-            currentProductSlide.append(html)
+            currentProductList.append(html)
           }
         }
       })
 
-      currentProductSlide.append('<div class="feed-padding-right"></div>')
+      if (style == 'slide') {
+        currentProductList.append('<div class="feed-padding-right"></div>')
+      }
     })
   }
 }
 
-export default ProductSlide;
+export default ProductList;

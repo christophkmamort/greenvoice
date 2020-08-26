@@ -58,14 +58,6 @@ class ShootingAgreementsView(TemplateView):
         return render(request, self.template_name, context)
 
 
-class ShopView(TemplateView):
-    template_name = 'shop/shop.html'
-
-    def get(self, request):
-        context = {}
-        return render(request, self.template_name, context)
-
-
 class TermsOfSaleView(TemplateView):
     template_name = 'shop/terms-of-sale.html'
 

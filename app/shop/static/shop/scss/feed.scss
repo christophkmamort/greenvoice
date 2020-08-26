@@ -20,7 +20,7 @@
       }
     }
     &-right {
-      // padding-right: 15px;
+      padding-right: 15px;
 
       @include media-breakpoint-only(sm) {
         padding-right: calc(50vw - 255px);
