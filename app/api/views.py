@@ -77,6 +77,11 @@ class ValueLogViewSet(ModelViewSet):
         serializer.save()
 
 
+"""class DynamicSearchFilter(SearchFilter):
+    def get_search_fields(self, view, request):
+        return request.GET.getlist('search') # .GET.getlist('search_fields', [])"""
+
+
 class ProductViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` products.
@@ -86,12 +91,25 @@ class ProductViewSet(ModelViewSet):
     filter_fields = ['brand', 'category', 'price']
     ordering_fields = ['created', 'price', 'value']
     ordering = ['-value']
-    search_fields = ['brand__name', 'category__name', 'name']
+    search_fields = ['brand__name', 'query', 'name',]
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save()
+        categories = self.request.data.getlist('category')
+        query = ''
+        for id in categories:
+            category = Category.objects.get(id=id)
+            query += category.name + ' '
+        serializer.save(query=query)
+
+    def perform_update(self, serializer):
+        categories = self.request.data.getlist('category')
+        query = ''
+        for id in categories:
+            category = Category.objects.get(id=id)
+            query += category.name + ' '
+        serializer.save(query=query)
 
 
 class UserViewSet(ReadOnlyModelViewSet):
