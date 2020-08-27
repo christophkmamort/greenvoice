@@ -18,7 +18,8 @@
 
 
       <div> <!-- Search. -->
-        <button class="btn m-0 p-0 mr-3">
+        {% include 'shop/templates/modals/product-search.html' %}
+        <button class="btn m-0 p-0 mr-3 modalTrigger" data-action="open" data-modal="#productSearchModal">
           {% include 'shop/templates/svg/search.svg' with class='text-white' height='1.8em' style='' only %}
         </button>
       </div>

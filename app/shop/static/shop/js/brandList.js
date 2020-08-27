@@ -17,11 +17,12 @@ class BrandList {
     that.brandList.each(function() {
       var currentBrandList = $(this)
       var amount = currentBrandList.data('amount')
-      var sort = currentBrandList.data('sort')
+      var ordering = currentBrandList.data('ordering')
+      if (!ordering) {
+        ordering = '-value'
+      }
 
-      currentBrandList.append('<div class="feed-padding-left"></div>')
-
-      fetch(that.brand_api + '?ordering=' + sort)
+      fetch(that.brand_api + '?ordering=' + ordering)
       .then((resp) => resp.json())
       .then(function(data) {
         if (amount.length > 0) {
@@ -36,7 +37,7 @@ class BrandList {
           if (brand.status == 2) {
             var html = `
               <div class="feed-brand mr-4">
-                <a href="${ shop_url + '?brand=' + brand.id }" class="text-decoration-none">
+                <a href="${ shop_url + '?brand__name__in=' + brand.name }" class="text-decoration-none">
                   <div class="d-flex justify-content-center align-items-center">
                     <div class="mw-100">
                       <img src="${ brand.logo }" class="img img-fluid img-thumbnail circle w-100 h-100" alt="">

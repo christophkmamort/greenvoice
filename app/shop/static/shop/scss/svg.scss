@@ -3,4 +3,16 @@
   &-white {
     stroke: $white;
   }
+
+  &-dark {
+    stroke: $dark;
+  }
+
+  &-info {
+    stroke: $info;
+  }
+
+  &-primary {
+    stroke: $primary;
+  }
 }

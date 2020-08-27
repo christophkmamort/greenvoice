@@ -20,10 +20,11 @@ class ProductList {
         this.filterPriceErrorMsg = $('.filterPriceErrorMsg')
         this.filterPriceMin = $('input[name="filterPriceMin"]')
         this.filterPriceMax = $('input[name="filterPriceMax"]')
+
+        this.events()
       }
 
       this.populateProductList()
-      this.events()
     }
   }
 
@@ -63,7 +64,7 @@ class ProductList {
       ordering = that.productFilter.find('input[name="ordering"]:checked').val()
     }
     if (that.productFilter.find('input[name="filterBrand"]:checked').val()) {
-      filter += '&brand__name='
+      filter += '&brand__name__in='
       that.productFilter.find('input[name="filterBrand"]:checked').each(function(i) {
         if (i > 0) {
           filter += ','
@@ -123,19 +124,35 @@ class ProductList {
         var checked = ''
 
         if (filter.includes(brand.name)) {
-          checked = 'checked'
+          var html = `
+            <label class="checkbox">
+              <input type="checkbox" name="filterBrand" value="${ brand.name }" checked>
+              <div class="checkbox-box checkbox-box-dark">
+                <svg class="bi text-white checkbox-icon" height="0.7em" viewBox="0 0 15 11.942" xmlns="http://www.w3.org/2000/svg"><path d="M16.725,5.158a1.377,1.377,0,1,1,1.966,1.928l-7.329,9.161a1.377,1.377,0,0,1-1.983.037L4.524,11.426A1.377,1.377,0,1,1,6.47,9.48l3.844,3.843L16.69,5.2a.433.433,0,0,1,.037-.04Z" transform="translate(-4.085 -4.745)" fill="currentColor" fill-rule="evenodd"/></svg>
+              </div>
+              <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">${ brand.name }</h6>
+            </label>
+          `
+          that.filterBrands.append(html)
         }
+      }
 
-        var html = `
-          <label class="checkbox">
-            <input type="checkbox" name="filterBrand" value="${ brand.name }" ${ checked }>
-            <div class="checkbox-box checkbox-box-dark">
-              <svg class="bi text-white checkbox-icon" height="0.7em" viewBox="0 0 15 11.942" xmlns="http://www.w3.org/2000/svg"><path d="M16.725,5.158a1.377,1.377,0,1,1,1.966,1.928l-7.329,9.161a1.377,1.377,0,0,1-1.983.037L4.524,11.426A1.377,1.377,0,1,1,6.47,9.48l3.844,3.843L16.69,5.2a.433.433,0,0,1,.037-.04Z" transform="translate(-4.085 -4.745)" fill="currentColor" fill-rule="evenodd"/></svg>
-            </div>
-            <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">${ brand.name }</h6>
-          </label>
-        `
-        that.filterBrands.append(html)
+      for (var i in brands) {
+        var brand = brands[i]
+        var checked = ''
+
+        if (!filter.includes(brand.name)) {
+          var html = `
+            <label class="checkbox">
+              <input type="checkbox" name="filterBrand" value="${ brand.name }">
+              <div class="checkbox-box checkbox-box-dark">
+                <svg class="bi text-white checkbox-icon" height="0.7em" viewBox="0 0 15 11.942" xmlns="http://www.w3.org/2000/svg"><path d="M16.725,5.158a1.377,1.377,0,1,1,1.966,1.928l-7.329,9.161a1.377,1.377,0,0,1-1.983.037L4.524,11.426A1.377,1.377,0,1,1,6.47,9.48l3.844,3.843L16.69,5.2a.433.433,0,0,1,.037-.04Z" transform="translate(-4.085 -4.745)" fill="currentColor" fill-rule="evenodd"/></svg>
+              </div>
+              <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">${ brand.name }</h6>
+            </label>
+          `
+          that.filterBrands.append(html)
+        }
       }
     })
 
@@ -181,8 +198,8 @@ class ProductList {
       if (url_params.get('category__name')) {
         filter += '&category__name=' + url_params.get('category__name')
       }
-      if (url_params.get('brand__name')) {
-        filter += '&brand__name=' + url_params.get('brand__name')
+      if (url_params.get('brand__name__in')) {
+        filter += '&brand__name__in=' + url_params.get('brand__name__in')
         active_filters += 1
       }
       if (url_params.get('price__lte')) {
@@ -203,7 +220,9 @@ class ProductList {
           var products = data
         }
 
-        that.populateProductFilter(active_filters, filter, ordering, products)
+        if (that.productFilter.length > 0) {
+          that.populateProductFilter(active_filters, filter, ordering, products)
+        }
 
         if (products.length == 1) {
           that.productAmount.html(products.length + ' Produkt')
@@ -270,6 +289,28 @@ class ProductList {
             currentProductList.append(html)
           }
         }
+
+        if (products.length == 0) {
+          html = `
+            <div class="d-flex justify-content-center align-items-center">
+              <div>
+                <div class="d-flex justify-content-center">
+                  <svg class="text-primary stroke-dark" height="3em" viewBox="0 0 52.003 45.758" xmlns="http://www.w3.org/2000/svg"><g transform="translate(116.001 -3595.995)"><path d="M42.369,35.751l-.215-.224A11.692,11.692,0,0,0,26.98,34.2l3.069,9.251L21.46,49.181l4.295,11.452L12.87,47.75l8.589-5.726L18.9,34.284A11.681,11.681,0,0,0,3.628,35.537l-.215.215a12.3,12.3,0,0,0-.653,16.3L21.737,71.612a1.594,1.594,0,0,0,2.3,0L43.023,52.044a12.285,12.285,0,0,0-.653-16.293Z" transform="translate(-111.798 3568.652)" fill="currentColor"/><path data-name="heart-broken-solid" d="M46.244,36.093l-.234-.244A12.761,12.761,0,0,0,29.448,34.4L32.8,44.5l-9.374,6.25,4.687,12.5L14.048,49.188l9.374-6.25L20.63,34.492A12.749,12.749,0,0,0,3.961,35.859l-.234.234a13.42,13.42,0,0,0-.713,17.792L23.725,75.231a1.74,1.74,0,0,0,2.51,0L46.957,53.875a13.408,13.408,0,0,0-.713-17.782Z" transform="translate(-114.985 3564.988)" fill="none" stroke-width="2"/></g></svg>
+                </div>
+
+                <div class="seperator mt-3"></div>
+
+                <h5 class="text-center text-regular px-2">${ i_tag }*Für deinen akutellen Filter konnten leider keine Produkt gefunden werden.${ i_tag_close }</h5>
+
+                <div class="seperator mt-4"></div>
+              </div>
+              <div class="feed-padding-right"></div>
+            </div>
+          `
+
+          currentProductList.append(html)
+        }
+
       })
 
       if (style == 'slide') {

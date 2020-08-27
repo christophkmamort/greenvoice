@@ -13,6 +13,12 @@ var categoryList = new CategoryList();
 var productList = new ProductList();
 
 
+// Functions checked
+import Modal from './js/modal';
+
+var modal = new Modal();
+
+
 // Functions
 import AcceptCookies from './js/acceptCookies';
 import Accordion from './js/accordion';

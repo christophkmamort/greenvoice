@@ -3,9 +3,9 @@ import $ from 'jquery';
 class CategoryList {
   constructor() {
     this.categoryList = $('.categoryList')
-    this.currentCategory = $('.currentCategory')
+    this.currentCategoryHeader = $('.currentCategoryHeader')
 
-    if (this.categoryList.length > 0 && url_params.get('category')) {
+    if (this.categoryList.length > 0 && url_params.get('category__name')) {
       this.populateCurrentCategory()
     }
 
@@ -19,11 +19,11 @@ class CategoryList {
   populateCurrentCategory() {
     var that = this
 
-    that.currentCategory.each(function() {
-      if (url_params.get('category') == 'Sport') {
-        $(this).html('<i class="text-strong-italic">Nachhaltige ' + url_params.get('category') + 'artikel</i>')
+    that.currentCategoryHeader.each(function() {
+      if (url_params.get('category__name') == 'Sport') {
+        $(this).html('<i class="text-strong-italic">Nachhaltige ' + url_params.get('category__name') + 'artikel</i>')
       } else {
-        $(this).html('Nachhaltige ' + url_params.get('category'))
+        $(this).html('Nachhaltige ' + url_params.get('category__name'))
       }
     })
   }
@@ -47,11 +47,8 @@ class CategoryList {
         }
 
         var filter = ''
-        if (url_params.get('category__name')) {
-          filter += '&category__name=' + url_params.get('category__name')
-        }
-        if (url_params.get('brand__name')) {
-          filter += '&brand__name=' + url_params.get('brand__name')
+        if (url_params.get('brand__name__in')) {
+          filter += '&brand__name__in=' + url_params.get('brand__name__in')
         }
         if (url_params.get('price__gte')) {
           filter += '&price__gte=' + url_params.get('price__gte')
@@ -65,38 +62,38 @@ class CategoryList {
           var i_tag = ''
           var i_tag_close = ''
 
-          if (style == 'mobile-menu') {
-            var html = `
-              <li class="border-bottom border-primary p-2"> 
-                <a href="${ shop_url + '?category=' + category.name + filter }">
-                  <button class="btn m-0 p-0 w-100">
-                    <div class="d-flex align-items-center">
-                      <h5 class="text-white m-0 mr-auto text-regular">${ i_tag + category.name + i_tag_close }</h5>
-                      <svg class="bi bi-chevron-right text-white" height="0.8em" viewBox="0 0 21.181 35.992" xmlns="http://www.w3.org/2000/svg"><path d="M5.233,8.233a2.5,2.5,0,0,1,3.538,0L22,21.462,35.22,8.233a2.5,2.5,0,0,1,3.538,3.538L23.765,26.765a2.5,2.5,0,0,1-3.538,0L5.233,11.772a2.5,2.5,0,0,1,0-3.538Z" transform="translate(-6.818 39.991) rotate(-90)" fill="currentColor" stroke="{{ border }}" stroke-width="1" fill-rule="evenodd"/></svg>
-                    </div>
-                  </button>
-                </a>
-              </li>
-              `
-          } else {
-            if (style == 'nav') {
-              if (current_url.includes(category.name)) {
+          if (current_url.includes(category.name)) {
+            if (style == 'mobile-menu') {
+              var html = `
+                <li class="border-bottom border-primary p-2">
+                  <a href="${ shop_url + '?category__name=' + category.name + filter }">
+                    <button class="btn m-0 p-0 w-100">
+                      <div class="d-flex align-items-center">
+                        <h5 class="text-primary m-0 mr-auto text-regular">${ i_tag + category.name + i_tag_close }</h5>
+                        <svg class="bi bi-chevron-right text-primary" height="0.8em" viewBox="0 0 21.181 35.992" xmlns="http://www.w3.org/2000/svg"><path d="M5.233,8.233a2.5,2.5,0,0,1,3.538,0L22,21.462,35.22,8.233a2.5,2.5,0,0,1,3.538,3.538L23.765,26.765a2.5,2.5,0,0,1-3.538,0L5.233,11.772a2.5,2.5,0,0,1,0-3.538Z" transform="translate(-6.818 39.991) rotate(-90)" fill="currentColor" stroke="{{ border }}" stroke-width="1" fill-rule="evenodd"/></svg>
+                      </div>
+                    </button>
+                  </a>
+                </li>
+                `
+            } else {
+              if (style == 'nav') {
                 if (category.name == 'Sport') {
                   i_tag = '<i>'
                   i_tag_close = '</i>'
                 }
 
                 var html = `
-                  <a href="${ shop_url + '?category=' + category.name + filter }">
+                  <a href="${ shop_url + '?category__name=' + category.name + filter }">
                     <button class="btn btn-lg btn-primary ml-2">
                       ${ i_tag + category.name + i_tag_close }
                     </button>
                   </a>
                   `
-
-                currentCategoryList.append(html)
               }
             }
+
+            currentCategoryList.append(html)
           }
         }
 
@@ -114,7 +111,7 @@ class CategoryList {
             if (style == 'mobile-menu') {
               var html = `
                 <li class="border-bottom border-info p-2">
-                  <a href="${ shop_url + '?category=' + category.name + filter }">
+                  <a href="${ shop_url + '?category__name=' + category.name + filter }">
                     <button class="btn m-0 p-0 w-100">
                       <div class="d-flex align-items-center">
                         <h5 class="text-white m-0 mr-auto text-regular">${ i_tag + category.name + i_tag_close }</h5>
@@ -132,7 +129,7 @@ class CategoryList {
               }
 
               var html = `
-                <a href="${ shop_url + '?category=' + category.name + filter }">
+                <a href="${ shop_url + '?category__name=' + category.name + filter }">
                   <button class="${ btn_class }">
                     ${ i_tag + category.name + i_tag_close }
                   </button>

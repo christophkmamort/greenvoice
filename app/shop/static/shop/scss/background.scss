@@ -1,11 +1,19 @@
 .bg {
   &-white {
+    &-75 {
+      background-color: rgba($white,0.75);
+    }
+
     &-50 {
       background-color: rgba($white,0.5);
     }
   }
 
   &-dark {
+    &-50 {
+      background-color: rgba($dark,0.5);
+    }
+
     &-25 {
       background-color: rgba($dark,0.25);
     }
