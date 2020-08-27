@@ -32,7 +32,7 @@ class CategorySerializer(ModelSerializer):
 
 
 class ProductSerializer(ModelSerializer):
-    brand = BrandSerializer(read_only=True)
+    # brand = BrandSerializer()
 
     class Meta:
         model = Product

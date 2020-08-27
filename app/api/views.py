@@ -88,10 +88,10 @@ class ProductViewSet(ModelViewSet):
     """
     queryset = Product.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
-    filter_fields = ['brand', 'category', 'price']
+    filter_fields = ['brand', 'category', 'gender', 'price']
     ordering_fields = ['created', 'price', 'value']
     ordering = ['-value']
-    search_fields = ['brand__name', 'query', 'name',]
+    search_fields = ['brand__name', 'name', 'query']
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -101,6 +101,13 @@ class ProductViewSet(ModelViewSet):
         for id in categories:
             category = Category.objects.get(id=id)
             query += category.name + ' '
+        gender = self.request.data.get('gender')
+        if gender == '1':
+            query += 'Unisex Frauen Damen Herren Männer '
+        if gender == '2':
+            query += 'Frauen Damen '
+        if gender == '3':
+            query += 'Herren Männer '
         serializer.save(query=query)
 
     def perform_update(self, serializer):
@@ -109,6 +116,14 @@ class ProductViewSet(ModelViewSet):
         for id in categories:
             category = Category.objects.get(id=id)
             query += category.name + ' '
+        gender = self.request.data.get('gender')
+        if gender == '1':
+            query += 'Unisex Frauen Damen Herren Männer '
+        if gender == '2':
+            query += 'Frauen Damen '
+        if gender == '3':
+            query += 'Herren Männer '
+        print(query)
         serializer.save(query=query)
 
 

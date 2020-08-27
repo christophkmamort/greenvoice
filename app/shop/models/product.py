@@ -8,6 +8,15 @@ from .taxonomies import Category
 class Product(models.Model):
     brand = models.ForeignKey(Brand, blank=True, on_delete=models.CASCADE, verbose_name=_('brand'))
     name = models.CharField(max_length=200, blank=True, verbose_name=_('name'))
+    UNISEX = 1
+    WOMEN = 2
+    MEN = 3
+    GENDER_CHOICES = (
+        (UNISEX, _('unisex')),
+        (WOMEN, _('women')),
+        (MEN, _('men')),
+    )
+    gender = models.PositiveSmallIntegerField(choices=GENDER_CHOICES, default=UNISEX, verbose_name=_('gender'))
     category = models.ManyToManyField(Category, blank=True, verbose_name=_('category'))
     query = models.CharField(max_length=200, blank=True, verbose_name=_('queryset'))
     price = models.FloatField(blank=True, verbose_name=_('price'))
@@ -22,8 +31,8 @@ class Product(models.Model):
         (PAUSED, _('paused')),
         (RETIRED, _('retired')),
     )
-    value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
+    value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
     class Meta:

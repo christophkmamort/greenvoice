@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 class CategoryList {
   constructor() {
@@ -43,10 +44,22 @@ class CategoryList {
     that.categoryList.each(function() {
       var currentCategoryList = $(this)
       var amount = currentCategoryList.data('amount')
-      var sort = currentCategoryList.data('sort')
+      var ordering = currentCategoryList.data('ordering')
       var style = currentCategoryList.data('style')
+      if (!ordering) {
+        ordering = '-value'
+      }
 
-      fetch(that.category_api + '?ordering=' + sort + '&product__isnull=False')
+      var gender = ''
+      if (Cookies.get('filter_gender') == 'unisex') {
+        gender += '&gender__in=1'
+      } else if (Cookies.get('filter_gender') == 'women') {
+        gender += '&gender__in=1,2'
+      } else if (Cookies.get('filter_gender') == 'men') {
+        gender += '&gender__in=1,3'
+      }
+
+      fetch(that.category_api + '?ordering=' + ordering + gender + '&product__isnull=False')
       .then((resp) => resp.json())
       .then(function(data) {
         if (amount && amount.length > 0) {
@@ -71,7 +84,7 @@ class CategoryList {
           var i_tag = ''
           var i_tag_close = ''
 
-          if (current_url.includes(category.name)) {
+          if (current_url.includes(category.name) && !url_params.get('search')) {
             if (style == 'mobile-menu') {
               var html = `
                 <li class="border-bottom border-primary p-2">
@@ -114,7 +127,7 @@ class CategoryList {
           var i_tag = ''
           var i_tag_close = ''
 
-          if (!current_url.includes(category.name)) {
+          if (!current_url.includes(category.name) || url_params.get('search')) {
             if (category.name == 'Sport') {
               i_tag = '<i>'
               i_tag_close = '</i>'

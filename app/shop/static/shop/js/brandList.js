@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 class BrandList {
   constructor() {
@@ -22,7 +23,16 @@ class BrandList {
         ordering = '-value'
       }
 
-      fetch(that.brand_api + '?ordering=' + ordering)
+      var gender = ''
+      if (Cookies.get('filter_gender') == 'unisex') {
+        gender += '&gender__in=1'
+      } else if (Cookies.get('filter_gender') == 'women') {
+        gender += '&gender__in=1,2'
+      } else if (Cookies.get('filter_gender') == 'men') {
+        gender += '&gender__in=1,3'
+      }
+
+      fetch(that.brand_api + '?ordering=' + ordering + gender + '&status=2&product__isnull=False')
       .then((resp) => resp.json())
       .then(function(data) {
         if (amount.length > 0) {

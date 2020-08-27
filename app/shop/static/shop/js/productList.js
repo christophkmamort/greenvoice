@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Cookies from 'js-cookie';
 
 class ProductList {
   constructor() {
@@ -119,7 +120,16 @@ class ProductList {
       that.openFilter.addClass('btn-outline-dark')
     }
 
-    fetch(that.brand_api + '?status=2&product__isnull=False')
+    var gender = ''
+    if (Cookies.get('filter_gender') == 'unisex') {
+      gender += '&gender__in=1'
+    } else if (Cookies.get('filter_gender') == 'women') {
+      gender += '&gender__in=1,2'
+    } else if (Cookies.get('filter_gender') == 'men') {
+      gender += '&gender__in=1,3'
+    }
+
+    fetch(that.brand_api + '?status=2&product__isnull=False' + gender)
     .then((resp) => resp.json())
     .then(function(data) {
       var brands = data
@@ -216,12 +226,23 @@ class ProductList {
         active_filters += 1
       }
 
+      var gender = ''
+      if (Cookies.get('filter_gender') == 'unisex') {
+        gender += '&gender__in=1'
+      } else if (Cookies.get('filter_gender') == 'women') {
+        gender += '&gender__in=1,2'
+      } else if (Cookies.get('filter_gender') == 'men') {
+        gender += '&gender__in=1,3'
+      }
+
       var search = ''
       if (url_params.get('search')) {
         search += '&search=' + url_params.get('search')
       }
 
-      fetch(that.product_api + '?ordering=' + ordering + filter + search + '&status=2&brand__status=2')
+      console.log(that.product_api + '?ordering=' + ordering + filter + gender + search + '&status=2&brand__status=2')
+
+      fetch(that.product_api + '?ordering=' + ordering + filter + gender + search + '&status=2&brand__status=2')
       .then((resp) => resp.json())
       .then(function(data) {
         if (amount && amount.length > 0) {
