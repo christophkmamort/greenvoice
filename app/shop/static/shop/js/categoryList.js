@@ -5,7 +5,7 @@ class CategoryList {
     this.categoryList = $('.categoryList')
     this.currentCategoryHeader = $('.currentCategoryHeader')
 
-    if (this.categoryList.length > 0 && url_params.get('category__name')) {
+    if (this.categoryList.length > 0 && url_params.get('category__name') || url_params.get('search')) {
       this.populateCurrentCategory()
     }
 
@@ -20,10 +20,19 @@ class CategoryList {
     var that = this
 
     that.currentCategoryHeader.each(function() {
-      if (url_params.get('category__name') == 'Sport') {
-        $(this).html('<i class="text-strong-italic">Nachhaltige ' + url_params.get('category__name') + 'artikel</i>')
+      if (url_params.get('search')) {
+        if (url_params.get('search').includes('sport')) {
+          $(this).html('<i class="text-strong-italic">Suchergebnisse für "' + url_params.get('search') + '"</i>')
+        } else {
+          $(this).html('Suchergebnisse für "' + url_params.get('search') + '"')
+        }
+
       } else {
-        $(this).html('Nachhaltige ' + url_params.get('category__name'))
+        if (url_params.get('category__name') == 'Sport') {
+          $(this).html('<i class="text-strong-italic">Nachhaltige ' + url_params.get('category__name') + 'artikel</i>')
+        } else {
+          $(this).html('Nachhaltige ' + url_params.get('category__name'))
+        }
       }
     })
   }
@@ -37,7 +46,7 @@ class CategoryList {
       var sort = currentCategoryList.data('sort')
       var style = currentCategoryList.data('style')
 
-      fetch(that.category_api + '?ordering=' + sort)
+      fetch(that.category_api + '?ordering=' + sort + '&product__isnull=False')
       .then((resp) => resp.json())
       .then(function(data) {
         if (amount && amount.length > 0) {
@@ -93,7 +102,10 @@ class CategoryList {
               }
             }
 
-            currentCategoryList.append(html)
+            if (url_params.get('search') && style == 'nav') {}
+            else {
+              currentCategoryList.append(html)
+            }
           }
         }
 
@@ -137,7 +149,10 @@ class CategoryList {
                 `
             }
 
-            currentCategoryList.append(html)
+            if (url_params.get('search') && style == 'nav') {}
+            else {
+              currentCategoryList.append(html)
+            }
           }
         }
       })

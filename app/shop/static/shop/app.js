@@ -7,10 +7,12 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import BrandList from './js/brandList';
 import CategoryList from './js/categoryList';
 import ProductList from './js/productList';
+import ProductSearch from './js/productSearch';
 
 var brandList = new BrandList();
 var categoryList = new CategoryList();
 var productList = new ProductList();
+var productSearch = new ProductSearch();
 
 
 // Functions checked

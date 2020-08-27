@@ -95,8 +95,13 @@ class ProductList {
       filter += '&category__name=' + url_params.get('category__name')
     }
 
+    var search = ''
+    if (url_params.get('search')) {
+      search += '&search=' + url_params.get('search')
+    }
+
     if (error_codes == 0) {
-      window.location.href = base_url + '?ordering=' + ordering + filter;
+      window.location.href = shop_url + '?ordering=' + ordering + filter + search;
     }
   }
 
@@ -114,7 +119,7 @@ class ProductList {
       that.openFilter.addClass('btn-outline-dark')
     }
 
-    fetch(that.brand_api) // Check if brand has active products and check if brand is active
+    fetch(that.brand_api + '?status=2&product__isnull=False')
     .then((resp) => resp.json())
     .then(function(data) {
       var brands = data
@@ -211,7 +216,12 @@ class ProductList {
         active_filters += 1
       }
 
-      fetch(that.product_api + '?ordering=' + ordering + filter) // check if products and their brands are active
+      var search = ''
+      if (url_params.get('search')) {
+        search += '&search=' + url_params.get('search')
+      }
+
+      fetch(that.product_api + '?ordering=' + ordering + filter + search + '&status=2&brand__status=2')
       .then((resp) => resp.json())
       .then(function(data) {
         if (amount && amount.length > 0) {
@@ -233,7 +243,6 @@ class ProductList {
         for (var i in products) {
           var product = products[i]
 
-          if (product.status == 2) {
             if (user == 'AnonymousUser') {
               var wishlistTrigger = `
                 <a href="${ login_url }">
@@ -287,7 +296,6 @@ class ProductList {
               </div>
               `
             currentProductList.append(html)
-          }
         }
 
         if (products.length == 0) {
