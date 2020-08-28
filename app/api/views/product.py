@@ -28,8 +28,8 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
     filter_fields = ['brand', 'category', 'gender'] # , 'price'
-    ordering_fields = ['created', 'value'] #  'price',
-    ordering = ['-value']
+    ordering_fields = ['created'] #  'price', 'value'
+    ordering = ['-created']
     search_fields = ['brand__name', 'name', 'query']
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]

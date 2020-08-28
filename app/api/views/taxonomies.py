@@ -20,6 +20,9 @@ class CategoryViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(slug=self.request.data['name'].lower())
 
+    def perform_update(self, serializer):
+        serializer.save(slug=self.request.data['name'].lower())
+
 
 class ColorViewSet(ModelViewSet):
     """
@@ -35,6 +38,9 @@ class ColorViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(slug=self.request.data['name'].lower())
 
+    def perform_update(self, serializer):
+        serializer.save(slug=self.request.data['name'].lower())
+
 
 class SizeViewSet(ModelViewSet):
     """
@@ -42,9 +48,13 @@ class SizeViewSet(ModelViewSet):
     """
     queryset = Size.objects.all()
     filter_backends = [OrderingFilter]
-    ordering_fields = ['created', 'value',]
+    ordering_fields = ['order',]
+    ordering = ['order']
     serializer_class = SizeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
+        serializer.save(slug=self.request.data['name'].lower())
+
+    def perform_update(self, serializer):
         serializer.save(slug=self.request.data['name'].lower())

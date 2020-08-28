@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 class BaseTaxonomy(models.Model):
     name = models.CharField(max_length=200, null=True, verbose_name=_('name'))
     slug = models.SlugField(unique=True, null=True, verbose_name=_('slug'))
-    # value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
+    value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
     def __str__(self):
@@ -35,8 +35,8 @@ class Category(models.Model):
 
 
 class Color(BaseTaxonomy):
-    pass
+    hex = models.CharField(max_length=6, null=True, verbose_name=_('hex'))
 
 
 class Size(BaseTaxonomy):
-    pass
+    order = models.IntegerField(blank=True, verbose_name=_('order'))
