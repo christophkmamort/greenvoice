@@ -2,7 +2,7 @@ from django.views.generic import TemplateView
 from django.shortcuts import render
 
 from shop.models.brand import Brand
-from shop.models.log import ValueLog
+from shop.models.log import BrandValueLog, ProductValueLog, TaxonomyValueLog
 from shop.models.product import Product
 from shop.models.taxonomies import Category
 
@@ -10,7 +10,7 @@ from shop.models.taxonomies import Category
 class ProductView(TemplateView):
     template_name = 'shop/product.html'
 
-    def get(self, request, pk):
+    """def get(self, request, pk):
         product = Product.objects.get(id=pk)
         brand = Brand.objects.get(product=product)
 
@@ -43,4 +43,4 @@ class ProductView(TemplateView):
             category.save()
 
         context = {'product':product,}
-        return render(request, self.template_name, context)
+        return render(request, self.template_name, context)"""

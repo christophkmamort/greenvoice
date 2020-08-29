@@ -8,7 +8,7 @@ class UserSerializer(ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['url', 'last_login', 'is_superuser', 'email', 'is_staff', 'is_active', 'date_joined', 'user_permissions',]
+        fields = '__all__'
 
 
 class CustomerSerializer(ModelSerializer):

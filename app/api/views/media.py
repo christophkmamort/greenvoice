@@ -1,28 +1,28 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from api.serializers.gallery import ProductBrandGallerySerializer, ProductGallerySerializer
-from shop.models.gallery import ProductBrandImage, ProductImage
+from api.serializers.media import ProductBrandImageSerializer, ProductImageSerializer
+from shop.models.media import ProductBrandImage, ProductImage
 
 
-class ProductBrandGalleryViewSet(ModelViewSet):
+class ProductBrandImageViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` product brand img.
     """
     queryset = ProductBrandImage.objects.all()
-    serializer_class = ProductBrandGallerySerializer
+    serializer_class = ProductBrandImageSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save()
 
 
-class ProductGalleryViewSet(ModelViewSet):
+class ProductImageViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` product img.
     """
     queryset = ProductImage.objects.all()
-    serializer_class = ProductGallerySerializer
+    serializer_class = ProductImageSerializer
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):

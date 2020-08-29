@@ -12,12 +12,15 @@ router.register(r'customer', views.CustomerViewSet, basename='customer')
 router.register(r'order', views.OrderViewSet, basename='order')
 router.register(r'order-item', views.OrderItemViewSet, basename='orderitem')
 router.register(r'product', views.ProductViewSet, basename='product')
-router.register(r'product-brand-gallery', views.ProductBrandGalleryViewSet, basename='product-brand-gallery')
-router.register(r'product-gallery', views.ProductGalleryViewSet, basename='product-gallery')
+router.register(r'product-brand-image', views.ProductBrandImageViewSet, basename='product-brand-image')
+router.register(r'product-image', views.ProductImageViewSet, basename='product-image')
 router.register(r'product-option', views.ProductOptionViewSet, basename='product-option')
+router.register(r'product-manager', views.ProductManagerViewSet, basename='product-manager')
 router.register(r'size', views.SizeViewSet, basename='size')
 router.register(r'users', views.UserViewSet, basename='user')
-router.register(r'value-log', views.ValueLogViewSet, basename='value-log')
+router.register(r'brand-value-log', views.BrandValueLogViewSet, basename='brand-value-log')
+router.register(r'product-value-log', views.ProductValueLogViewSet, basename='product-value-log')
+router.register(r'taxonomy-value-log', views.TaxonomyValueLogViewSet, basename='taxonomy-value-log')
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

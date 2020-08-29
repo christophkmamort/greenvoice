@@ -1,16 +1,16 @@
 from rest_framework.serializers import ModelSerializer
 
-from shop.models.gallery import ProductBrandImage, ProductImage
+from shop.models.media import ProductBrandImage, ProductImage
 
 
-class ProductBrandGallerySerializer(ModelSerializer):
+class ProductBrandImageSerializer(ModelSerializer):
 
     class Meta:
         model = ProductBrandImage
         fields = '__all__'
 
 
-class ProductGallerySerializer(ModelSerializer):
+class ProductImageSerializer(ModelSerializer):
 
     class Meta:
         model = ProductImage

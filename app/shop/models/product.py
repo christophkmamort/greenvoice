@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .brand import Brand
-from .gallery import ProductBrandImage, ProductImage
 from .taxonomies import Category, Color, Size
 
 
