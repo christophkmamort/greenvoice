@@ -40,6 +40,8 @@ class ProductOptionViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
 
+        # Create logic to fill gross, tax and net if nessasary!! & make sure that it is filled correct!!
+
 
 class ProductViewSet(ModelViewSet):
     """

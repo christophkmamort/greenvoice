@@ -21,4 +21,5 @@ class BrandViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
+        name = self.request.data.get('name')
         serializer.save()

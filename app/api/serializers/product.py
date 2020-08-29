@@ -7,18 +7,18 @@ class ProductSerializer(ModelSerializer):
 
     class Meta:
         model = Product
-        fields = '__all__'
+        exclude = ['query', 'value',]
 
 
 class ProductManagerSerializer(ModelSerializer):
 
     class Meta:
         model = ProductManager
-        fields = '__all__'
+        exclude = ['value',]
 
 
 class ProductOptionSerializer(ModelSerializer):
 
     class Meta:
         model = ProductOption
-        fields = '__all__'
+        exclude = ['value',]

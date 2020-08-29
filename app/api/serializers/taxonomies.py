@@ -1,24 +1,31 @@
 from rest_framework.serializers import ModelSerializer
 
-from shop.models.taxonomies import Category, Color, Size
+from shop.models.taxonomies import Category, Color, Size, UserGroup
 
 
 class CategorySerializer(ModelSerializer):
 
     class Meta:
         model = Category
-        fields = '__all__'
+        exclude = ['slug', 'value',]
 
 
 class ColorSerializer(ModelSerializer):
 
     class Meta:
         model = Color
-        fields = '__all__'
+        exclude = ['slug', 'value',]
 
 
 class SizeSerializer(ModelSerializer):
 
     class Meta:
         model = Size
-        fields = '__all__'
+        exclude = ['slug', 'value',]
+
+
+class UserGroupSerializer(ModelSerializer):
+
+    class Meta:
+        model = UserGroup
+        exclude = ['slug', 'value',]
