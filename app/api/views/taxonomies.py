@@ -18,10 +18,10 @@ class CategoryViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
+        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
 
     def perform_update(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
+        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
 
 
 class ColorViewSet(ModelViewSet):
@@ -36,10 +36,10 @@ class ColorViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
+        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
 
     def perform_update(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
+        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
 
 
 class SizeViewSet(ModelViewSet):
@@ -54,10 +54,10 @@ class SizeViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
+        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
 
     def perform_update(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
+        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
 
 
 class UserGroupViewSet(ModelViewSet):
@@ -72,7 +72,7 @@ class UserGroupViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
+        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
 
     def perform_update(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower())
+        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))

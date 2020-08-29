@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 def create_upload_path(self, filename):
-    return os.path.join('brands', self.name, 'branding', filename)
+    return os.path.join('brands', self.name.lower().replace(' ', '-'), 'branding', filename)
 
 
 class Brand(models.Model):
