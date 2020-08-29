@@ -1,9 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from .product import ProductManager
 
-class BaseImage(models.Model):
-    # name = models.ImageField(upload_to='products/', blank=True , verbose_name=_('image'))
+
+class BaseProductImage(models.Model):
+    product = models.ForeignKey(ProductManager, null=True, on_delete=models.SET_NULL, verbose_name=_('product'))
+    order = models.IntegerField(blank=True, verbose_name=_('order'))
+    created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
     @property
     def imageUrl(self):
@@ -14,9 +18,9 @@ class BaseImage(models.Model):
         return url
 
 
-class ProductBrandImage(BaseImage):
+class ProductBrandImage(BaseProductImage):
     image = models.ImageField(upload_to='products/brands/', blank=True , verbose_name=_('image'))
 
 
-class ProductImage(BaseImage):
+class ProductImage(BaseProductImage):
     image = models.ImageField(upload_to='products/', blank=True , verbose_name=_('image'))

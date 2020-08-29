@@ -38,5 +38,9 @@ class Color(BaseTaxonomy):
     hex = models.CharField(max_length=6, null=True, verbose_name=_('hex'))
 
 
+class Country(BaseTaxonomy):
+    pass
+
+
 class Size(BaseTaxonomy):
     order = models.IntegerField(blank=True, verbose_name=_('order'))
