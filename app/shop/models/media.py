@@ -5,7 +5,6 @@ from .product import ProductManager
 
 
 class BaseProductImage(models.Model):
-    product = models.ForeignKey(ProductManager, null=True, on_delete=models.SET_NULL, verbose_name=_('product'))
     order = models.IntegerField(blank=True, verbose_name=_('order'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
@@ -19,8 +18,10 @@ class BaseProductImage(models.Model):
 
 
 class ProductBrandImage(BaseProductImage):
-    image = models.ImageField(upload_to='products/brands/', blank=True , verbose_name=_('image'))
+    image = models.ImageField(upload_to='products/brands/', blank=True, verbose_name=_('image'))
+    product = models.ForeignKey(ProductManager, null=True, on_delete=models.SET_NULL, verbose_name=_('product'))
 
 
 class ProductImage(BaseProductImage):
-    image = models.ImageField(upload_to='products/', blank=True , verbose_name=_('image'))
+    image = models.ImageField(upload_to='products/', blank=True, verbose_name=_('image'))
+    product = models.ForeignKey(ProductManager, null=True, on_delete=models.SET_NULL, verbose_name=_('product'))

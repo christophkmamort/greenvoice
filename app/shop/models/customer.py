@@ -32,7 +32,7 @@ class Customer(models.Model):
         (WOMEN, _('women')),
         (MEN, _('men')),
     )
-    gender = models.PositiveSmallIntegerField(choices=GENDER_CHOICES, blank=True, verbose_name=_('gender'))
+    gender = models.PositiveSmallIntegerField(choices=GENDER_CHOICES, null=True, blank=True, verbose_name=_('gender'))
     name = models.CharField(max_length=200, blank=True, verbose_name=_('name'))
     address = models.OneToOneField(Address, null=True, on_delete=models.SET_NULL, verbose_name=_('address'))
 

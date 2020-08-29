@@ -14,6 +14,8 @@ class ProductBrandImageViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
+        product = self.request.data.get('product')
+        print(product)
         serializer.save()
 
 
