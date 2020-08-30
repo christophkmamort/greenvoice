@@ -6,7 +6,7 @@ class BrandList {
     this.brandList = $('.brandList')
 
     if (this.brandList.length > 0) {
-      this.brand_api = domain + '/api/brand/'
+      this.brand_api = home_url + '/api/brand/'
 
       this.populateBrandList()
     }

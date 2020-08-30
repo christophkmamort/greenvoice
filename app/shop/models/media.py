@@ -32,7 +32,7 @@ class BaseProductImage(models.Model):
 
 class ProductBrandImage(BaseProductImage):
     image = models.ImageField(upload_to=create_product_brand_image_path, blank=True, verbose_name=_('image'))
-    product_manager = models.ForeignKey(ProductManager, null=True, on_delete=models.SET_NULL, verbose_name=_('product'))
+    product_manager = models.ForeignKey(ProductManager, null=True, on_delete=models.SET_NULL, related_name='brand_image', verbose_name=_('product'))
 
     def save(self, *args, **kwargs):
         image = Image.open(self.image)
@@ -51,7 +51,7 @@ class ProductBrandImage(BaseProductImage):
 
 class ProductImage(BaseProductImage):
     image = models.ImageField(upload_to=create_product_image_path, blank=True, verbose_name=_('image'))
-    product_manager = models.ForeignKey(ProductManager, null=True, on_delete=models.SET_NULL, verbose_name=_('product'))
+    product_manager = models.ForeignKey(ProductManager, null=True, on_delete=models.SET_NULL, related_name='image', verbose_name=_('product'))
 
     def save(self, *args, **kwargs):
         image = Image.open(self.image)

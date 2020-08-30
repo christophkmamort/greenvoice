@@ -7,25 +7,25 @@ class CategorySerializer(ModelSerializer):
 
     class Meta:
         model = Category
-        exclude = ['slug', 'value',]
+        fields = '__all__'
 
 
 class ColorSerializer(ModelSerializer):
 
     class Meta:
         model = Color
-        exclude = ['slug', 'value',]
+        fields = '__all__'
 
 
 class SizeSerializer(ModelSerializer):
 
     class Meta:
         model = Size
-        exclude = ['slug', 'value',]
+        fields = '__all__'
 
 
 class UserGroupSerializer(ModelSerializer):
 
     class Meta:
         model = UserGroup
-        exclude = ['slug', 'value',]
+        fields = '__all__'

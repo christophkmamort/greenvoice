@@ -11,7 +11,7 @@ class CategoryList {
     }
 
     if (this.categoryList.length > 0) {
-      this.category_api = domain + '/api/category/'
+      this.category_api = home_url + '/api/category/'
 
       this.populateCategoryList()
     }

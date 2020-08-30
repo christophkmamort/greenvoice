@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .brand import Brand
 from .customer import BodyMeasurements
-from .product import ProductManager, ProductOption
+from .product import Product, ProductManager, ProductOption
 from .taxonomies import Category, Color, Size
 
 
@@ -69,6 +69,7 @@ class BrandValueLog(BaseValueLog):
 
 
 class ProductValueLog(BaseValueLog):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('product'))
     product_manager = models.ForeignKey(ProductManager, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('product manager'))
     product_option = models.ForeignKey(ProductOption, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('product option'))
 

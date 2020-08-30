@@ -45,5 +45,10 @@ var productDetailTransparencyMapLocations = new ProductDetailTransparencyMapLoca
 var registerUser = new RegisterUser();
 
 
+// Testing
+// import Test from './js/test';
+// var test = new Test();
+
+
 // Scss
 import "./app.scss";

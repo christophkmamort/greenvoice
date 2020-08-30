@@ -31,7 +31,7 @@ class ProductManager(models.Model):
 
 
 class ProductOption(models.Model):
-    product_manager = models.ForeignKey(ProductManager, null=True, on_delete=models.CASCADE, verbose_name=_('product and color'))
+    product_manager = models.ForeignKey(ProductManager, null=True, on_delete=models.CASCADE, related_name='product_option', verbose_name=_('product and color'))
     product_number =  models.CharField(max_length=200, blank=True, null=True, verbose_name=_('product number'))
     size = models.ForeignKey(Size, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('size'))
     stock = models.IntegerField(blank=True, null=True, default=0, verbose_name=_('stock'))
@@ -54,4 +54,4 @@ class ProductOption(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
     def __str__(self):
-        return self.product_manager.product.name + ' ' + self.product_manager.color.name + ' ' + self.size
+        return self.product_manager.product.name + ' ' + self.product_manager.color.name + ' ' + self.size.name

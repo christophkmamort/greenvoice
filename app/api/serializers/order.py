@@ -8,7 +8,7 @@ class OrderItemSerializer(ModelSerializer):
 
     class Meta:
         model = OrderItem
-        exclude = ['customer',]
+        fields = '__all__'
         read_only_fields = ['id',]
 
 

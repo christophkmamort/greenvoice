@@ -7,4 +7,4 @@ class BrandSerializer(ModelSerializer):
 
     class Meta:
         model = Brand
-        exclude = ['value',]
+        fields = '__all__'

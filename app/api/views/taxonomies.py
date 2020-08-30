@@ -17,12 +17,6 @@ class CategoryViewSet(ModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
-
-    def perform_update(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
-
 
 class ColorViewSet(ModelViewSet):
     """
@@ -34,12 +28,6 @@ class ColorViewSet(ModelViewSet):
     ordering = ['-value']
     serializer_class = ColorSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
-
-    def perform_update(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
 
 
 class SizeViewSet(ModelViewSet):
@@ -53,12 +41,6 @@ class SizeViewSet(ModelViewSet):
     serializer_class = SizeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
-
-    def perform_update(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
-
 
 class UserGroupViewSet(ModelViewSet):
     """
@@ -70,9 +52,3 @@ class UserGroupViewSet(ModelViewSet):
     ordering = ['-value']
     serializer_class = UserGroupSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))
-
-    def perform_update(self, serializer):
-        serializer.save(slug=self.request.data['name'].lower().replace(' ', '-'))

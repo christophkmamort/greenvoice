@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 class Test {
   constructor() {
-    var domain = window.location.protocol + '//' + window.location.hostname
+    /*var domain = window.location.protocol + '//' + window.location.hostname
     if (domain.includes('localhost')) { domain = 'http://localhost:8000' }
 
     this.cartFeed = $('.cartFeed')
@@ -13,11 +13,71 @@ class Test {
     this.productsApi = domain + '/api/products/'
 
     this.populateCartFeed()
-    this.populateProductFeed()
+    this.populateProductFeed()*/
+
+    this.productList = $('.productList')
+    this.product_manager_api = domain + '/api/product-manager/'
+    this.populateProductList()
   }
 
 
-  addCartItem(order_id, item, product_id) {
+  populateProductList() {
+    var that = this
+
+    fetch(that.product_manager_api)
+    .then((resp) => resp.json())
+    .then(function(data) {
+      var product_managers = data
+
+      for (var i in product_managers) {
+        var product_manager = product_managers[i]
+
+        var porduct_color = product_manager.color.name
+        var product_options = product_manager.product_option
+        var product_option_prices = []
+        var product_option_sizes = []
+
+        for (var x in product_options) {
+          var product_option = product_options[x]
+
+          product_option_prices.push(product_option.gross)
+          product_option_sizes.push(product_option.size.name)
+        }
+
+        product_option_prices.sort(function(a, b) { return a-b })
+        var product_price_form = product_option_prices[0]
+
+        var title_image = product_manager.image[1].image
+        if (!title_image) {
+          var title_image = product_manager.brand_image[0].image
+        }
+
+        var html = `
+          <div>
+            <a href="#">
+              <div class="d-flex">
+                <img src="${ title_image }" style="height: 10em;">
+                <div>
+                  <h6>${ product_manager.product.name }</h6>
+                  <p>
+                    ab €${ product_price_form }
+                    <br>
+                    ${ porduct_color }
+                    <br>
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          `
+        that.productList.append(html)
+      }
+
+    })
+
+  }
+
+  /*addCartItem(order_id, item, product_id) {
     var that = this
 
     if (item == null) {
@@ -270,7 +330,7 @@ class Test {
 
     })
 
-  }
+  }*/
 
 
 }
