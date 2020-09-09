@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from shop.models.taxonomies import Category, Color, Size, UserGroup
+from shop.models.taxonomies import Category, Color, Size, TargetGroup
 
 
 class CategorySerializer(ModelSerializer):
@@ -24,8 +24,8 @@ class SizeSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class UserGroupSerializer(ModelSerializer):
+class TargetGroupSerializer(ModelSerializer):
 
     class Meta:
-        model = UserGroup
+        model = TargetGroup
         fields = '__all__'

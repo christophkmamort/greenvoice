@@ -54,5 +54,5 @@ class Size(BaseTaxonomy):
     order = models.IntegerField(blank=True, verbose_name=_('order'))
 
 
-class UserGroup(BaseTaxonomy):
+class TargetGroup(BaseTaxonomy):
     pass

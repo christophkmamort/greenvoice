@@ -2,16 +2,16 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .brand import Brand
-from .taxonomies import Category, Color, UserGroup, Size
+from .taxonomies import Category, Color, TargetGroup, Size
 
 
 class Product(models.Model):
     brand = models.ForeignKey(Brand, blank=True, on_delete=models.CASCADE, verbose_name=_('brand'))
     name = models.CharField(max_length=200, blank=True, verbose_name=_('name'))
-    user_group = models.ManyToManyField(UserGroup, blank=True, verbose_name=_('user group'))
+    user_group = models.ManyToManyField(TargetGroup, blank=True, verbose_name=_('target group'))
     category = models.ManyToManyField(Category, blank=True, verbose_name=_('category'))
     # Add transparency manager here!!
-    query = models.CharField(max_length=200, blank=True, verbose_name=_('queryset'))
+    # query = models.CharField(max_length=200, blank=True, verbose_name=_('queryset'))
     value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 

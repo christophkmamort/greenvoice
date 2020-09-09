@@ -1,12 +1,12 @@
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from api.serializers.customer import CustomerSerializer, UserSerializer
 from shop.models.customer import Customer
 from users.models import CustomUser
 
 
-class UserViewSet(ReadOnlyModelViewSet):
+class UserViewSet(ModelViewSet):
     """
     Manage `list` and `detail` users.
     """

@@ -7,6 +7,7 @@ class ProductList {
 
     if (this.productList.length > 0) {
       this.product_manager_api = home_url + '/api/product-manager/'
+      this.productAmount = $('.productAmount')
 
       this.populateProductList()
     }
@@ -24,13 +25,55 @@ class ProductList {
         ordering = '-value'
       }
 
-      fetch(that.product_manager_api)
+      var filter = ''
+      var active_filters = 0
+      if (url_params.get('ordering')) {
+        ordering = url_params.get('ordering')
+        active_filters += 1
+      }
+      if (url_params.get('category__name')) {
+        filter += '&category__name=' + url_params.get('category__name')
+      }
+      if (url_params.get('brand__name__in')) {
+        filter += '&brand__name__in=' + url_params.get('brand__name__in')
+        active_filters += 1
+      }
+      if (url_params.get('price__lte')) {
+        filter += '&price__lte=' + url_params.get('price__lte')
+        active_filters += 1
+      }
+      if (url_params.get('price__gte')) {
+        filter += '&price__gte=' + url_params.get('price__gte')
+        active_filters += 1
+      }
+
+      var gender = ''
+      if (Cookies.get('user_group') == 'unisex') {
+        gender += '&gender__in=1'
+      } else if (Cookies.get('user_group') == 'women') {
+        gender += '&gender__in=1,2'
+      } else if (Cookies.get('user_group') == 'men') {
+        gender += '&gender__in=1,3'
+      }
+
+      var search = ''
+      if (url_params.get('search')) {
+        search += '&search=' + url_params.get('search')
+      }
+
+      fetch(that.product_manager_api + '?ordering=' + ordering + filter + gender + search + '&product__status=2&product__brand__status=2')
       .then((resp) => resp.json())
       .then(function(data) {
         if (amount && amount.length > 0) {
           var product_managers = data.slice(0,amount)
         } else {
           var product_managers = data
+        }
+
+        if (product_managers.length == 1) {
+          that.productAmount.html(product_managers.length + ' Produkt')
+        } else {
+          that.productAmount.html(product_managers.length + ' Produkte')
         }
 
         for (var i in product_managers) {

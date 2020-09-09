@@ -24,7 +24,7 @@ class BodyMeasurements(models.Model):
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name=_('user'))
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE, verbose_name=_('user'))
 
     WOMEN = 1
     MEN = 2

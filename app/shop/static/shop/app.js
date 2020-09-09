@@ -6,13 +6,13 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 // Api
 import BrandList from './js/brandList';
 import CategoryList from './js/categoryList';
-import GenderFilter from './js/genderFilter';
+import UserGroupFilter from './js/userGroupFilter';
 import ProductList from './js/productList';
 import ProductSearch from './js/productSearch';
 
 var brandList = new BrandList();
 var categoryList = new CategoryList();
-var genderFilter = new GenderFilter();
+var userGroupFilter = new UserGroupFilter();
 var productList = new ProductList();
 var productSearch = new ProductSearch();
 

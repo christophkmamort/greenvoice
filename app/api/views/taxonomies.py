@@ -2,8 +2,8 @@ from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
-from api.serializers import CategorySerializer, ColorSerializer, SizeSerializer, UserGroupSerializer
-from shop.models.taxonomies import Category, Color, Size, UserGroup
+from api.serializers import CategorySerializer, ColorSerializer, SizeSerializer, TargetGroupSerializer
+from shop.models.taxonomies import Category, Color, Size, TargetGroup
 
 
 class CategoryViewSet(ModelViewSet):
@@ -42,13 +42,13 @@ class SizeViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-class UserGroupViewSet(ModelViewSet):
+class TargetGroupViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy` sizes.
     """
-    queryset = UserGroup.objects.all()
+    queryset = TargetGroup.objects.all()
     filter_backends = [OrderingFilter]
     ordering_fields = ['value',]
     ordering = ['-value']
-    serializer_class = UserGroupSerializer
+    serializer_class = TargetGroupSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
