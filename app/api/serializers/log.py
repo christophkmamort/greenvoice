@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from shop.models.log import BrandValueLog, ProductValueLog, TaxonomyValueLog
+from logs.models import BrandValueLog, ProductValueLog, TaxonomyValueLog
 
 
 class BrandValueLogSerializer(ModelSerializer):

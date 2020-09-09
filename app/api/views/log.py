@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from api.serializers.log import BrandValueLogSerializer, ProductValueLogSerializer, TaxonomyValueLogSerializer
-from shop.models.log import BrandValueLog, ProductValueLog, TaxonomyValueLog
+from logs.models import BrandValueLog, ProductValueLog, TaxonomyValueLog
 
 
 class BaseValueLog(ModelViewSet):
