@@ -23,6 +23,7 @@ router.register(r'product-option', views.ProductOptionViewSet, basename='product
 
 router.register(r'taxonomy-category', views.CategoryViewSet, basename='taxonomy-category')
 router.register(r'taxonomy-color', views.ColorViewSet, basename='taxonomy-color')
+router.register(r'taxonomy-country', views.CountryViewSet, basename='taxonomy-country')
 router.register(r'taxonomy-size', views.SizeViewSet, basename='taxonomy-size')
 router.register(r'taxonomy-target-group', views.TargetGroupViewSet, basename='taxonomy-target-group')
 

@@ -7,7 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 from api.serializers.product import ProductManagerSerializer, \
                                     ProductManagerDetailSerializer, \
                                     ProductOptionSerializer, ProductSerializer
-from shop.models.taxonomies import Category
+from taxonomies.models import Category
 from shop.models.product import Product, ProductManager, ProductOption
 
 

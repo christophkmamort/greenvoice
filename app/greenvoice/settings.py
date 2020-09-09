@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Custom
     'users',
     'shop',
+    'taxonomies',
 ]
 
 MIDDLEWARE = [

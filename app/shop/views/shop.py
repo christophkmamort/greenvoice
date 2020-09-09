@@ -4,7 +4,7 @@ from django.shortcuts import render
 from shop.models.brand import Brand
 from shop.models.log import BrandValueLog, ProductValueLog, TaxonomyValueLog
 from shop.models.product import Product
-from shop.models.taxonomies import Category
+from taxonomies.models import Category
 
 
 class IndexView(TemplateView):

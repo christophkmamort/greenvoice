@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .brand import Brand
-from .taxonomies import Category, Color, TargetGroup, Size
+from taxonomies.models import Category, Color, TargetGroup, Size
 
 
 class Product(models.Model):

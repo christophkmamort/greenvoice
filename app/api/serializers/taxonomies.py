@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from shop.models.taxonomies import Category, Color, Size, TargetGroup
+from taxonomies.models import *
 
 
 class CategorySerializer(ModelSerializer):
@@ -14,6 +14,13 @@ class ColorSerializer(ModelSerializer):
 
     class Meta:
         model = Color
+        fields = '__all__'
+
+
+class CountrySerializer(ModelSerializer):
+
+    class Meta:
+        model = Country
         fields = '__all__'
 
 

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from shop.models.brand import Brand
 from shop.models.log import BrandValueLog, ProductValueLog, TaxonomyValueLog
 from shop.models.product import Product, ProductManager, ProductOption
-from shop.models.taxonomies import Category, Color, Size
+from taxonomies.models import Category, Color, Size
 
 
 class ProductView(TemplateView):

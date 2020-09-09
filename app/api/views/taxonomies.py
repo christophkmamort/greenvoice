@@ -2,8 +2,10 @@ from rest_framework.filters import OrderingFilter
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
-from api.serializers import CategorySerializer, ColorSerializer, SizeSerializer, TargetGroupSerializer
-from shop.models.taxonomies import Category, Color, Size, TargetGroup
+from api.serializers import CategorySerializer, ColorSerializer, \
+                            SizeSerializer, TargetGroupSerializer, \
+                            CountrySerializer
+from taxonomies.models import *
 
 
 class CategoryViewSet(ModelViewSet):
@@ -27,6 +29,18 @@ class ColorViewSet(ModelViewSet):
     ordering_fields = ['created', 'value',]
     ordering = ['-value']
     serializer_class = ColorSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class CountryViewSet(ModelViewSet):
+    """
+    Manage `list`, `create`, `retrieve`, `update` and `destroy` countries.
+    """
+    queryset = Country.objects.all()
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['created', 'value',]
+    ordering = ['-value']
+    serializer_class = CountrySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 

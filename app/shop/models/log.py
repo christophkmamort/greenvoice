@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from .brand import Brand
 from .customer import BodyMeasurements
 from .product import Product, ProductManager, ProductOption
-from .taxonomies import Category, Color, Size
+from taxonomies.models import Category, Color, Size
 
 
 class AnonymousUserData(models.Model):
