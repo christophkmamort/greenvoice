@@ -10,8 +10,6 @@ class BaseTaxonomyLayout(admin.ModelAdmin):
 
 class CategoryLayout(BaseTaxonomyLayout):
     model = Category
-    verbose_name = _('category')
-    verbose_name_plural = _('categories')
 
 
 class ColorLayout(BaseTaxonomyLayout):

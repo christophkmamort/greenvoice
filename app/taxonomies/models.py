@@ -29,6 +29,7 @@ class Category(models.Model):
 
     class Meta:
         unique_together = ('slug', 'parent',)
+        verbose_name_plural = _('categories')
 
     def __str__(self):
         return self.name
@@ -47,7 +48,9 @@ class Color(BaseTaxonomy):
 
 
 class Country(BaseTaxonomy):
-    pass
+
+    class Meta:
+        verbose_name_plural = _('countries')
 
 
 class Size(BaseTaxonomy):
@@ -55,4 +58,6 @@ class Size(BaseTaxonomy):
 
 
 class TargetGroup(BaseTaxonomy):
-    pass
+
+    class Meta:
+        verbose_name = _('target group')

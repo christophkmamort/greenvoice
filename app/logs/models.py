@@ -67,14 +67,23 @@ class BaseValueLog(models.Model):
 class BrandValueLog(BaseValueLog):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('brand'))
 
+    class Meta:
+        verbose_name = _('brand log')
+
 
 class ProductValueLog(BaseValueLog):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('product'))
     product_manager = models.ForeignKey(ProductManager, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('product manager'))
     product_option = models.ForeignKey(ProductOption, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('product option'))
 
+    class Meta:
+        verbose_name = _('product log')
+
 
 class TaxonomyValueLog(BaseValueLog):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('category'))
     color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('color'))
     size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('size'))
+
+    class Meta:
+        verbose_name = _('taxonomy log')
