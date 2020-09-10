@@ -30,3 +30,17 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        logo = Image.open(self.logo)
+        width = 320
+        if logo.size[0] > width:
+            hpercent = (width/float(logo.size[0]))
+            height = int(logo.size[1]*float(hpercent))
+            size = (width, height)
+            logo = logo.resize(size, resample=0, box=None)
+        thumb_io = BytesIO()
+        logo.save(thumb_io, format='JPEG', optimize=True, quality=50)
+        inmemory_uploaded_file = InMemoryUploadedFile(thumb_io, None, self.logo.name.split('.')[0] + '.jpg', 'logo/jpeg', thumb_io.tell(), None)
+        self.logo = inmemory_uploaded_file
+        super(Brand, self).save(*args, **kwargs)
