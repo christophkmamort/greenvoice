@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from shop.models.customer import Customer
+from users.models.customer import Customer
 from users.models import CustomUser
 
 

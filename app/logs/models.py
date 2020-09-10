@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from shop.models.brand import Brand
-from shop.models.customer import BodyMeasurements
+from users.models.customer import BodyMeasurements
 from shop.models.product import Product, ProductManager, ProductOption
 from taxonomies.models import Category, Color, Size
 

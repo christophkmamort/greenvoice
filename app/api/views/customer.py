@@ -2,7 +2,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from api.serializers.customer import CustomerSerializer, UserSerializer
-from shop.models.customer import Customer
+from users.models.customer import Customer
 from users.models import CustomUser
 
 
