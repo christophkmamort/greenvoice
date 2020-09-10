@@ -17,19 +17,19 @@ class ColorLayout(BaseTaxonomyLayout):
 
 
 class CountryLayout(BaseTaxonomyLayout):
-    model = Color
+    model = Country
 
 
 class SizeLayout(BaseTaxonomyLayout):
-    model = Color
+    model = Size
 
 
 class TargetGroupLayout(BaseTaxonomyLayout):
-    model = Color
+    model = TargetGroup
 
 
 admin.site.register(Category, CategoryLayout)
-admin.site.register(Color)
-admin.site.register(Country)
-admin.site.register(Size)
-admin.site.register(TargetGroup)
+admin.site.register(Color, ColorLayout)
+admin.site.register(Country, CountryLayout)
+admin.site.register(Size, SizeLayout)
+admin.site.register(TargetGroup, TargetGroupLayout)

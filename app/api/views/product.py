@@ -44,8 +44,6 @@ class ProductOptionViewSet(ModelViewSet):
     serializer_class = ProductOptionSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    # Create logic to fill gross, tax and net if nessasary!! & make sure that it is filled correct!!
-
 
 class ProductViewSet(ModelViewSet):
     """
@@ -58,33 +56,3 @@ class ProductViewSet(ModelViewSet):
     ordering = ['-created']
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-
-    """def perform_create(self, serializer):
-        categories = self.request.data.getlist('category')
-        query = ''
-        for id in categories:
-            category = Category.objects.get(id=id)
-            query += category.name + ' '
-        gender = self.request.data.get('gender')
-        if gender == '1':
-            query += 'Unisex Frauen Damen Herren Männer '
-        if gender == '2':
-            query += 'Frauen Damen '
-        if gender == '3':
-            query += 'Herren Männer '
-        serializer.save(query=query)
-
-    def perform_update(self, serializer):
-        categories = self.request.data.getlist('category')
-        query = ''
-        for id in categories:
-            category = Category.objects.get(id=id)
-            query += category.name + ' '
-        gender = self.request.data.get('gender')
-        if gender == '1':
-            query += 'Unisex Frauen Damen Herren Männer '
-        if gender == '2':
-            query += 'Frauen Damen '
-        if gender == '3':
-            query += 'Herren Männer '
-        serializer.save(query=query)"""

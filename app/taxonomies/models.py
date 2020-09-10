@@ -10,7 +10,7 @@ class BaseTaxonomy(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def save(self, *args, **kwargs):
         try:
@@ -32,7 +32,7 @@ class Category(models.Model):
         verbose_name_plural = _('categories')
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def __str__(self):
         full_path = [self.name]

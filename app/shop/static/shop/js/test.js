@@ -21,9 +21,17 @@ class Test {
       this.populateBrandFeed()
     }
 
-    // this.productList = $('.productList')
-    // this.product_manager_api = home_url + '/api/product-manager/'
-    // this.populateProductList()
+    this.productList = $('.productList')
+    if (this.productList) {
+      this.product_manager_api = home_url + '/api/product-manager/'
+      this.populateProductList()
+    }
+
+    this.orderList = $('.orderList')
+    if (this.cartList) {
+      this.order_api = home_url + '/api/order/'
+      this.populateOrderList()
+    }
   }
 
 
@@ -38,16 +46,18 @@ class Test {
       .then(function(data) {
         var brands = data
 
-        for (var i in brands) {
-          var brand = brands[i]
+        if (brands) {
+          for (var i in brands) {
+            var brand = brands[i]
 
-          if (brand.status == 2) {
-            var html = `
-              <div>
-                <h6>${ brand.name }</h6>
-              </div>
-              `
-            current_list.append(html)
+            if (brand.status == 2) {
+              var html = `
+                <div>
+                  <h6>${ brand.name }</h6>
+                </div>
+                `
+              current_list.append(html)
+            }
           }
         }
       })
@@ -63,52 +73,83 @@ class Test {
     .then(function(data) {
       var product_managers = data
 
-      for (var i in product_managers) {
-        var product_manager = product_managers[i]
+      if (product_managers) {
+        for (var i in product_managers) {
+          var product_manager = product_managers[i]
+          var product_options = product_manager.product_option
 
-        var porduct_color = product_manager.color.name
-        var product_options = product_manager.product_option
-        var product_option_prices = []
-        var product_option_sizes = []
+          // TODO: Add logic to check if products are in stock/available.
 
-        for (var x in product_options) {
-          var product_option = product_options[x]
+          if (product_options) {
+            var porduct_color = product_manager.color.name
+            var product_option_prices = []
+            var product_option_sizes = []
 
-          product_option_prices.push(product_option.gross)
-          product_option_sizes.push(product_option.size.name)
+            for (var x in product_options) {
+              var product_option = product_options[x]
+              var product_status = product_option.status
+
+              if (product_status == 2) {
+                product_option_prices.push(product_option.gross)
+                product_option_sizes.push(product_option.size.name)
+              }
+            }
+
+            if (product_option_prices.length > 0
+            && product_option_sizes.length > 0) {
+              var product_images = product_manager.image
+
+              if (product_images.length > 0) {
+                var title_image = product_manager.image[0].image
+              } else {
+                var product_brand_images = product_manager.brand_image
+                if (product_brand_images.length > 0) {
+                  var title_image = product_manager.brand_image[0].image
+                }
+              }
+
+              if (title_image) {
+                product_option_prices.sort(function(a, b) { return a-b })
+                var product_prices_from = product_option_prices[0]
+                var product_name = product_manager.product.name
+
+                var html = `
+                  <div>
+                    <a href="#">
+                      <div class="d-flex">
+                        <img src="${ title_image }" style="height: 10em;">
+                        <div>
+                          <h6>${ product_name }</h6>
+                          <p>
+                            ab €${ product_prices_from }
+                            <br>
+                            ${ porduct_color }
+                            <br>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  `
+                that.productList.append(html)
+              }
+            }
+          }
         }
-
-        product_option_prices.sort(function(a, b) { return a-b })
-        var product_price_form = product_option_prices[0]
-
-        var title_image = product_manager.image[1].image
-        if (!title_image) {
-          var title_image = product_manager.brand_image[0].image
-        }
-
-        var html = `
-          <div>
-            <a href="#">
-              <div class="d-flex">
-                <img src="${ title_image }" style="height: 10em;">
-                <div>
-                  <h6>${ product_manager.product.name }</h6>
-                  <p>
-                    ab €${ product_price_form }
-                    <br>
-                    ${ porduct_color }
-                    <br>
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          `
-        that.productList.append(html)
       }
-
     })
+  }
 
+  populateOrderFeed() {
+    var that = this;
+
+    fetch(that.order_api)
+    .then((resp) => resp.json())
+    .then(function(data) {
+      var orders = data
+
+      // make order stuff happen here..
+    })
   }
 
   /*addCartItem(order_id, item, product_id) {
