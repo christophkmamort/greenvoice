@@ -11,7 +11,6 @@ class Product(models.Model):
     user_group = models.ManyToManyField(TargetGroup, blank=True, verbose_name=_('target group'))
     category = models.ManyToManyField(Category, blank=True, verbose_name=_('category'))
     # Add transparency manager here!!
-    # query = models.CharField(max_length=200, blank=True, verbose_name=_('queryset'))
     value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
@@ -23,6 +22,7 @@ class ProductManager(models.Model):
     product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE, verbose_name=_('product'))
     color = models.ForeignKey(Color, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('color'))
     # Add transparency manager here!!
+    query = models.CharField(max_length=200, blank=True, verbose_name=_('queryset'))
     value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
 
