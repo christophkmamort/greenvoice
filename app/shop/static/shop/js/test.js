@@ -2,22 +2,56 @@ import $ from 'jquery';
 
 class Test {
   constructor() {
-    /*var domain = window.location.protocol + '//' + window.location.hostname
-    if (domain.includes('localhost')) { domain = 'http://localhost:8000' }
+    /*var home_url = window.location.protocol + '//' + window.location.hostname
+    if (home_url.includes('localhost')) { home_url = 'http://localhost:8000' }
 
     this.cartFeed = $('.cartFeed')
-    this.order_api = domain + '/api/order/'
-    this.order_item_api = domain + '/api/order-item/'
+    this.order_api = home_url + '/api/order/'
+    this.order_item_api = home_url + '/api/order-item/'
 
     this.productFeed = $('.productFeed')
-    this.productsApi = domain + '/api/products/'
+    this.productsApi = home_url + '/api/products/'
 
     this.populateCartFeed()
     this.populateProductFeed()*/
 
-    this.productList = $('.productList')
-    this.product_manager_api = domain + '/api/product-manager/'
-    this.populateProductList()
+    this.brandList = $('.brandList')
+    if (this.brandList) {
+      this.brand_api = home_url + '/api/brand/'
+      this.populateBrandFeed()
+    }
+
+    // this.productList = $('.productList')
+    // this.product_manager_api = home_url + '/api/product-manager/'
+    // this.populateProductList()
+  }
+
+
+  populateBrandFeed() {
+    var that = this
+
+    that.brandList.each(function() {
+      var current_list = $(this)
+
+      fetch(that.brand_api)
+      .then((resp) => resp.json())
+      .then(function(data) {
+        var brands = data
+
+        for (var i in brands) {
+          var brand = brands[i]
+
+          if (brand.status == 2) {
+            var html = `
+              <div>
+                <h6>${ brand.name }</h6>
+              </div>
+              `
+            current_list.append(html)
+          }
+        }
+      })
+    })
   }
 
 

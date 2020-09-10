@@ -42,10 +42,10 @@ class ProductBrandImage(BaseProductImage):
             height = int(image.size[1]*float(hpercent))
             size = (width, height)
             image = image.resize(size, resample=0, box=None)
-        thumb_io = BytesIO()
-        image.save(thumb_io, format='JPEG', optimize=True, quality=50)
-        inmemory_uploaded_file = InMemoryUploadedFile(thumb_io, None, self.image.name.split('.')[0] + '.jpg', 'image/jpeg', thumb_io.tell(), None)
-        self.image = inmemory_uploaded_file
+            thumb_io = BytesIO()
+            image.save(thumb_io, format='JPEG', optimize=True, quality=50)
+            inmemory_uploaded_file = InMemoryUploadedFile(thumb_io, None, self.image.name.split('.')[0] + '.jpg', 'image/jpeg', thumb_io.tell(), None)
+            self.image = inmemory_uploaded_file
         super(ProductBrandImage, self).save(*args, **kwargs)
 
 
@@ -61,8 +61,8 @@ class ProductImage(BaseProductImage):
             height = int(image.size[1]*float(hpercent))
             size = (width, height)
             image = image.resize(size, resample=0, box=None)
-        thumb_io = BytesIO()
-        image.save(thumb_io, format='JPEG', optimize=True, quality=50)
-        inmemory_uploaded_file = InMemoryUploadedFile(thumb_io, None, self.image.name.split('.')[0] + '.jpg', 'image/jpeg', thumb_io.tell(), None)
-        self.image = inmemory_uploaded_file
+            thumb_io = BytesIO()
+            image.save(thumb_io, format='JPEG', optimize=True, quality=50)
+            inmemory_uploaded_file = InMemoryUploadedFile(thumb_io, None, self.image.name.split('.')[0] + '.jpg', 'image/jpeg', thumb_io.tell(), None)
+            self.image = inmemory_uploaded_file
         super(ProductImage, self).save(*args, **kwargs)

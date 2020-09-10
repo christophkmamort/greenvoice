@@ -4,17 +4,17 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 
 
 // Api
-import BrandList from './js/brandList';
-import CategoryList from './js/categoryList';
-import UserGroupFilter from './js/userGroupFilter';
-import ProductList from './js/productList';
-import ProductSearch from './js/productSearch';
+// import BrandList from './js/brandList';
+// import CategoryList from './js/categoryList';
+// import UserGroupFilter from './js/userGroupFilter';
+// import ProductList from './js/productList';
+// import ProductSearch from './js/productSearch';
 
-var brandList = new BrandList();
-var categoryList = new CategoryList();
-var userGroupFilter = new UserGroupFilter();
-var productList = new ProductList();
-var productSearch = new ProductSearch();
+// var brandList = new BrandList();
+// var categoryList = new CategoryList();
+// var userGroupFilter = new UserGroupFilter();
+// var productList = new ProductList();
+// var productSearch = new ProductSearch();
 
 
 // Functions checked
@@ -46,8 +46,8 @@ var registerUser = new RegisterUser();
 
 
 // Testing
-// import Test from './js/test';
-// var test = new Test();
+import Test from './js/test';
+var test = new Test();
 
 
 // Scss
