@@ -1,5 +1,8 @@
+from io import BytesIO
+from PIL import Image
 import os
 
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
