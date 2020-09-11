@@ -27,9 +27,15 @@ class Test {
       this.populateProductList()
     }
 
+    this.wishlistCount = $('.wishlistCount')
+    if (this.wishlistCount) {
+      this.wishlist_item_api = home_url + '/api/wishlist-item/'
+      this.countWishlistItems()
+    }
+
     this.wishlistList = $('.wishlistList')
     if (this.wishlistList) {
-      this.wishlist_api = home_url + '/api/wishlist/'
+      this.wishlist_item_api = home_url + '/api/wishlist-item/'
       this.populateWishlistList()
     }
 
@@ -62,7 +68,7 @@ class Test {
                   <h6>${ brand.name }</h6>
                 </div>
                 `
-              current_list.append(html)
+              current_list.html(html)
             }
           }
         }
@@ -74,7 +80,7 @@ class Test {
   populateProductList() {
     var that = this
 
-    that.productList.each(function() {
+    that.productList.each(function(index) {
       var current_list = $(this)
 
       fetch(that.product_manager_api)
@@ -124,6 +130,24 @@ class Test {
                     product_prices_from = 'ab ' + product_prices_from
                   }
                   var product_name = product_manager.product.name
+                  var wishlist_item = product_manager.wishlist_item
+
+                  var wishlist_item_id = ''
+                  if (wishlist_item[0]) {
+                    var wishlist_item_id = wishlist_item[0]
+                    var wishlist_html = `
+                      <button class="btn p-0 wishlist updateWishlist" data-unique="productList${ index + i }" data-action="delete">
+                        <svg class="bi bi-heart text-primary wishlist__icon wishlist__icon--filled" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="currentColor" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+                      </button>
+                    `
+                  } else {
+                    var wishlist_html = `
+                      <button class="btn p-0 wishlist updateWishlist" data-unique="productList${ index + i }" data-action="add">
+                        <svg class="bi bi-heart text-dark wishlist__icon wishlist__icon--outline" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+                        <svg class="bi bi-heart text-primary wishlist__icon wishlist__icon--filled d-none" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="currentColor" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+                      </button>
+                    `
+                  }
 
                   // TODO: Add logic to check if product is order/wishlist.
 
@@ -132,10 +156,7 @@ class Test {
                       <div class="d-flex">
                         <div class="position-relative">
                           <div class="position-absolute" style="right: 0.5em; top: 0.5em;">
-                            <button class="btn p-0 wishlist updateWishlist" data-action="add">
-                              <svg class="bi bi-heart text-dark wishlist__icon wishlist__icon--outline" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
-                              <svg class="bi bi-heart text-primary d-none wishlist__icon wishlist__icon--filled" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="currentColor" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
-                            </button>
+                            ${ wishlist_html }
                           </div>
                           <img src="${ title_image }" style="height: 10em;">
                         </div>
@@ -151,14 +172,15 @@ class Test {
                       </div>
                     </div>
                     `
-                  current_list.append(html)
+                  current_list.html(html)
 
-                  var updateWishlist = $($('.updateWishlist')[i])
+                  var product_option = '' // Add real product option selector here!!
+                  var updateWishlist = $($(`.updateWishlist[data-unique="productList${ index + i }"]`))
                   updateWishlist.on("click", (function(product_manager) {
                     return function(e) {
-                      that.updateWishlist(e, product_manager)
+                      that.updateWishlist(e, product_manager, product_option, wishlist_item_id)
                     }
-                  })(product_managers[i]))
+                  })(product_manager))
                 }
               }
             }
@@ -169,13 +191,68 @@ class Test {
   }
 
 
-  populateWishlistList() {
-    var that = this;
+  countWishlistItems() {
+    var that = this
 
-    that.wishlistList.each(function() {
+    if (user != 'AnonymousUser') {
+      fetch(that.wishlist_item_api)
+      .then((resp) => resp.json())
+      .then(function(data) {
+        var wishlist_items = data
+        if (wishlist_items) {
+          var wishlist_count = wishlist_items.length
+          that.wishlistCount.html(wishlist_count)
+        }
+      })
+    }
+  }
+
+
+  populateWishlistList() {
+    var that = this
+
+    that.wishlistList.each(function(index) {
       var current_list = $(this)
 
       if (user != 'AnonymousUser') {
+        fetch(that.wishlist_item_api)
+        .then((resp) => resp.json())
+        .then(function(data) {
+          var wishlist_items = data
+          var html = ''
+
+          if (wishlist_items.length > 0) {
+            for (var i in wishlist_items) {
+              var wishlist_item = wishlist_items[i]
+              var product_manager = wishlist_item.product_manager
+              var product_name = product_manager.product.name
+
+              var html = `
+                <div class="d-flex align-items-center wishlistItem">
+                  <h6 class="m-0">${ product_name }</h6>
+                  <button class="btn btn-sm btn-danger ml-3 updateWishlist" data-unique="wishlistList${ index + i }" data-action="delete">Delete</button>
+                </div>
+              `
+              current_list.html(html)
+
+              var product_option = ''
+              var wishlist_item_id = wishlist_item.id
+              var updateWishlist = $($(`.updateWishlist[data-unique="wishlistList${ index + i }"]`))
+              updateWishlist.on("click", (function(product_manager) {
+                return function(e) {
+                  that.updateWishlist(e, product_manager, product_option, wishlist_item_id)
+                }
+              })(product_manager))
+            }
+          } else {
+            var html = `
+              <div>
+                <h6>Deine Wunschliste ist noch leer.</h6>
+              </div>
+            `
+            current_list.html(html)
+          }
+        })
 
       } else {
         var html = `
@@ -183,37 +260,55 @@ class Test {
             <h6>Melde dich zuerst an um deine Wunschliste zu verwenden.</h6>
           </div>
         `
+        current_list.html(html)
       }
-
-      current_list.append(html)
     })
   }
 
 
-  updateWishlist(e, product_manager) {
+  updateWishlist(e, product_manager, product_option, wishlist_item_id) {
     var that = this
     var action = $(e.target.closest('.updateWishlist')).data('action')
 
+    // Add.
     if (action == 'add' && product_manager) {
-      fetch(that.wishlist_api, {
+      var product_manager_id = product_manager.id
+
+      fetch(that.wishlist_item_api, {
         method:'POST',
         headers:{
           'Content-type':'application/json',
           'X-CSRFToken':csrftoken,
         },
         body:JSON.stringify({
-          'quantity':1,
-          'order':order_id,
-          'product':product_id,
+          'product_manager':product_manager_id,
+          'product_option':product_option,
         })
       })
       .then((resp) => resp.json())
       .then(function(response) {
         console.log(response)
+        that.populateProductList()
+        that.countWishlistItems()
+        that.populateWishlistList()
       })
 
-    } else if (action == 'delete') {
-      console.log('delete wishlist item')
+    // Delete.
+    } else if (action == 'delete' && wishlist_item_id) {
+      fetch(that.wishlist_item_api + wishlist_item_id + '/', {
+        method:'DELETE',
+        headers:{
+          'Content-type':'application/json',
+          'X-CSRFToken':csrftoken,
+        },
+      })
+      .then(function(response) {
+        console.log(response)
+        that.populateProductList()
+        that.countWishlistItems()
+        that.populateWishlistList()
+      })
+
     }
   }
 
@@ -244,7 +339,7 @@ class Test {
                 <h6>Dein Warenkorb ist noch leer.</h6>
               </div>
             `
-            current_list.append(html)
+            current_list.html(html)
           }
         })
       } else {
@@ -438,7 +533,7 @@ class Test {
                 <hr class="bg-info">
               </div>
             `
-          currentFeed.append(product)
+          currentFeed.html(product)
 
           var updateCart = $($('.updateCart[data-action="add"]')[i])
           updateCart.on("click", (function(product) {
@@ -485,7 +580,7 @@ class Test {
                   <hr class="bg-info">
                 </div>
               `
-            that.cartFeed.append(item)
+            that.cartFeed.html(item)
 
             var updateCart = $($('.updateCart[data-action="delete"]')[x])
             updateCart.on("click", (function(product) {

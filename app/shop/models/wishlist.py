@@ -8,9 +8,9 @@ from .product import ProductManager, ProductOption
 
 class WishlistItem(models.Model):
     customer = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, null=True, related_name='wcustomer', verbose_name=_('customer'))
+        Customer, on_delete=models.CASCADE, null=True, related_name='wishlist_item', verbose_name=_('customer'))
     product_manager = models.ForeignKey(
-        ProductManager, on_delete=models.SET_NULL, null=True, verbose_name=_('product manager'))
+        ProductManager, on_delete=models.SET_NULL, null=True, related_name='wishlist_item', verbose_name=_('product manager'))
     product_option = models.ForeignKey(
         ProductOption, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_('product option'))
     created = models.DateTimeField(

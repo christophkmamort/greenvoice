@@ -1,8 +1,8 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from api.serializers.wishlist import WishlistItemSerializer
-from shop.models.wishlist import WishlistItem
+from api.serializers.wishlist import *
+from shop.models.wishlist import *
 
 
 class WishlistItemViewSet(ModelViewSet):
@@ -14,6 +14,14 @@ class WishlistItemViewSet(ModelViewSet):
 
     def get_queryset(self):
         return WishlistItem.objects.filter(customer=self.request.user.customer)
+
+    def get_serializer_class(self):
+        """
+        Return appropriate serializer class for wishlist items.
+        """
+        if self.action == 'retrieve' or self.action == 'list':
+            return WishlistItemDetailSerializer
+        return self.serializer_class
 
     def perform_create(self, serializer):
         serializer.save(customer=self.request.user.customer)

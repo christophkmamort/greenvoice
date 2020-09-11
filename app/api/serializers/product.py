@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 
 from .media import ProductBrandImageSerializer, ProductImageSerializer
 from .taxonomies import ColorSerializer, SizeSerializer
@@ -13,6 +13,7 @@ class ProductSerializer(ModelSerializer):
 
 
 class ProductManagerSerializer(ModelSerializer):
+    product = ProductSerializer(read_only=True)
 
     class Meta:
         model = ProductManager
@@ -40,7 +41,9 @@ class ProductManagerDetailSerializer(ModelSerializer):
     product_option = ProductOptionDetailSerializer(read_only=True, many=True)
     image = ProductImageSerializer(read_only=True, many=True)
     brand_image = ProductBrandImageSerializer(read_only=True, many=True)
+    wishlist_item = PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = ProductManager
         fields = '__all__'
+        # fields = ['id', 'color', 'product', 'product_option', 'image', 'brand_image', 'query', 'value', 'created', 'wishlist_item']
