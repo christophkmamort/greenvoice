@@ -30,6 +30,8 @@ router.register(r'taxonomy-target-group', views.TargetGroupViewSet, basename='ta
 router.register(r'user', views.UserViewSet, basename='user')
 router.register(r'user-customer', views.CustomerViewSet, basename='user-customer')
 
+router.register(r'wishlist-item', views.WishlistItemViewSet, basename='wishlist-item')
+
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),

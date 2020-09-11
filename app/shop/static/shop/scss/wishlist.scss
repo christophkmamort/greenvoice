@@ -1,0 +1,14 @@
+.wishlist {
+  &__icon {
+    height: 1.5em;
+  }
+
+  &:hover {
+    & .wishlist__icon--outline {
+      display: none;
+    }
+    & .wishlist__icon--filled {
+      display: inline !important;
+    }
+  }
+}

@@ -18,7 +18,7 @@ class Test {
     this.brandList = $('.brandList')
     if (this.brandList) {
       this.brand_api = home_url + '/api/brand/'
-      this.populateBrandFeed()
+      this.populateBrandList()
     }
 
     this.productList = $('.productList')
@@ -27,15 +27,21 @@ class Test {
       this.populateProductList()
     }
 
+    this.wishlistList = $('.wishlistList')
+    if (this.wishlistList) {
+      this.wishlist_api = home_url + '/api/wishlist/'
+      this.populateWishlistList()
+    }
+
     this.orderList = $('.orderList')
-    if (this.cartList) {
+    if (this.orderList) {
       this.order_api = home_url + '/api/order/'
       this.populateOrderList()
     }
   }
 
 
-  populateBrandFeed() {
+  populateBrandList() {
     var that = this
 
     that.brandList.each(function() {
@@ -68,87 +74,182 @@ class Test {
   populateProductList() {
     var that = this
 
-    fetch(that.product_manager_api)
-    .then((resp) => resp.json())
-    .then(function(data) {
-      var product_managers = data
+    that.productList.each(function() {
+      var current_list = $(this)
 
-      if (product_managers) {
-        for (var i in product_managers) {
-          var product_manager = product_managers[i]
-          var product_options = product_manager.product_option
+      fetch(that.product_manager_api)
+      .then((resp) => resp.json())
+      .then(function(data) {
+        var product_managers = data
 
-          // TODO: Add logic to check if products are in stock/available.
+        if (product_managers) {
+          for (var i in product_managers) {
+            var product_manager = product_managers[i]
+            var product_options = product_manager.product_option
 
-          if (product_options) {
-            var porduct_color = product_manager.color.name
-            var product_option_prices = []
-            var product_option_sizes = []
+            // TODO: Add logic to check if products are in stock/available.
 
-            for (var x in product_options) {
-              var product_option = product_options[x]
-              var product_status = product_option.status
+            if (product_options) {
+              var porduct_color = product_manager.color.name
+              var product_option_prices = []
+              var product_option_sizes = []
 
-              if (product_status == 2) {
-                product_option_prices.push(product_option.gross)
-                product_option_sizes.push(product_option.size.name)
-              }
-            }
+              for (var x in product_options) {
+                var product_option = product_options[x]
+                var product_status = product_option.status
 
-            if (product_option_prices.length > 0
-            && product_option_sizes.length > 0) {
-              var product_images = product_manager.image
-
-              if (product_images.length > 0) {
-                var title_image = product_manager.image[0].image
-              } else {
-                var product_brand_images = product_manager.brand_image
-                if (product_brand_images.length > 0) {
-                  var title_image = product_manager.brand_image[0].image
+                if (product_status == 2) {
+                  product_option_prices.push(product_option.gross)
+                  product_option_sizes.push(product_option.size.name)
                 }
               }
 
-              if (title_image) {
-                product_option_prices.sort(function(a, b) { return a-b })
-                var product_prices_from = product_option_prices[0]
-                var product_name = product_manager.product.name
+              if (product_option_prices.length > 0
+              && product_option_sizes.length > 0) {
+                var product_images = product_manager.image
 
-                var html = `
-                  <div>
-                    <a href="#">
+                if (product_images.length > 0) {
+                  var title_image = product_manager.image[0].image
+                } else {
+                  var product_brand_images = product_manager.brand_image
+                  if (product_brand_images.length > 0) {
+                    var title_image = product_manager.brand_image[0].image
+                  }
+                }
+
+                if (title_image) {
+                  product_option_prices.sort(function(a, b) { return a-b })
+                  var product_prices_from = product_option_prices[0]
+                  if (product_prices_from < product_option_prices[-1]) {
+                    product_prices_from = 'ab ' + product_prices_from
+                  }
+                  var product_name = product_manager.product.name
+
+                  // TODO: Add logic to check if product is order/wishlist.
+
+                  var html = `
+                    <div>
                       <div class="d-flex">
-                        <img src="${ title_image }" style="height: 10em;">
-                        <div>
+                        <div class="position-relative">
+                          <div class="position-absolute" style="right: 0.5em; top: 0.5em;">
+                            <button class="btn p-0 wishlist updateWishlist" data-action="add">
+                              <svg class="bi bi-heart text-dark wishlist__icon wishlist__icon--outline" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="none" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+                              <svg class="bi bi-heart text-primary d-none wishlist__icon wishlist__icon--filled" viewBox="0 0 26.593 25.22" xmlns="http://www.w3.org/2000/svg"><path d="M12.267,2.015c6.8-7,23.819,5.246,0,20.985C-11.552,7.262,5.462-4.98,12.267,2.015Z" transform="translate(1.03 1.022)" fill="currentColor" stroke="currentColor" stroke-width="2" fill-rule="evenodd"/></svg>
+                            </button>
+                          </div>
+                          <img src="${ title_image }" style="height: 10em;">
+                        </div>
+                        <div class="ml-3">
                           <h6>${ product_name }</h6>
                           <p>
-                            ab €${ product_prices_from }
+                            € ${ product_prices_from }
                             <br>
                             ${ porduct_color }
                             <br>
                           </p>
                         </div>
                       </div>
-                    </a>
-                  </div>
-                  `
-                that.productList.append(html)
+                    </div>
+                    `
+                  current_list.append(html)
+
+                  var updateWishlist = $($('.updateWishlist')[i])
+                  updateWishlist.on("click", (function(product_manager) {
+                    return function(e) {
+                      that.updateWishlist(e, product_manager)
+                    }
+                  })(product_managers[i]))
+                }
               }
             }
           }
         }
-      }
+      })
     })
   }
 
-  populateOrderFeed() {
+
+  populateWishlistList() {
     var that = this;
 
-    fetch(that.order_api)
-    .then((resp) => resp.json())
-    .then(function(data) {
-      var orders = data
+    that.wishlistList.each(function() {
+      var current_list = $(this)
 
-      // make order stuff happen here..
+      if (user != 'AnonymousUser') {
+
+      } else {
+        var html = `
+          <div>
+            <h6>Melde dich zuerst an um deine Wunschliste zu verwenden.</h6>
+          </div>
+        `
+      }
+
+      current_list.append(html)
+    })
+  }
+
+
+  updateWishlist(e, product_manager) {
+    var that = this
+    var action = $(e.target.closest('.updateWishlist')).data('action')
+
+    if (action == 'add' && product_manager) {
+      fetch(that.wishlist_api, {
+        method:'POST',
+        headers:{
+          'Content-type':'application/json',
+          'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({
+          'quantity':1,
+          'order':order_id,
+          'product':product_id,
+        })
+      })
+      .then((resp) => resp.json())
+      .then(function(response) {
+        console.log(response)
+      })
+
+    } else if (action == 'delete') {
+      console.log('delete wishlist item')
+    }
+  }
+
+
+  populateOrderList() {
+    var that = this;
+
+    that.orderList.each(function() {
+      var current_list = $(this)
+      var current_list_style = current_list.data('style')
+
+      if (user != 'AnonymousUser') {
+        var filter = ''
+        if (current_list_style == 'cart') {
+          filter = '?status=1'
+        }
+
+        fetch(that.order_api + filter)
+        .then((resp) => resp.json())
+        .then(function(data) {
+          var orders = data
+
+          if (orders.length > 0) {
+
+          } else {
+            var html = `
+              <div>
+                <h6>Dein Warenkorb ist noch leer.</h6>
+              </div>
+            `
+            current_list.append(html)
+          }
+        })
+      } else {
+        // Get cart/order cookies
+      }
     })
   }
 

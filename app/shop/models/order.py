@@ -7,7 +7,8 @@ from .product import Product
 
 
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, verbose_name=_('customer'))
+    customer = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, null=True, related_name='customer', verbose_name=_('customer'))
     DRAFT = 1
     ORDERED = 2
     COMPLETED = 3
@@ -16,7 +17,8 @@ class Order(models.Model):
         (ORDERED, _('ordered')),
         (COMPLETED, _('completed')),
     )
-    status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
+    status = models.PositiveSmallIntegerField(
+        choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
 
     """def __str__(self):
         return self.customer"""
@@ -41,10 +43,14 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, verbose_name=_('customer'))
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True, related_name='items', verbose_name=_('order'))
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, verbose_name=_('product'))
-    quantity = models.IntegerField(default=0, null=True, verbose_name=_('quantity'))
+    """ customer = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, null=True, verbose_name=_('customer')) """
+    order = models.ForeignKey(Order, on_delete=models.CASCADE,
+                              null=True, related_name='items', verbose_name=_('order'))
+    product = models.ForeignKey(
+        Product, on_delete=models.SET_NULL, null=True, verbose_name=_('product'))
+    quantity = models.IntegerField(
+        default=0, null=True, verbose_name=_('quantity'))
 
     def __str__(self):
         return self.product.name

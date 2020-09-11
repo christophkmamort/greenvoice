@@ -2,7 +2,6 @@ import $ from 'jquery';
 import './../../../node_modules/popper.js/dist/popper.min.js';
 import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 
-
 // Api
 // import BrandList from './js/brandList';
 // import CategoryList from './js/categoryList';
@@ -16,12 +15,10 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 // var productList = new ProductList();
 // var productSearch = new ProductSearch();
 
-
 // Functions checked
 import Modal from './js/modal';
 
 var modal = new Modal();
-
 
 // Functions
 import AcceptCookies from './js/acceptCookies';
@@ -44,11 +41,9 @@ var productDetailNav = new ProductDetailNav();
 var productDetailTransparencyMapLocations = new ProductDetailTransparencyMapLocations();
 var registerUser = new RegisterUser();
 
-
 // Testing
 import Test from './js/test';
 var test = new Test();
-
 
 // Scss
 import "./app.scss";

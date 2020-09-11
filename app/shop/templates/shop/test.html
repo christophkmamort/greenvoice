@@ -7,15 +7,26 @@
   <div class="w-100 min-vh-100 bg-white">
     <div class="container pt-5 pb-5">
 
-      <div class="cartList">
-        <h3>Cart</h3>
+      <div class="circle {% if user.is_authenticated %} bg-primary {% else %} bg-info {% endif %}" style="height: 0.5em; width: 0.5em;">
+      </div>
+
+      <div class="seperator mt-5"></div>
+
+      <div class="row">
+        <div class="col orderList" data-style="cart">
+          <h3>Cart</h3>
+        </div>
+        <div class="col wishlistList" data-style="cart">
+          <h3>Wishlist</h3>
+        </div>
       </div>
 
       <div class="seperator mt-5"></div>
       <hr>
       <div class="seperator mt-5"></div>
 
-      <div class="productList" data-amount="12" data-ordering="-value"> <!-- data-style="feed" -->
+      <div class="productList" data-amount="12" data-ordering="-value">
+        <!-- data-style="feed" -->
         <h3>Product List</h3>
       </div>
 
