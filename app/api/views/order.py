@@ -1,8 +1,8 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from api.serializers.order import OrderItemSerializer, OrderSerializer
-from shop.models.order import Order, OrderItem
+from api.serializers.order import *
+from shop.models.order import *
 
 
 class OrderViewSet(ModelViewSet):
@@ -15,13 +15,16 @@ class OrderViewSet(ModelViewSet):
     def get_queryset(self):
         return Order.objects.filter(customer=self.request.user.customer)
 
+    def get_serializer_class(self):
+        if self.action == 'retrieve' or self.action == 'list':
+            return OrderDetailSerializer
+        return self.serializer_class
+
     def perform_create(self, serializer):
         serializer.save(customer=self.request.user.customer)
 
     def perform_update(self, serializer):
         serializer.save(customer=self.request.user.customer)
-
-    """def perform_destroy(self, instance):"""
 
 
 class OrderItemViewSet(ModelViewSet):
@@ -31,15 +34,13 @@ class OrderItemViewSet(ModelViewSet):
     serializer_class = OrderItemSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_serializer_class(self):
-        """Return appropriate serializer class"""
-        if self.action == 'retrieve':
-            return OrderItemDetailSerializer
-
-        return self.serializer_class
-
     def get_queryset(self):
         return OrderItem.objects.filter(customer=self.request.user.customer)
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve' or self.action == 'list':
+            return OrderItemDetailSerializer
+        return self.serializer_class
 
     def perform_create(self, serializer):
         serializer.save(customer=self.request.user.customer)

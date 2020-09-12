@@ -4,11 +4,9 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
-from api.serializers.product import ProductManagerSerializer, \
-                                    ProductManagerDetailSerializer, \
-                                    ProductOptionSerializer, ProductSerializer
+from api.serializers.product import *
 from taxonomies.models import Category
-from shop.models.product import Product, ProductManager, ProductOption
+from shop.models.product import *
 
 
 class ProductManagerViewSet(ModelViewSet):
@@ -20,7 +18,7 @@ class ProductManagerViewSet(ModelViewSet):
     filter_fields = ['product__brand']
     ordering_fields = ['created', 'value']
     ordering = ['-created']
-    search_fields = ['color__name'] # Add more search fields
+    search_fields = ['color__name', 'query'] # Add more search fields
     serializer_class = ProductManagerSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -43,6 +41,14 @@ class ProductOptionViewSet(ModelViewSet):
     ordering = ['-created']
     serializer_class = ProductOptionSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_serializer_class(self):
+        """
+        Return appropriate serializer class for product option.
+        """
+        if self.action == 'retrieve' or self.action == 'list':
+            return ProductOptionDetailSerializer
+        return self.serializer_class
 
 
 class ProductViewSet(ModelViewSet):

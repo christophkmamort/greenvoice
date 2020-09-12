@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from users.models.customer import Customer
-from .product import Product
+from .product import ProductOption
 
 
 class Order(models.Model):
@@ -20,9 +20,6 @@ class Order(models.Model):
     status = models.PositiveSmallIntegerField(
         choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
 
-    """def __str__(self):
-        return self.customer"""
-
     @property
     def get_cart_items(self):
         orderitems = self.orderitem_set.all()
@@ -35,20 +32,14 @@ class Order(models.Model):
         total = sum([item.get_total for item in orderitems])
         return total
 
-    """@property
-    def get_content_type(self):
-        instance = self
-        content_type = ContentType.objects.get_for_model(instance.__class__)
-        return content_type"""
-
 
 class OrderItem(models.Model):
-    """ customer = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, null=True, verbose_name=_('customer')) """
+    customer = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, null=True, verbose_name=_('customer'))
     order = models.ForeignKey(Order, on_delete=models.CASCADE,
-                              null=True, related_name='items', verbose_name=_('order'))
-    product = models.ForeignKey(
-        Product, on_delete=models.SET_NULL, null=True, verbose_name=_('product'))
+                              null=True, related_name='order_items', verbose_name=_('order'))
+    product_option = models.ForeignKey(
+        ProductOption, on_delete=models.SET_NULL, null=True, verbose_name=_('product'))
     quantity = models.IntegerField(
         default=0, null=True, verbose_name=_('quantity'))
 
@@ -59,9 +50,4 @@ class OrderItem(models.Model):
     def get_total(self):
         total = self.product.price * self.quantity
         return total
-
-    """@property
-    def get_content_type(self):
-        instance = self
-        content_type = ContentType.objects.get_for_model(instance.__class__)
-        return content_type"""
+        return content_type

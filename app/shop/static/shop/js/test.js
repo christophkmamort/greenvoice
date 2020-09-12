@@ -24,6 +24,7 @@ class Test {
     this.productList = $('.productList')
     if (this.productList) {
       this.product_manager_api = home_url + '/api/product-manager/'
+      this.order_api = home_url + '/api/order/'
       this.populateProductList()
     }
 
@@ -36,7 +37,14 @@ class Test {
     this.wishlistList = $('.wishlistList')
     if (this.wishlistList) {
       this.wishlist_item_api = home_url + '/api/wishlist-item/'
+      this.order_api = home_url + '/api/order/'
       this.populateWishlistList()
+    }
+
+    this.orderCount = $('.orderCount')
+    if (this.orderCount) {
+      this.order_item_api = home_url + '/api/order-item/'
+      this.countOrderItems()
     }
 
     this.orderList = $('.orderList')
@@ -99,16 +107,27 @@ class Test {
               var porduct_color = product_manager.color.name
               var product_option_prices = []
               var product_option_sizes = []
+              var product_options_html = '<div class="seperator mt-1"></div>'
 
               for (var x in product_options) {
                 var product_option = product_options[x]
                 var product_status = product_option.status
 
                 if (product_status == 2) {
+                  var product_option_size = product_option.size.name
+                  var product_option_id = product_option.id
                   product_option_prices.push(product_option.gross)
-                  product_option_sizes.push(product_option.size.name)
+                  product_option_sizes.push(product_option_size)
+
+                  product_options_html += `
+                    <label class="checkbox form-check m-0 p-1">
+                      <input class="form-check-input productOption" type="radio" name="productOption" value="${ product_option_id }">
+                      <h6 class="checkbox-text checkbox-text-strong m-0 ml-1 text-small text-regular">${ product_option_size }</h6>
+                    </label>
+                  `
                 }
               }
+              product_options_html += '<div class="seperator mt-1"></div>'
 
               if (product_option_prices.length > 0
               && product_option_sizes.length > 0) {
@@ -149,7 +168,7 @@ class Test {
                     `
                   }
 
-                  // TODO: Add logic to check if product is order/wishlist.
+                  // TODO: Add logic to check if product is order.
 
                   var html = `
                     <div>
@@ -168,19 +187,38 @@ class Test {
                             ${ porduct_color }
                             <br>
                           </p>
+                          <div class="d-flex">
+
+                            <div class="dropdown">
+                              <button class="btn btn-sm btn-outline-info dropdown-toggle productOptionIndicator" type="button" id="productDetailNavSizeDropdown" data-toggle="dropdown">
+                                Größe
+                              </button>
+                              <div class="dropdown-menu border border-info p-0" aria-labelledby="productOptionDropdown">
+                                ${ product_options_html }
+                              </div>
+                            </div>
+
+                            <button class="btn btn-sm btn-primary ml-2 updateOrder" data-action="add" data-unique="productList${ index + i }">Add to cart</button>
+                          </div>
                         </div>
                       </div>
                     </div>
                     `
                   current_list.html(html)
 
-                  var product_option = '' // Add real product option selector here!!
+                  var product_option_id = '' // Add real product option selector here!!
                   var updateWishlist = $($(`.updateWishlist[data-unique="productList${ index + i }"]`))
                   updateWishlist.on("click", (function(product_manager) {
                     return function(e) {
-                      that.updateWishlist(e, product_manager, product_option, wishlist_item_id)
+                      that.updateWishlist(e, product_manager, product_option_id, wishlist_item_id)
                     }
                   })(product_manager))
+
+                  var updateOrder = $($(`.updateOrder[data-unique="productList${ index + i }"]`))
+                  updateOrder.on("click", (function(e) {
+                    product_option_id = $('input[name="productOption"]:checked').val()
+                    that.updateOrder(e, product_option_id)
+                  }))
                 }
               }
             }
@@ -199,7 +237,7 @@ class Test {
       .then((resp) => resp.json())
       .then(function(data) {
         var wishlist_items = data
-        if (wishlist_items) {
+        if (wishlist_items.length > 0) {
           var wishlist_count = wishlist_items.length
           that.wishlistCount.html(wishlist_count)
         }
@@ -313,10 +351,33 @@ class Test {
   }
 
 
+  countOrderItems() {
+    var that = this
+
+    /*if (user != 'AnonymousUser') {
+      fetch(that.order_item_api)
+      .then((resp) => resp.json())
+      .then(function(data) {
+        var order_items = data
+        if (order_items.length > 0) {
+          var order_count = ''
+          for (var i in order_items) {
+            order_item = order_items[i]
+            // order_count += order_item.quantity
+          }
+          that.orderCount.html(order_count)
+        }
+      })
+    } else {
+      // Add cookie logic here!!
+    }*/
+  }
+
+
   populateOrderList() {
     var that = this;
 
-    that.orderList.each(function() {
+    /*that.orderList.each(function() {
       var current_list = $(this)
       var current_list_style = current_list.data('style')
 
@@ -345,10 +406,108 @@ class Test {
       } else {
         // Get cart/order cookies
       }
-    })
+    })*/
   }
 
-  /*addCartItem(order_id, item, product_id) {
+
+  updateOrder(e, product_option_id) {
+    var that = this
+
+    if (product_option_id) {
+      var action = $(e.target.closest('.updateOrder')).data('action')
+
+      if (action == 'add') {
+        if (user != 'AnonymousUser') {
+          fetch(that.order_api + '?status=1')
+          .then((resp) => resp.json())
+          .then(function(data) {
+            var orders = data
+
+            if (orders) {
+              var order = orders[0]
+
+              if (order) {
+                var order_items = order.order_items
+
+                if (order_items.length > 0) { // == 1
+                  // update amount of item.
+
+                } else {
+                  fetch(that.order_item_api, {
+                    method:'POST',
+                    headers:{
+                      'Content-type':'application/json',
+                      'X-CSRFToken':csrftoken,
+                    },
+                    body:JSON.stringify({
+                      'order':order.id,
+                      'product_option':product_option_id,
+                      'quantity':1,
+                    })
+                  })
+                  .then((resp) => resp.json())
+                  .then(function(response) {
+                    console.log(response)
+                    // that.countOrderItems()
+                    // that.populateOrderList()
+                  })
+
+                }
+              }
+            }
+          })
+
+        } else {
+          // Make add to cart logic with cookies here.
+        }
+      }
+    }
+  }
+
+
+  /*addOrderItem(oder_id, product_option_id, exists) {
+    var that = this
+
+    if (exists) {
+      /*
+      Increase quantity of order item.
+      */
+      // First get then increase.
+
+      /*fetch(that.order_item_api + product_option_id + '/', {
+        method:'POST',
+        headers:{
+          'Content-type':'application/json',
+          'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({
+          'quantity':1,
+          'order':order_id,
+          'product_option':product_option_id,
+        })
+      })
+      .then((resp) => resp.json())
+      .then(function(response) {
+        console.log(response)
+      })
+
+    } else {
+      /*
+      Create new order item.
+      */
+
+      /*console.log(oder_id)
+      console.log(product_option_id)
+    }
+  }*/
+
+
+
+
+
+
+
+  addCartItemOLD(order_id, item, product_id) {
     var that = this
 
     if (item == null) {
@@ -392,7 +551,7 @@ class Test {
   }
 
 
-  removeCartItem(item) {
+  removeCartItemOLD(item) {
     var that = this
 
     if (item.quantity <= 1) {
@@ -420,7 +579,7 @@ class Test {
   }
 
 
-  deleteCartItem(item) {
+  deleteCartItemOLD(item) {
     var that = this
     var order_item_api = that.order_item_api + item.id + '/'
 
@@ -439,7 +598,7 @@ class Test {
 
 
   // Create/edit cart add/remove items
-  updateCart(e, product) { // product
+  updateCartOLD(e, product) { // product
     var that = this
     var action = $(e.target).data('action')
 
@@ -503,7 +662,7 @@ class Test {
 
 
 
-  populateProductFeed() {
+  populateProductFeedOLD() {
     var that = this
 
     that.productFeed.each(function() {
@@ -547,7 +706,7 @@ class Test {
   }
 
 
-  populateCartFeed() {
+  populateCartFeedOLD() {
     var that = this
 
     fetch(that.order_api)
@@ -601,7 +760,7 @@ class Test {
 
     })
 
-  }*/
+  }
 
 
 }

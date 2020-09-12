@@ -13,7 +13,6 @@ class ProductSerializer(ModelSerializer):
 
 
 class ProductManagerSerializer(ModelSerializer):
-    product = ProductSerializer(read_only=True)
 
     class Meta:
         model = ProductManager
@@ -27,23 +26,22 @@ class ProductOptionSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class ProductOptionDetailSerializer(ModelSerializer):
+class ProductManagerOptionDetailSerializer(ProductManagerSerializer):
+    color = ColorSerializer(read_only=True)
+    product = ProductSerializer(read_only=True)
+    image = ProductImageSerializer(read_only=True, many=True)
+    brand_image = ProductBrandImageSerializer(read_only=True, many=True)
+
+
+class ProductOptionDetailSerializer(ProductOptionSerializer):
+    product_manager = ProductManagerOptionDetailSerializer(read_only=True)
     size = SizeSerializer(read_only=True)
 
-    class Meta:
-        model = ProductOption
-        fields = '__all__'
 
-
-class ProductManagerDetailSerializer(ModelSerializer):
+class ProductManagerDetailSerializer(ProductManagerSerializer):
     color = ColorSerializer(read_only=True)
     product = ProductSerializer(read_only=True)
     product_option = ProductOptionDetailSerializer(read_only=True, many=True)
     image = ProductImageSerializer(read_only=True, many=True)
     brand_image = ProductBrandImageSerializer(read_only=True, many=True)
     wishlist_item = PrimaryKeyRelatedField(many=True, read_only=True)
-
-    class Meta:
-        model = ProductManager
-        fields = '__all__'
-        # fields = ['id', 'color', 'product', 'product_option', 'image', 'brand_image', 'query', 'value', 'created', 'wishlist_item']
