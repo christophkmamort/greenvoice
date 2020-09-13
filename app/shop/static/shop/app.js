@@ -17,8 +17,12 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 
 // Functions checked
 import Modal from './js/modal';
+import Order from './js/order';
+import Wishlist from './js/wishlist';
 
 var modal = new Modal();
+var order = new Order();
+var wishlist = new Wishlist();
 
 // Functions
 import AcceptCookies from './js/acceptCookies';

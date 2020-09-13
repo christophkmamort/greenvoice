@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import order from '../app';
 
 class Test {
   constructor() {
@@ -41,7 +42,10 @@ class Test {
       this.populateWishlistList()
     }
 
-    this.orderCount = $('.orderCount')
+    /*this.orderCount = $('.orderCount')
+    this.orderGross = $('.orderGross')
+    this.orderDeliveryGross = $('.orderDeliveryGross')
+    this.orderTax = $('.orderTax')
     if (this.orderCount) {
       this.order_item_api = home_url + '/api/order-item/'
       this.countOrderItems()
@@ -51,7 +55,7 @@ class Test {
     if (this.orderList) {
       this.order_api = home_url + '/api/order/'
       this.populateOrderList()
-    }
+    }*/
   }
 
 
@@ -196,6 +200,7 @@ class Test {
                               <div class="dropdown-menu border border-info p-0" aria-labelledby="productOptionDropdown">
                                 ${ product_options_html }
                               </div>
+                              <p class="m-0 text-samller text-danger productOptionErrorMsg"></p>
                             </div>
 
                             <button class="btn btn-sm btn-primary ml-2 updateOrder" data-action="add" data-unique="productList${ index + i }">Add to cart</button>
@@ -216,8 +221,11 @@ class Test {
 
                   var updateOrder = $($(`.updateOrder[data-unique="productList${ index + i }"]`))
                   updateOrder.on("click", (function(e) {
-                    product_option_id = $('input[name="productOption"]:checked').val()
-                    that.updateOrder(e, product_option_id)
+                    var action = $(e.target).data('action')
+                    var args = {
+                      'product-option-id': $('input[name="productOption"]:checked').val(),
+                    }
+                    that.order.updateOrder(e, action, args)
                   }))
                 }
               }
@@ -351,34 +359,39 @@ class Test {
   }
 
 
-  countOrderItems() {
+  /*countOrderItems() {
     var that = this
 
-    /*if (user != 'AnonymousUser') {
+    if (user != 'AnonymousUser') {
       fetch(that.order_item_api)
       .then((resp) => resp.json())
       .then(function(data) {
         var order_items = data
         if (order_items.length > 0) {
           var order_count = ''
-          for (var i in order_items) {
-            order_item = order_items[i]
-            // order_count += order_item.quantity
-          }
+          var order_gross = ''
+          var order_item = order_items[0]
+          order_count += order_item.quantity
+          order_gross += order_item.quantity * order_item.product_option.gross
           that.orderCount.html(order_count)
+          that.orderGross.html('Total: € ' + order_gross)
+        } else {
+          that.orderCount.html('0')
+          that.orderGross.html('')
         }
       })
     } else {
       // Add cookie logic here!!
-    }*/
-  }
+    }
+  }*/
 
 
-  populateOrderList() {
+  /*populateOrderList() {
     var that = this;
 
-    /*that.orderList.each(function() {
+    that.orderList.each(function(index) {
       var current_list = $(this)
+      current_list.html('') // Possibility to add placeholders in html and then replace!!)
       var current_list_style = current_list.data('style')
 
       if (user != 'AnonymousUser') {
@@ -393,6 +406,43 @@ class Test {
           var orders = data
 
           if (orders.length > 0) {
+            var order = orders[0]
+            var order_items = order.order_items
+            var order_items_length = order_items.length
+            for (var i in order_items) {
+              var order_item = order_items[i]
+              var product_name = order_item.product_option.product_manager.product.name
+              var product_option_gross = order_item.product_option.gross
+              var order_item_quantity = order_item.quantity
+              var product_option_id = order_item.id
+
+              var html = `
+                <div class="d-flex align-items-center wishlistItem">
+                  <h6 class="m-0">${ product_name }</h6>
+                  <p class="m-0 ml-2">€ ${ product_option_gross }</p>
+                  <p class="m-0 ml-2">(${ order_item_quantity })</p>
+                  <button class="btn ml-3 updateOrder" data-unique="orderList${ index + i + '1' }" data-action="add">+</button>
+                  <button class="btn btn-sm btn-danger updateOrder" data-unique="orderList${ index + i + '2' }" data-action="delete">Delete</button>
+                  <button class="btn updateOrder" data-unique="orderList${ index + i + '3' }" data-action="remove">-</button>
+                </div>
+              `
+              current_list.append(html)
+
+              var args = {
+                'order-item': order_item,
+                'order-items-length':order_items_length,
+              }
+
+              var x = 0
+              while (x < 3) {
+                x++
+                var updateOrder = $(`.updateOrder[data-unique="orderList${ index + i + x.toString() }"]`)
+                updateOrder.on("click", (function(e) {
+                  var action = $(e.target).data('action')
+                  that.updateOrder(e, action, args)
+                }))
+              }
+            }
 
           } else {
             var html = `
@@ -402,37 +452,175 @@ class Test {
             `
             current_list.html(html)
           }
+
         })
       } else {
         // Get cart/order cookies
+        if (1 == 0) {
+
+        } else {
+          var html = `
+            <div>
+              <h6>Dein Warenkorb ist noch leer.</h6>
+            </div>
+          `
+          current_list.html(html)
+        }
       }
-    })*/
-  }
+    })
+  }*/
 
 
-  updateOrder(e, product_option_id) {
+  updateOrderOLD(e, action, args) {
     var that = this
 
-    if (product_option_id) {
-      var action = $(e.target.closest('.updateOrder')).data('action')
+    if (args) {
+      if (user != 'AnonymousUser') {
+        /*
+        Logic if user is logged in.
+        */
+        if (args['order-item']) {
+          /*
+          Logic if order item exists.
+          */
+          var order_item = args['order-item']
+          var order_item_id = order_item.id
 
-      if (action == 'add') {
-        if (user != 'AnonymousUser') {
-          fetch(that.order_api + '?status=1')
-          .then((resp) => resp.json())
-          .then(function(data) {
-            var orders = data
+          if (action == 'add') {
+            /*
+            Increase order-item quantity.
+            */
+            var order_item_quantity = order_item.quantity + 1
+            fetch(that.order_item_api + order_item_id + '/', {
+              method:'PUT',
+              headers:{
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+              },
+              body:JSON.stringify({
+                'quantity':order_item_quantity,
+              })
+            })
+            .then((resp) => resp.json())
+            .then(function(response) {
+              console.log(response)
+              that.countOrderItems()
+              that.populateOrderList()
+            })
 
-            if (orders) {
-              var order = orders[0]
-
-              if (order) {
-                var order_items = order.order_items
-
-                if (order_items.length > 0) { // == 1
-                  // update amount of item.
-
+          } else if (action == 'remove') {
+            /*
+            Decrease order-item quantity.
+            */
+            var order_item_quantity = order_item.quantity - 1
+            if (order_item_quantity <= 0) {
+              /*
+              If order-item amount reaches 0 delete order-item.
+              */
+              fetch(that.order_item_api + order_item_id + '/', {
+                method:'DELETE',
+                headers:{
+                  'Content-type':'application/json',
+                  'X-CSRFToken':csrftoken,
+                },
+              })
+              .then(function(response) {
+                var order_items_length = args['order-items-length']
+                if (order_items_length <= 1) {
+                  var order_id = order_item.order
+                  fetch(that.order_api + order_id + '/', {
+                    method:'DELETE',
+                    headers:{
+                      'Content-type':'application/json',
+                      'X-CSRFToken':csrftoken,
+                    },
+                  })
+                  .then(function(response) {
+                    that.countOrderItems()
+                    that.populateOrderList()
+                  })
                 } else {
+                  that.countOrderItems()
+                  that.populateOrderList()
+                }
+              })
+
+
+            } else {
+              fetch(that.order_item_api + order_item_id + '/', {
+                method:'PUT',
+                headers:{
+                  'Content-type':'application/json',
+                  'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({
+                  'quantity':order_item_quantity,
+                })
+              })
+              .then((resp) => resp.json())
+              .then(function(response) {
+                that.countOrderItems()
+                that.populateOrderList()
+              })
+            }
+
+          } else if (action == 'delete') {
+            /*
+            Delete order-item.
+            */
+            fetch(that.order_item_api + order_item_id + '/', {
+              method:'DELETE',
+              headers:{
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+              },
+            })
+            .then(function(response) {
+              var order_items_length = args['order-items-length']
+              if (order_items_length <= 1) {
+                var order_id = order_item.order
+                fetch(that.order_api + order_id + '/', {
+                  method:'DELETE',
+                  headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                  },
+                })
+                .then(function(response) {
+                  that.countOrderItems()
+                  that.populateOrderList()
+                })
+              } else {
+                that.countOrderItems()
+                that.populateOrderList()
+              }
+            })
+
+          }
+
+        } else if (action == 'add') {
+          /*
+          Create new order-item.
+          */
+          if (args['product-option-id']) {
+            var filter = '?status=1'
+            fetch(that.order_api + filter)
+            .then((resp) => resp.json())
+            .then(function(data) {
+              var orders = data
+
+              if (orders.length <= 0) {
+                fetch(that.order_api, {
+                  method:'POST',
+                  headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                  },
+                })
+                .then((resp) => resp.json())
+                .then(function(response) {
+                  var order_id = response.id
+
                   fetch(that.order_item_api, {
                     method:'POST',
                     headers:{
@@ -440,329 +628,61 @@ class Test {
                       'X-CSRFToken':csrftoken,
                     },
                     body:JSON.stringify({
-                      'order':order.id,
-                      'product_option':product_option_id,
+                      'order':order_id,
+                      'product_option':args['product-option-id'],
                       'quantity':1,
                     })
                   })
                   .then((resp) => resp.json())
                   .then(function(response) {
-                    console.log(response)
-                    // that.countOrderItems()
-                    // that.populateOrderList()
+                    that.countOrderItems()
+                    that.populateOrderList()
                   })
+                })
 
-                }
+              } else {
+                var order_id = orders[0].id
+
+                fetch(that.order_item_api, {
+                  method:'POST',
+                  headers:{
+                    'Content-type':'application/json',
+                    'X-CSRFToken':csrftoken,
+                  },
+                  body:JSON.stringify({
+                    'order':order_id,
+                    'product_option':args['product-option-id'],
+                    'quantity':1,
+                  })
+                })
+                .then((resp) => resp.json())
+                .then(function(response) {
+                  that.countOrderItems()
+                  that.populateOrderList()
+                })
               }
-            }
-          })
 
-        } else {
-          // Make add to cart logic with cookies here.
-        }
-      }
-    }
-  }
+            })
 
-
-  /*addOrderItem(oder_id, product_option_id, exists) {
-    var that = this
-
-    if (exists) {
-      /*
-      Increase quantity of order item.
-      */
-      // First get then increase.
-
-      /*fetch(that.order_item_api + product_option_id + '/', {
-        method:'POST',
-        headers:{
-          'Content-type':'application/json',
-          'X-CSRFToken':csrftoken,
-        },
-        body:JSON.stringify({
-          'quantity':1,
-          'order':order_id,
-          'product_option':product_option_id,
-        })
-      })
-      .then((resp) => resp.json())
-      .then(function(response) {
-        console.log(response)
-      })
-
-    } else {
-      /*
-      Create new order item.
-      */
-
-      /*console.log(oder_id)
-      console.log(product_option_id)
-    }
-  }*/
-
-
-
-
-
-
-
-  addCartItemOLD(order_id, item, product_id) {
-    var that = this
-
-    if (item == null) {
-      fetch(that.order_item_api, {
-        method:'POST',
-        headers:{
-          'Content-type':'application/json',
-          'X-CSRFToken':csrftoken,
-        },
-        body:JSON.stringify({
-          'quantity':1,
-          'order':order_id,
-          'product':product_id,
-        })
-      })
-      .then((resp) => resp.json())
-      .then(function(response) {
-        console.log(response)
-      })
-
-    } else {
-      var quantity = item.quantity + 1
-      var order_item_api = that.order_item_api + item.id + '/'
-
-      fetch(order_item_api, {
-        method:'PUT',
-        headers:{
-          'Content-type':'application/json',
-          'X-CSRFToken':csrftoken,
-        },
-        body:JSON.stringify({
-          'quantity':quantity
-        })
-      })
-      .then((resp) => resp.json())
-      .then(function(response) {
-        console.log(response)
-      })
-
-    }
-  }
-
-
-  removeCartItemOLD(item) {
-    var that = this
-
-    if (item.quantity <= 1) {
-      that.deleteCartItem(item)
-    } else {
-      var quantity = item.quantity - 1
-      var order_item_api = that.order_item_api + item.id + '/'
-
-      fetch(order_item_api, {
-        method:'PUT',
-        headers:{
-          'Content-type':'application/json',
-          'X-CSRFToken':csrftoken,
-        },
-        body:JSON.stringify({
-          'quantity':quantity
-        })
-      })
-      .then((resp) => resp.json())
-      .then(function(response) {
-        console.log(response)
-      })
-    }
-
-  }
-
-
-  deleteCartItemOLD(item) {
-    var that = this
-    var order_item_api = that.order_item_api + item.id + '/'
-
-    fetch(order_item_api, {
-      method:'DELETE',
-      headers:{
-        'Content-type':'application/json',
-        'X-CSRFToken':csrftoken,
-      }
-    })
-    // .then((resp) => resp.json())
-    .then(function(response) {
-      console.log(response)
-    })
-  }
-
-
-  // Create/edit cart add/remove items
-  updateCartOLD(e, product) { // product
-    var that = this
-    var action = $(e.target).data('action')
-
-
-    fetch(that.order_api)
-    .then((resp) => resp.json())
-    .then(function(data) {
-      var orders = data
-      var order_id = null
-      var item = null
-      var product_id = product.id
-
-      if (orders) {
-        for (var i in orders) {
-          var order = orders[i]
-          order_id = order.id
-          var items = order.items
-
-          if (order.status == 1) {
-
-            var items_in_cart = 0
-            for (var x in items) {
-              if (items[x].product.id == product_id) {
-                item = items[x]
-                items_in_cart = items_in_cart + item.quantity
-              }
-            }
-
-            if (action == 'add') {
-              that.addCartItem(order_id, item, product_id)
-            } else if (action == 'delete') {
-              that.deleteCartItem(item)
-            } else if (action == 'remove') {
-              that.removeCartItem(item)
-            }
+          } else {
+            /*
+            Throw error if product option is not selected.
+            */
+            $('.productOptionErrorMsg').html('Wähle deine Größe aus!')
+            $('.productOptionIndicator').removeClass('btn-outline-info').addClass('btn-outline-danger')
 
           }
         }
+
+      } else {
+        /*
+        Logic (using cookies) if user is not logged in.
+        */
+
+
       }
-
-      if (order_id == null && action == 'add') {
-        fetch(that.order_api, {
-          method:'POST',
-          headers:{
-            'Content-type':'application/json',
-            'X-CSRFToken':csrftoken,
-          },
-          body:JSON.stringify({
-            'status':1,
-          })
-        })
-        .then((resp) => resp.json())
-        .then(function(response) {
-          console.log(response)
-          order_id = response.id
-          that.addCartItem(order_id, item, product_id)
-        })
-      }
-    })
+    }
   }
-
-
-
-  populateProductFeedOLD() {
-    var that = this
-
-    that.productFeed.each(function() {
-      var currentFeed = $(this)
-      var sort = $(this).data('sort')
-      var amount = parseInt($(this).data('amount'))
-
-      fetch(that.productsApi + '?ordering=' + sort)
-      .then((resp) => resp.json())
-      .then(function(data) {
-
-        var products = data.slice(0,amount)
-
-        for (var i in products) {
-          var product = `
-              <div class="mt-4">
-                <div class="d-flex">
-                  <img src="${products[i].image}" class="img img-fluid" alt="test" style="width: 5em; height: 5em;">
-                  <div class="mx-3 w-50">
-                    name: ${products[i].name}<br>
-                    price: ${products[i].price}
-                  </div>
-                  <div>
-                    <button class="btn btn-primary updateCart" data-action="add">Add</button>
-                  </div>
-                </div>
-                <hr class="bg-info">
-              </div>
-            `
-          currentFeed.html(product)
-
-          var updateCart = $($('.updateCart[data-action="add"]')[i])
-          updateCart.on("click", (function(product) {
-            return function(e) {
-              that.updateCart(e, product)
-            }
-          })(products[i]))
-        }
-      })
-    })
-  }
-
-
-  populateCartFeedOLD() {
-    var that = this
-
-    fetch(that.order_api)
-    .then((resp) => resp.json())
-    .then(function(data) {
-
-      var orders = data
-      for (var i in orders) {
-        if (orders[i].status == 1) {
-
-          var order = orders[i].items
-          for (var x in order) {
-
-            var item = `
-                <div class="mt-4">
-                  <div class="d-flex">
-                    <img src="${order[x].product.image}" class="img img-fluid" alt="test" style="width: 5em; height: 5em;">
-                    <div class="mx-3 w-50">
-                      name: ${order[x].product.name}<br>
-                      price: ${order[x].product.price}<br>
-                      amount: ${order[x].quantity}
-                    </div>
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <button class="btn btn-danger updateCart" data-action="delete">Delete</button><br>
-                        <button class="btn mt-2 text-strong w-100 updateCart" data-action="remove">-</button>
-                      </div>
-                    </div>
-                  </div>
-                  <hr class="bg-info">
-                </div>
-              `
-            that.cartFeed.html(item)
-
-            var updateCart = $($('.updateCart[data-action="delete"]')[x])
-            updateCart.on("click", (function(product) {
-              return function(e) {
-                that.updateCart(e, product)
-              }
-            })(order[x].product))
-
-            var updateCart = $($('.updateCart[data-action="remove"]')[x])
-            updateCart.on("click", (function(product) {
-              return function(e) {
-                that.updateCart(e, product)
-              }
-            })(order[x].product))
-          }
-        }
-      }
-
-    })
-
-  }
-
-
 }
 
 export default Test;
