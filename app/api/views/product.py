@@ -15,7 +15,7 @@ class ProductManagerViewSet(ModelViewSet):
     """
     queryset = ProductManager.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
-    filter_fields = ['product__brand']
+    # filter_fields = ['product__brand']
     ordering_fields = ['created', 'value']
     ordering = ['-created']
     search_fields = ['color__name', 'query'] # Add more search fields

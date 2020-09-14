@@ -1,18 +1,39 @@
-.stroke {
+.svg {
+  height: 1em;
 
-  &-white {
-    stroke: $white;
+  &__height {
+    &--medium {
+      height: 1.2em;
+    }
   }
 
-  &-dark {
-    stroke: $dark;
+  &__bg {
+    &--info {
+      color: $info;
+      fill: $info;
+    }
+    &--primary {
+      color: $primary;
+      fill: $primary;
+    }
+    &--dark {
+      color: $dark;
+      fill: $dark;
+    }
   }
 
-  &-info {
-    stroke: $info;
-  }
-
-  &-primary {
-    stroke: $primary;
+  &__stroke {
+    &--white {
+      stroke: $white;
+    }
+    &--dark {
+      stroke: $dark;
+    }
+    &--info {
+      stroke: $info;
+    }
+    &--primary {
+      stroke: $primary;
+    }
   }
 }

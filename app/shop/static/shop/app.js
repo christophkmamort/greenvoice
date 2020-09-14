@@ -1,6 +1,6 @@
-import $ from 'jquery';
-import './../../../node_modules/popper.js/dist/popper.min.js';
-import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
+import $ from 'jquery'
+import './../../../node_modules/popper.js/dist/popper.min.js'
+import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 
 // Api
 // import BrandList from './js/brandList';
@@ -15,14 +15,15 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 // var productList = new ProductList();
 // var productSearch = new ProductSearch();
 
-// Functions checked
-import Modal from './js/modal';
-import Order from './js/order';
-import Wishlist from './js/wishlist';
 
-var modal = new Modal();
-var order = new Order();
-var wishlist = new Wishlist();
+// Populate pages with data from api.
+import './js/populateProductManager'
+import './js/populateWishlistItem'
+
+
+// Manage user interactions with api.
+
+
 
 // Functions
 import AcceptCookies from './js/acceptCookies';
@@ -34,7 +35,9 @@ import ProductDetailMaterialsDoughnut from './js/productDetailMaterialsDoughnut'
 import ProductDetailNav from './js/productDetailNav';
 import ProductDetailTransparencyMapLocations from './js/productDetailTransparencyMapLocations';
 import RegisterUser from './js/registerUser';
+import Modal from './js/modal';
 
+var modal = new Modal();
 var acceptCookies = new AcceptCookies();
 var accordion = new Accordion();
 var cart = new Cart();
@@ -46,8 +49,7 @@ var productDetailTransparencyMapLocations = new ProductDetailTransparencyMapLoca
 var registerUser = new RegisterUser();
 
 // Testing
-import Test from './js/test';
-var test = new Test();
+import './js/test';
 
 // Scss
 import "./app.scss";

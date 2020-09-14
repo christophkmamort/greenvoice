@@ -33,6 +33,13 @@ class ProductManagerOptionDetailSerializer(ProductManagerSerializer):
     brand_image = ProductBrandImageSerializer(read_only=True, many=True)
 
 
+class ProductManagerWishlistDetailSerializer(ProductManagerSerializer):
+    product = ProductSerializer(read_only=True)
+    product_option = ProductOptionSerializer(read_only=True, many=True)
+    image = ProductImageSerializer(read_only=True, many=True)
+    brand_image = ProductBrandImageSerializer(read_only=True, many=True)
+
+
 class ProductOptionDetailSerializer(ProductOptionSerializer):
     product_manager = ProductManagerOptionDetailSerializer(read_only=True)
     size = SizeSerializer(read_only=True)

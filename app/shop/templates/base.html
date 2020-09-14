@@ -20,7 +20,7 @@
       var path_url = home_url + '{{ request.path|urlencode }}'
       var current_url = home_url + '{{ request.get_full_path|urlencode }}'
       var login_url = home_url + '{% url "shop:login" %}?next=' + current_url
-      var product_url = home_url + '/shop/product/'
+      // var product_url = home_url + '/shop/product/'
       var shop_url = home_url + '/shop'
       var url_params = new URLSearchParams(window.location.search);
 

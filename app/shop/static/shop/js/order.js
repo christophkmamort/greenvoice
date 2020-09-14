@@ -11,9 +11,9 @@ class Order {
       this.orderCount = $('.orderCount')
       this.orderSum = $('.orderSum')
 
-      this.populateOrderCount()
-      this.populateOrderSum()
-      this.populateOrderList()
+      // this.populateOrderCount()
+      // this.populateOrderSum()
+      // this.populateOrderList()
     }
   }
 

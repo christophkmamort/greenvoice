@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .product import ProductManagerSerializer
+from .product import ProductManagerWishlistDetailSerializer
 from shop.models.wishlist import WishlistItem
 
 
@@ -12,7 +12,7 @@ class WishlistItemSerializer(ModelSerializer):
 
 
 class WishlistItemDetailSerializer(ModelSerializer):
-    product_manager = ProductManagerSerializer(read_only=True)
+    product_manager = ProductManagerWishlistDetailSerializer(read_only=True)
 
     class Meta:
         model = WishlistItem
