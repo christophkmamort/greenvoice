@@ -33,7 +33,7 @@ export function updateWishlist(args) {
           'product_manager_id':product_manager_id,
           'product_wishlist_item_id':response.id
         }
-        populateProductManager.populateWishlistTriggerWrapper(args)
+        populateProductManager.populateUpdateWishlistTriggerWrapper(args)
         populateWishlistItem.populateWishlistCount()
         populateWishlistItem.populateWishlistList()
       })
@@ -56,7 +56,7 @@ export function updateWishlist(args) {
           'currentElem':currentElem,
           'product_manager_id':product_manager_id,
         }
-        populateProductManager.populateWishlistTriggerWrapper(args)
+        populateProductManager.populateUpdateWishlistTriggerWrapper(args)
         populateWishlistItem.populateWishlistCount()
         populateWishlistItem.populateWishlistList()
       })

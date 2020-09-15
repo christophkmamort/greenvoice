@@ -1,6 +1,7 @@
 import $ from 'jquery'
 
 import * as manageWishlist from './manageWishlist.js'
+import * as manageOrder from './manageOrder.js'
 
 
 // Constructor.
@@ -94,8 +95,9 @@ function populateProductList(args) {
             /*
             Get product options from product-manager.
             */
-            var product_gross_prices = []
-            var product_sizes = []
+            var product_option_gross_prices = []
+            var product_option_sizes = []
+            var product_option_ids = []
 
             for (var x in product_options) {
               var product_option = product_options[x]
@@ -104,16 +106,17 @@ function populateProductList(args) {
               if (product_status == 2) { // Add logic to check stock (if stock management is on).
                 var product_option_gross = product_option.gross
                 if (product_option_gross) {
-                  product_gross_prices.push(product_option_gross)
+                  product_option_gross_prices.push(product_option_gross)
                 }
                 var product_option_size = product_option.size.name
-                if (product_option_size) {
-                  product_sizes.push(product_option_size)
+                if (product_option_gross && product_option_size) {
+                  product_option_sizes.push(product_option_size)
+                  product_option_ids.push(product_option.id)
                 }
               }
             }
 
-            if (product_gross_prices.length > 0 && product_sizes.length > 0) {
+            if (product_option_gross_prices.length > 0 && product_option_sizes.length > 0) {
               /*
               Get product images from product-manager.
               */
@@ -132,10 +135,10 @@ function populateProductList(args) {
                 Get all product details from product-manager.
                 */
                 var porduct_color = product_manager.color.name
-                product_gross_prices.sort(function(a, b) { return a-b })
-                var product_gross_from = product_gross_prices[0]
+                product_option_gross_prices.sort(function(a, b) { return a-b })
+                var product_gross_from = product_option_gross_prices[0]
                 var product_gross_info = ''
-                if (product_gross_prices.length > 1 && product_gross_from != product_gross_prices[-1]) {
+                if (product_option_gross_prices.length > 1 && product_gross_from != product_option_gross_prices[-1]) {
                   product_gross_info = 'ab '
                 }
                 var product_manager_id = product_manager.id
@@ -169,26 +172,38 @@ function populateProductList(args) {
                           </div>
                         </a>
 
-                        <div class="position-absolute wishlistTriggerWrapper" data-unique="productList${ product_manager_id }" style="top:0.5em; right:0.5em;">
+                        <div class="position-absolute updateWishlistTriggerWrapper" data-unique="productList${ product_manager_id }" style="top:0.5em; right:0.5em;">
                         </div>
                       </div>
                       <a href="${ product_url }" class="text-decoration-none">
                         <div class="pt-2 pr-2 pl-2">
                           <p class="m-0 p-0 mt-1">${ product_name }</p>
                           <h6 class="m-0 p-0 mt-1 text-small"><span class="text-dark text-strong">${ product_gross_info }€ ${ product_gross_from }</span></h6>
+                          </div>
                         </div>
                       </a>
+
+                      <div class="d-flex updateOrderTriggerWrapper" data-unique="productList${ product_manager_id }">
+                      </div>
                     </div>
                   `
                   currentElem.append(html)
 
-                  var wishlistTriggerWrapper = $(`.wishlistTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
-                  var argsPopulateWishlistTrigger = {
-                    'currentElem':wishlistTriggerWrapper,
+                  var updateOrderTriggerWrapper = $(`.updateOrderTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
+                  var argsPopulateUpdateOrderTrigger = {
+                    'currentElem':updateOrderTriggerWrapper,
+                    'product_option_sizes':product_option_sizes,
+                    'product_option_ids':product_option_ids,
+                  }
+                  populateUpdateOrderTriggerWrapper(argsPopulateUpdateOrderTrigger)
+
+                  var updateWishlistTriggerWrapper = $(`.updateWishlistTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
+                  var argsPopulateUpdateWishlistTrigger = {
+                    'currentElem':updateWishlistTriggerWrapper,
                     'product_manager_id':product_manager_id,
                     'product_wishlist_item_id':product_wishlist_item_id,
                   }
-                  populateWishlistTriggerWrapper(argsPopulateWishlistTrigger)
+                  populateUpdateWishlistTriggerWrapper(argsPopulateUpdateWishlistTrigger)
                 }
               }
             }
@@ -200,9 +215,79 @@ function populateProductList(args) {
 }
 
 
-export function populateWishlistTriggerWrapper(args) {
+export function populateUpdateOrderTriggerWrapper(args) {
   /*
-  Populate wishlistTriggerWrapper.
+  Populate and manage populateUpdateOrderTriggerWrapper.
+  */
+  var currentElem = args['currentElem']
+  var product_options_html = ''
+  var product_option_ids = args['product_option_ids']
+  var product_option_sizes = args['product_option_sizes']
+
+  for (var i in product_option_sizes) {
+    var product_option_size = product_option_sizes[i]
+    var product_option_id = product_option_ids[i]
+
+    product_options_html += `
+      <label class="checkbox form-check m-0 p-1 pt-1">
+        <input class="form-check-input" type="radio" name="productOption" value="${ product_option_id }" data-option="${ product_option_size }">
+        <h6 class="checkbox-text checkbox-text-strong m-0 ml-2 text-regular text-small">${ product_option_size }</h6>
+      </label>
+    `
+  }
+
+  var html = `
+    <div class="dropdown">
+      <button id="productOptionIndicator" class="btn btn-sm btn-outline-info dropdown-toggle productOptionIndicator" type="button" data-toggle="dropdown">Größe</button>
+      <div class="dropdown-menu border border-info p-0" aria-labelledby="productOptionIndicator">
+        ${ product_options_html }
+      </div>
+    </div>
+    <button class="ml-2 btn btn-sm btn-primary updateOrderTrigger" data-action="add">In den Warenkorb</button>
+  `
+  currentElem.html(html)
+
+  /*
+  Display current selected size.
+  */
+  var productOptionIndicator = currentElem.find('.productOptionIndicator')
+  var productOptionInput = currentElem.find('input[name="productOption"]')
+  productOptionInput.change(function() {
+    if($(this).is(':checked')) {
+      productOptionIndicator.removeClass('btn-outline-info').removeClass('btn-outline-danger').addClass('btn-outline-primary')
+      productOptionIndicator.html($(this).data('option'))
+    }
+  })
+
+  /*
+  Trigger manageOrder.
+  */
+  var updateOrderTrigger = currentElem.find('.updateOrderTrigger')
+  updateOrderTrigger.on("click", (function() {
+    return function(e) {
+      var action = updateOrderTrigger.data('action')
+      var product_option_id = currentElem.find('input[name="productOption"]:checked').val()
+      if (!product_option_id) {
+        productOptionIndicator.removeClass('btn-outline-info').addClass('btn-outline-danger')
+        return
+      } else {
+        productOptionIndicator.removeClass('btn-outline-danger').addClass('btn-outline-info')
+      }
+
+      var args = {
+        'action':action,
+        'currentElem':updateOrderTrigger,
+        'product_option_id':product_option_id,
+      }
+      manageOrder.updateOrder(args)
+    }
+  })())
+}
+
+
+export function populateUpdateWishlistTriggerWrapper(args) {
+  /*
+  Populate and manage updateWishlistTriggerWrapper.
   */
   var currentElem = args['currentElem']
   var product_manager_id = args['product_manager_id']
@@ -233,18 +318,18 @@ export function populateWishlistTriggerWrapper(args) {
   /*
   Trigger manageWishlist.
   */
-  var wishlistTriggerWrapper = currentElem
+  var updateWishlistTriggerWrapper = currentElem
   var updateWishlistTrigger = $(`.updateWishlistTrigger[data-unique="productList${ product_manager_id }"]`)
-  updateWishlistTrigger.on("click", (function(updateWishlistTrigger, wishlistTriggerWrapper, product_manager_id) {
+  updateWishlistTrigger.on("click", (function(updateWishlistTrigger, updateWishlistTriggerWrapper, product_manager_id) {
     return function(e) {
       var action = updateWishlistTrigger.data('action')
       var args = {
         'action':action,
-        'currentElem':wishlistTriggerWrapper,
+        'currentElem':updateWishlistTriggerWrapper,
         'product_manager_id':product_manager_id,
         'product_wishlist_item_id':product_wishlist_item_id,
       }
       manageWishlist.updateWishlist(args)
     }
-  })(updateWishlistTrigger, wishlistTriggerWrapper, product_manager_id))
+  })(updateWishlistTrigger, updateWishlistTriggerWrapper, product_manager_id))
 }

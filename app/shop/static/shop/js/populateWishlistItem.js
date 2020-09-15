@@ -140,20 +140,20 @@ export function populateWishlistList() {
             Trigger manageWishlist.
             */
             var product_wishlist_item_id = wishlist_item.id
-            var wishlistTriggerWrapper = $(`.wishlistTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
+            var updateWishlistTriggerWrapper = $(`.updateWishlistTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
             var updateWishlistTrigger = $(`.updateWishlistTrigger[data-unique="wishlistList${ product_manager_id }"]`)
-            updateWishlistTrigger.on("click", (function(updateWishlistTrigger, wishlistTriggerWrapper, product_manager_id, product_wishlist_item_id) {
+            updateWishlistTrigger.on("click", (function(updateWishlistTrigger, updateWishlistTriggerWrapper, product_manager_id, product_wishlist_item_id) {
               return function(e) {
                 var action = updateWishlistTrigger.data('action')
                 var args = {
                   'action':action,
-                  'currentElem':wishlistTriggerWrapper,
+                  'currentElem':updateWishlistTriggerWrapper,
                   'product_manager_id':product_manager_id,
                   'product_wishlist_item_id':product_wishlist_item_id,
                 }
                 manageWishlist.updateWishlist(args)
               }
-            })(updateWishlistTrigger, wishlistTriggerWrapper, product_manager_id, product_wishlist_item_id))
+            })(updateWishlistTrigger, updateWishlistTriggerWrapper, product_manager_id, product_wishlist_item_id))
           }
 
         } else {
