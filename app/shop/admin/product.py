@@ -8,13 +8,13 @@ from shop.models.product import Product, ProductManager, ProductOption
 
 class ProductImageInline(NestedStackedInline):
     model = ProductImage
-    extra = 0
+    extra = 1
     verbose_name = _('image')
 
 
 class ProductOptionInline(NestedStackedInline):
     model = ProductOption
-    extra = 0
+    extra = 1
     verbose_name = _('option')
 
 
@@ -26,7 +26,7 @@ class ProductBrandImageInline(NestedStackedInline):
 
 class ProductManagerInline(NestedStackedInline):
     model = ProductManager
-    extra = 0
+    extra = 1
     inlines = [
         ProductImageInline,
         ProductOptionInline,

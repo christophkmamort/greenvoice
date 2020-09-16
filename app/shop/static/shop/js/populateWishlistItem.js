@@ -39,8 +39,6 @@ export function populateWishlistCount() {
       'currentElem':currentElem,
     }
 
-    currentElem.html('')
-
     apiCallWishlistItem(args).then(function(data) {
       var wishlist_items = data
 
@@ -118,8 +116,8 @@ export function populateWishlistList() {
 
             var html = `
               <div class="row">
-                <a class="col-auto p-0" style="max-height: 105px; max-width: 70px;" href="${ product_url }">
-                  <img src="${ product_title_image }" class="img img-fluid w-100 h-100 rounded" alt="">
+                <a class="col-auto p-0" style="max-height: 110px; max-width: 70px;" href="${ product_url }">
+                  <img src="${ product_title_image }" class="img img-fluid w-100 h-100 rounded" alt="${ product_name }">
                 </a>
                 <a class="col d-flex align-items-center justiy-content-start ml-2" href="${ product_url }">
                   <div>

@@ -43,6 +43,23 @@ class Product(models.Model):
                 product_manager.query = query
                 product_manager.save()
 
+                """ product_brand_images = product_manager.brand_image.all()
+                if product_brand_images:
+                    for product_brand_image in product_brand_images:
+                        product_brand_image = product_brand_image.image
+                        if product_brand_image:
+                            width = 640
+                            if product_brand_image.size[0] > width:
+                                hpercent = (width / float(product_brand_image.size[0]))
+                                height = int(product_brand_image.size[1] * float(hpercent))
+                                size = (width, height)
+                                product_brand_image = product_brand_image.resize(size, resample=0, box=None)
+                            thumb_io = BytesIO()
+                            product_brand_image.save(thumb_io, format='JPEG', optimize=True, quality=50)
+                            inmemory_uploaded_file = InMemoryUploadedFile(thumb_io, None, product_brand_image.name.split(
+                                '.')[0] + '.jpg', 'image/jpeg', thumb_io.tell(), None)
+                            product_brand_image = inmemory_uploaded_file """
+
         # TODO: Create logic to fill gross, tax and net if nessasary!!
 
         super(Product, self).save(*args, **kwargs)

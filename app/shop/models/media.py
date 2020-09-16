@@ -38,18 +38,21 @@ class ProductBrandImage(BaseProductImage):
         ProductManager, null=True, on_delete=models.SET_NULL, related_name='brand_image', verbose_name=_('product'))
 
     def save(self, *args, **kwargs):
-        image = Image.open(self.image)
-        width = 640
-        if image.size[0] > width:
-            hpercent = (width / float(image.size[0]))
-            height = int(image.size[1] * float(hpercent))
-            size = (width, height)
-            image = image.resize(size, resample=0, box=None)
+        try:
+            image = Image.open(self.image)
+            width = 640
+            if image.size[0] > width:
+                hpercent = (width / float(image.size[0]))
+                height = int(image.size[1] * float(hpercent))
+                size = (width, height)
+                image = image.resize(size, resample=0, box=None)
             thumb_io = BytesIO()
             image.save(thumb_io, format='JPEG', optimize=True, quality=50)
             inmemory_uploaded_file = InMemoryUploadedFile(thumb_io, None, self.image.name.split(
                 '.')[0] + '.jpg', 'image/jpeg', thumb_io.tell(), None)
             self.image = inmemory_uploaded_file
+        except:
+            print(self)
         super(ProductBrandImage, self).save(*args, **kwargs)
 
 
@@ -60,16 +63,19 @@ class ProductImage(BaseProductImage):
         ProductManager, null=True, on_delete=models.SET_NULL, related_name='image', verbose_name=_('product'))
 
     def save(self, *args, **kwargs):
-        image = Image.open(self.image)
-        width = 640
-        if image.size[0] > width:
-            hpercent = (width / float(image.size[0]))
-            height = int(image.size[1] * float(hpercent))
-            size = (width, height)
-            image = image.resize(size, resample=0, box=None)
+        try:
+            image = Image.open(self.image)
+            width = 640
+            if image.size[0] > width:
+                hpercent = (width / float(image.size[0]))
+                height = int(image.size[1] * float(hpercent))
+                size = (width, height)
+                image = image.resize(size, resample=0, box=None)
             thumb_io = BytesIO()
             image.save(thumb_io, format='JPEG', optimize=True, quality=50)
             inmemory_uploaded_file = InMemoryUploadedFile(thumb_io, None, self.image.name.split(
                 '.')[0] + '.jpg', 'image/jpeg', thumb_io.tell(), None)
             self.image = inmemory_uploaded_file
+        except:
+            pass
         super(ProductImage, self).save(*args, **kwargs)

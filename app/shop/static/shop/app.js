@@ -3,6 +3,7 @@ import './../../../node_modules/popper.js/dist/popper.min.js'
 import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 
 // Populate pages with data from api.
+import './js/populateOrderList'
 import './js/populateProductManager'
 import './js/populateWishlistItem'
 

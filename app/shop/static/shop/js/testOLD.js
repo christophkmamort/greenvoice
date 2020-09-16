@@ -386,7 +386,7 @@ class Test {
   }*/
 
 
-  /*populateOrderList() {
+  populateOrderListOLD() {
     var that = this;
 
     that.orderList.each(function(index) {
@@ -468,7 +468,7 @@ class Test {
         }
       }
     })
-  }*/
+  }
 
 
   updateOrderOLD(e, action, args) {
