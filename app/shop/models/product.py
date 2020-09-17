@@ -7,7 +7,7 @@ from taxonomies.models import Category, Color, TargetGroup, Size
 
 class Product(models.Model):
     brand = models.ForeignKey(
-        Brand, blank=True, on_delete=models.CASCADE, verbose_name=_('brand'))
+        Brand, blank=True, on_delete=models.CASCADE, related_name='product', verbose_name=_('brand'))
     name = models.CharField(max_length=200, blank=True, verbose_name=_('name'))
     target_group = models.ManyToManyField(
         TargetGroup, blank=True, verbose_name=_('target group'))

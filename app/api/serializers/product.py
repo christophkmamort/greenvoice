@@ -1,7 +1,5 @@
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer
 
-from .media import ProductBrandImageSerializer, ProductImageSerializer
-from .taxonomies import ColorSerializer, SizeSerializer
 from shop.models.product import Product, ProductManager, ProductOption
 
 
@@ -12,14 +10,29 @@ class ProductSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class ProductManagerSerializer(ModelSerializer):
+class ProductOptionDetailSerializer(ModelSerializer):
+
+    class Meta:
+        model = ProductOption
+        fields = '__all__'
+
+
+class ProductManagerDetailSerializer(ModelSerializer):
+    product_option = ProductOptionDetailSerializer(many=True, read_only=True)
 
     class Meta:
         model = ProductManager
         fields = '__all__'
 
 
-class ProductOptionSerializer(ModelSerializer):
+class ProductDetailSerializer(ProductSerializer):
+    product_manager = ProductManagerDetailSerializer(many=True, read_only=True)
+
+
+
+
+
+"""class ProductOptionSerializer(ModelSerializer):
 
     class Meta:
         model = ProductOption
@@ -37,18 +50,9 @@ class ProductManagerWishlistDetailSerializer(ProductManagerSerializer):
     product = ProductSerializer(read_only=True)
     product_option = ProductOptionSerializer(read_only=True, many=True)
     image = ProductImageSerializer(read_only=True, many=True)
-    brand_image = ProductBrandImageSerializer(read_only=True, many=True)
+    brand_image = ProductBrandImageSerializer(read_only=True, many=True)"""
 
 
-class ProductOptionDetailSerializer(ProductOptionSerializer):
+"""class ProductOptionDetailSerializer(ProductOptionSerializer):
     product_manager = ProductManagerOptionDetailSerializer(read_only=True)
-    size = SizeSerializer(read_only=True)
-
-
-class ProductManagerDetailSerializer(ProductManagerSerializer):
-    color = ColorSerializer(read_only=True)
-    product = ProductSerializer(read_only=True)
-    product_option = ProductOptionDetailSerializer(read_only=True, many=True)
-    image = ProductImageSerializer(read_only=True, many=True)
-    brand_image = ProductBrandImageSerializer(read_only=True, many=True)
-    wishlist_item = PrimaryKeyRelatedField(many=True, read_only=True)
+    size = SizeSerializer(read_only=True)"""

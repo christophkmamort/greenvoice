@@ -30,6 +30,9 @@ function apiCallProductManger(args) {
     currentElemOrder = '-value'
   }
   filter += '?ordering=' + currentElemOrder
+  filter += '&product__brand__status=2' // Check if brand is active.
+  filter += '&product_option__status=2' // Check if has active products.
+  // TODO: Add check if product is in stock!! (filter += '&product_option__stock=')
 
   return fetch(api_product_manager + filter)
   .then((resp) => resp.json())
@@ -180,7 +183,7 @@ function populateProductList(args) {
                       </div>
                       <a href="${ product_url }" class="text-decoration-none">
                         <div class="pt-2 pr-2 pl-2">
-                          <p class="m-0 p-0 mt-1">${ product_name }</p>
+                          <p class="m-0 p-0 mt-1 text-truncate">${ product_name }</p>
                           <h6 class="m-0 p-0 mt-1 text-small"><span class="text-dark text-strong">${ product_gross_info }€ ${ product_gross_from }</span></h6>
                           </div>
                         </div>
@@ -209,6 +212,9 @@ function populateProductList(args) {
                   populateUpdateWishlistTriggerWrapper(argsPopulateUpdateWishlistTrigger)
                 }
               }
+
+              product_title_image = false
+
             }
           }
         }

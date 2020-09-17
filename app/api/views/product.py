@@ -15,10 +15,10 @@ class ProductManagerViewSet(ModelViewSet):
     """
     queryset = ProductManager.objects.all()
     filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
-    # filter_fields = ['product__brand']
+    filter_fields = ['product', 'product_option']
     ordering_fields = ['created', 'value']
     ordering = ['-created']
-    search_fields = ['color__name', 'query'] # Add more search fields
+    search_fields = ['color__name', 'query']
     serializer_class = ProductManagerSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
@@ -36,7 +36,7 @@ class ProductOptionViewSet(ModelViewSet):
     Manage `list`, `create`, `retrieve`, `update` and `destroy` product option.
     """
     queryset = ProductOption.objects.all()
-    filter_backends = [OrderingFilter] # DjangoFilterBackend
+    filter_backends = [OrderingFilter]
     ordering_fields = ['created', 'gross', 'value']
     ordering = ['-created']
     serializer_class = ProductOptionSerializer
@@ -56,8 +56,7 @@ class ProductViewSet(ModelViewSet):
     Manage `list`, `create`, `retrieve`, `update` and `destroy` product.
     """
     queryset = Product.objects.all()
-    filter_backends = [OrderingFilter] # DjangoFilterBackend
-    filter_fields = ['brand', 'category', 'gender']
+    filter_backends = [OrderingFilter]
     ordering_fields = ['created', 'value']
     ordering = ['-created']
     serializer_class = ProductSerializer
