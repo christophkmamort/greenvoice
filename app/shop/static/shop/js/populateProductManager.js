@@ -279,7 +279,7 @@ export function populateUpdateOrderTriggerWrapper(args) {
         'currentElem':updateOrderTrigger,
         'product_option_id':product_option_id,
       }
-      manageOrder.updateOrder(args)
+      manageOrder.updateOrderManager(args)
     }
   })())
 }

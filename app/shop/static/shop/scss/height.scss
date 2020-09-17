@@ -1,4 +1,10 @@
 .height  {
+  &__em {
+    &__1 {
+      height: 1em;
+    }
+  }
+
   &-25vh {
     height: 25vh;
   }

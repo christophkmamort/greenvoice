@@ -44,8 +44,10 @@ export function populateWishlistCount() {
 
       if (wishlist_items.length > 0) {
         currentElem.html(wishlist_items.length)
+        currentElem.addClass('notifier--active')
       } else {
         currentElem.html('0')
+        currentElem.removeClass('notifier--active')
       }
     })
   })

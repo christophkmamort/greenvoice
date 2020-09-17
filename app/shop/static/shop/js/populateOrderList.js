@@ -1,5 +1,7 @@
 import $ from 'jquery'
 
+import * as manageOrder from './manageOrder.js'
+
 
 // Constructor.
 var orderCount = $('.orderCount')
@@ -51,6 +53,7 @@ export function populateOrderCount() {
               order_items_quantity += order_item.quantity
             }
             currentElem.html(order_items_quantity)
+            currentElem.addClass('notifier--active')
           } else {
             var empty = true
           }
@@ -61,6 +64,7 @@ export function populateOrderCount() {
 
       if (empty) {
         currentElem.html('0')
+        currentElem.removeClass('notifier--active')
       }
     })
   })
@@ -81,8 +85,9 @@ export function populateOrderList() {
         for (var i in orders) {
           var order = orders[i]
           var order_items = order.order_items
+          var order_items_length = order_items.length
 
-          if (order_items.length > 0) {
+          if (order_items_length > 0) {
             currentElem.html('')
 
             for (var i in order_items) {
@@ -157,8 +162,9 @@ export function populateOrderList() {
                       'order_id':order_id,
                       'order_item_id':order_item_id,
                       'order_item_quantity':order_item_quantity,
+                      'order_items_length':order_items_length,
                     }
-                    manageOrder.updateOrder(args)
+                    manageOrder.updateOrderManager(args)
                   }
                 })())
               })

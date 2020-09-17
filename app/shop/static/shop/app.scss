@@ -4,6 +4,10 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-slider/dist/css/bootstrap-slider.min.css";
 /* Custom */
+@import './scss/notifier';
+
+
+
 @import './scss/accordion';
 @import './scss/background';
 @import './scss/border';
@@ -19,7 +23,6 @@
 @import './scss/gradients';
 @import './scss/height';
 @import './scss/img';
-@import './scss/notify';
 @import './scss/seperator';
 @import './scss/scrollbar';
 // @import './scss/slider';
