@@ -15,131 +15,171 @@
 <!-- Page content -->
 {% block content %}
   <div class="down">
-
-
-    <div data-section="indexImageLarge">
+    <!--
+    `Title image` large.
+    -->
+    <div>
       <div class="position-absolute w-100" style="height: 80vh; z-index: -1">
         <img src="{% static 'shop/med/phs7.jpg' %}" class="img img-fluid w-100 h-100" alt="">
       </div>
-      <div style="height: 75vh;"></div>
+      <div class="seperator height__vh__75"></div>
     </div>
 
-
-    <div data-section="indexDesignElementWrapperWhiteRounded">
-      <div class="bg-white down-container">
-
-        <div data-section="indexDesignElementVerticalBar">
-          {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
-        </div>
-
-
-        <div data-section="indexValuesShort">
-          <div class="container">
-            <div class="seperator mt-4"></div>
-
-            <h4 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Dafür stehen wir</h4>
-            <h4 class="mb-4">Unsere Werte</h4>
-            <div class="pt-3"></div>
-            {% include 'shop/templates/values.html' with class='text-dark' height='2.5em' border='#fff' only %}
-
-            <div class="seperator mt-4"></div>
-
-            <p class="text-center">
-              Mit Allem was wir tun glauben wir daran, dass eine <strong>transparente Wirtschaft</strong> die Grundlage für nachhaltige und faire Mode bilden soll. Aus diesem Grund zeigen wir dir die Bestandteile, Lieferketten und Produktionsstätten jedes einzelnen Produktes. Greenvoice ist <strong>dein transparenter und nachhaltiger Mode Marktplatz</strong>. All unsere Produkte sind selbstverständlich <u>100% Vegan</u>.
-            </p>
-          </div>
-        </div>
+    <!--
+    `Content section` for index page.
+    -->
+    <div class="bg-white down-container">
+      <!--
+      Design element `horizontal-bar`.
+      -->
+      {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
 
 
-        <div data-section="indexProductListPopular">
-          <div class="seperator mt-5"></div>
+      <!--
+      `Brand values` described short.
+      -->
+      <div class="container">
+        <div class="seperator mt-4"></div>
 
-          <div class="container">
-            <h4 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Style Trends</h4>
-            <h4>Beliebte Produkte</h4>
-          </div>
+        <h4 class="text-info m-0 text-regular">Dafür stehen wir</h4>
+        <h4>Unsere Werte</h4>
+        <div class="seperator mt-4 pt-3"></div>
 
-          <div class="seperator mt-4"></div>
+        {% include 'shop/templates/values.html' with class='svg svg--med' only %}
 
-          <div data-section="productList">
-            <div class="d-flex scrollbar productList" data-amount="12" data-ordering="-value" data-style="slide">
-            </div>
-          </div>
-
-          <div class="container d-flex justify-content-center align-items-center mt-4">
-            <a href="{% url 'shop:shop' %}?ordering=-value"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
-          </div>
-        </div>
-
-
-        <div data-section="indexProductListNew">
-          <div class="seperator mt-5"></div>
-
-          <div class="container">
-            <h4 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Vor kurzem eingetroffen</h4>
-            <h4>Neue Produkte</h4>
-          </div>
-
-          <div class="seperator mt-4"></div>
-
-          <div data-section="productList">
-            <div class="d-flex scrollbar productList" data-amount="12" data-ordering="-created" data-style="slide">
-            </div>
-          </div>
-
-          <div class="container d-flex justify-content-center align-items-center mt-4">
-            <a href="{% url 'shop:shop' %}?ordering=-created"><button class="btn"><u class="text-info"><h6 class="text-info">Weitere Produkte anzeigen</h6></u></button></a>
-          </div>
-        </div>
-
-
-        <div data-section="indexCategoryListPopular">
-          <div class="seperator mt-5"></div>
-
-          <div class="container">
-            <h4 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Beliebt & Meistgekauft</h4>
-            <h4>Top Kategorien</h4>
-
-            <div class="seperator mt-4"></div>
-
-            <div class="categoryList" data-ordering="-value" data-amount="12"></div>
-
-            <div class="seperator mt-4"></div>
-
-            <div class="d-flex justify-content-center align-items-center">
-              <a href="{% url 'shop:shop' %}?ordering=-value"><button class="btn"><u class="text-info"><h6 class="text-info">Alle Kategorien anzeigen</h6></u></button></a>
-            </div>
-          </div>
-        </div>
-
-
-        <div data-section="indexBrandsListPopular">
-          <div class="seperator mt-5"></div>
-
-          <div class="container">
-            <h4 class="text-info m-0 {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Nachhaltig & Fair</h4>
-            <h4>Beliebte Marken</h4>
-          </div>
-
-          <div class="seperator mt-4"></div>
-
-          <div class="d-flex scrollbar align-items-start brandList" data-ordering="-value" data-amount="12">
-          </div>
-
-          <div class="seperator mt-4"></div>
-
-          <div class="container d-flex justify-content-center align-items-center">
-            <a href="{% url 'shop:shop' %}?ordering=-value"><button class="btn"><u class="text-info"><h6 class="text-info">Alle Marken anzeigen</h6></u></button></a>
-          </div>
-        </div>
-
-
-        <div data-section="indexDesignElementVerticalBar">
-          {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
-        </div>
-
-
+        <div class="seperator mt-4"></div>
+        <p class="text-center">
+          Mit Allem was wir tun glauben wir daran, dass eine <strong>transparente Wirtschaft</strong> die Grundlage für nachhaltige und faire Mode bilden soll. Aus diesem Grund zeigen wir dir die Bestandteile, Lieferketten und Produktionsstätten jedes einzelnen Produktes. Greenvoice ist <strong>dein transparenter und nachhaltiger Mode Marktplatz</strong>. All unsere Produkte sind selbstverständlich <u>100% Vegan</u>.
+        </p>
       </div>
+
+
+      <!--
+      `Product list` (ordering:-vale, style:slide)
+      -->
+      <div>
+        <div class="seperator mt-5"></div>
+
+        <div class="container">
+          <h4 class="text-info m-0 text-regular">Style Trends</h4>
+          <h4>Beliebte Produkte</h4>
+        </div>
+
+        <div class="seperator mt-4"></div>
+
+        <div data-section="productList">
+          <div class="d-flex scrollbar productList" data-ordering="-value" data-quantity="12" data-style="slide">
+          </div>
+        </div>
+
+        <div class="seperator mt-4"></div>
+
+        <div class="container d-flex justify-content-center align-items-center">
+          <a href="{% url 'shop:shop' %}?ordering=-value">
+            <button class="btn">
+              <u class="text-info">
+                Weitere Produkte anzeigen
+              </u>
+            </button>
+          </a>
+        </div>
+      </div>
+
+
+      <div class="seperator mt-5"></div>
+
+
+      <!--
+      `Product list` (ordering:-created, style:slide)
+      -->
+      <div>
+        <div class="container">
+          <h4 class="text-info m-0 text-regular">Vor kurzem eingetroffen</h4>
+          <h4>Neue Produkte</h4>
+        </div>
+
+        <div class="seperator mt-4"></div>
+
+        <div class="d-flex scrollbar productList" data-ordering="-created" data-quantity="12" data-style="slide">
+        </div>
+
+        <div class="seperator mt-4"></div>
+
+        <div class="container d-flex justify-content-center align-items-center">
+          <a href="{% url 'shop:shop' %}?ordering=-created">
+            <button class="btn">
+              <u class="text-info">
+                Weitere Produkte anzeigen
+              </u>
+            </button>
+          </a>
+        </div>
+      </div>
+
+
+      <!--
+      `Category list` (ordering:-value, style:feed)
+      -->
+      <div>
+        <div class="seperator mt-5"></div>
+
+        <div class="container">
+          <h4 class="text-info m-0 text-regular">Beliebt & Meistgekauft</h4>
+          <h4>Top Kategorien</h4>
+
+          <div class="seperator mt-4"></div>
+
+          <div class="categoryList" data-ordering="-value" data-quantity="12" data-style="feed"></div>
+
+          <div class="seperator mt-4"></div>
+
+          <div class="d-flex justify-content-center align-items-center">
+            <a href="{% url 'shop:shop' %}?ordering=-value">
+              <button class="btn">
+                <u class="text-info">
+                  Alle Kategorien anzeigen
+                </u>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <!--
+      `Brand list` (ordering:-value, style:slide)
+      -->
+      <div>
+        <div class="seperator mt-5"></div>
+
+        <div class="container">
+          <h4 class="text-info m-0 text-regular">Nachhaltig & Fair</h4>
+          <h4>Beliebte Marken</h4>
+        </div>
+
+        <div class="seperator mt-4"></div>
+
+        <div class="d-flex scrollbar align-items-start brandList" data-ordering="-value" data-quantity="12" data-style="slide">
+        </div>
+
+        <div class="seperator mt-4"></div>
+
+        <div class="container d-flex justify-content-center align-items-center">
+          <a href="{% url 'shop:shop' %}?ordering=-value">
+            <button class="btn">
+              <u class="text-info">
+                Alle Marken anzeigen
+              </u>
+            </button>
+          </a>
+        </div>
+      </div>
+
+
+      <!--
+      Design element `horizontal-bar`.
+      -->
+      {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
     </div>
   </div>
 {% endblock %}

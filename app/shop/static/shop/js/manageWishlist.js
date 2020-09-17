@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-import * as populateProductManager from './populateProductManager.js'
+import * as populateProductList from './populateProductList.js'
 import * as populateWishlistItem from './populateWishlistItem.js'
 
 
@@ -33,7 +33,7 @@ export function updateWishlist(args) {
           'product_manager_id':product_manager_id,
           'product_wishlist_item_id':response.id
         }
-        populateProductManager.populateUpdateWishlistTriggerWrapper(args)
+        populateProductList.populateUpdateWishlistTriggerWrapper(args)
         populateWishlistItem.populateWishlistCount()
         populateWishlistItem.populateWishlistList()
       })
@@ -56,7 +56,7 @@ export function updateWishlist(args) {
           'currentElem':currentElem,
           'product_manager_id':product_manager_id,
         }
-        populateProductManager.populateUpdateWishlistTriggerWrapper(args)
+        populateProductList.populateUpdateWishlistTriggerWrapper(args)
         populateWishlistItem.populateWishlistCount()
         populateWishlistItem.populateWishlistList()
       })

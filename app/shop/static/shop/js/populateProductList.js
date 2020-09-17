@@ -79,6 +79,7 @@ function populateProductList(args) {
 
       if (product_managers.length > 0) {
         var currentElemQuantity = currentElem.data('quantity')
+        var currentElemStyle = currentElem.data('style')
         var index = args['index']
         if (currentElemQuantity) { // TODO: Find way to query this in api call (speed).
           /*
@@ -155,12 +156,14 @@ function populateProductList(args) {
                     var product_wishlist_item_id = product_in_wishlist[0]
                   }
 
-                  var currentElemStyle = currentElem.data('style')
                   if (currentElemStyle == 'slide') {
                     /*
                     Html classes for product slide.
                     */
                     product_wrapper_class = 'feed-product feed-product-slide'
+                    if (i == 0) {
+                      currentElem.append(`<div class="feed-padding-left"></div>`)
+                    }
                   }
 
                   var html = `
@@ -182,12 +185,12 @@ function populateProductList(args) {
                           </div>
                         </div>
                       </a>
-
-                      <div class="d-flex updateOrderTriggerWrapper" data-unique="productList${ product_manager_id }">
-                      </div>
                     </div>
                   `
                   currentElem.append(html)
+
+                  /*<div class="d-flex updateOrderTriggerWrapper" data-unique="productList${ product_manager_id }">
+                  </div>*/
 
                   var updateOrderTriggerWrapper = $(`.updateOrderTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
                   var argsPopulateUpdateOrderTrigger = {
@@ -208,6 +211,10 @@ function populateProductList(args) {
               }
             }
           }
+        }
+
+        if (currentElemStyle == 'slide') {
+          currentElem.append(`<div class="feed-padding-right"></div>`)
         }
       }
     })

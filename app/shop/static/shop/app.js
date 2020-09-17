@@ -4,7 +4,7 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 
 // Populate pages with data from api.
 import './js/populateOrderList'
-import './js/populateProductManager'
+import './js/populateProductList'
 import './js/populateWishlistItem'
 
 // Functions

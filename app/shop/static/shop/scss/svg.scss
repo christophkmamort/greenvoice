@@ -1,7 +1,30 @@
 .svg {
-  height: 1em;
+  height: 1.8em;
+  color: $dark;
+  fill: $dark;
 
-  &__height {
+  &--med {
+    height: 2.5em;
+  }
+
+  &__fill {
+    &--primary {
+      color: $primary;
+      fill: $primary;
+    }
+  }
+
+  &__stroke {
+    stroke: $dark;
+
+    &--white {
+      stroke: $white;
+    }
+  }
+
+
+
+  /*&__height {
     &--medium {
       height: 1.2em;
     }
@@ -35,5 +58,5 @@
     &--primary {
       stroke: $primary;
     }
-  }
+  }*/
 }
