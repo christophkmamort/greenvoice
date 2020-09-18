@@ -20,3 +20,7 @@ class UserSerializer(ModelSerializer):
 
 class CustomerDetailSerializer(CustomerSerializer):
     user = UserSerializer(read_only=True)
+
+
+class UserDetailSerializer(UserSerializer):
+    customer = CustomerSerializer(read_only=True)
