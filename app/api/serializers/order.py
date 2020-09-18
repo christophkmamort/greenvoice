@@ -1,18 +1,9 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.serializers import ModelSerializer
 
-from .product import ProductOptionDetailSerializer
+from .product import ProductDetailMiniSerializer
+from .taxonomies import ColorMiniSerializer, SizeMiniSerializer
 from shop.models.order import *
-
-
-class OrderItemSerializer(ModelSerializer):
-
-    class Meta:
-        model = OrderItem
-        fields = '__all__'
-
-
-class OrderItemDetailSerializer(OrderItemSerializer):
-    product_option = ProductOptionDetailSerializer(read_only=True)
+from shop.models.product import ProductManager, ProductOption
 
 
 class OrderSerializer(ModelSerializer):
@@ -22,17 +13,35 @@ class OrderSerializer(ModelSerializer):
         fields = '__all__'
         read_only_fields = ['customer',]
 
-    """ def get_items(self, obj):
-        queryset = OrderItem.objects.filter(order=obj.id)
-        items = OrderItemDetailSerializer(queryset, many=True).data
-        return items """
 
-    """ def create(self, validated_data):
-        items_data = validated_data.pop('items')
-        order = Order.objects.create(**validated_data)
-        for order_item_data in items_data:
-            OrderItem.objects.create(order=order, **order_item_data)
-        return order """
+class OrderItemSerializer(ModelSerializer):
+
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+        read_only_fields = ['customer',]
+
+
+class OrderProductManagerSerializer(ModelSerializer):
+    product = ProductDetailMiniSerializer(read_only=True)
+    color = ColorMiniSerializer(read_only=True)
+
+    class Meta:
+        model = ProductManager
+        exclude = ['query', 'value', 'created']
+
+
+class OrderProductOptionSerializer(ModelSerializer):
+    product_manager = OrderProductManagerSerializer(read_only=True)
+    size = SizeMiniSerializer(read_only=True)
+
+    class Meta:
+        model = ProductOption
+        exclude = ['value', 'created']
+
+
+class OrderItemDetailSerializer(OrderItemSerializer):
+    product_option = OrderProductOptionSerializer(read_only=True)
 
 
 class OrderDetailSerializer(OrderSerializer):

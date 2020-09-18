@@ -32,4 +32,4 @@ class ProductManagerDetailSerializer(ProductManagerSerializer):
     product_option = ProductOptionDetailSerializer(read_only=True, many=True)
     image = ProductImageSerializer(read_only=True, many=True)
     brand_image = ProductBrandImageSerializer(read_only=True, many=True)
-    # wishlist_item = PrimaryKeyRelatedField(many=True, read_only=True)
+    wishlist_item = PrimaryKeyRelatedField(many=True, read_only=True)

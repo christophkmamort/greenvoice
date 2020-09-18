@@ -16,3 +16,7 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = CustomUser
         fields = '__all__'
+
+
+class CustomerDetailSerializer(CustomerSerializer):
+    user = UserSerializer(read_only=True)
