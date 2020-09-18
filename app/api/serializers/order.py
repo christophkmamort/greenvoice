@@ -6,6 +6,9 @@ from shop.models.order import *
 from shop.models.product import ProductManager, ProductOption
 
 
+"""
+Basic order + order-item serializer.
+"""
 class OrderSerializer(ModelSerializer):
 
     class Meta:
@@ -22,6 +25,10 @@ class OrderItemSerializer(ModelSerializer):
         read_only_fields = ['customer',]
 
 
+"""
+Order + order-item detail serializer to get all required data and
+check if brand is active and has active products in stock.
+"""
 class OrderProductManagerSerializer(ModelSerializer):
     product = ProductDetailMiniSerializer(read_only=True)
     color = ColorMiniSerializer(read_only=True)

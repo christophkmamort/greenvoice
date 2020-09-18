@@ -12,6 +12,12 @@ class ProductSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class ProductDetailSerializer(ProductSerializer):
+    brand = BrandMiniSerializer(read_only=True)
+    target_group = TargetGroupMiniSerializer(many=True, read_only=True)
+    category = CategoryMiniSerializer(many=True, read_only=True)
+
+
 class ProductDetailMiniSerializer(ModelSerializer):
     brand = BrandMiniSerializer(read_only=True)
     target_group = TargetGroupMiniSerializer(many=True, read_only=True)
