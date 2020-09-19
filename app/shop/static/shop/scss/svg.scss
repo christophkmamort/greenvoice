@@ -3,6 +3,10 @@
   color: $dark;
   fill: $dark;
 
+  &--sm {
+    height: 1.3em;
+  }
+
   &--med {
     height: 2.5em;
   }
@@ -11,6 +15,10 @@
     &--primary {
       color: $primary;
       fill: $primary;
+    }
+    &--info {
+      color: $info;
+      fill: $info;
     }
   }
 

@@ -19,6 +19,8 @@ class Order(models.Model):
     )
     status = models.PositiveSmallIntegerField(
         choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
+    created = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created'))
 
     """ def __str__(self):
         return self.id """
@@ -33,6 +35,8 @@ class OrderItem(models.Model):
         ProductOption, on_delete=models.SET_NULL, null=True, verbose_name=_('product'))
     quantity = models.IntegerField(
         default=0, null=True, verbose_name=_('quantity'))
+    created = models.DateTimeField(
+        auto_now_add=True, verbose_name=_('created'))
 
     def __str__(self):
         return self.product.name

@@ -24,7 +24,7 @@ urlpatterns = [
     path('terms', views.TermsView.as_view(), name='terms'),
 
     # Shop (functional)
-    path('shop/update-cart/', views.updateCart, name='update-cart'),
+    # path('shop/update-cart/', views.updateCart, name='update-cart'),
     path('test', views.TestView.as_view(), name='test'),
 
     # Legal

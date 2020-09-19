@@ -47,8 +47,16 @@ function populateBrandList() {
       var brands = data
 
       if (brands.length > 0) {
-        var html = `<div class="feed-padding-left"></div>`
-        currentElem.append(html)
+        var currentElemQuantity = currentElem.data('quantity')
+        var currentElemStyle = currentElem.data('style')
+        if (currentElemQuantity) { // TODO: Find way to query this in api call (speed).
+          brands = data.slice(0,currentElemQuantity)
+        }
+
+        if (currentElemStyle = 'slide') {
+          var html = `<div class="feed-padding-left"></div>`
+          currentElem.append(html)
+        }
 
         for (var i in brands) {
           var brand = brands[i]
@@ -90,8 +98,10 @@ function populateBrandList() {
           currentElem.append(html)
         }
 
-        var html = `<div class="feed-padding-right"></div>`
-        currentElem.append(html)
+        if (currentElemStyle = 'slide') {
+          var html = `<div class="feed-padding-right"></div>`
+          currentElem.append(html)
+        }
 
       }
     })

@@ -7,7 +7,7 @@ export function updateOrderManager(args) {
   /*
   Manage order actions.
   */
-  var action = args['action']
+  var action = args['currentElem'].data('action')
   var api_order = home_url + '/api/order/'
   var order_item_id = args['order_item_id']
 

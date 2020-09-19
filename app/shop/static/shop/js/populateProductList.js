@@ -85,10 +85,7 @@ function populateProductList(args) {
         var currentElemStyle = currentElem.data('style')
         var index = args['index']
         if (currentElemQuantity) { // TODO: Find way to query this in api call (speed).
-          /*
-          Only display specified amount of products.
-          */
-          var product_managers = data.slice(0,currentElemQuantity)
+          product_managers = data.slice(0,currentElemQuantity)
         }
 
         for (var i in product_managers) {
@@ -125,12 +122,13 @@ function populateProductList(args) {
               Get product images from product-manager.
               */
               var product_images = product_manager.image
+              var product_title_image = false
               if (product_images.length > 0) {
-                var product_title_image = product_images[0].image
+                product_title_image = product_images[0].image
               } else {
                 var product_brand_images = product_manager.brand_image
                 if (product_brand_images.length > 0) {
-                  var product_title_image = product_brand_images[0].image
+                  product_title_image = product_brand_images[0].image
                 }
               }
 
@@ -155,8 +153,9 @@ function populateProductList(args) {
                   */
                   var product_wrapper_class = 'feed-product mb-4'
                   var product_in_wishlist = product_manager.wishlist_item
+                  var product_wishlist_item_id = false
                   if (product_in_wishlist.length > 0) {
-                    var product_wishlist_item_id = product_in_wishlist[0]
+                    product_wishlist_item_id = product_in_wishlist[0]
                   }
 
                   if (currentElemStyle == 'slide') {
@@ -212,9 +211,6 @@ function populateProductList(args) {
                   populateUpdateWishlistTriggerWrapper(argsPopulateUpdateWishlistTrigger)
                 }
               }
-
-              product_title_image = false
-
             }
           }
         }

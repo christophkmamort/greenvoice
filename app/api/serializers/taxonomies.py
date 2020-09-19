@@ -54,7 +54,7 @@ class CategoryMiniSerializer(ModelSerializer):
 class ColorMiniSerializer(ModelSerializer):
 
     class Meta:
-        model = Size
+        model = Color
         exclude = ['slug', 'value', 'created']
 
 

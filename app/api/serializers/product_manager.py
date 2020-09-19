@@ -33,6 +33,8 @@ class ProductManagerDetailForWishlistSerializer(ProductManagerSerializer):
     product = ProductDetailMiniSerializer(read_only=True)
     color = ColorMiniSerializer(read_only=True)
     product_option = ProductOptionDetailMiniSerializer(many=True, read_only=True)
+    image = ProductImageSerializer(read_only=True, many=True)
+    brand_image = ProductBrandImageSerializer(read_only=True, many=True)
 
     class Meta:
         model = ProductManager
@@ -42,6 +44,8 @@ class ProductManagerDetailForWishlistSerializer(ProductManagerSerializer):
 class ProductManagerDetailForOrderSerializer(ProductManagerSerializer):
     product = ProductDetailMiniSerializer(read_only=True)
     color = ColorMiniSerializer(read_only=True)
+    image = ProductImageSerializer(read_only=True, many=True)
+    brand_image = ProductBrandImageSerializer(read_only=True, many=True)
 
     class Meta:
         model = ProductManager
