@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from .product_option import ProductOptionStatusSerializer
+from .taxonomies import CategoryMiniSerializer
 from shop.models.brand import Brand
 from shop.models.product import Product, ProductManager, ProductOption
 
@@ -29,10 +30,11 @@ class ProductManagerProductOptionSerializer(ModelSerializer):
 
 class ProductProductManagerSerializer(ModelSerializer):
     product_manager = ProductManagerProductOptionSerializer(read_only=True, many=True)
+    category = CategoryMiniSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
-        fields = ['product_manager']
+        fields = ['product_manager', 'category']
 
 
 class BrandDetailSerializer(BrandSerializer):
