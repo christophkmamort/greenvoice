@@ -7,12 +7,12 @@ from shop.models.order import *
 
 class OrderViewSet(ModelViewSet):
     """
-    Manage `list`, `create`, `retrieve`, `update` and `destroy` orders.
+    Manage `list`, `create`, `retrieve`, `update` and `destroy`.
     """
     serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
+    def get_queryset(self): # TODO: Check if works without this.
         return Order.objects.filter(customer=self.request.user.customer)
 
     def get_serializer_class(self):
@@ -29,12 +29,12 @@ class OrderViewSet(ModelViewSet):
 
 class OrderItemViewSet(ModelViewSet):
     """
-    Manage `list`, `create`, `retrieve`, `update` and `destroy` order-items.
+    Manage `list`, `create`, `retrieve`, `update` and `destroy`.
     """
     serializer_class = OrderItemSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
+    def get_queryset(self): # TODO: Check if works without this.
         return OrderItem.objects.filter(customer=self.request.user.customer)
 
     def get_serializer_class(self):

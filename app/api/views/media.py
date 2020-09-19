@@ -7,7 +7,7 @@ from shop.models.media import ProductBrandImage, ProductImage
 
 class ProductBrandImageViewSet(ModelViewSet):
     """
-    Manage `list`, `create`, `retrieve`, `update` and `destroy` product brand img.
+    Manage `list`, `create`, `retrieve`, `update` and `destroy`.
     """
     queryset = ProductBrandImage.objects.all()
     serializer_class = ProductBrandImageSerializer
@@ -19,7 +19,7 @@ class ProductBrandImageViewSet(ModelViewSet):
 
 class ProductImageViewSet(ModelViewSet):
     """
-    Manage `list`, `create`, `retrieve`, `update` and `destroy` product img.
+    Manage `list`, `create`, `retrieve`, `update` and `destroy`.
     """
     queryset = ProductImage.objects.all()
     serializer_class = ProductImageSerializer

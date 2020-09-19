@@ -25,3 +25,10 @@ class ProductOptionDetailMiniSerializer(ProductOptionSerializer):
     class Meta:
         model = ProductOption
         exclude = ['value', 'created', 'product_manager']
+
+
+class ProductOptionStatusSerializer(ProductOptionSerializer):
+
+    class Meta:
+        model = ProductOption
+        fields = ['status']

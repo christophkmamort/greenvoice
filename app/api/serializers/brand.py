@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
+from .product_option import ProductOptionStatusSerializer
 from shop.models.brand import Brand
 from shop.models.product import Product, ProductManager, ProductOption
 
@@ -18,13 +19,6 @@ class BrandSerializer(ModelSerializer):
 Detail serializers to check if brand is active
 and has active products in stock.
 """
-class ProductOptionStatusSerializer(ModelSerializer):
-
-    class Meta:
-        model = ProductOption
-        fields = ['status']
-
-
 class ProductManagerProductOptionSerializer(ModelSerializer):
     product_option = ProductOptionStatusSerializer(read_only=True, many=True)
 
