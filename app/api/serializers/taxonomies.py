@@ -3,6 +3,9 @@ from rest_framework.serializers import ModelSerializer
 from taxonomies.models import *
 
 
+"""
+Basic serializers.
+"""
 class CategorySerializer(ModelSerializer):
 
     class Meta:
@@ -10,25 +13,11 @@ class CategorySerializer(ModelSerializer):
         fields = '__all__'
 
 
-class CategoryMiniSerializer(ModelSerializer):
-
-    class Meta:
-        model = Category
-        exclude = ['slug', 'value', 'created']
-
-
 class ColorSerializer(ModelSerializer):
 
     class Meta:
         model = Color
         fields = '__all__'
-
-
-class ColorMiniSerializer(ModelSerializer):
-
-    class Meta:
-        model = Size
-        exclude = ['slug', 'value', 'created']
 
 
 class CountrySerializer(ModelSerializer):
@@ -45,18 +34,35 @@ class SizeSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class SizeMiniSerializer(ModelSerializer):
-
-    class Meta:
-        model = Size
-        exclude = ['slug', 'value', 'created', 'order']
-
-
 class TargetGroupSerializer(ModelSerializer):
 
     class Meta:
         model = TargetGroup
         fields = '__all__'
+
+
+"""
+Minified serializers.
+"""
+class CategoryMiniSerializer(ModelSerializer):
+
+    class Meta:
+        model = Category
+        exclude = ['slug', 'value', 'created']
+
+
+class ColorMiniSerializer(ModelSerializer):
+
+    class Meta:
+        model = Size
+        exclude = ['slug', 'value', 'created']
+
+
+class SizeMiniSerializer(ModelSerializer):
+
+    class Meta:
+        model = Size
+        exclude = ['slug', 'value', 'created', 'order']
 
 
 class TargetGroupMiniSerializer(ModelSerializer):

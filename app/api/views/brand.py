@@ -1,10 +1,10 @@
 from url_filter.integrations.drf import DjangoFilterBackend
 
 from rest_framework.filters import OrderingFilter
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
 from api.serializers.brand import BrandDetailSerializer, BrandSerializer
+from api.permissions import IsStaffOrReadOnly
 from shop.models.brand import Brand
 
 
@@ -18,7 +18,7 @@ class BrandViewSet(ModelViewSet):
     ordering_fields = ['created', 'value',]
     ordering = ['-created']
     serializer_class = BrandSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly] # Add is staff to edit.
+    permission_classes = [IsStaffOrReadOnly]
 
     def get_serializer_class(self):
         """

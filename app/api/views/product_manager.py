@@ -1,10 +1,10 @@
 from url_filter.integrations.drf import DjangoFilterBackend
 
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
 from api.serializers.product_manager import ProductManagerSerializer, ProductManagerDetailSerializer
+from api.permissions import IsStaffOrReadOnly
 from shop.models.product import ProductManager
 
 
@@ -19,7 +19,7 @@ class ProductManagerViewSet(ModelViewSet):
     ordering = ['-created']
     search_fields = ['color__name', 'query']
     serializer_class = ProductManagerSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsStaffOrReadOnly]
 
     def get_serializer_class(self):
         """

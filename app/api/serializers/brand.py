@@ -5,7 +5,7 @@ from shop.models.product import Product, ProductManager, ProductOption
 
 
 """
-Basic brand serializer.
+Basic serializers.
 """
 class BrandSerializer(ModelSerializer):
 
@@ -15,7 +15,7 @@ class BrandSerializer(ModelSerializer):
 
 
 """
-Brand detail serializer to check if brand is active
+Detail serializers to check if brand is active
 and has active products in stock.
 """
 class ProductOptionStatusSerializer(ModelSerializer):
@@ -46,7 +46,7 @@ class BrandDetailSerializer(BrandSerializer):
 
 
 """
-Minified brand serializer classes.
+Minified serializers.
 """
 class BrandMiniSerializer(ModelSerializer):
 

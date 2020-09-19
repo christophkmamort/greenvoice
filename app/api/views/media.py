@@ -1,7 +1,7 @@
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from api.serializers.media import ProductBrandImageSerializer, ProductImageSerializer
+from api.permissions import IsStaffOrReadOnly
 from shop.models.media import ProductBrandImage, ProductImage
 
 
@@ -11,7 +11,7 @@ class ProductBrandImageViewSet(ModelViewSet):
     """
     queryset = ProductBrandImage.objects.all()
     serializer_class = ProductBrandImageSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save()
@@ -23,7 +23,7 @@ class ProductImageViewSet(ModelViewSet):
     """
     queryset = ProductImage.objects.all()
     serializer_class = ProductImageSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsStaffOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save()

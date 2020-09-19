@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
+from .product_manager import ProductManagerDetailForOrderSerializer
 from .product import ProductDetailMiniSerializer
 from .taxonomies import ColorMiniSerializer, SizeMiniSerializer
 from shop.models.order import *
@@ -29,17 +30,8 @@ class OrderItemSerializer(ModelSerializer):
 Order + order-item detail serializer to get all required data and
 check if brand is active and has active products in stock.
 """
-class OrderProductManagerSerializer(ModelSerializer):
-    product = ProductDetailMiniSerializer(read_only=True)
-    color = ColorMiniSerializer(read_only=True)
-
-    class Meta:
-        model = ProductManager
-        exclude = ['query', 'value', 'created']
-
-
-class OrderProductOptionSerializer(ModelSerializer):
-    product_manager = OrderProductManagerSerializer(read_only=True)
+class ProductOrderDetailForOrderSerializer(ModelSerializer):
+    product_manager = ProductManagerDetailForOrderSerializer(read_only=True)
     size = SizeMiniSerializer(read_only=True)
 
     class Meta:
@@ -48,7 +40,7 @@ class OrderProductOptionSerializer(ModelSerializer):
 
 
 class OrderItemDetailSerializer(OrderItemSerializer):
-    product_option = OrderProductOptionSerializer(read_only=True)
+    product_option = ProductOrderDetailForOrderSerializer(read_only=True)
 
 
 class OrderDetailSerializer(OrderSerializer):

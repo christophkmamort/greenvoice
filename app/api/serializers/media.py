@@ -3,6 +3,9 @@ from rest_framework.serializers import ModelSerializer
 from shop.models.media import ProductBrandImage, ProductImage
 
 
+"""
+Basic serializers.
+"""
 class ProductBrandImageSerializer(ModelSerializer):
 
     class Meta:

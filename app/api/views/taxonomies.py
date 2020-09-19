@@ -1,10 +1,10 @@
 from rest_framework.filters import OrderingFilter
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
 from api.serializers import CategorySerializer, ColorSerializer, \
                             SizeSerializer, TargetGroupSerializer, \
                             CountrySerializer
+from api.permissions import IsStaffOrReadOnly
 from taxonomies.models import *
 
 
@@ -17,7 +17,7 @@ class CategoryViewSet(ModelViewSet):
     ordering_fields = ['created', 'value',]
     ordering = ['-value']
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsStaffOrReadOnly]
 
 
 class ColorViewSet(ModelViewSet):
@@ -29,7 +29,7 @@ class ColorViewSet(ModelViewSet):
     ordering_fields = ['created', 'value',]
     ordering = ['-value']
     serializer_class = ColorSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsStaffOrReadOnly]
 
 
 class CountryViewSet(ModelViewSet):
@@ -41,7 +41,7 @@ class CountryViewSet(ModelViewSet):
     ordering_fields = ['created', 'value',]
     ordering = ['-value']
     serializer_class = CountrySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsStaffOrReadOnly]
 
 
 class SizeViewSet(ModelViewSet):
@@ -53,7 +53,7 @@ class SizeViewSet(ModelViewSet):
     ordering_fields = ['order',]
     ordering = ['order']
     serializer_class = SizeSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsStaffOrReadOnly]
 
 
 class TargetGroupViewSet(ModelViewSet):
@@ -65,4 +65,4 @@ class TargetGroupViewSet(ModelViewSet):
     ordering_fields = ['value',]
     ordering = ['-value']
     serializer_class = TargetGroupSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsStaffOrReadOnly]

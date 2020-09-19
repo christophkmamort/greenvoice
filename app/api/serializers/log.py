@@ -3,6 +3,9 @@ from rest_framework.serializers import ModelSerializer
 from logs.models import BrandValueLog, ProductValueLog, TaxonomyValueLog
 
 
+"""
+Basic serializers.
+"""
 class BrandValueLogSerializer(ModelSerializer):
 
     class Meta:

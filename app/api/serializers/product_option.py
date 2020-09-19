@@ -1,10 +1,13 @@
 from rest_framework.serializers import ModelSerializer
 
-from .product_manager import ProductManagerDetailSerializer
 from .taxonomies import SizeMiniSerializer
 from shop.models.product import ProductOption
 
 
+
+"""
+Basic serializers.
+"""
 class ProductOptionSerializer(ModelSerializer):
 
     class Meta:
@@ -12,11 +15,10 @@ class ProductOptionSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class ProductOptionDetailSerializer(ProductOptionSerializer):
-    product_manager = ProductManagerDetailSerializer(read_only=True)
-    size = SizeMiniSerializer(read_only=True)
 
-
+"""
+Detail serializers.
+"""
 class ProductOptionDetailMiniSerializer(ProductOptionSerializer):
     size = SizeMiniSerializer(read_only=True)
 

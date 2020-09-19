@@ -1,32 +1,22 @@
 from rest_framework.serializers import ModelSerializer
 
-from .product import ProductDetailMiniSerializer
-from .product_option import ProductOptionDetailMiniSerializer
-from .taxonomies import ColorMiniSerializer
-from shop.models.product import ProductManager, ProductOption
+from .product_manager import ProductManagerDetailForWishlistSerializer
 from shop.models.wishlist import WishlistItem
 
 
+"""
+Basic serializers.
+"""
 class WishlistItemSerializer(ModelSerializer):
 
     class Meta:
         model = WishlistItem
         fields = '__all__'
+        read_only_fields = ['customer',]
 
 
-class WishlistProductManagerSerializer(ModelSerializer):
-    product = ProductDetailMiniSerializer(read_only=True)
-    color = ColorMiniSerializer(read_only=True)
-    product_option = ProductOptionDetailMiniSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = ProductManager
-        exclude = ['query', 'value', 'created']
-
-
-class WishlistItemDetailSerializer(ModelSerializer):
-    product_manager = WishlistProductManagerSerializer(read_only=True)
-
-    class Meta:
-        model = WishlistItem
-        fields = '__all__'
+"""
+Detail serializers.
+"""
+class WishlistItemDetailSerializer(WishlistItemSerializer):
+    product_manager = ProductManagerDetailForWishlistSerializer(read_only=True)
