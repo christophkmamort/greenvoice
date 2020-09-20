@@ -7,6 +7,9 @@ import * as orderListHtml from './templates/orderList.js'
 // Constructor.
 var orderCount = $('.orderCount')
 if (orderCount.length > 0) {
+  populateAllOrderCounts()
+}
+export function populateAllOrderCounts() {
   orderCount.each(function() {
     var args = {
       'currentElem':$(this),
@@ -18,6 +21,9 @@ if (orderCount.length > 0) {
 
 var orderList = $('.orderList')
 if (orderList.length > 0) {
+  populateAllOrderLists()
+}
+export function populateAllOrderLists() {
   orderList.each(function() {
     var args = {
       'currentElem':$(this),
@@ -29,6 +35,9 @@ if (orderList.length > 0) {
 
 var orderTotal = $('.orderTotal')
 if (orderTotal.length > 0) {
+  populateAllOrderTotals()
+}
+export function populateAllOrderTotals() {
   orderTotal.each(function() {
     var args = {
       'currentElem':$(this),
@@ -211,7 +220,7 @@ export function populateOrderTotal(args) {
           }
 
           var args = {
-            'order_total_gross':order_total_gross,
+            'order_total_gross':Math.round(order_total_gross * 100) / 100,
           }
 
           if (currentElemType == 'cart') {

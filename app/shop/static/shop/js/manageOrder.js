@@ -107,8 +107,9 @@ function createOrderItem(args) {
         })
         .then((resp) => resp.json())
         .then(function(response) {
-          populateOrderList.populateOrderCount()
-          populateOrderList.populateOrderList()
+          populateOrderList.populateAllOrderCounts()
+          populateOrderList.populateAllOrderLists()
+          populateOrderList.populateAllOrderTotals()
         })
         .catch(function(error) {
           console.log(error)
@@ -167,8 +168,9 @@ function increaseOrderItemQuantity(args) {
     })
     .then((resp) => resp.json())
     .then(function(response) {
-      populateOrderList.populateOrderCount()
-      populateOrderList.populateOrderList()
+      populateOrderList.populateAllOrderCounts()
+      populateOrderList.populateAllOrderLists()
+      populateOrderList.populateAllOrderTotals()
     })
     .catch(function(error) {
       console.log(error)
@@ -205,8 +207,9 @@ function decreaseOrderItemQuantity(args) {
       })
       .then((resp) => resp.json())
       .then(function(response) {
-        populateOrderList.populateOrderCount()
-        populateOrderList.populateOrderList()
+        populateOrderList.populateAllOrderCounts()
+        populateOrderList.populateAllOrderLists()
+        populateOrderList.populateAllOrderTotals()
       })
       .catch(function(error) {
         console.log(error)
@@ -233,8 +236,11 @@ function deleteOrderItem(args) {
       Delete order-item.
       */
       var api_order_item_detail = args['api_order_item_detail']
+      console.log(populateOrderList.populateAllOrderCounts())
+      console.log(populateOrderList.populateAllOrderLists())
+      console.log(populateOrderList.populateAllOrderTotals())
 
-      fetch(api_order_item_detail, {
+      /*fetch(api_order_item_detail, {
         method:'DELETE',
         headers:{
           'Content-type':'application/json',
@@ -242,12 +248,13 @@ function deleteOrderItem(args) {
         },
       })
       .then(function(response) {
-        populateOrderList.populateOrderCount()
-        populateOrderList.populateOrderList()
+        populateOrderList.populateAllOrderCounts()
+        populateOrderList.populateAllOrderLists()
+        populateOrderList.populateAllOrderTotals()
       })
       .catch(function(error) {
         console.log(error)
-      })
+      })*/
     }
   }
 }
@@ -258,8 +265,11 @@ function deleteOrder(args) {
   Delete order.
   */
   var api_order_detail = args['api_order_detail']
+  console.log(populateOrderList.populateAllOrderCounts())
+  console.log(populateOrderList.populateAllOrderLists())
+  console.log(populateOrderList.populateAllOrderTotals())
 
-  fetch(api_order_detail, {
+  /*fetch(api_order_detail, {
     method:'DELETE',
     headers:{
       'Content-type':'application/json',
@@ -267,10 +277,11 @@ function deleteOrder(args) {
     },
   })
   .then(function(response) {
-    populateOrderList.populateOrderCount()
-    populateOrderList.populateOrderList()
+    populateOrderList.populateAllOrderCounts()
+    populateOrderList.populateAllOrderLists()
+    populateOrderList.populateAllOrderTotals()
   })
   .catch(function(error) {
     console.log(error)
-  })
+  })*/
 }
