@@ -16,8 +16,7 @@
 {% block content %}
 <div class="down">
 
-
-  <div data-section="loginImageMedium">
+  <div>
     <div class="position-absolute w-100" style="height: 60vh; z-index: -1">
       <img src="{% static 'shop/med/backdrops/b1.jpg' %}" class="img img-fluid w-100 h-100" alt="">
     </div>
@@ -36,53 +35,49 @@
   </div>
 
 
-  <div data-section="loginFormWrapper">
-    <div class="bg-white down-container position-relative" style="min-height: 50vh;">
-      <div class="container">
-        <div data-section="indexDesignElementVerticalBar">
-          {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
-        </div>
+  <div class="bg-white down-container position-relative" style="min-height: 50vh;">
+    <div class="container">
+      <!--
+      Design element `horizontal-bar`.
+      -->
+      {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
 
-        <div data-section="loginForm">
-          <form id="loginUserForm" method="POST">
-            {% csrf_token %}
+      <form id="loginUserForm" method="POST">
+        {% csrf_token %}
 
-            <input type="email" name="loginEmail" class="form-control form-control-lg" placeholder="E-Mail" value="{{ submittedLoginEmail }}">
-            <input type="password" name="loginPassword" class="form-control form-control-lg mt-2" placeholder="Passwort">
-            <input type="hidden" name="next" value="{{ request.GET.next }}">
+        <input type="email" name="loginEmail" class="form-control form-control-lg" placeholder="E-Mail" value="{{ submittedLoginEmail }}">
+        <input type="password" name="loginPassword" class="form-control form-control-lg mt-2" placeholder="Passwort">
+        <input type="hidden" name="next" value="{{ request.GET.next }}">
 
-            <div class="seperator mt-4"></div>
+        <div class="seperator mt-4"></div>
 
-            <button id="loginUserTrigger" class="btn btn-primary btn-lg w-100" type="button">Anmelden</button>
+        <button id="loginUserTrigger" class="btn btn-primary btn-lg w-100" type="button">Anmelden</button>
 
-            <div class="seperator mt-2"></div>
+        <div class="seperator mt-2"></div>
 
-            <p id="loginUserMessage" class="text-danger text-small text-center"></p>
-            {% for message in messages %}
-              {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-    					  <p class="text-danger text-small text-center">{{ message }}</p>
-              {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-                <p class="text-primary text-small text-center">{{ message }}</p>
-              {% endif %}
-    				{% endfor %}
-          </form>
-        </div>
+        <p id="loginUserMessage" class="text-danger text-small text-center"></p>
+        {% for message in messages %}
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+					  <p class="text-danger text-small text-center">{{ message }}</p>
+          {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <p class="text-primary text-small text-center">{{ message }}</p>
+          {% endif %}
+				{% endfor %}
+      </form>
 
-        <div class="seperator mt-5"></div>
+      <div class="seperator mt-5"></div>
 
-        <div data-section="loginRegister">
-          <div class="w-100">
-            <p class="text-info text-center m-0 text-smaller">Du hast noch keinen Account?</p>
-            <a href="{% url 'shop:register' %}"><button class="btn btn-outline-info btn-lg w-100 mt-2">Jetzt registrieren</button></a>
-          </div>
-        </div>
-
-        <div class="seperator mt-5"></div>
-
-        <div data-section="indexDesignElementVerticalBar">
-          {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
-        </div>
+      <div class="w-100">
+        <p class="text-info text-center m-0 text-smaller">Du hast noch keinen Account?</p>
+        <a href="{% url 'shop:register' %}"><button class="btn btn-outline-info btn-lg w-100 mt-2">Jetzt registrieren</button></a>
       </div>
+
+      <div class="seperator mt-5"></div>
+
+      <!--
+      Design element `horizontal-bar`.
+      -->
+      {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
     </div>
   </div>
 

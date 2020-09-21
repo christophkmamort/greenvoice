@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from .product_manager import ProductManagerDetailForOrderSerializer
 from .product import ProductDetailMiniSerializer
@@ -44,4 +44,8 @@ class OrderItemDetailSerializer(OrderItemSerializer):
 
 
 class OrderDetailSerializer(OrderSerializer):
-    order_items = OrderItemDetailSerializer(many=True, read_only=True)
+    order_items = SerializerMethodField()
+
+    def get_order_items(self, instance):
+        order_items = instance.order_items.order_by('created')
+        return OrderItemDetailSerializer(order_items, many=True, read_only=True).data

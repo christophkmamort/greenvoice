@@ -4,14 +4,16 @@ import * as manageWishlist from './manageWishlist.js'
 
 
 // Constructor.
-var wishlistList = $('.wishlistList')
-if (wishlistList) {
-  populateWishlistList()
-}
+if (user != 'AnonymousUser') {
+  var wishlistList = $('.wishlistList')
+  if (wishlistList) {
+    populateWishlistList()
+  }
 
-var wishlistCount = $('.wishlistCount')
-if (wishlistCount) {
-  populateWishlistCount()
+  var wishlistCount = $('.wishlistCount')
+  if (wishlistCount) {
+    populateWishlistCount()
+  }
 }
 
 
