@@ -15,20 +15,18 @@
 <!-- Page content -->
 {% block content %}
   <div class="down">
-
-
-    <div data-section="shopImageSmall">
-      <div class="position-absolute w-100 height-30vh z-1">
+    <div>
+      <div class="position-absolute w-100 height__vh__30 z-1">
         <div class="position-relative w-100 h-100">
           <img src="{% static 'shop/med/phs1.jpg' %}" class="img img-fluid w-100 h-100" alt="...">
           <div class="w-100 h-100 position-absolute bg-dark-25" style="top: 0; left: 0;"></div>
         </div>
       </div>
 
-      <div class="position-relative height-25vh z-1">
+      <div class="position-relative height__vh__25 z-1">
         <div class="p-3 position-absolute w-100" style="left: 0; bottom: 0;">
           <h4 class="text-white text-center currentCategoryHeader">Nachhaltige Mode</h4>
-          <p class="text-white text-center m-0 mb-2 text-smaller productAmount">0 Produkte</p>
+          <p class="text-white text-center m-0 mb-2 text-smaller"><span class="productCount">0</span> Produkte</p>
         </div>
       </div>
     </div>
@@ -36,12 +34,16 @@
 
     <div class="bg-white down-container">
 
-      <div data-section="shopDesignElementVerticalBar">
-        {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
-      </div>
+      <!--
+      Design element `horizontal-bar`.
+      -->
+      {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
 
 
-      <div data-section="shopFilterAndCategories">
+      <!--
+      `Filter` and `Categories`.
+      -->
+      <div>
         {% include 'shop/templates/modals/filter.html' %}
 
         <div class="seperator mt-4"></div>
@@ -51,7 +53,7 @@
 
           <button class="btn btn-lg btn-outline-dark openFilter" data-toggle="modal" data-target="#filterModal">Filter (<span class="activeFilterAmount">0</span>)</button>
 
-          <div class="d-flex categoryList" data-style="nav">
+          <div class="d-flex categoryList" data-order="-value" data-style="horizontal" data-type="mainCatNav">
           </div>
 
           <div class="feed-padding-right"></div>
@@ -72,9 +74,10 @@
       <div class="seperator mt-4"></div>
 
 
-      <div data-section="shopDesignElementVerticalBar">
-        {% include 'shop/templates/design-elements/vertical-bar.html' with class='bg-info' only %}
-      </div>
+      <!--
+      Design element `horizontal-bar`.
+      -->
+      {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
     </div>
   </div>
 {% endblock %}

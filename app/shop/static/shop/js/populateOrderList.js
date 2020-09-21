@@ -71,8 +71,6 @@ export function populateOrderCount(args) {
   var currentElemStyle = currentElem.data('style')
   var currentElemType = currentElem.data('type')
 
-  currentElem.html('')
-
   if (user != 'AnonymousUser') {
     apiCallOrder(args).then(function(data) {
       var orders = data
@@ -88,6 +86,9 @@ export function populateOrderCount(args) {
           var order_items = order.order_items
 
           if (order_items.length > 0) {
+
+            currentElem.html('')
+
             if (currentElemStyle == 'bracket') {
               currentElem.removeClass('text-info').addClass('text-primary')
             }
@@ -103,7 +104,7 @@ export function populateOrderCount(args) {
         /*
         Cart is empty.
         */
-        currentElem.append(order_items_quantity).removeClass('notifier--active')
+        currentElem.html(order_items_quantity).removeClass('notifier--active')
       }
 
       if (currentElemStyle == 'bracket') {
@@ -118,8 +119,6 @@ export function populateOrderList(args) {
   var currentElem = args['currentElem']
   var currentElemType = currentElem.data('type')
 
-  currentElem.html('')
-
   if (user != 'AnonymousUser') {
     apiCallOrder(args).then(function(data) {
       var orders = data
@@ -130,6 +129,9 @@ export function populateOrderList(args) {
           var order_items = order.order_items
 
           if (order_items.length > 0) {
+
+            currentElem.html('')
+
             for (var x in order_items) {
               var order_item = order_items[x]
               var order_item_id = order_item.id
@@ -186,7 +188,7 @@ export function populateOrderList(args) {
         /*
         Cart is empty.
         */
-        currentElem.append(orderListHtml.cartItemNull(args))
+        currentElem.html(orderListHtml.cartItemNull(args))
       }
     })
   }
@@ -196,8 +198,6 @@ export function populateOrderList(args) {
 export function populateOrderTotal(args) {
   var currentElem = args['currentElem']
   var currentElemType = currentElem.data('type')
-
-  currentElem.html('')
 
   if (user != 'AnonymousUser') {
     apiCallOrder(args).then(function(data) {
@@ -210,6 +210,8 @@ export function populateOrderTotal(args) {
 
           if (order_items.length > 0) {
             var order_total_gross = 0
+
+            currentElem.html('')
 
             for (var x in order_items) {
               var order_item = order_items[x]
@@ -236,7 +238,7 @@ export function populateOrderTotal(args) {
         var args = {
           'shop_url':shop_url,
         }
-        currentElem.append(orderListHtml.cartTotalNull(args))
+        currentElem.html(orderListHtml.cartTotalNull(args))
       }
     })
   }
