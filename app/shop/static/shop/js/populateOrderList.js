@@ -24,7 +24,6 @@ if (orderList.length > 0) {
   populateAllOrderLists()
 }
 export function populateAllOrderLists() {
-  console.log('running')
   orderList.each(function() {
     var args = {
       'currentElem':$(this),

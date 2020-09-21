@@ -4,9 +4,10 @@ import './../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 
 // Populate pages with data from api.
 import './js/populateBrandList'
+import './js/populateCategoryList'
 import './js/populateOrderList'
 import './js/populateProductList'
-import './js/populateWishlistItem'
+import './js/populateWishlistList'
 
 // Page functionality.
 import './js/acceptCookies'

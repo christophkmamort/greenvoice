@@ -1,9 +1,9 @@
+from url_filter.integrations.drf import DjangoFilterBackend
+
 from rest_framework.filters import OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 
-from api.serializers import CategorySerializer, ColorSerializer, \
-                            SizeSerializer, TargetGroupSerializer, \
-                            CountrySerializer
+from api.serializers.taxonomies import *
 from api.permissions import IsStaffOrReadOnly
 from taxonomies.models import *
 
@@ -13,7 +13,8 @@ class CategoryViewSet(ModelViewSet):
     Manage `list`, `create`, `retrieve`, `update` and `destroy` categories.
     """
     queryset = Category.objects.all()
-    filter_backends = [OrderingFilter]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filter_fields = ['product', 'parent',]
     ordering_fields = ['created', 'value',]
     ordering = ['-value']
     serializer_class = CategorySerializer

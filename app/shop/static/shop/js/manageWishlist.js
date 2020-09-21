@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
 import * as populateProductList from './populateProductList.js'
-import * as populateWishlistItem from './populateWishlistItem.js'
+import * as populateWishlistList from './populateWishlistList.js'
 
 
 // Functions.
@@ -34,8 +34,8 @@ export function updateWishlist(args) {
           'product_wishlist_item_id':response.id
         }
         populateProductList.populateUpdateWishlistTriggerWrapper(args)
-        populateWishlistItem.populateWishlistCount()
-        populateWishlistItem.populateWishlistList()
+        populateWishlistList.populateWishlistCount()
+        populateWishlistList.populateWishlistList()
       })
       .catch(function(error) {
         console.log(error)
@@ -57,8 +57,8 @@ export function updateWishlist(args) {
           'product_manager_id':product_manager_id,
         }
         populateProductList.populateUpdateWishlistTriggerWrapper(args)
-        populateWishlistItem.populateWishlistCount()
-        populateWishlistItem.populateWishlistList()
+        populateWishlistList.populateWishlistCount()
+        populateWishlistList.populateWishlistList()
       })
       .catch(function(error) {
         console.log(error)

@@ -2,86 +2,88 @@
   <div class="modal-dialog m-0 mw-100 h-100">
     <div class="modal-content up h-100 border-none">
       <div class="bg-dark h-100 up-container bg-primary position-relative">
-
-
-        <div data-section="mobileNavClose">
-          <div class="row p-3 m-0">
-            <div class="col d-flex justify-content-end align-items-center p-0">
-              <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
-                {% include 'shop/templates/svg/close.html' with class='text-white' height='1.1em' only %}
-              </button>
-            </div>
+        <!--
+        Close modal.
+        -->
+        <div class="row p-3 m-0">
+          <div class="col d-flex justify-content-end align-items-center p-0">
+            <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+              {% include 'shop/templates/svg/close.html' with class='text-white' height='1.1em' only %}
+            </button>
           </div>
         </div>
 
 
         <div class="container" style="margin-bottom: 7em;">
+          <div class="seperator mt-4"></div>
 
-          <div data-section="mobileNavGender">
-            <div class="row mt-4">
-              <div class="col pr-2">
-                <a href="{% url 'shop:index' %}">
-                  <button class="btn btn-lg btn-outline-info w-100 filterMenTrigger">Herren</button>
-                </a>
-              </div>
-              <div class="col pl-2">
-                <a href="{% url 'shop:index' %}">
-                  <button class="btn btn-lg btn-outline-info w-100 filterWomenTrigger">Damen</button>
-                </a>
-              </div>
+          <!--
+          Target group nav.
+          -->
+          <div class="row px-2">
+            <div class="col p-0 px-2">
+              <a href="{% url 'shop:index' %}">
+                <button class="btn btn-lg btn-outline-info w-100 filterMenTrigger">Herren</button>
+              </a>
+            </div>
+            <div class="col p-0 px-2">
+              <a href="{% url 'shop:index' %}">
+                <button class="btn btn-lg btn-outline-info w-100 filterWomenTrigger">Damen</button>
+              </a>
             </div>
           </div>
 
-          <div data-section="mobileNavCategories">
-            <div class="mt-5">
-              <ul class="text m-0 p-0 mt-4 categoryList categoryList" data-style="mobile-menu">
-              </ul>
-            </div>
-          </div>
+          <div class="seperator mt-5"></div>
 
+          <!--
+          Category nav.
+          -->
+          <ul class="text m-0 p-0 mt-4 categoryList" data-order="-value" data-style="vertical" data-type="mainCatNav">
+          </ul>
         </div>
 
 
-        <div data-section="mobileNavUserLogin">
-          <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100" style="bottom: 2em; left: 0;">
-            {% if user.is_authenticated %}
-              <a href="{% url 'shop:profile' %}" class="mr-2">
-                <button class="btn m-0 p-0 w-100">
-                  <h5 class="text-white text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Mein Profil</h5>
-                </button>
-              </a>
-              <a href="{% url 'shop:logout' %}?logout=success" class="ml-2">
-                <button class="btn m-0 p-0 w-100">
-                  <h5 class="text-info text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Abmelden</h5>
-                </button>
-              </a>
-            {% else %}
-              <a href="{% url 'shop:login' %}" class="mr-2">
-                <button class="btn m-0 p-0 w-100">
-                  <h5 class="text-white text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Anmelden</h5>
-                </button>
-              </a>
-              <a href="{% url 'shop:register' %}" class="ml-2">
-                <button class="btn m-0 p-0 w-100">
-                  <h5 class="text-info text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Registrieren</h5>
-                </button>
-              </a>
-            {% endif %}
-          </div>
+        <!--
+        User nav.
+        -->
+        <div class="p-3 d-flex justify-content-center align-items-center position-absolute w-100" style="bottom: 2em; left: 0;">
+          {% if user.is_authenticated %}
+            <a href="{% url 'shop:profile' %}" class="mr-2">
+              <button class="btn m-0 p-0 w-100">
+                <h5 class="text-white text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Mein Profil</h5>
+              </button>
+            </a>
+            <a href="{% url 'shop:logout' %}?logout=success" class="ml-2">
+              <button class="btn m-0 p-0 w-100">
+                <h5 class="text-info text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Abmelden</h5>
+              </button>
+            </a>
+          {% else %}
+            <a href="{% url 'shop:login' %}" class="mr-2">
+              <button class="btn m-0 p-0 w-100">
+                <h5 class="text-white text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Anmelden</h5>
+              </button>
+            </a>
+            <a href="{% url 'shop:register' %}" class="ml-2">
+              <button class="btn m-0 p-0 w-100">
+                <h5 class="text-info text-center {% if 1 == 0 %} text-italic {% else %} text-regular {% endif %}">Registrieren</h5>
+              </button>
+            </a>
+          {% endif %}
         </div>
 
 
-        <div data-section="mobileMenuDesignElementVerticalBar">
-          <div class="position-absolute w-100" style="bottom: 0; left: 0;">
-            {% include 'shop/templates/horizontal-bar.html' with class='bg-white stroke-white' only %}
-          </div>
+        <!--
+        Design element `horizontal-bar`.
+        -->
+        <div class="position-absolute w-100" style="bottom: 0; left: 0;">
+          {% include 'shop/templates/horizontal-bar.html' with class='bg-white stroke-white' only %}
         </div>
       </div>
 
       <div class="container pt-4 pb-4">
-        {% include 'shop/templates/values.html' with class='text-dark' height='2.5em' only %}
+        {% include 'shop/templates/values.html' with class='svg svg--med' only %}
       </div>
-
     </div>
   </div>
 </div>
