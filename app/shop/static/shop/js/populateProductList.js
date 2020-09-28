@@ -2,37 +2,56 @@ import $ from 'jquery'
 
 import * as manageWishlist from './manageWishlist.js'
 import * as manageOrder from './manageOrder.js'
+import * as productListHtml from './templates/productList.js'
 
 
 // Constructor.
 var productList = $('.productList')
 if (productList) {
-  populateProductList()
+  populateAllProductLists()
 }
+export function populateAllProductLists() {
+  productList.each(function(index) {
+    var args = {
+      'currentElem':$(this),
+      'index':index,
+    }
+    populateProductList(args)
+  })
+}
+
 
 var productCount = $('.productCount')
 if (productCount) {
-  populateProductCount()
+  populateAllProductCounts()
+}
+export function populateAllProductCounts() {
+  productCount.each(function() {
+    var args = {
+      'currentElem':$(this),
+    }
+    populateProductCount(args)
+  })
 }
 
 
-// Functions.
+// Helper functions.
 function apiCallProductManger(args) {
   /*
-  Api call to get matching product-managers.
+  Api call get product-managers.
   */
   var api_product_manager = home_url + '/api/product-manager/'
   var currentElem = args['currentElem']
-  var filter = ''
-
-  var currentElemOrder = currentElem.data('order')
-  if (!currentElemOrder) {
-    currentElemOrder = '-value'
+  var currentElemOrder = '-value'
+  var currentElemDataOrder = currentElem.data('order')
+  if (currentElemDataOrder) {
+    currentElemOrder = currentElemDataOrder
   }
-  filter += '?ordering=' + currentElemOrder
+
+  var filter = '?ordering=' + currentElemOrder
   filter += '&product__brand__status=2' // Check if brand is active.
   filter += '&product_option__status=2' // Check if has active products.
-  // TODO: Add check if product is in stock!! (filter += '&product_option__stock=')
+  // TODO: Stock check (filter += '&product_option__stock=')
 
   return fetch(api_product_manager + filter)
   .then((resp) => resp.json())
@@ -42,184 +61,168 @@ function apiCallProductManger(args) {
 }
 
 
-function populateProductCount() {
+// Functions.
+function populateProductCount(args) {
   /*
-  Populate product-count with number of matching product-managers from api call.
+  Display number of matching product-managers for api query.
   */
-  productCount.each(function() {
-    var currentElem = $(this)
-    var args = {
-      'currentElem':currentElem,
+  var currentElem = args['currentElem']
+
+  currentElem.html('')
+
+  apiCallProductManger(args).then(function(data) {
+    var product_managers = data
+
+    if (product_managers.length > 0) {
+      currentElem.html(product_managers.length) // + '+'
     }
-
-    currentElem.html('')
-
-    apiCallProductManger(args).then(function(data) {
-      var product_managers = data
-
-      if (product_managers.length > 0) {
-        currentElem.html(product_managers.length)
-      }
-    })
   })
 }
 
 
 function populateProductList(args) {
   /*
-  Populate product-list with matching product-managers from api call.
+  Populate product-list with matching product-managers from api query.
   */
-  productList.each(function(index) {
-    var currentElem = $(this)
-    var args = {
-      'currentElem':currentElem,
-    }
+  var currentElem = args['currentElem']
+  var index = args['index']
 
-    currentElem.html('')
+  currentElem.html('')
 
-    apiCallProductManger(args).then(function(data) {
-      var product_managers = data
+  apiCallProductManger(args).then(function(data) {
+    var product_managers = data
 
-      if (product_managers.length > 0) {
-        var currentElemQuantity = currentElem.data('quantity')
-        var currentElemStyle = currentElem.data('style')
-        var index = args['index']
-        if (currentElemQuantity) { // TODO: Find way to query this in api call (speed).
-          product_managers = data.slice(0,currentElemQuantity)
+    if (product_managers.length > 0) {
+      var currentElemStyle = currentElem.data('style')
+      /*
+      ==== ==== ==== ====
+      TODO: Find way to query this in api call (speed).
+      */
+      var currentElemQuantity = currentElem.data('quantity')
+      if (currentElemQuantity) {
+        product_managers = data.slice(0,currentElemQuantity)
+      }
+      /*
+      End.
+      ==== ==== ==== ====
+      */
+
+      for (var i in product_managers) {
+        var product_manager = product_managers[i]
+
+        /*
+        Get `product images` from product-manager.
+        */
+        var product_images = product_manager.image
+        var product_title_image = false
+        if (product_images.length > 0) {
+          product_title_image = product_images[0].image
+        } else {
+          var product_brand_images = product_manager.brand_image
+          if (product_brand_images.length > 0) {
+            product_title_image = product_brand_images[0].image
+          }
         }
 
-        for (var i in product_managers) {
-          var product_manager = product_managers[i]
+        if (product_title_image) {
           var product_options = product_manager.product_option
 
           if (product_options) {
             /*
-            Get product options from product-manager.
+            Retrive product-options.
             */
-            var product_option_gross_prices = []
-            var product_option_sizes = []
-            var product_option_ids = []
+            var product_options_gross_array = []
+            var product_options_size_array = []
+            var product_options_id_array = []
 
             for (var x in product_options) {
               var product_option = product_options[x]
               var product_status = product_option.status
 
-              if (product_status == 2) { // Add logic to check stock (if stock management is on).
+              // TODO: Check stock (if on).
+              if (product_status == 2 /* && product_stock_management = false || 
+                product_status == 2 && product_stock_management = true && product_stock > 0 */) {
                 var product_option_gross = product_option.gross
-                if (product_option_gross) {
-                  product_option_gross_prices.push(product_option_gross)
-                }
                 var product_option_size = product_option.size.name
                 if (product_option_gross && product_option_size) {
-                  product_option_sizes.push(product_option_size)
-                  product_option_ids.push(product_option.id)
+                  product_options_gross_array.push(product_option_gross)
+                  product_options_size_array.push(product_option_size)
+                  product_options_id_array.push(product_option.id)
                 }
               }
             }
 
-            if (product_option_gross_prices.length > 0 && product_option_sizes.length > 0) {
+            if (product_options_gross_array.length > 0 && product_options_size_array.length > 0) {
               /*
-              Get product images from product-manager.
+              Get all `product details` from product-manager.
               */
-              var product_images = product_manager.image
-              var product_title_image = false
-              if (product_images.length > 0) {
-                product_title_image = product_images[0].image
-              } else {
-                var product_brand_images = product_manager.brand_image
-                if (product_brand_images.length > 0) {
-                  product_title_image = product_brand_images[0].image
-                }
+              var porduct_color = product_manager.color.name
+              product_options_gross_array.sort(function(a, b) { return a-b })
+              var product_gross_from = product_options_gross_array[0]
+              var product_gross_info_txt = ''
+              if (product_options_gross_array.length > 1 && product_gross_from != product_options_gross_array[-1]) {
+                product_gross_info_txt = 'ab '
               }
+              var product_manager_id = product_manager.id
+              var product_name = product_manager.product.name
+              var product_url = home_url + '/shop/product/' + product_manager.id
 
-              if (product_title_image) {
+              if (porduct_color && product_name) {
                 /*
-                Get all product details from product-manager.
+                Populate currentElem with `product data`.
                 */
-                var porduct_color = product_manager.color.name
-                product_option_gross_prices.sort(function(a, b) { return a-b })
-                var product_gross_from = product_option_gross_prices[0]
-                var product_gross_info = ''
-                if (product_option_gross_prices.length > 1 && product_gross_from != product_option_gross_prices[-1]) {
-                  product_gross_info = 'ab '
+                var product_in_wishlist = product_manager.wishlist_item
+                var product_wishlist_item_id = false
+                if (product_in_wishlist.length > 0) {
+                  product_wishlist_item_id = product_in_wishlist[0]
                 }
-                var product_manager_id = product_manager.id
-                var product_name = product_manager.product.name
-                var product_url = home_url + '/shop/product/' + product_manager.id
 
-                if (porduct_color && product_name) {
-                  /*
-                  Display product data in current product list.
-                  */
-                  var product_wrapper_class = 'feed-product mb-4'
-                  var product_in_wishlist = product_manager.wishlist_item
-                  var product_wishlist_item_id = false
-                  if (product_in_wishlist.length > 0) {
-                    product_wishlist_item_id = product_in_wishlist[0]
+                var product_wrapper_class = 'feed-product mb-4'
+                if (currentElemStyle == 'slide') {
+                  product_wrapper_class = 'feed-product feed-product-slide'
+                  if (i == 0) {
+                    currentElem.append(productListHtml.marginLeft())
                   }
-
-                  if (currentElemStyle == 'slide') {
-                    /*
-                    Html classes for product slide.
-                    */
-                    product_wrapper_class = 'feed-product feed-product-slide'
-                    if (i == 0) {
-                      currentElem.append(`<div class="feed-padding-left"></div>`)
-                    }
-                  }
-
-                  var html = `
-                    <div class="${ product_wrapper_class }">
-                      <div class="overflow-hidden position-relative feed-product-img">
-                        <a href="${ product_url }">
-                          <div class="position-absolute" style="left: 0; top: 0; right: 0; bottom: 0;">
-                            <img class="img w-100 h-100" src="${ product_title_image }" alt="">
-                          </div>
-                        </a>
-
-                        <div class="position-absolute updateWishlistTriggerWrapper" data-unique="productList${ product_manager_id }" style="top:0.5em; right:0.5em;">
-                        </div>
-                      </div>
-                      <a href="${ product_url }" class="text-decoration-none">
-                        <div class="pt-2 pr-2 pl-2">
-                          <p class="m-0 p-0 mt-1 text-truncate">${ product_name }</p>
-                          <h6 class="m-0 p-0 mt-1 text-small"><span class="text-dark text-strong">${ product_gross_info }€ ${ product_gross_from }</span></h6>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  `
-                  currentElem.append(html)
-
-                  /*<div class="d-flex updateOrderTriggerWrapper" data-unique="productList${ product_manager_id }">
-                  </div>*/
-
-                  var updateOrderTriggerWrapper = $(`.updateOrderTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
-                  var argsPopulateUpdateOrderTrigger = {
-                    'currentElem':updateOrderTriggerWrapper,
-                    'product_option_sizes':product_option_sizes,
-                    'product_option_ids':product_option_ids,
-                  }
-                  populateUpdateOrderTriggerWrapper(argsPopulateUpdateOrderTrigger)
-
-                  var updateWishlistTriggerWrapper = $(`.updateWishlistTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
-                  var argsPopulateUpdateWishlistTrigger = {
-                    'currentElem':updateWishlistTriggerWrapper,
-                    'product_manager_id':product_manager_id,
-                    'product_wishlist_item_id':product_wishlist_item_id,
-                  }
-                  populateUpdateWishlistTriggerWrapper(argsPopulateUpdateWishlistTrigger)
                 }
+
+                var args = {
+                  'product_gross_from':product_gross_from,
+                  'product_gross_info_txt':product_gross_info_txt,
+                  'product_manager_id':product_manager_id,
+                  'product_name':product_name,
+                  'product_title_image':product_title_image,
+                  'product_url':product_url,
+                  'product_wrapper_class':product_wrapper_class,
+                }
+                currentElem.append(productListHtml.productItem(args))
+
+                /*<div class="d-flex updateOrderTriggerWrapper" data-unique="productList${ product_manager_id }">
+                </div>*/
+                var updateOrderTriggerWrapper = $(`.updateOrderTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
+                var argsPopulateUpdateOrderTrigger = {
+                  'currentElem':updateOrderTriggerWrapper,
+                  'product_options_size_array':product_options_size_array,
+                  'product_options_id_array':product_options_id_array,
+                }
+                populateUpdateOrderTriggerWrapper(argsPopulateUpdateOrderTrigger)
+
+                var updateWishlistTriggerWrapper = $(`.updateWishlistTriggerWrapper[data-unique="productList${ product_manager_id }"]`)
+                var argsPopulateUpdateWishlistTrigger = {
+                  'currentElem':updateWishlistTriggerWrapper,
+                  'product_manager_id':product_manager_id,
+                  'product_wishlist_item_id':product_wishlist_item_id,
+                }
+                populateUpdateWishlistTriggerWrapper(argsPopulateUpdateWishlistTrigger)
               }
             }
           }
         }
-
-        if (currentElemStyle == 'slide') {
-          currentElem.append(`<div class="feed-padding-right"></div>`)
-        }
       }
-    })
+
+      if (currentElemStyle == 'slide') {
+        currentElem.append(productListHtml.marginRight())
+      }
+    }
   })
 }
 
@@ -230,12 +233,12 @@ export function populateUpdateOrderTriggerWrapper(args) {
   */
   var currentElem = args['currentElem']
   var product_options_html = ''
-  var product_option_ids = args['product_option_ids']
-  var product_option_sizes = args['product_option_sizes']
+  var product_options_id_array = args['product_options_id_array']
+  var product_options_size_array = args['product_options_size_array']
 
-  for (var i in product_option_sizes) {
-    var product_option_size = product_option_sizes[i]
-    var product_option_id = product_option_ids[i]
+  for (var i in product_options_size_array) {
+    var product_option_size = product_options_size_array[i]
+    var product_option_id = product_options_id_array[i]
 
     product_options_html += `
       <label class="checkbox form-check m-0 p-1 pt-1">

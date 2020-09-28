@@ -1,10 +1,12 @@
 import $ from 'jquery'
 
+import * as categoryListHtml from './templates/categoryList.js'
+
 
 // Constructor.
 var categoryList = $('.categoryList')
 if (categoryList) {
-  populateAllCategoryLists()
+  // populateAllCategoryLists()
 }
 
 
@@ -16,7 +18,18 @@ function apiCallCategories(args) {
   var filter = '?ordering=-value&product__isnull=False'
   if (currentElemType == 'mainCatNav') {
     filter += '&parent__isnull=true'
-  }
+
+  } /*else if (currentElemType == 'variableCatNav') {
+    var category_name = url_params.get('category__name')
+
+    if (category_name) {
+      filter += '&parent__name=' + category_name // do stuff here!!
+
+    } else {
+      filter += '&parent__isnull=true'
+    }
+
+  }*/
 
   return fetch(home_url + '/api/taxonomy-category/' + filter)
   .then((resp) => resp.json())
@@ -40,40 +53,96 @@ export function populateAllCategoryLists() {
 function populateCategoryList(args) {
   var currentElem = args['currentElem']
   var currentElemStyle = currentElem.data('style')
+  var currentElemType = currentElem.data('type')
 
   apiCallCategories(args).then(function(data) {
     var categories = data
 
     if (categories) {
+      /*
+      Filter categories.
+      */
+      if (currentElemType == 'variableCatNav') {
+        var category_url_param = url_params.get('category__name')
+
+        for (var i in categories) {
+          /*
+          Check if active category has children.
+          */
+          var category = categories[i]
+          var category_name = category.name
+
+          if (category_name == category_url_param) {
+            var category_children_length = category.children.length
+            var category_url_parent = category.parent
+          }
+        }
+
+        for (var i in categories) {
+          var category = categories[i]
+          var category_name = category.name
+          var category_parent = category.parent
+
+          if (category_url_param) {
+            if (category_parent) {
+              var category_parent_name = category_parent.name
+            }
+
+            if (category_children_length > 0) {
+              /*
+              Display child categories of currently active category.
+              Only if current category has child categories.
+              */
+              if (!category_parent || category_parent_name != category_url_param) {
+                categories.splice(i, 1);
+              }
+
+            } else {
+              /*
+              Display siblings of current category and mark active category.
+              Only if no more child categories for current category.
+              */
+              if (category_parent != category_url_parent) {
+                categories.splice(i, 1);
+              }
+            }
+
+          } else {
+            /*
+            Display main categories only.
+            */
+            if (category_parent != null) {
+              categories.splice(i, 1);
+            }
+          }
+        }
+      }
+
+      /*
+      Display categories.
+      */
       for (var i in categories) {
         var category = categories[i]
         var category_name = category.name
         var category_url = shop_url + '?category__name=' + category_name // + filter
 
-        if (currentElemStyle == 'vertical') {
-          var html = `
-            <li class="border-bottom border-white p-2">
-              <a href="${ category_url }">
-                <button class="btn m-0 p-0 w-100">
-                  <div class="d-flex align-items-center">
-                    <h5 class="text-white m-0 mr-auto text-regular">${ category_name }</h5>
-                    <svg class="bi bi-chevron-right text-white" height="0.8em" viewBox="0 0 21.181 35.992" xmlns="http://www.w3.org/2000/svg"><path d="M5.233,8.233a2.5,2.5,0,0,1,3.538,0L22,21.462,35.22,8.233a2.5,2.5,0,0,1,3.538,3.538L23.765,26.765a2.5,2.5,0,0,1-3.538,0L5.233,11.772a2.5,2.5,0,0,1,0-3.538Z" transform="translate(-6.818 39.991) rotate(-90)" fill="currentColor" stroke="2" stroke-width="1" fill-rule="evenodd"/></svg>
-                  </div>
-                </button>
-              </a>
-            </li>
-          `
-
-
-        } else if (currentElemStyle == 'horizontal') {
-          var html = `
-            <a href="${ category_url }">
-              <button class="btn btn-lg btn-outline-dark ml-2">
-                ${ category_name }
-              </button>
-            </a>
-          `
+        var args = {
+          'category_name': category_name,
+          'category_url': category_url,
+          'category_url_param':category_url_param,
         }
+
+        if (currentElemStyle == 'buttonSm') {
+          var html = categoryListHtml.categoryButtonSm(args)
+
+        } else if (currentElemStyle == 'buttonLg') {
+          var html = categoryListHtml.categoryButtonLg(args)
+
+        } else if (currentElemStyle == 'mobileMenu') {
+          var html = categoryListHtml.categoryButtonMobileMenu(args)
+
+        }
+
         currentElem.append(html)
       }
     }

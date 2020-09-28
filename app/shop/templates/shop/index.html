@@ -16,17 +16,17 @@
 {% block content %}
   <div class="down">
     <!--
-    `Title image` large.
+    Design element `header image large`.
     -->
     <div>
-      <div class="position-absolute w-100" style="height: 80vh; z-index: -1">
+      <div class="position-absolute w-100 height__vh__80" style="z-index: -1">
         <img src="{% static 'shop/med/phs7.jpg' %}" class="img img-fluid w-100 h-100" alt="">
       </div>
       <div class="seperator height__vh__75"></div>
     </div>
 
     <!--
-    `Content section` for index page.
+    Design element `content section white`.
     -->
     <div class="bg-white down-container">
       <!--
@@ -36,7 +36,7 @@
 
 
       <!--
-      `Brand values` described short.
+      `Greenvoice values` medium.
       -->
       <div class="container">
         <div class="seperator mt-4"></div>
@@ -55,7 +55,7 @@
 
 
       <!--
-      `Product list` (ordering:-vale, style:slide)
+      `Product list` (ordering:-vale, quantity:12, style:slide,)
       -->
       <div>
         <div class="seperator mt-5"></div>
@@ -67,9 +67,7 @@
 
         <div class="seperator mt-4"></div>
 
-        <div data-section="productList">
-          <div class="d-flex scrollbar productList" data-order="-value" data-quantity="12" data-style="slide">
-          </div>
+        <div class="d-flex scrollbar productList" data-order="-value" data-quantity="12" data-style="slide">
         </div>
 
         <div class="seperator mt-4"></div>
@@ -86,13 +84,12 @@
       </div>
 
 
-      <div class="seperator mt-5"></div>
-
-
       <!--
-      `Product list` (ordering:-created, style:slide)
+      `Product list` (ordering:-created, quantity:12, style:slide,)
       -->
       <div>
+        <div class="seperator mt-5"></div>
+
         <div class="container">
           <h4 class="text-info m-0 text-regular">Vor kurzem eingetroffen</h4>
           <h4>Neue Produkte</h4>
@@ -118,7 +115,7 @@
 
 
       <!--
-      `Category list` (ordering:-value, style:feed)
+      `Category list` (ordering:-value, quantity:12, style:buttonSm,)
       -->
       <div>
         <div class="seperator mt-5"></div>
@@ -129,7 +126,7 @@
 
           <div class="seperator mt-4"></div>
 
-          <div class="categoryList" data-order="-value" data-quantity="12" data-style="feed"></div>
+          <div class="categoryList" data-order="-value" data-quantity="12" data-style="buttonSm"></div>
 
           <div class="seperator mt-4"></div>
 
@@ -147,7 +144,7 @@
 
 
       <!--
-      `Brand list` (ordering:-value, style:slide)
+      `Brand list` (ordering:-value, quantity:12, style:slide,)
       -->
       <div>
         <div class="seperator mt-5"></div>

@@ -1,4 +1,4 @@
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 
 class IsStaffOrReadOnly(BasePermission):
@@ -11,7 +11,7 @@ class IsStaffOrReadOnly(BasePermission):
         Read permissions are allowed to any request,
         so we'll always allow GET, HEAD or OPTIONS requests.
         """
-        if request.method in permissions.SAFE_METHODS:
+        if request.method in SAFE_METHODS:
             return True
 
         """

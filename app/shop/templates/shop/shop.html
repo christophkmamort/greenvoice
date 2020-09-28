@@ -15,6 +15,9 @@
 <!-- Page content -->
 {% block content %}
   <div class="down">
+    <!--
+      Design element `header image medium`.
+    -->
     <div>
       <div class="position-absolute w-100 height__vh__30 z-1">
         <div class="position-relative w-100 h-100">
@@ -33,7 +36,6 @@
 
 
     <div class="bg-white down-container">
-
       <!--
       Design element `horizontal-bar`.
       -->
@@ -53,7 +55,7 @@
 
           <button class="btn btn-lg btn-outline-dark openFilter" data-toggle="modal" data-target="#filterModal">Filter (<span class="activeFilterAmount">0</span>)</button>
 
-          <div class="d-flex categoryList" data-order="-value" data-style="horizontal" data-type="mainCatNav">
+          <div class="d-flex categoryList" data-order="-value" data-style="buttonLg" data-type="variableCatNav">
           </div>
 
           <div class="feed-padding-right"></div>
@@ -61,7 +63,10 @@
       </div>
 
 
-      <div data-section="shopProductList">
+      <!--
+      `Product feed`.
+      -->
+      <div>
         <div class="seperator mt-5"></div>
 
         <div class="container">
@@ -71,13 +76,14 @@
       </div>
 
 
-      <div class="seperator mt-4"></div>
-
-
       <!--
       Design element `horizontal-bar`.
       -->
-      {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
+      <div>
+        <div class="seperator mt-4"></div>
+
+        {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
+      </div>
     </div>
   </div>
 {% endblock %}

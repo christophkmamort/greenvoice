@@ -20,6 +20,14 @@ class CategoryViewSet(ModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = [IsStaffOrReadOnly]
 
+    def get_serializer_class(self):
+        """
+        Return appropriate serializer class for product manager.
+        """
+        if self.action == 'retrieve' or self.action == 'list':
+            return CategoryDetailMiniSerializer
+        return self.serializer_class
+
 
 class ColorViewSet(ModelViewSet):
     """

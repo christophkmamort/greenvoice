@@ -70,3 +70,11 @@ class TargetGroupMiniSerializer(ModelSerializer):
     class Meta:
         model = TargetGroup
         exclude = ['slug', 'value', 'created']
+
+
+"""
+Detail serializers.
+"""
+class CategoryDetailMiniSerializer(CategoryMiniSerializer):
+    parent = CategoryMiniSerializer(read_only=True)
+    children = CategoryMiniSerializer(many=True, read_only=True)
