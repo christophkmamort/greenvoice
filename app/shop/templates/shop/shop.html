@@ -42,13 +42,30 @@
       {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
 
 
+      <div class="seperator mt-4"></div>
+
+
+      <!--
+      `Breadcrumbs` (category).
+      -->
+      <div class="categoryBreadcrumbsWrapper">
+        <nav>
+          <ol class="breadcrumb bg-transparent m-0 py-0 d-none categoryBreadcrumbs">
+            <!--<li class="breadcrumb-item"><a href="#">Herren</a></li>
+            <li class="breadcrumb-item"><a href="#">Schuhe</a></li>
+            <li class="breadcrumb-item active">Sneaker</li>-->
+          </ol>
+        </nav>
+      </div>
+
+
       <!--
       `Filter` and `Categories`.
       -->
       <div>
         {% include 'shop/templates/modals/filter.html' %}
 
-        <div class="seperator mt-4"></div>
+        <div class="seperator mt-3"></div>
 
         <div class="d-flex scrollbar">
           <div class="feed-padding-left"></div>

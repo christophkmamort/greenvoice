@@ -1,10 +1,10 @@
 export function categoryButtonSm(args) {
   var category_name = args['category_name']
   var category_url = args['category_url']
-  var category_url_param = args['category_url_param']
+  var url_param_category__name = args['url_param_category__name']
 
   var btn_css = `btn-outline-dark`
-  if (category_name == category_url_param) {
+  if (category_name == url_param_category__name) {
     btn_css = `btn-primary`
   }
 
@@ -22,10 +22,10 @@ export function categoryButtonSm(args) {
 export function categoryButtonLg(args) {
   var category_name = args['category_name']
   var category_url = args['category_url']
-  var category_url_param = args['category_url_param']
+  var url_param_category__name = args['url_param_category__name']
 
   var btn_css = `btn-outline-dark`
-  if (category_name == category_url_param) {
+  if (category_name == url_param_category__name) {
     btn_css = `btn-primary`
   }
 
@@ -43,7 +43,6 @@ export function categoryButtonLg(args) {
 export function categoryButtonMobileMenu(args) {
   var category_name = args['category_name']
   var category_url = args['category_url']
-  var category_url_param = args['category_url_param']
 
   var html = `
     <li class="border-bottom border-white p-2">
@@ -56,6 +55,22 @@ export function categoryButtonMobileMenu(args) {
         </button>
       </a>
     </li>
+  `
+  return html
+}
+
+
+export function categoryBreadcrumbs(args) {
+  var category_name = args['category_name']
+  var category_url = args['category_url']
+
+  var breadcrumb_item_class = 'breadcrumb-item'
+  if (1 == 0) {
+    var breadcrumb_item_class = 'breadcrumb-item active'
+  }
+
+  var html = `
+    <li class="${ breadcrumb_item_class }"><a href="${ category_url }">${ category_name }</a></li>
   `
   return html
 }

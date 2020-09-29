@@ -13,16 +13,13 @@ module.exports = {
     before: function(app, server, compiler) {
       server._watch('./**/*.html')
     },
-    contentBase: 'http://localhost:8000',
     hot: true,
     proxy: {
-      '!/static/shop/**': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-      },
+      '*': 'http://localhost:8000',
     },
     port: 3000,
     host: '0.0.0.0',
+    clientLogLevel: 'silent',
   },
   module: {
     rules: [

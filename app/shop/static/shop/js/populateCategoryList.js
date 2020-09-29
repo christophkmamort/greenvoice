@@ -4,6 +4,12 @@ import * as categoryListHtml from './templates/categoryList.js'
 
 
 // Constructor.
+var categoryBreadcrumbs = $('.categoryBreadcrumbs')
+if (categoryBreadcrumbs) {
+  populateAllCategoryBreadcrumbs()
+}
+
+
 var categoryList = $('.categoryList')
 if (categoryList) {
   populateAllCategoryLists()
@@ -14,28 +20,35 @@ if (categoryList) {
 function apiCallCategories(args) {
   var currentElem = args['currentElem']
   var currentElemOrder = '-value'
-  var currentElemDataOrder = currentElem.data('order')
+  var currentElemDataOrder = args['currentElemDataOrder']
   if (currentElemDataOrder) {
     currentElemOrder = currentElemDataOrder
   }
-  var currentElemType = currentElem.data('type')
+  var currentElemType = args['currentElemType']
+  var url_param_category__name = args['url_param_category__name']
 
   var filter = '?ordering=' + currentElemOrder
   filter += '&product__isnull=False'
-  if (currentElemType == 'mainCatNav') {
+  if (currentElemType == 'mainCatNav' || currentElemType == 'variableCatNav' && !url_param_category__name) {
     filter += '&parent__isnull=true'
 
-  } else if (currentElemType == 'variableCatNav') {
-    console.log('test')
   }
-
-
   // TODO: Stock check (filter += '&product_option__stock=')
 
   return fetch(home_url + '/api/taxonomy-category/' + filter)
   .then((resp) => resp.json())
   .catch(function(error) {
     console.log(error)
+  })
+}
+
+
+function populateAllCategoryBreadcrumbs() {
+  categoryBreadcrumbs.each(function() {
+    var args = {
+      'currentElem':$(this),
+    }
+    populateCategoryBreadcrumbs(args)
   })
 }
 
@@ -54,6 +67,13 @@ function populateAllCategoryLists() {
 function populateCategoryList(args) {
   var currentElem = args['currentElem']
   var currentElemStyle = currentElem.data('style')
+  var currentElemType = currentElem.data('type')
+  var currentElemDataOrder = currentElem.data('order')
+  var url_param_category__name = url_params.get('category__name')
+
+  args['currentElemDataOrder'] = currentElemDataOrder
+  args['currentElemType'] = currentElemType
+  args['url_param_category__name'] = url_param_category__name
 
   apiCallCategories(args).then(function(data) {
     var categories = data
@@ -71,54 +91,9 @@ function populateCategoryList(args) {
     */
 
     if (categories) {
-      var category_url_param = url_params.get('category__name')
+      currentElem.html('')
 
-      for (var i in categories) {
-        var category = categories[i]
-        var category_name = category.name
-        var category_url = shop_url + '?category__name=' + category_name // + filter
-
-        var args = {
-          'category_name': category_name,
-          'category_url': category_url,
-          'category_url_param':category_url_param,
-        }
-
-        if (currentElemStyle == 'buttonSm') {
-          var html = categoryListHtml.categoryButtonSm(args)
-
-        } else if (currentElemStyle == 'buttonLg') {
-          var html = categoryListHtml.categoryButtonLg(args)
-
-        } else if (currentElemStyle == 'mobileMenu') {
-          var html = categoryListHtml.categoryButtonMobileMenu(args)
-
-        }
-
-        currentElem.append(html)
-      }
-    }
-  })
-}
-
-
-
-
-function populateCategoryListOld(args) {
-  var currentElem = args['currentElem']
-  var currentElemStyle = currentElem.data('style')
-  var currentElemType = currentElem.data('type')
-
-  apiCallCategories(args).then(function(data) {
-    var categories = data
-
-    if (categories) {
-      /*
-      Filter categories.
-      */
       if (currentElemType == 'variableCatNav') {
-        var category_url_param = url_params.get('category__name')
-
         for (var i in categories) {
           /*
           Check if active category has children.
@@ -126,7 +101,7 @@ function populateCategoryListOld(args) {
           var category = categories[i]
           var category_name = category.name
 
-          if (category_name == category_url_param) {
+          if (category_name == url_param_category__name) {
             var category_children_length = category.children.length
             var category_url_parent = category.parent
           }
@@ -137,7 +112,7 @@ function populateCategoryListOld(args) {
           var category_name = category.name
           var category_parent = category.parent
 
-          if (category_url_param) {
+          if (url_param_category__name) {
             if (category_parent) {
               var category_parent_name = category_parent.name
             }
@@ -147,7 +122,7 @@ function populateCategoryListOld(args) {
               Display child categories of currently active category.
               Only if current category has child categories.
               */
-              if (!category_parent || category_parent_name != category_url_param) {
+              if (!category_parent || category_parent_name != url_param_category__name) {
                 categories.splice(i, 1);
               }
 
@@ -172,9 +147,6 @@ function populateCategoryListOld(args) {
         }
       }
 
-      /*
-      Display categories.
-      */
       for (var i in categories) {
         var category = categories[i]
         var category_name = category.name
@@ -183,7 +155,7 @@ function populateCategoryListOld(args) {
         var args = {
           'category_name': category_name,
           'category_url': category_url,
-          'category_url_param':category_url_param,
+          'url_param_category__name':url_param_category__name,
         }
 
         if (currentElemStyle == 'buttonSm') {
@@ -199,6 +171,51 @@ function populateCategoryListOld(args) {
 
         currentElem.append(html)
       }
+    }
+  })
+}
+
+
+function populateCategoryBreadcrumbs(args) {
+  var currentElem = args['currentElem']
+  var url_param_category__name = url_params.get('category__name')
+
+  args['url_param_category__name'] = url_param_category__name
+
+  apiCallCategories(args).then(function(data) {
+    var categories = data
+
+    if (categories) {
+      currentElem.html('')
+      currentElem.removeClass('d-none')
+
+      /*for (var i in categories) {
+        var category = categories[i]
+        var category_name = category.name
+        var category_parent = category.parent
+        if (category_parent) {
+          var category_parent_name = category.parent.name
+        }
+
+        if (category_name != url_param_category__name && category_parent_name == url_param_category__name) {
+          categories.splice(i, 1);
+
+        } else if () {
+
+        }
+
+        console.log(category_name)
+
+        // var category_url = shop_url + '?category__name=' + category_name // + filter
+
+        var args = {
+          'category_name': category_name,
+          'category_url': category_url,
+          'url_param_category__name':url_param_category__name,
+        }
+
+        currentElem.append(categoryListHtml.categoryBreadcrumbs(args))
+      }*/
     }
   })
 }
