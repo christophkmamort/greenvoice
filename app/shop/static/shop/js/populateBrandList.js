@@ -15,16 +15,17 @@ function apiCallBrand(args) {
   */
   var api_brand = home_url + '/api/brand/'
   var currentElem = args['currentElem']
-  var filter = ''
-
-  var currentElemOrder = currentElem.data('order')
-  if (!currentElemOrder) {
-    currentElemOrder = '-value'
+  var currentElemOrder = '-value'
+  var currentElemDataOrder = currentElem.data('order')
+  if (currentElemDataOrder) {
+    currentElemOrder = currentElemDataOrder
   }
-  filter += '?ordering=' + currentElemOrder
+
+
+  var filter = '?ordering=' + currentElemOrder
   filter += '&status=2'
   filter += '&product__product_manager__product_option__status=2'
-  // TODO: Add check if product is in stock!! (filter += '&product_option__stock=')
+  // TODO: Stock check (filter += '&product_option__stock=')
 
   return fetch(api_brand + filter)
   .then((resp) => resp.json())

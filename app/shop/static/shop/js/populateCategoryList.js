@@ -6,30 +6,31 @@ import * as categoryListHtml from './templates/categoryList.js'
 // Constructor.
 var categoryList = $('.categoryList')
 if (categoryList) {
-  // populateAllCategoryLists()
+  populateAllCategoryLists()
 }
 
 
 // Helper functions.
 function apiCallCategories(args) {
   var currentElem = args['currentElem']
+  var currentElemOrder = '-value'
+  var currentElemDataOrder = currentElem.data('order')
+  if (currentElemDataOrder) {
+    currentElemOrder = currentElemDataOrder
+  }
   var currentElemType = currentElem.data('type')
 
-  var filter = '?ordering=-value&product__isnull=False'
+  var filter = '?ordering=' + currentElemOrder
+  filter += '&product__isnull=False'
   if (currentElemType == 'mainCatNav') {
     filter += '&parent__isnull=true'
 
-  } /*else if (currentElemType == 'variableCatNav') {
-    var category_name = url_params.get('category__name')
+  } else if (currentElemType == 'variableCatNav') {
+    console.log('test')
+  }
 
-    if (category_name) {
-      filter += '&parent__name=' + category_name // do stuff here!!
 
-    } else {
-      filter += '&parent__isnull=true'
-    }
-
-  }*/
+  // TODO: Stock check (filter += '&product_option__stock=')
 
   return fetch(home_url + '/api/taxonomy-category/' + filter)
   .then((resp) => resp.json())
@@ -39,7 +40,7 @@ function apiCallCategories(args) {
 }
 
 
-export function populateAllCategoryLists() {
+function populateAllCategoryLists() {
   categoryList.each(function() {
     var args = {
       'currentElem':$(this),
@@ -51,6 +52,59 @@ export function populateAllCategoryLists() {
 
 // Functions.
 function populateCategoryList(args) {
+  var currentElem = args['currentElem']
+  var currentElemStyle = currentElem.data('style')
+
+  apiCallCategories(args).then(function(data) {
+    var categories = data
+    /*
+    ==== ==== ==== ====
+    TODO: Find way to query this in api call (speed).
+    */
+    var currentElemQuantity = currentElem.data('quantity')
+    if (currentElemQuantity) {
+      categories = data.slice(0,currentElemQuantity)
+    }
+    /*
+    End.
+    ==== ==== ==== ====
+    */
+
+    if (categories) {
+      var category_url_param = url_params.get('category__name')
+
+      for (var i in categories) {
+        var category = categories[i]
+        var category_name = category.name
+        var category_url = shop_url + '?category__name=' + category_name // + filter
+
+        var args = {
+          'category_name': category_name,
+          'category_url': category_url,
+          'category_url_param':category_url_param,
+        }
+
+        if (currentElemStyle == 'buttonSm') {
+          var html = categoryListHtml.categoryButtonSm(args)
+
+        } else if (currentElemStyle == 'buttonLg') {
+          var html = categoryListHtml.categoryButtonLg(args)
+
+        } else if (currentElemStyle == 'mobileMenu') {
+          var html = categoryListHtml.categoryButtonMobileMenu(args)
+
+        }
+
+        currentElem.append(html)
+      }
+    }
+  })
+}
+
+
+
+
+function populateCategoryListOld(args) {
   var currentElem = args['currentElem']
   var currentElemStyle = currentElem.data('style')
   var currentElemType = currentElem.data('type')
