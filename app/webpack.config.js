@@ -2,13 +2,28 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './shop/static/shop/app.js',
   output: {
     filename: 'bundled.js',
     path: path.resolve(__dirname, 'shop/static/shop'),
+    publicPath: '/static/shop/',
   },
-  mode: 'development',
-  watch: true,
+  devServer: {
+    before: function(app, server, compiler) {
+      server._watch('./**/*.html')
+    },
+    contentBase: 'http://localhost:8000',
+    hot: true,
+    proxy: {
+      '!/static/shop/**': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+      },
+    },
+    port: 3000,
+    host: '0.0.0.0',
+  },
   module: {
     rules: [
       {

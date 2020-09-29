@@ -15,7 +15,7 @@
 
       var home_url = window.location.protocol + '//' + window.location.hostname
       if (home_url.includes('localhost')) {
-        home_url = 'http://localhost:8000'
+        home_url = 'http://localhost:3000' // 8000
       }
       var path_url = home_url + '{{ request.path|urlencode }}'
       var current_url = home_url + '{{ request.get_full_path|urlencode }}'

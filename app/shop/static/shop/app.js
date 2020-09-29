@@ -32,3 +32,7 @@ var modal = new Modal();
 
 // Scss
 import "./app.scss";
+
+if (module.hot) {
+  module.hot.accept()
+}
