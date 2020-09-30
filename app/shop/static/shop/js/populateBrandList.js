@@ -9,7 +9,7 @@ if (brandList) {
 
 
 // Functions.
-function apiCallBrand(args) {
+export function apiCallBrand(args) {
   /*
   Api call to get matching product-managers.
   */

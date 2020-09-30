@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-class RegisterUser {
+class UserRegister {
   constructor() {
     this.registerUserForm = $('#registerUserForm');
     this.registerUserTrigger = $('#registerUserTrigger');
@@ -94,4 +94,4 @@ class RegisterUser {
   }
 }
 
-export default RegisterUser;
+export default UserRegister;

@@ -1,9 +1,10 @@
 .height  {
   &__min {
-    min-height: 100%;
-
-    &--45vh {
+    &__45vh {
       min-height: 45vh;
+    }
+    &__100vh {
+      min-height: 100vh;
     }
   }
 

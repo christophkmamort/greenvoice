@@ -1,0 +1,220 @@
+<div class="modal fade vw-100 min-vh-100 productFilterModal" id="productFilterModal" tabindex="-1" role="dialog" aria-labelledby="productFilterModalLabel" aria-hidden="true" data-backdrop="static" style="z-index: 2000;">
+
+  <div class="position-relative" style="height: 24.5vh; z-index: -1;"></div>
+
+  <div class="modal-dialog m-0 mw-100"> <!-- style="min-height: 75%;" -->
+    <div class="modal-content down bg-transparent" style="border: none;">
+      <div class="bg-dark down-container down-container-flat bg-primary position-relative">
+
+        <!--
+        Design element `horizontal-bar`.
+        -->
+        <div class="position-absolute w-100">
+          {% include 'shop/templates/horizontal-bar.html' with class='bg-info' only %}
+        </div>
+
+
+        <div data-section="filterClose">
+          <div class="row p-3 m-0">
+            <div class="col d-flex justify-content-end align-items-center p-0">
+              <button type="button" class="btn close closeProductFilterModalTrigger"> <!-- data-dismiss="modal" aria-label="Close" -->
+                {% include 'shop/templates/svg/close.html' with class='text-white' height='1.1em' only %}
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container productFilter" data-sort="-value">
+
+
+          <div data-section="filterBrands">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Marken</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto filterBrands">
+            </div>
+
+          </div>
+
+
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
+          </div>
+
+
+          <div data-section="filterPrice">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Preis</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="d-flex">
+              <input type="number" name="filterPriceMin" placeholder="Min" class="text-white form-control form-control-lg bg-dark mr-2" value="">
+              <input type="number" name="filterPriceMax" placeholder="Max" class="text-white form-control form-control-lg bg-dark ml-2" value="">
+            </div>
+            <div class="d-flex">
+              <p class="text-info text-smaller w-50 m-0 p-0 text-center">Min</p>
+              <p class="text-info text-smaller w-50 m-0 p-0 text-center">Max</p>
+            </div>
+            <span class="text-danger text-smaller filterPriceErrorMsg"></span>
+
+            <div class="seperator pt-2"></div>
+          </div>
+
+
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
+          </div>
+
+
+          <div data-section="productOrdering">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Sortieren nach</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="radio" name="ordering" value="-value" checked>
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Beliebtheit</h6>
+              </label>
+              <label class="checkbox">
+                <input type="radio" name="ordering" value="-created">
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Neu</h6>
+              </label>
+              <label class="checkbox">
+                <input type="radio" name="ordering" value="price">
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Preis Aufsteigend</h6>
+              </label>
+              <label class="checkbox">
+                <input type="radio" name="ordering" value="-price">
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Preis Absteigend</h6>
+              </label>
+            </div>
+          </div>
+
+
+          <!--<div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
+          </div>
+
+
+          <div data-section="filterMaterials">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Materialien</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Baumwolle">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Baumwolle</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Hanf">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Hanf</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Recyceltes PET">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Recyceltes PET</h6>
+              </label>
+            </div>
+          </div>
+
+
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
+          </div>
+
+
+          <div data-section="filterColors">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Farben</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Schwarz">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Schwarz</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Weiß">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Weiß</h6>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" name="" vlaue="Blau">
+                <div class="checkbox-box checkbox-box-dark">
+                  {% include 'shop/templates/svg/check.svg' with class='text-white checkbox-icon' height='0.7em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Blau</h6>
+              </label>
+            </div>
+          </div>
+
+
+          <div data-section="filterDesignElementHorizontalLine">
+            <hr class="bg-info mt-4 mb-4">
+          </div>
+
+
+          <div data-section="filterProduction">
+            <h5 class="text-white {% if 1 == 0 %} text-strong-italic {% endif %}">Produktion</h5>
+
+            <div class="seperator mt-3"></div>
+
+            <div class="max-height-25vh overflow-auto">
+              <label class="checkbox">
+                <input type="radio" name="filterProduction" vlaue="Weltweit" checked>
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Weltweit</h6>
+              </label>
+              <label class="checkbox">
+                <input type="radio" name="filterProduction" vlaue="Europaweit">
+                <div class="checkbox-box checkbox-box-dark checkbox-box-radio">
+                  {% include 'shop/templates/svg/circle.svg' with class='text-white checkbox-icon' height='0.5em' style='' only %}
+                </div>
+                <h6 class="checkbox-text checkbox-text-dark m-0 ml-2">Europaweit</h6>
+              </label>
+            </div>
+          </div>-->
+
+
+          <div data-section="filterSubmit">
+            <button class="btn btn-light btn-lg w-100 mt-5 submitProductFilterTrigger">Filter anwenden</button>
+              <!-- data-dismiss="modal" aria-label="Close" -->
+
+            <p class="text-info text-center m-0 mt-2 mb-5 text-italic" style="font-size: 0.8em">*All unsere Produkte sind selbstverständlich <u>100% Vegan</u>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
