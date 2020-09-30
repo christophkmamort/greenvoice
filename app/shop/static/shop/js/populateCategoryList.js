@@ -186,36 +186,37 @@ function populateCategoryBreadcrumbs(args) {
     var categories = data
 
     if (categories) {
-      currentElem.html('')
-      currentElem.removeClass('d-none')
+      var breadcrumb_categories_array = []
 
-      /*for (var i in categories) {
-        var category = categories[i]
-        var category_name = category.name
-        var category_parent = category.parent
-        if (category_parent) {
-          var category_parent_name = category.parent.name
+      var current_category = categories.find(category => category.name === url_param_category__name)
+      while (current_category) {
+        breadcrumb_categories_array.push(current_category.name)
+        current_category = current_category.parent
+      }
+      breadcrumb_categories_array.push('Herren')
+
+      breadcrumb_categories_array = breadcrumb_categories_array.reverse()
+
+      if (breadcrumb_categories_array.length > 1) {
+        currentElem.html('')
+        currentElem.removeClass('d-none')
+
+        for (var i in breadcrumb_categories_array) {
+          var category_name = breadcrumb_categories_array[i]
+          var category_url = shop_url + '?category__name=' + category_name // + filter
+          if (category_name == 'Herren' || category_name == 'Damen') {
+            category_url = shop_url // + filter
+          }
+
+          var args = {
+            'category_name': category_name,
+            'category_url': category_url,
+            'url_param_category__name':url_param_category__name,
+          }
+
+          currentElem.append(categoryListHtml.categoryBreadcrumbs(args))
         }
-
-        if (category_name != url_param_category__name && category_parent_name == url_param_category__name) {
-          categories.splice(i, 1);
-
-        } else if () {
-
-        }
-
-        console.log(category_name)
-
-        // var category_url = shop_url + '?category__name=' + category_name // + filter
-
-        var args = {
-          'category_name': category_name,
-          'category_url': category_url,
-          'url_param_category__name':url_param_category__name,
-        }
-
-        currentElem.append(categoryListHtml.categoryBreadcrumbs(args))
-      }*/
+      }
     }
   })
 }

@@ -63,14 +63,15 @@ export function categoryButtonMobileMenu(args) {
 export function categoryBreadcrumbs(args) {
   var category_name = args['category_name']
   var category_url = args['category_url']
+  var url_param_category__name = args['url_param_category__name']
 
-  var breadcrumb_item_class = 'breadcrumb-item'
-  if (1 == 0) {
-    var breadcrumb_item_class = 'breadcrumb-item active'
+  var breadcrumb_link_class = ''
+  if (category_name == url_param_category__name) {
+    breadcrumb_link_class = 'text-primary nounderline'
   }
 
   var html = `
-    <li class="${ breadcrumb_item_class }"><a href="${ category_url }">${ category_name }</a></li>
+    <li class="breadcrumb-item"><a href="${ category_url }" class="${ breadcrumb_link_class }">${ category_name }</a></li>
   `
   return html
 }

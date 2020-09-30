@@ -19,3 +19,18 @@ $btn-white-space: nowrap;
 
 /* Breadcrumbs */
 $breadcrumb-divider: quote(">");
+
+.breadcrumb-item {
+  a {
+    color: $info;
+    text-decoration: underline;
+  }
+
+  &::before {
+    color: $info !important;
+  }
+}
+
+.nounderline {
+  text-decoration: none !important
+}
