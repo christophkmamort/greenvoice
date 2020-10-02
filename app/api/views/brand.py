@@ -4,7 +4,7 @@ from rest_framework.filters import OrderingFilter
 from rest_framework.viewsets import ModelViewSet
 
 from api.serializers.brand import BrandDetailSerializer, BrandSerializer
-from api.permissions import IsStaffOrReadOnly
+from api.permissions import IsUserOrStaffOrReadOnly
 from shop.models.brand import Brand
 
 
@@ -13,12 +13,12 @@ class BrandViewSet(ModelViewSet):
     Manage `list`, `create`, `retrieve`, `update` and `destroy`.
     """
     queryset = Brand.objects.all()
-    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    """ filter_backends = [DjangoFilterBackend, OrderingFilter]
     filter_fields = ['status', 'product']
     ordering_fields = ['created', 'value',]
-    ordering = ['-created']
+    ordering = ['-created'] """
     serializer_class = BrandSerializer
-    permission_classes = [IsStaffOrReadOnly]
+    permission_classes = [IsUserOrStaffOrReadOnly] # IsStaffOrReadOnly
 
     def get_serializer_class(self):
         """

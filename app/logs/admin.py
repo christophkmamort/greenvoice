@@ -4,6 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from .models import BrandValueLog, ProductValueLog, TaxonomyValueLog
 
 
-admin.site.register(BrandValueLog)
+""" admin.site.register(BrandValueLog)
 admin.site.register(ProductValueLog)
-admin.site.register(TaxonomyValueLog)
+admin.site.register(TaxonomyValueLog) """

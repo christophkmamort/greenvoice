@@ -96,6 +96,15 @@ DATABASES = {
     }
 }
 
+"""
+Reset DATABASE:
+1. docker-compose down -v
+2. find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+3. docker volume ls
+4. docker volume rm <name_of_volume>
+5. docker-compose up --build
+"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

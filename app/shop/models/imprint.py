@@ -11,6 +11,6 @@ class BasicImprint(models.Model):
     phone = models.CharField(max_length=200, blank=True, verbose_name=_('phone number'), unique=True)
     line_1 = models.CharField(max_length=200, blank=True, verbose_name=_('line 1'))
     line_2 = models.CharField(max_length=200, blank=True, verbose_name=_('line 2'))
-    country = models.ForeignKey(Country, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('country'))
+    # country = models.ForeignKey(Country, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('country'))
     post_code = models.IntegerField(blank=True, verbose_name=_('post code'))
     tax_number = models.CharField(max_length=200, blank=True, verbose_name=_('tax number'), unique=True)

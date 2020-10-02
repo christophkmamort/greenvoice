@@ -2,34 +2,31 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from .models import *
+from shop.models.meta_data import MetaDataCountry
 
 
-class BaseTaxonomyLayout(admin.ModelAdmin):
+"""
+Basic layout logic for all taxonomies.
+"""
+class BasicTaxonomyLayout(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
-class CategoryLayout(BaseTaxonomyLayout):
-    model = Category
+"""
+Country taxonomy layout.
+"""
+class MetaDataCountryLayout(admin.TabularInline):
+    model = MetaDataCountry
 
 
-class ColorLayout(BaseTaxonomyLayout):
-    model = Color
-
-
-class CountryLayout(BaseTaxonomyLayout):
+class TaxonomyCountryLayout(BasicTaxonomyLayout):
     model = Country
+    inlines = [
+        MetaDataCountryLayout,
+    ]
 
 
-class SizeLayout(BaseTaxonomyLayout):
-    model = Size
-
-
-class TargetGroupLayout(BaseTaxonomyLayout):
-    model = TargetGroup
-
-
-admin.site.register(Category, CategoryLayout)
-admin.site.register(Color, ColorLayout)
-admin.site.register(Country, CountryLayout)
-admin.site.register(Size, SizeLayout)
-admin.site.register(TargetGroup, TargetGroupLayout)
+"""
+Register taxonomies to show up in admin.
+"""
+admin.site.register(Country, TaxonomyCountryLayout)

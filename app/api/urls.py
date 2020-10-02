@@ -7,12 +7,15 @@ from . import views
 router = DefaultRouter()
 
 router.register(r'brand', views.BrandViewSet, basename='brand')
+router.register(r'taxonomy/country', views.CountryViewSet, basename='taxonomy-country')
+router.register(r'taxonomy/company-type', views.CompanyTypeViewSet, basename='taxonomy-company-type')
+router.register(r'taxonomy/currency', views.CurrencyViewSet, basename='taxonomy-currency')
 
-router.register(r'log-brand', views.BrandValueLogViewSet, basename='log-brand')
+""" router.register(r'log-brand', views.BrandValueLogViewSet, basename='log-brand')
 router.register(r'log-product', views.ProductValueLogViewSet, basename='log-product')
-router.register(r'log-taxonomy', views.TaxonomyValueLogViewSet, basename='log-taxonomy')
+router.register(r'log-taxonomy', views.TaxonomyValueLogViewSet, basename='log-taxonomy') """
 
-router.register(r'order', views.OrderViewSet, basename='order')
+""" router.register(r'order', views.OrderViewSet, basename='order')
 router.register(r'order-item', views.OrderItemViewSet, basename='order-item')
 
 router.register(r'product', views.ProductViewSet, basename='product')
@@ -30,7 +33,7 @@ router.register(r'taxonomy-target-group', views.TargetGroupViewSet, basename='ta
 router.register(r'user', views.UserViewSet, basename='user')
 router.register(r'user-customer', views.CustomerViewSet, basename='user-customer')
 
-router.register(r'wishlist-item', views.WishlistItemViewSet, basename='wishlist-item')
+router.register(r'wishlist-item', views.WishlistItemViewSet, basename='wishlist-item') """
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

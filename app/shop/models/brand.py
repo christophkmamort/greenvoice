@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from .api import BasicApi
 from .banking import BasicBanking
 from .imprint import BasicImprint
+from .meta_data import BasicMetaData
 from .settings import BrandSettings
 from .tax import BasicTax
 
@@ -24,26 +25,25 @@ def create_brand_person_upload_path(self, filename):
     return os.path.join('brands', brand_name, 'people', person_firstname, 'id_card', filename)
 
 
-class Branding(models.Model):
+class BasicBranding(models.Model):
     brand_name = models.CharField(max_length=200, blank=True, verbose_name=_('brand name'))
     logo = models.ImageField(upload_to=create_brand_branding_upload_path, blank=True, verbose_name=_('logo'))
 
 
 class Brand(models.Model):
     api = models.OneToOneField(BasicApi, on_delete=models.CASCADE, verbose_name=_('api'))
-    branding = models.OneToOneField(Branding, on_delete=models.CASCADE, verbose_name=_('branding'))
+    branding = models.OneToOneField(BasicBranding, on_delete=models.CASCADE, verbose_name=_('branding'))
     banking = models.OneToOneField(BasicBanking, on_delete=models.CASCADE, verbose_name=_('banking'))
-    created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
     imprint = models.OneToOneField(BasicImprint, on_delete=models.CASCADE, verbose_name=_('imprint'))
+    meta_data = models.OneToOneField(BasicMetaData, on_delete=models.CASCADE, verbose_name=_('meta data'))
     settings = models.OneToOneField(BrandSettings, on_delete=models.CASCADE, verbose_name=_('settings'))
     tax = models.OneToOneField(BasicTax, on_delete=models.CASCADE, verbose_name=_('tax'))
-    value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
 
-    class Meta:
-        ordering = ['created']
+    """ class Meta:
+        ordering = ['created'] """
 
     def __str__(self):
-        return self.name
+        return self.imprint.company_name
 
     """ def save(self, *args, **kwargs):
         logo = Image.open(self.logo)

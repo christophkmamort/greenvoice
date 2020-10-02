@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .brand import Brand
+from .status import BasicStatus
 from taxonomies.models.categories import Category, TargetGroup
 from taxonomies.models.options import Color, Size
 
@@ -72,3 +73,15 @@ class ProductOption(models.Model):
     size = models.ForeignKey(Size, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('size'))
     # TODO: Add stock manager here!!
     # TODO: Add transparency manager here!!
+
+
+class ProductStatus(BasicStatus):
+    product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE, related_name='status', verbose_name=_('product'))
+
+
+class ProductManagerStatus(BasicStatus):
+    product_manager = models.ForeignKey(ProductManager, null=True, on_delete=models.CASCADE, related_name='status', verbose_name=_('product manager'))
+
+
+class ProductOptionStatus(BasicStatus):
+    product_option = models.ForeignKey(ProductOption, null=True, on_delete=models.CASCADE, related_name='status', verbose_name=_('product option'))

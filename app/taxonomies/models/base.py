@@ -3,11 +3,12 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 
+"""
+Fields & Functions for all taxonomies.
+"""
 class BaseTaxonomy(models.Model):
     name = models.CharField(max_length=200, null=True, verbose_name=_('name'))
-    slug = models.SlugField(null=True, verbose_name=_('slug'), unique=True,)
-    value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
-    created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
+    slug = models.SlugField(null=True, verbose_name=_('slug'), unique=True)
 
     def __str__(self):
         return str(self.name)
