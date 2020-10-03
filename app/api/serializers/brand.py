@@ -1,56 +1,70 @@
 # Django rest framework.
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import CharField, EmailField, \
+                                       ModelSerializer # , PrimaryKeyRelatedField
+from rest_framework.validators import UniqueValidator
 
 # Models for serializers.
-from shop.models.brand import Brand, BrandBranding, BrandSettings, \
-                                BrandSalesSettings
+# from shop.models.basic import BasicApi, BasicBanking, BasicTax, BasicTaxZones
+from shop.models.brand import Brand, BrandImprint # , BrandBranding, BrandPerson, BrandSettings, BrandSettingsSales, BrandSettingsStatus
 from shop.models.product import Product, ProductManager, ProductOption
 from shop.models.basic import BasicTax
 
 # One to one field serializers.
 from .basic import BasicApiSerializer, BasicBankingSerializer, \
-                        BasicImprintSerializer, BasicMetaDataSerializer
+                   BasicMetaDataSerializer, BasicTaxSerializer
 
 # Other.
 # from .product_option import ProductOptionStatusSerializer
 # from .taxonomies import CategoryMiniSerializer
 
+
 """
 One to one field serializers.
 """
-class BrandBrandingSerializer(ModelSerializer):
+class BrandImprintSerializer(ModelSerializer):
     class Meta:
-        model = BrandBranding
-        fields = '__all__'
-
-
-class BrandSettingsSerializer(ModelSerializer):
-    class Meta:
-        model = BrandSettings
-        fields = '__all__'
-
-
-class BasicTaxSerializer(ModelSerializer):
-    class Meta:
-        model = BasicTax
-        fields = '__all__'
+        model = BrandImprint
+        exclude = ['brand',]
+        extra_kwargs = {
+            'email': {'validators': [],},
+            'phone': {'validators': [],},
+            'tax_number': {'validators': [],},
+        }
 
 
 """
 Main serializer.
 """
 class BrandSerializer(ModelSerializer):
-    api = BasicApiSerializer()
-    branding = BrandBrandingSerializer()
-    banking = BasicBankingSerializer()
-    imprint = BasicImprintSerializer()
-    meta_data = BasicMetaDataSerializer()
-    settings = BrandSettingsSerializer()
-    tax = BasicTaxSerializer()
+    imprint = BrandImprintSerializer()
 
     class Meta:
         model = Brand
         fields = '__all__'
+
+    def create(self, validated_data):
+        imprint = validated_data.pop('imprint')
+        instance = Brand.objects.create(**validated_data)
+        BrandImprint.objects.create(brand=instance) # , **imprint
+
+        instance.save()
+        return instance
+
+    def update(self, instance, validated_data):
+        """ imprint = validated_data.pop('imprint')
+        imprint['company_type'] = imprint['company_type'].pk
+        imprint['country'] = imprint['country'].pk
+
+        imprint = BrandImprintSerializer(instance=instance.imprint, data=imprint)
+        if imprint.is_valid():
+            # TODO: Add uniquness check.
+            # TODO: Check django objects.update() method.
+            imprint.save() """
+
+        imprint = BrandImprint.objects.update_or_create(brand=instance, defaults=validated_data.pop('imprint'))
+
+        instance.save()
+        return instance
 
 
 """

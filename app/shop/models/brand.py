@@ -20,7 +20,7 @@ from .functions.brand import brand_branding_upload_path, \
 """
 One to one fields.
 """
-class BrandBranding(models.Model):
+""" class BrandBranding(models.Model):
     name = models.CharField(max_length=200, blank=True, verbose_name=_('name'))
     logo = models.ImageField(upload_to=brand_branding_upload_path, blank=True, verbose_name=_('logo'))
 
@@ -33,7 +33,7 @@ class BrandSettings(models.Model):
     # TODO: Add stores selection in which brand want's to sell it's products to.
 
 
-class BrandSalesSettings(models.Model):
+class BrandSettingsSales(models.Model):
     brand_settings = models.ForeignKey(BrandSettings, on_delete=models.CASCADE, related_name='sale', verbose_name=_('brand settings'))
     amount = models.FloatField(blank=True, null=True, verbose_name=_('amount (in %)'))
     from_datetime = models.DateTimeField(verbose_name=_('status from'))
@@ -41,20 +41,13 @@ class BrandSalesSettings(models.Model):
 
 
 class BrandSettingsStatus(BasicStatus):
-    brand_settings = models.ForeignKey(BrandSettings, null=True, on_delete=models.CASCADE, related_name='status', verbose_name=_('brand settings'))
+    brand_settings = models.ForeignKey(BrandSettings, null=True, on_delete=models.CASCADE, related_name='status', verbose_name=_('brand settings')) """
 
 
 """
 Main fields.
 """
 class Brand(models.Model):
-    api = models.OneToOneField(BasicApi, on_delete=models.CASCADE, verbose_name=_('api'))
-    branding = models.OneToOneField(BrandBranding, on_delete=models.CASCADE, verbose_name=_('branding'))
-    banking = models.OneToOneField(BasicBanking, on_delete=models.CASCADE, verbose_name=_('banking'))
-    imprint = models.OneToOneField(BasicImprint, on_delete=models.CASCADE, verbose_name=_('imprint'))
-    meta_data = models.OneToOneField(BasicMetaData, on_delete=models.CASCADE, verbose_name=_('meta data'))
-    settings = models.OneToOneField(BrandSettings, on_delete=models.CASCADE, verbose_name=_('settings'))
-    tax = models.OneToOneField(BasicTax, on_delete=models.CASCADE, verbose_name=_('tax'))
 
     """ class Meta:
         ordering = ['created'] """
@@ -82,9 +75,16 @@ class Brand(models.Model):
 
 
 """
+One to one fields.
+"""
+class BrandImprint(BasicImprint):
+    brand = models.OneToOneField(Brand, on_delete=models.CASCADE, related_name='imprint', verbose_name=_('brand'))
+
+
+"""
 Foreign key fields.
 """
-class BrandPerson(BasicPerson):
-    brand = models.ForeignKey(Brand, blank=True, null=True, on_delete=models.CASCADE, related_name='person', verbose_name=_('brand'))
+""" class BrandPerson(BasicPerson):
+    brand = models.ForeignKey(Brand, blank=True, null=True, on_delete=models.CASCADE, related_name='people', verbose_name=_('brand'))
     id_front = models.ImageField(upload_to=brand_person_upload_path, blank=True, verbose_name=_('id front'), unique=True)
-    id_back = models.ImageField(upload_to=brand_person_upload_path, blank=True, verbose_name=_('id back'), unique=True)
+    id_back = models.ImageField(upload_to=brand_person_upload_path, blank=True, verbose_name=_('id back'), unique=True) """
