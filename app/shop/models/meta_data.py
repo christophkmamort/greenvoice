@@ -1,16 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from .basic import BasicMetaData
 from taxonomies.models.iso_coded import *
-
-
-class BasicMetaData(models.Model):
-    created = models.DateTimeField(auto_now_add=True, verbose_name=_('created'))
-    value = models.FloatField(max_length=200, default=0, verbose_name=_('value'))
-
-    class Meta:
-        verbose_name = _('meta data')
-        verbose_name_plural = _('meta data')
 
 
 class MetaDataCountry(BasicMetaData):

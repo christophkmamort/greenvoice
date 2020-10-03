@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .brand import Brand
-from .status import BasicStatus
+from .basic import BasicStatus
 from taxonomies.models.categories import Category, TargetGroup
 from taxonomies.models.options import Color, Size
 

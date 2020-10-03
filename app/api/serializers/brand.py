@@ -1,23 +1,50 @@
+# Django rest framework.
 from rest_framework.serializers import ModelSerializer
 
-from .helper import BasicApiSerializer, BasicBrandingSerializer, \
-                    BasicBankingSerializer, BasicImprintSerializer, \
-                    BrandSettingsSerializer, BasicTaxSerializer # , \ BasicMetaDataSerializer
-from .product_option import ProductOptionStatusSerializer
-from .taxonomies import CategoryMiniSerializer
-from shop.models.brand import Brand
+# Models for serializers.
+from shop.models.brand import Brand, BrandBranding, BrandSettings, \
+                                BrandSalesSettings
 from shop.models.product import Product, ProductManager, ProductOption
+from shop.models.basic import BasicTax
+
+# One to one field serializers.
+from .basic import BasicApiSerializer, BasicBankingSerializer, \
+                        BasicImprintSerializer, BasicMetaDataSerializer
+
+# Other.
+# from .product_option import ProductOptionStatusSerializer
+# from .taxonomies import CategoryMiniSerializer
+
+"""
+One to one field serializers.
+"""
+class BrandBrandingSerializer(ModelSerializer):
+    class Meta:
+        model = BrandBranding
+        fields = '__all__'
+
+
+class BrandSettingsSerializer(ModelSerializer):
+    class Meta:
+        model = BrandSettings
+        fields = '__all__'
+
+
+class BasicTaxSerializer(ModelSerializer):
+    class Meta:
+        model = BasicTax
+        fields = '__all__'
 
 
 """
-Basic serializers.
+Main serializer.
 """
 class BrandSerializer(ModelSerializer):
     api = BasicApiSerializer()
-    branding = BasicBrandingSerializer()
+    branding = BrandBrandingSerializer()
     banking = BasicBankingSerializer()
     imprint = BasicImprintSerializer()
-    # meta_data = BasicMetaDataSerializer()
+    meta_data = BasicMetaDataSerializer()
     settings = BrandSettingsSerializer()
     tax = BasicTaxSerializer()
 

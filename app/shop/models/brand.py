@@ -1,38 +1,55 @@
+# 3rd party.
 from io import BytesIO
 from PIL import Image
 import os
 
+# Django.
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .api import BasicApi
-from .banking import BasicBanking
-from .imprint import BasicImprint
-from .meta_data import BasicMetaData
-from .settings import BrandSettings
-from .tax import BasicTax
+# Custom one to one fields.
+from .basic import BasicApi, BasicBanking, BasicImprint, BasicMetaData, \
+                   BasicPerson, BasicStatus, BasicTax
+
+# Custom functions.
+from .functions.brand import brand_branding_upload_path, \
+                             brand_person_upload_path
 
 
-def create_brand_branding_upload_path(self, filename):
-    brand_name = self.name.lower().replace(' ', '-')
-    return os.path.join('brands', brand_name, 'branding', filename)
+"""
+One to one fields.
+"""
+class BrandBranding(models.Model):
+    name = models.CharField(max_length=200, blank=True, verbose_name=_('name'))
+    logo = models.ImageField(upload_to=brand_branding_upload_path, blank=True, verbose_name=_('logo'))
 
 
-def create_brand_person_upload_path(self, filename):
-    brand_name = self.name.lower().replace(' ', '-')
-    person_firstname = self.firstname.lower().replace(' ', '-')
-    return os.path.join('brands', brand_name, 'people', person_firstname, 'id_card', filename)
+class BrandSettings(models.Model):
+    backorders = models.BooleanField(default=False, blank=True, verbose_name=_('backorders'))
+    free_shipping_from = models.FloatField(blank=True, null=True, verbose_name=_('free shipping from'))
+    return_policy_period = models.IntegerField(blank=True, null=True, verbose_name=_('return policy period'))
+    return_shipping_costs = models.BooleanField(default=True, blank=True, verbose_name=_('return shipping costs'))
+    # TODO: Add stores selection in which brand want's to sell it's products to.
 
 
-class BasicBranding(models.Model):
-    brand_name = models.CharField(max_length=200, blank=True, verbose_name=_('brand name'))
-    logo = models.ImageField(upload_to=create_brand_branding_upload_path, blank=True, verbose_name=_('logo'))
+class BrandSalesSettings(models.Model):
+    brand_settings = models.ForeignKey(BrandSettings, on_delete=models.CASCADE, related_name='sale', verbose_name=_('brand settings'))
+    amount = models.FloatField(blank=True, null=True, verbose_name=_('amount (in %)'))
+    from_datetime = models.DateTimeField(verbose_name=_('status from'))
+    until_datetime = models.DateTimeField(verbose_name=_('status until'))
 
 
+class BrandSettingsStatus(BasicStatus):
+    brand_settings = models.ForeignKey(BrandSettings, null=True, on_delete=models.CASCADE, related_name='status', verbose_name=_('brand settings'))
+
+
+"""
+Main fields.
+"""
 class Brand(models.Model):
     api = models.OneToOneField(BasicApi, on_delete=models.CASCADE, verbose_name=_('api'))
-    branding = models.OneToOneField(BasicBranding, on_delete=models.CASCADE, verbose_name=_('branding'))
+    branding = models.OneToOneField(BrandBranding, on_delete=models.CASCADE, verbose_name=_('branding'))
     banking = models.OneToOneField(BasicBanking, on_delete=models.CASCADE, verbose_name=_('banking'))
     imprint = models.OneToOneField(BasicImprint, on_delete=models.CASCADE, verbose_name=_('imprint'))
     meta_data = models.OneToOneField(BasicMetaData, on_delete=models.CASCADE, verbose_name=_('meta data'))
@@ -62,3 +79,12 @@ class Brand(models.Model):
 
     # TODO: Automatic path creation for `person id` and `logo`
     # TODO: on save create automatic check if status of live is eligable if not change back to draft.
+
+
+"""
+Foreign key fields.
+"""
+class BrandPerson(BasicPerson):
+    brand = models.ForeignKey(Brand, blank=True, null=True, on_delete=models.CASCADE, related_name='person', verbose_name=_('brand'))
+    id_front = models.ImageField(upload_to=brand_person_upload_path, blank=True, verbose_name=_('id front'), unique=True)
+    id_back = models.ImageField(upload_to=brand_person_upload_path, blank=True, verbose_name=_('id back'), unique=True)
