@@ -1,10 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+# from rest_framework_nested import routers
 
 from . import views
 
 
-router = DefaultRouter()
+router = DefaultRouter() # routers.SimpleRouter()
 
 router.register(r'brand', views.BrandViewSet, basename='brand')
 router.register(r'taxonomy/country', views.CountryViewSet, basename='taxonomy-country')
@@ -35,8 +36,14 @@ router.register(r'user-customer', views.CustomerViewSet, basename='user-customer
 
 router.register(r'wishlist-item', views.WishlistItemViewSet, basename='wishlist-item') """
 
+# https://github.com/alanjds/drf-nested-routers
+# taxonomy_router = routers.NestedSimpleRouter(router, r'taxonomy', lookup='taxonomy') # taxonomy_router = DefaultRouter()
+# taxonomy_router.register(r'country', views.CountryViewSet, basename='taxonomy-country')
+# taxonomy_router.register(r'company-type', views.CompanyTypeViewSet, basename='taxonomy-company-type')
+# taxonomy_router.register(r'currency', views.CurrencyViewSet, basename='taxonomy-currency')
+
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', include(router.urls)), # url(r'^', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
 ]

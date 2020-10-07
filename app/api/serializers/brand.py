@@ -7,7 +7,7 @@ from rest_framework.validators import UniqueValidator
 # from shop.models.basic import BasicApi, BasicBanking, BasicTax, BasicTaxZones
 from shop.models.brand import Brand, BrandImprint # , BrandBranding, BrandPerson, BrandSettings, BrandSettingsSales, BrandSettingsStatus
 from shop.models.product import Product, ProductManager, ProductOption
-from shop.models.basic import BasicTax
+from shop.models.basic_with_relations import BasicTax
 
 # One to one field serializers.
 from .basic import BasicApiSerializer, BasicBankingSerializer, \
@@ -43,14 +43,17 @@ class BrandSerializer(ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        imprint = validated_data.pop('imprint')
+        imprint_data = validated_data.pop('imprint')
         instance = Brand.objects.create(**validated_data)
-        BrandImprint.objects.create(brand=instance) # , **imprint
+
+        BrandImprint.objects.create(brand=instance, **imprint_data)
 
         instance.save()
         return instance
 
     def update(self, instance, validated_data):
+        # TODO: Add unique check here!!
+
         """ imprint = validated_data.pop('imprint')
         imprint['company_type'] = imprint['company_type'].pk
         imprint['country'] = imprint['country'].pk
@@ -61,7 +64,7 @@ class BrandSerializer(ModelSerializer):
             # TODO: Check django objects.update() method.
             imprint.save() """
 
-        imprint = BrandImprint.objects.update_or_create(brand=instance, defaults=validated_data.pop('imprint'))
+        BrandImprint.objects.update_or_create(brand=instance, defaults=validated_data.pop('imprint'))
 
         instance.save()
         return instance

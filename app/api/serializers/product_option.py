@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .taxonomies import SizeMiniSerializer
+from .taxonomies.taxonomies import SizeMiniSerializer
 from shop.models.product import ProductOption
 
 

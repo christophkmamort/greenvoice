@@ -42,42 +42,6 @@ class ColorViewSet(ModelViewSet):
     permission_classes = [IsAdminUser|ReadOnly]
 
 
-class CountryViewSet(ModelViewSet):
-    """
-    Manage `list`, `create`, `retrieve`, `update` and `destroy`.
-    """
-    queryset = Country.objects.all()
-    filter_backends = [OrderingFilter]
-    ordering_fields = ['name',]
-    ordering = ['name']
-    serializer_class = CountrySerializer
-    permission_classes = [IsAdminUser|ReadOnly]
-
-
-class CompanyTypeViewSet(ModelViewSet):
-    """
-    Manage `list`, `create`, `retrieve`, `update` and `destroy`.
-    """
-    queryset = CompanyType.objects.all()
-    filter_backends = [OrderingFilter]
-    ordering_fields = ['name',]
-    ordering = ['name']
-    serializer_class = CompanyTypeSerializer
-    permission_classes = [IsAdminUser|ReadOnly]
-
-
-class CurrencyViewSet(ModelViewSet):
-    """
-    Manage `list`, `create`, `retrieve`, `update` and `destroy`.
-    """
-    queryset = Currency.objects.all()
-    filter_backends = [OrderingFilter]
-    ordering_fields = ['name',]
-    ordering = ['name']
-    serializer_class = CurrencySerializer
-    permission_classes = [IsAdminUser|ReadOnly]
-
-
 class SizeViewSet(ModelViewSet):
     """
     Manage `list`, `create`, `retrieve`, `update` and `destroy`.

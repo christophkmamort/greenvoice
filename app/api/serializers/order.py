@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from .product_manager import ProductManagerDetailForOrderSerializer
 from .product import ProductDetailMiniSerializer
-from .taxonomies import ColorMiniSerializer, SizeMiniSerializer
+from .taxonomies.taxonomies import ColorMiniSerializer, SizeMiniSerializer
 from shop.models.order import *
 from shop.models.product import ProductManager, ProductOption
 

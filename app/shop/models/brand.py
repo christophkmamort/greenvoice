@@ -9,8 +9,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 # Custom one to one fields.
-from .basic import BasicApi, BasicBanking, BasicImprint, BasicMetaData, \
-                   BasicPerson, BasicStatus, BasicTax
+from .basic_with_relations import BasicApi, BasicBanking, BasicImprint, BasicTax
+from .basic import BasicMetaData, BasicPerson, BasicStatus
 
 # Custom functions.
 from .functions.brand import brand_branding_upload_path, \

@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from .media import ProductBrandImageSerializer, ProductImageSerializer
 from .product_option import ProductOptionDetailMiniSerializer
 from .product import ProductDetailMiniSerializer
-from .taxonomies import ColorMiniSerializer
+from .taxonomies.taxonomies import ColorMiniSerializer
 from shop.models.product import ProductManager, ProductOption
 
 

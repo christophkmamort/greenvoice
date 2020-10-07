@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 3rd party
     'nested_inline',
     'rest_framework',
+    # 'rest_framework_nested',
 
     # Custom
     'logs',

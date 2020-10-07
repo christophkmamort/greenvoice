@@ -1,7 +1,9 @@
 from rest_framework.serializers import ModelSerializer
 
-from shop.models.basic import BasicApi, BasicBanking, BasicImprint, \
-                              BasicMetaData, BasicTax, BasicTaxZones
+from shop.models.basic_with_relations import BasicApi, BasicBanking, \
+                                             BasicImprint, BasicTax, \
+                                             BasicTaxZones
+from shop.models.basic import BasicMetaData
 
 
 """

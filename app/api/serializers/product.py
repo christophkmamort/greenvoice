@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from .brand import BrandMiniSerializer
-from .taxonomies import CategoryMiniSerializer, TargetGroupMiniSerializer
+from .taxonomies.taxonomies import CategoryMiniSerializer, TargetGroupMiniSerializer
 from shop.models.product import Product
 
 
