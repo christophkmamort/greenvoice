@@ -1,7 +1,18 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from shop.models.brand import Brand
+from shop.models.brand import *
 
 
-admin.site.register(Brand)
+class BrandImprintLayout(admin.StackedInline):
+    model = BrandImprint
+
+
+class BrandLayout(admin.ModelAdmin):
+    model = Brand
+    inlines = [
+        BrandImprintLayout,
+    ]
+
+
+admin.site.register(Brand, BrandLayout)

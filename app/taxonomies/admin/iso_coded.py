@@ -14,7 +14,7 @@ class BasicTaxonomyLayout(admin.ModelAdmin):
 """
 Country layout.
 """
-class MetaDataCountryLayout(admin.TabularInline):
+class MetaDataCountryLayout(admin.StackedInline):
     model = MetaDataCountry
 
 
@@ -31,7 +31,7 @@ admin.site.register(Country, CountryLayout)
 """
 Company type layout.
 """
-class MetaDataCompanyTypeLayout(admin.TabularInline):
+class MetaDataCompanyTypeLayout(admin.StackedInline):
     model = MetaDataCompanyType
 
 
@@ -48,7 +48,7 @@ admin.site.register(CompanyType, CompanyTypeLayout)
 """
 Currency layout.
 """
-class MetaDataCurrencyLayout(admin.TabularInline):
+class MetaDataCurrencyLayout(admin.StackedInline):
     model = MetaDataCurrency
 
 
