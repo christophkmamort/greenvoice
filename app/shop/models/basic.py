@@ -29,9 +29,9 @@ class BasicStatus(models.Model):
         (PAUSED, _('paused')),
         (RETIRED, _('retired')),
     )
-    from_datetime = models.DateTimeField(verbose_name=_('status from'))
-    until_datetime = models.DateTimeField(verbose_name=_('status until'))
+    from_datetime = models.DateTimeField(null=True, blank=True, verbose_name=_('status from'))
+    until_datetime = models.DateTimeField(null=True, blank=True, verbose_name=_('status until'))
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=DRAFT, verbose_name=_('status'))
 
     def __str__(self):
-        return self.status
+        return str(self.status)

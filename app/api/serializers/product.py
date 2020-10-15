@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .brand import BrandMiniSerializer
+# from .brand import BrandMiniSerializer
 from .taxonomies.taxonomies import CategoryMiniSerializer, TargetGroupMiniSerializer
 from shop.models.product import Product
 
@@ -21,13 +21,13 @@ class ProductSerializer(ModelSerializer):
 Detail serializers.
 """
 class ProductDetailSerializer(ProductSerializer):
-    brand = BrandMiniSerializer(read_only=True)
+    # brand = BrandMiniSerializer(read_only=True)
     target_group = TargetGroupMiniSerializer(many=True, read_only=True)
     category = CategoryMiniSerializer(many=True, read_only=True)
 
 
 class ProductDetailMiniSerializer(ProductSerializer):
-    brand = BrandMiniSerializer(read_only=True)
+    # brand = BrandMiniSerializer(read_only=True)
     target_group = TargetGroupMiniSerializer(many=True, read_only=True)
     category = CategoryMiniSerializer(many=True, read_only=True)
 

@@ -2,7 +2,7 @@ import os
 
 
 def brand_branding_upload_path(self, filename):
-    brand_name = self.brand.imprint.company_name.lower().replace(' ', '-')
+    brand_name = 'testing' # self.brand.imprint.company_name.lower().replace(' ', '-')
     return os.path.join('brands', brand_name, 'branding', filename)
 
 

@@ -26,8 +26,8 @@ class CompanyType(models.Model): # Not `BasicMetaData` because clashes with coun
     abbreviation = models.CharField(max_length=200, null=True, verbose_name=_('abbreviation'), unique=True)
     country = models.ForeignKey(Country, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('country'))
 
-    def __str__(self):
-        return str(self.name)
+    """ def __str__(self):
+        return str(self.name) """
 
 
 class MetaDataCompanyType(BasicMetaData):

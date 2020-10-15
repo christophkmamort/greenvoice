@@ -8,9 +8,10 @@ from . import views
 router = DefaultRouter() # routers.SimpleRouter()
 
 router.register(r'brand', views.BrandViewSet, basename='brand')
-router.register(r'taxonomy/country', views.CountryViewSet, basename='taxonomy-country')
-router.register(r'taxonomy/company-type', views.CompanyTypeViewSet, basename='taxonomy-company-type')
-router.register(r'taxonomy/currency', views.CurrencyViewSet, basename='taxonomy-currency')
+
+# router.register(r'taxonomy/country', views.CountryViewSet, basename='taxonomy-country')
+# router.register(r'taxonomy/company-type', views.CompanyTypeViewSet, basename='taxonomy-company-type')
+# router.register(r'taxonomy/currency', views.CurrencyViewSet, basename='taxonomy-currency')
 
 """ router.register(r'log-brand', views.BrandValueLogViewSet, basename='log-brand')
 router.register(r'log-product', views.ProductValueLogViewSet, basename='log-product')

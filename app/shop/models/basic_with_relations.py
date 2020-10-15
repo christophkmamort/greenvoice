@@ -27,7 +27,10 @@ class BasicImprint(models.Model):
     post_code = models.IntegerField(verbose_name=_('post code'))
     city = models.CharField(max_length=200, verbose_name=_('city'))
     country = models.ForeignKey(Country, on_delete=models.PROTECT, verbose_name=_('country'))
-    tax_number = models.CharField(max_length=200, verbose_name=_('tax number'), unique=True)
+    tax_number = models.CharField(blank=True, max_length=200, verbose_name=_('tax number'), unique=True)
+
+    class Meta:
+        unique_together = ['line_1', 'line_2', 'post_code', 'city', 'country']
 
 
 class BasicTax(models.Model):

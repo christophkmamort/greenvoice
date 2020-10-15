@@ -1,20 +1,10 @@
 # Django rest framework.
-from rest_framework.serializers import CharField, EmailField, \
-                                       ModelSerializer # , PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer
 from rest_framework.validators import UniqueValidator
 
 # Models for serializers.
 from shop.models.brand import *
 from shop.models.product import Product, ProductManager, ProductOption
-from shop.models.basic_with_relations import BasicTax
-
-# One to one field serializers.
-from .basic import BasicApiSerializer, BasicBankingSerializer, \
-                   BasicMetaDataSerializer, BasicTaxSerializer
-
-# Other.
-# from .product_option import ProductOptionStatusSerializer
-# from .taxonomies import CategoryMiniSerializer
 
 
 """
@@ -23,86 +13,73 @@ One to one field serializers.
 class BrandBrandingSerializer(ModelSerializer):
     class Meta:
         model = BrandBranding
-        exclude = ['brand',]
+        fields = '__all__'
+        read_only_fields = ['brand', 'logo']
+
+
+class BrandBrandingLogoSerializer(ModelSerializer):
+    class Meta:
+        model = BrandBranding
+        fields = ['id', 'logo']
+        read_only_fields = ['id',]
 
 
 class BrandImprintSerializer(ModelSerializer):
     class Meta:
         model = BrandImprint
-        exclude = ['brand',]
+        fields = '__all__'
+        read_only_fields = ['brand']
         extra_kwargs = {
             'email': {'validators': [],},
             'phone': {'validators': [],},
             'tax_number': {'validators': [],},
+            'line_1': {'validators': [], 'required': False,},
+            'line_2': {'validators': [], 'required': False,},
+            'post_code': {'validators': [], 'required': False,},
+            'city': {'validators': [], 'required': False,},
+            'country': {'validators': [], 'required': False,},
         }
+        validators = []
 
 
 """
-Main serializer.
+Manager (main) serializers.
 """
 class BrandSerializer(ModelSerializer):
     branding = BrandBrandingSerializer()
-    imprint = BrandImprintSerializer()
+    # imprint = BrandImprintSerializer()
 
     class Meta:
         model = Brand
         fields = '__all__'
+        # depth=1
 
     def create(self, validated_data):
         branding_data = validated_data.pop('branding')
-        imprint_data = validated_data.pop('imprint')
+        # imprint_data = validated_data.pop('imprint')
 
-        # Create new instance.
+        # New instance.
         instance = Brand.objects.create(**validated_data)
 
         # One to one fields.
         BrandBranding.objects.create(brand=instance, **branding_data)
-        BrandImprint.objects.create(brand=instance, **imprint_data)
+        # BrandImprint.objects.create(brand=instance, **imprint_data)
 
         instance.save()
         return instance
 
     def update(self, instance, validated_data):
-        # TODO: Add unique check here!!
+        branding_data = validated_data.pop('branding')
 
         # One to one fields.
-        BrandBranding.objects.update_or_create(brand=instance, defaults=validated_data.pop('branding'))
-        BrandImprint.objects.update_or_create(brand=instance, defaults=validated_data.pop('imprint'))
+        # BrandBranding.objects.update_or_create(brand=instance, defaults=branding_data)
+        branding = BrandBrandingSerializer(instance=instance.branding, data=branding_data)
+        if branding.is_valid():
+            branding.save()
+
+        # imprint = BrandImprintSerializer(brand=instance, data=imprint_data)
+        # if imprint.is_valid():
+        #     imprint.save()
 
         instance.save()
         return instance
-
-
-"""
-Detail serializers to check if brand is active
-and has active products in stock.
-"""
-"""class ProductManagerProductOptionSerializer(ModelSerializer):
-    product_option = ProductOptionStatusSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = ProductManager
-        fields = ['product_option']
-
-
-class ProductProductManagerSerializer(ModelSerializer):
-    product_manager = ProductManagerProductOptionSerializer(read_only=True, many=True)
-    category = CategoryMiniSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Product
-        fields = ['product_manager', 'category']"""
-
-
-class BrandDetailSerializer(BrandSerializer):
-    pass
-    # product = ProductProductManagerSerializer(many=True, read_only=True)
-
-
-"""
-Minified serializers.
-"""
-class BrandMiniSerializer(ModelSerializer):
-    class Meta:
-        model = Brand
-        exclude = ['logo', 'value', 'created']
